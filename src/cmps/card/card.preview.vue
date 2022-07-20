@@ -1,6 +1,6 @@
 <template>
   <section>
-      <button @click="$emit('openCard', card.id)">Read</button>
+    <button @click="$emit('openCard', card.id)">Read</button>
     <router-link to="/home">
       <section class="card-preview">
         {{ card.title }}

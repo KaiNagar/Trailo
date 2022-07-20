@@ -16,7 +16,6 @@ const store = createStore({
     boards({ boards }) {
       return boards
     },
-    board({board})
     cardLoc({ cardLoc }) {
       return cardLoc
     },
