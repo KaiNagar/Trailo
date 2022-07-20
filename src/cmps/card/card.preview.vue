@@ -1,21 +1,16 @@
 <template>
-  <section>
-    <button @click="$emit('openCard', card.id)">Read</button>
-    <router-link to="/home">
-      <section class="card-preview">
-        {{ card.title }}
 
-        <div class="labels">
-          <div
-            class="label"
-            v-for="(label, idx) in card.labels"
-            :key="idx"
-            :style="{ 'background-color': label }"
-          ></div>
-        </div>
-      </section>
-    </router-link>
+  <!-- <button @click="$emit('openCard', card.id)">Read</button> -->
+
+  <section class="card-preview" @click="$emit('openCard', card.id)">
+    <input type="text" v-model="card.title" @click.stop @input.stop="saveCard">
+
+    <div class="labels">
+      <div class="label" v-for="(label, idx) in card.labels" :key="idx" :style="{ 'background-color': label }"></div>
+    </div>
   </section>
+
+
 </template>
 
 <script>
@@ -26,10 +21,15 @@ export default {
   data() {
     return {}
   },
-  methods: {},
+  methods: {
+    saveCard(){
+     this.$emit('saveGroup',this.card)
+    }
+  },
   computed: {},
-  created() {},
+  created() { },
 }
 </script>
 
-<style></style>
+<style>
+</style>

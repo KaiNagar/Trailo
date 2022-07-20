@@ -5,6 +5,7 @@ import { boardService } from '@/services/board.service.js'
 const store = createStore({
   strict: true,
   state: {
+    boardId:null,
     boards: [],
     currBoard:null,
   },
@@ -12,15 +13,17 @@ const store = createStore({
     boards({ boards }) {
       return boards
     },
-    currBoard({ currBoard }) {
-      return currBoard
-    },
+    board({ board }) { },
+
     boardId({ boardId }) {
       return boardId
     },
     groupId({ groupId }) {
       return groupId
     },
+    empetyCard() {
+      return boardService.getEmpetyCard()
+    }
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -48,9 +51,17 @@ const store = createStore({
         console.error('cannot get boards:', err)
       }
     },
-    saveBoard({commit},{board}){
-      
-    }
+    async setCardLoc({ commit }, { credentials }) {
+      console.log(credentials)
+      commit({ type: 'setCardLoc', cardLoc: credentials })
+    },
+    async getBoardById(context, {boardId}){
+      const board = await boardService.getById(boardId)
+      return board
+    },
+    async saveBoard(context, {board}){
+      const newBoard = await boardService.save(board)
+    },
   },
 })
 
