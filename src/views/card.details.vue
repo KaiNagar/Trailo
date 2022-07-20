@@ -121,6 +121,7 @@ export default {
     openLabelsMenu(ev) {
       this.isLabelMenuOpen = true
       this.labelMenuX = ev.pageX - ev.offsetX
+    console.log(ev.pageX - ev.offsetX);
     },
     // setLabelMenuX(ev) {
     //   console.log(ev.offsetX)
