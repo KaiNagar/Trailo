@@ -1,13 +1,27 @@
 .board-list-container{
-background-color: aquamarine;
-display: flex;
-height: 80px;
-position: relative;
-flex-direction: column;
-padding: 8px;
+    position: relative;
+    background-color: blanchedalmond;
     .board-list{
-        margin: 10px;
-        background-color: aqua;
+            background-color: aquamarine;
+            display: flex;
+            height: 80px;
+            position: relative;
+            flex-direction: column;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 3px;
+            .board-preview ul{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                background-color: lightblue;
+                list-style: none;
+                
+                li{
+                    background-color: lightcoral;
+                }
+            }
+        }
     }
     
-}
+    
