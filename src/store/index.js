@@ -6,19 +6,14 @@ const store = createStore({
   strict: true,
   state: {
     boards: [],
-    // cardLoc: {
-    //   boardId: null,
-    //   groupId: null,
-    //   cardId: null,
-    // },
+    currBoard:null,
   },
   getters: {
     boards({ boards }) {
       return boards
     },
-    board({board})
-    cardLoc({ cardLoc }) {
-      return cardLoc
+    currBoard({ currBoard }) {
+      return currBoard
     },
     boardId({ boardId }) {
       return boardId
@@ -31,12 +26,14 @@ const store = createStore({
     setBoards(state, { boards }) {
       state.boards = boards
     },
-    setCardLoc(state, { cardLoc }) {
-      state.cardLoc = cardLoc
-    },
     setBoardId(state, { boardId }) {
       state.boardId = boardId
     },
+    setCurrBoard(state, { currBoard }) {
+      console.log('SETTING BOARD',currBoard);
+      state.currBoard = currBoard
+    },
+
     setGroupId(state, { groupId }) {
       state.groupId = groupId
     },
@@ -51,10 +48,9 @@ const store = createStore({
         console.error('cannot get boards:', err)
       }
     },
-    async setCardLoc({ commit }, { credentials }) {
-      console.log(credentials)
-      commit({ type: 'setCardLoc', cardLoc: credentials })
-    },
+    saveBoard({commit},{board}){
+      
+    }
   },
 })
 

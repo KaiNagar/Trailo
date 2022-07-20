@@ -130,6 +130,19 @@ function _createBoard() {
             id: _makeId(),
             title: 'new card2',
             labelIds:['l101','l102'],
+            checklists: [
+              {
+                  id: 'YEhmF',
+                  title: 'Checklist',
+                  todos: [
+                      {
+                          id: '212jX',
+                          title: 'To Do 1',
+                          isDone: false
+                      }
+                  ]
+              }
+          ],
           },
         ],
       },
