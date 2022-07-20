@@ -1,8 +1,15 @@
 <template>
-  <section>
-    <div v-for="(cards, idx) in group.cards" :key="idx">
+  <section class="group">
+    <div class="g-header">
       {{ group.title }}
+      <div class="g-menu">---</div>
+    </div>
+
+    <div v-for="(cards, idx) in group.cards" :key="idx" class="card-list">
       <card-list :cards="group.cards" />
+    </div>
+
+    <div class="g-footer">
       <button>add card</button>
     </div>
   </section>
@@ -20,9 +27,12 @@ export default {
   methods: {},
   computed: {},
   created() {
-    let credentials = {...this.$store.getters.cardLoc}
+    let credentials = { ...this.$store.getters.cardLoc }
     credentials.groupId = this.group.id
-    this.$store.dispatch({type:'setCardLoc',credentials})
+    this.$store.dispatch({ type: 'setCardLoc', credentials })
+
+
+    console.log(this.group);
   },
 }
 </script>
