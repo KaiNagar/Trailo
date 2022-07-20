@@ -7,7 +7,7 @@ export const boardService = {
   remove,
   getEmptyBoard,
   getCardById,
-  getEmpetyCard,
+  getEmptyCard,
 }
 
 const STORAGE_KEY = 'boardDB'
@@ -70,7 +70,7 @@ async function getEmptyBoard() {
   return {}
 }
 
-function getEmpetyCard() {
+function getEmptyCard() {
   return {
     id: _makeId(),
     title: 'new card',
