@@ -31,7 +31,7 @@ export default {
       await this.$store.dispatch({ type: 'saveBoard', board })
     }
   },
-  computed: {},
+  computed: {}, 
   async created() {
     const { boardId } = this.$route.params
     const board = await boardService.getById(boardId)
