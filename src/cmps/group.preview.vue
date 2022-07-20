@@ -6,7 +6,7 @@
     </div>
 
     <div class="card-list">
-      <card-list :cards="group.cards" :saveGroup="addCard"/>
+      <card-list :cards="group.cards" :saveGroup="addCard" />
     </div>
 
     <div class="g-footer">
@@ -17,24 +17,25 @@
 
 <script>
 import cardList from '@/cmps/card/card.list.vue'
+import { boardService } from '../services/board.service'
 export default {
   name: 'groupPreview',
-  props: ['group'],
+  props: {
+    group: Object,
+  },
   components: { cardList },
   data() {
     return {}
   },
   methods: {
-    async addCard() {
-      const card = this.$store.getters.empetyCard
-      card.groupId = this.group.id
-      this.$emit('saveGroup', card)
+    addCard() {
+      const card = boardService.getEmptyCard()
+      const group = JSON.parse(JSON.stringify(this.group))
+      group.cards.push(card)
+      this.$emit('saveGroup', group)
     },
-    
   },
   computed: {},
-  created() {
-    this.$store.commit({ type: 'setGroupId', groupId: this.group.id })
-  },
+  created() {},
 }
 </script>
