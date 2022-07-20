@@ -3,7 +3,7 @@
     <div>
       <board-header />
     </div>
-    <group-list :groups="board.groups" />
+    <group-list :groups="board.groups" @saveGroup="saveGroup" />
   </section>
 </template>
 <script>
@@ -20,7 +20,16 @@ export default {
       credentials: {},
     }
   },
-  methods: {},
+  methods: {
+    async saveGroup(updatedGroup) {
+      console.log('made to details');
+      const idx = this.board.groups.findIndex((group) => group.id === updatedGroup.id)
+      const boardId = this.$store.getters.boardId
+      const board = await this.$store.dispatch({ type: 'getBoardById', boardId })
+      board.groups.splice(idx, 1, updatedGroup)
+      await this.$store.dispatch({ type: 'saveBoard', board })
+    }
+  },
   computed: {},
   async created() {
     const { boardId } = this.$route.params
@@ -31,5 +40,6 @@ export default {
     // this.credentials.boardId = boardId
     // this.$store.dispatch({type:'setCardLoc',credentials:this.credentials})
   },
+
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <section>
     <div v-for="card in cards" :key="card._id">
-      <card-preview @openCard="openCard" :card="card" />
+      <card-preview @openCard="openCard" :card="card" :saveGroup="saveGroup"/>
     </div>
   </section>
 </template>
@@ -21,6 +21,9 @@ export default {
     openCard(cardId) {
       this.$router.push(`/board/${this.boardId}/${this.groupId}/${cardId}`)
     },
+    saveGroup(card){
+      console.log(card);
+    }
   },
   computed: {},
   created() {

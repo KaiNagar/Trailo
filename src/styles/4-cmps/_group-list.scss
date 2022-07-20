@@ -1,5 +1,9 @@
-.group-list{
+.group-list {
     display: flex;
-    
-    border: 4px red solid;
+    margin: 0 10px;
+   
+
+    .group {
+        margin-inline-end: 10px;
+    }
 }

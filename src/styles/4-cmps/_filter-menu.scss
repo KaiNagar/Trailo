@@ -1,0 +1,28 @@
+.board-filter {
+  position: relative;
+  button {
+    @include headers-btns;
+  }
+  .filter-menu {
+    right: 1rem;
+    position: fixed;
+    background-color: aqua;
+    .filter-menu-header {
+      .close-menu {
+        position: absolute;
+        right: 1rem;
+        // top: 1rem;
+      }
+    }
+    .filter-actions {
+      label {
+        font-size: rem(14px);
+        padding: rem(3px)  0;
+      }
+      
+    }
+  }
+  .members-checkbox {
+    align-items: flex-start;
+  }
+}

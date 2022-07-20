@@ -7,6 +7,7 @@ export const boardService = {
   remove,
   getEmptyBoard,
   getCardById,
+  getEmpetyCard,
 }
 
 const STORAGE_KEY = 'boardDB'
@@ -63,8 +64,19 @@ async function save(board) {
   }
 }
 
+
+
 async function getEmptyBoard() {
   return {}
+}
+
+function getEmpetyCard() {
+  return {
+    id: _makeId(),
+    title: 'new card',
+    style: { bgImg: null, bgColor: null, isFull: false, },
+    labels: []
+  }
 }
 
 async function remove(boardId) {
@@ -81,8 +93,9 @@ function _createBoards() {
 }
 
 function _createBoard() {
+  const boardId = _makeId()
   return {
-    _id: _makeId(),
+    _id: boardId,
     title: 'board title new',
     createdAt: Date.now() - 100000,
     createdBy: {
@@ -116,6 +129,7 @@ function _createBoard() {
       {
         id: _makeId(),
         title: 'This is stav\'s list',
+        boardId,
         style: {
           bgColor: '#000',
         },

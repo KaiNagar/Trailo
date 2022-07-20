@@ -1,13 +1,14 @@
-.group{
+.group {
     border-radius: 3px;
     border: 1px black solid;
     width: 272px;
-    background-color:#ebecf0 ;
+    background-color: #ebecf0;
     color: #172b4d;
     font-size: 14px;
-    .g-header{
+
+    .g-header {
         border-radius: 3px;
-        padding: 10px 15px ;
+        padding: 10px 15px;
         line-height: 20px;
         width: 100%;
         display: flex;
@@ -15,22 +16,30 @@
         padding-bottom: 10px;
 
     }
-    
-    .card-list{
+
+    .card-list {
         display: flex;
         flex-direction: column;
         padding: 0 8px;
 
-        .card-preview{
+        textarea,
+        input {
+            outline: none;
+            background-color: inherit;
+            width: 100%;
+            border: none;
+            font-size: inherit;
+            font-family: inherit;
+        }
+
+        .card-preview {
             width: 98%;
             border: 1px black solid;
             border-radius: 3px;
 
-            .labels{
+            .labels {
                 display: flex;
-                // border: 1px green solid;
-
-                .label{
+                .label {
                     height: 8px;
                     width: 40px;
                     padding-inline-end: 3px;

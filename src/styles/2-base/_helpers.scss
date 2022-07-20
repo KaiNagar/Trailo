@@ -12,6 +12,10 @@
     justify-content: space-between;
 }
 
+.flex.column{
+    flex-direction: column;
+}
+
 // List 
 .clean-list {
     list-style-type: none;
