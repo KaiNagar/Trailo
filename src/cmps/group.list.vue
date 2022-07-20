@@ -10,17 +10,19 @@
 import groupPreview from './group.preview.vue'
 export default {
   name: 'groupList',
-  props: ['groups'],
+  props: {
+    groups: Array,
+  },
   components: { groupPreview },
   data() {
     return {}
   },
   methods: {
-    saveGroup(updatedGroup) {
-      this.$emit('saveGroup', updatedGroup)
-    }
+    saveGroup(group) {
+      this.$emit('saveGroup', group)
+    },
   },
   computed: {},
-  created() { },
+  created() {},
 }
 </script>

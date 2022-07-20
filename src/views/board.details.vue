@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <section v-if="currBoard">
     <div>
       <board-header />
     </div>
-    <group-list :groups="board.groups" @saveGroup="saveGroup" />
+    <group-list :groups="currBoard.groups" @saveGroup="saveGroup" />
   </section>
 </template>
 <script>
@@ -22,24 +22,22 @@ export default {
   },
   methods: {
     async saveGroup(updatedGroup) {
-      console.log('made to details');
       const idx = this.board.groups.findIndex((group) => group.id === updatedGroup.id)
-      const boardId = this.$store.getters.boardId
-      const board = await this.$store.dispatch({ type: 'getBoardById', boardId })
+      const board = JSON.parse(JSON.stringify(this.board))
       board.groups.splice(idx, 1, updatedGroup)
       await this.$store.dispatch({ type: 'saveBoard', board })
-    }
+    },
   },
-  computed: {},
+  computed: {
+    currBoard() {
+      return this.$store.getters.currBoard
+    },
+  },
   async created() {
     const { boardId } = this.$route.params
     const board = await boardService.getById(boardId)
-    this.board = board
-    this.$store.commit({ type: 'setBoardId', boardId })
     this.$store.commit({ type: 'setCurrBoard', currBoard: board })
-    // this.credentials.boardId = boardId
-    // this.$store.dispatch({type:'setCardLoc',credentials:this.credentials})
+    this.board = board
   },
-
 }
 </script>

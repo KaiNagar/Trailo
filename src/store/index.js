@@ -13,16 +13,15 @@ const store = createStore({
     boards({ boards }) {
       return boards
     },
-
     boardId({ boardId }) {
       return boardId
+    },
+    currBoard({ currBoard }) {
+      return currBoard
     },
     groupId({ groupId }) {
       return groupId
     },
-    // empetyCard() {
-    //   return boardService.getEmpetyCard()
-    // }
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -35,7 +34,6 @@ const store = createStore({
       console.log('SETTING BOARD',currBoard);
       state.currBoard = currBoard
     },
-
     setGroupId(state, { groupId }) {
       state.groupId = groupId
     },
@@ -50,16 +48,11 @@ const store = createStore({
         console.error('cannot get boards:', err)
       }
     },
-    // async setCardLoc({ commit }, { credentials }) {
-    //   console.log(credentials)
-    //   commit({ type: 'setCardLoc', cardLoc: credentials })
-    // },
-    // async getBoardById(context, {boardId}){
-    //   const board = await boardService.getById(boardId)
-    //   return board
-    // },
-    async saveBoard(context, {board}){
+    async saveBoard({commit}, {board}){
       const newBoard = await boardService.save(board)
+      console.log('newBoard', newBoard)
+      commit({type:'setCurrBoard',currBoard:newBoard})
+      
     },
   },
 })
