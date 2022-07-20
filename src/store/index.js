@@ -40,6 +40,9 @@ const store = createStore({
         (group) => group.id === groupId,
       )
     },
+    addGroup(state, { group }) {
+      state.currBoard.groups.push(group)
+    }
   },
   actions: {
     async loadBoards({ commit }) {
@@ -61,6 +64,7 @@ const store = createStore({
     //   commit({ type: 'setCurrBoard', currBoard: newBoard })
     // },
   },
+
 })
 
 export default store
