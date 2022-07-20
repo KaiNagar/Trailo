@@ -11,6 +11,9 @@
 .flex.space-between{
     justify-content: space-between;
 }
+.flex.align-center{
+    align-items: center;
+}
 
 .flex.column{
     flex-direction: column;
@@ -33,6 +36,12 @@
     color: $clr1;
     text-transform: uppercase;
     @include type(boldCondensed);
+}
+
+// btn
+
+.disabled-btn{
+    cursor:no-drop;
 }
 
 // Aspect ratios

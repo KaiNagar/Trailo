@@ -124,6 +124,11 @@ function _createBoard() {
         title: 'in progress',
         color: '#700f5b',
       },
+      {
+        id: 'l103',
+        title: 'WIP',
+        color: '#700f5b',
+      },
     ],
     members: [
       {
