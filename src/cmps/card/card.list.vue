@@ -1,7 +1,7 @@
 <template>
   <section>
     <div v-for="card in cards" :key="card._id">
-      <card-preview :card="card" />
+      <card-preview @openCard="openCard" :card="card" />
     </div>
   </section>
 </template>
@@ -10,13 +10,22 @@
 import cardPreview from './card.preview.vue'
 export default {
   props: ['cards'],
-  components: {cardPreview},
+  components: { cardPreview },
   data() {
-    return {}
+    return {
+      boardId: null,
+      groupId: null,
+    }
   },
-  methods: {},
+  methods: {
+    openCard(cardId) {
+      this.$router.push(`/board/${this.boardId}/${this.groupId}/${cardId}`)
+    },
+  },
   computed: {},
   created() {
+    this.boardId = this.$store.getters.boardId
+    this.groupId = this.$store.getters.groupId
   },
 }
 </script>

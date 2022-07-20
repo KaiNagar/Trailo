@@ -1,19 +1,21 @@
 <template>
+  <section>
+      <button @click="$emit('openCard', card.id)">Read</button>
+    <router-link to="/home">
+      <section class="card-preview">
+        {{ card.title }}
 
-
-  <router-link :to="'/board/card/' + card.id">
-    <section class="card-preview">
-      {{ card.title }}
-
-      <div class="labels">
-        <div class="label" v-for="(label, idx) in card.labels" :key="idx" :style="{ 'background-color': label }" >
+        <div class="labels">
+          <div
+            class="label"
+            v-for="(label, idx) in card.labels"
+            :key="idx"
+            :style="{ 'background-color': label }"
+          ></div>
         </div>
-      </div>
-
-    </section>
-  </router-link>
-
-
+      </section>
+    </router-link>
+  </section>
 </template>
 
 <script>
@@ -26,11 +28,8 @@ export default {
   },
   methods: {},
   computed: {},
-  created() {
-
-  },
+  created() {},
 }
 </script>
 
-<style>
-</style>
+<style></style>
