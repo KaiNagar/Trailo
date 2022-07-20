@@ -1,6 +1,6 @@
 // import { userStore } from './modules/user.store.js'
 import { createStore } from 'vuex'
-import {boardService} from '@/services/board.service.js'
+import { boardService } from '@/services/board.service.js'
 
 const store = createStore({
   strict: true,
@@ -18,9 +18,9 @@ const store = createStore({
     },
   },
   actions: {
-   async loadBoard({ commit }) {
-        const board = await boardService.query()
-        console.log(board);
+    async loadBoard({ commit }) {
+      const board = await boardService.query()
+      console.log(board)
     },
   },
 })
