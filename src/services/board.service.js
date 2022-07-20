@@ -12,7 +12,7 @@ export const boardService = {
 const STORAGE_KEY = 'boardDB'
 _setBoards()
 
-let gCurrCard = localStorage.getItem('currCard')
+let gCredentials = localStorage.getItem('credentials')
 
 function _setBoards() {
   let board = localStorage.getItem(STORAGE_KEY)
@@ -42,9 +42,14 @@ async function getCardById(credentials) {
   let board = await getById(credentials.boardId)
   let group = board.groups.find((group) => group.id === credentials.groupId)
   let card = group.cards.find((card) => card.id === credentials.cardId)
+  card = {
+    card,
+    loc:credentials
+  }
   localStorage.setItem('currCard', JSON.stringify(card))
   return card
 }
+
 
 async function save(board) {
   if (board._id) {
@@ -116,10 +121,12 @@ function _createBoard() {
           {
             id: _makeId(),
             title: 'new card1',
+            labelIds:[],
           },
           {
             id: _makeId(),
             title: 'new card2',
+            labelIds:['l101','l102'],
           },
         ],
       },

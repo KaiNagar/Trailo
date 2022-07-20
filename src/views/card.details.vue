@@ -1,7 +1,11 @@
 <template>
-  <section>
-    <h1>Card details</h1>
-    c:{{ card }}
+  <!-- <div class="screen"></div> -->
+  <section class="card-details">
+    <button>Cover</button>
+    <h1>{{ card.title }}</h1>
+    <p>in list____</p>
+    <p>labels</p>
+    <div>hi</div>
   </section>
 </template>
 
@@ -16,7 +20,11 @@ export default {
       card: {},
     }
   },
-  methods: {},
+  methods: {
+    boardLabels() {
+      console.log('label')
+    },
+  },
   computed: {},
   async created() {
     const { cardId } = this.$route.params
