@@ -1,0 +1,13 @@
+.board-list-container{
+background-color: aquamarine;
+display: flex;
+height: 80px;
+position: relative;
+flex-direction: column;
+padding: 8px;
+    .board-list{
+        margin: 10px;
+        background-color: aqua;
+    }
+    
+}
