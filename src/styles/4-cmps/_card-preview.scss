@@ -1,0 +1,36 @@
+.card-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0 8px;
+
+    textarea,
+    input {
+        outline: none;
+        background-color: inherit;
+        width: 100%;
+        border: none;
+        font-size: inherit;
+        font-family: inherit;
+    }
+
+    .card-preview {
+        width: 98%;
+        border: 1px black solid;
+        border-radius: 3px;
+
+        .labels {
+            display: flex;
+
+            .label {
+                height: 8px;
+                width: 40px;
+                padding-inline-end: 3px;
+                padding-block-end: 3px;
+
+                margin-inline-end: 5px;
+                border-radius: 50px;
+
+            }
+        }
+    }
+}

@@ -1,9 +1,12 @@
 .group-list {
     display: flex;
     margin: 0 10px;
-   
 
-    .group {
-        margin-inline-end: 10px;
+
+    .new-group {
+        height: 3em;
+        line-height: 3em;
+        background-color: rgb(195 200 209);
+        padding-inline-start: 1em;
     }
 }

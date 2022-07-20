@@ -33,7 +33,6 @@ const store = createStore({
       state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
-      console.log('SETTING BOARD', currBoard)
       state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
@@ -41,6 +40,9 @@ const store = createStore({
         (group) => group.id === groupId,
       )
     },
+    addGroup(state, { group }) {
+      state.currBoard.groups.push(group)
+    }
   },
   actions: {
     async loadBoards({ commit }) {
@@ -54,13 +56,15 @@ const store = createStore({
     },
     async saveBoard({ commit }, { board }) {
       const newBoard = await boardService.save(board)
-      console.log('newBoard', newBoard)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
     },
-    async saveCard({ commit, state }, { location: { card, board, group } }) {
-      console.log(card, board, group)
-    },
+    // async saveCard({ commit }, { location: { card, board, group } }) {
+    //   const newBoard = await boardService.saveCard(board, group, card)
+    //   console.log(newBoard)
+    //   commit({ type: 'setCurrBoard', currBoard: newBoard })
+    // },
   },
+
 })
 
 export default store
