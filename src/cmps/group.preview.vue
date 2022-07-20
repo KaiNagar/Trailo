@@ -6,7 +6,7 @@
     </div>
 
     <div class="card-list">
-      <card-list :cards="group.cards" :saveGroup="saveGroup" />
+      <card-list :cards="group.cards" :saveGroup="addCard"/>
     </div>
 
     <div class="g-footer">
@@ -27,12 +27,10 @@ export default {
   methods: {
     async addCard() {
       const card = this.$store.getters.empetyCard
-      this.group.cards.push(card)
+      card.groupId = this.group.id
+      this.$emit('saveGroup', card)
     },
-    saveGroup(card) {
-      console.log(card);
-      this.$emit('saveGroup', this.group)
-    }
+    
   },
   computed: {},
   created() {

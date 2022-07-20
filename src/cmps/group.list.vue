@@ -16,8 +16,9 @@ export default {
     return {}
   },
   methods: {
-    saveGroup(updatedGroup) {
-      this.$emit('saveGroup', updatedGroup)
+    saveGroup(card) {
+      
+      this.$emit('saveGroup', card)
     }
   },
   computed: {},

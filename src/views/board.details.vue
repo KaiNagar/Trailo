@@ -26,6 +26,7 @@ export default {
       const idx = this.board.groups.findIndex((group) => group.id === updatedGroup.id)
       const boardId = this.$store.getters.boardId
       const board = await this.$store.dispatch({ type: 'getBoardById', boardId })
+      this.board.groups[idx].push(card)
       board.groups.splice(idx, 1, updatedGroup)
       await this.$store.dispatch({ type: 'saveBoard', board })
     }
