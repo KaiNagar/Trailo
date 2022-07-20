@@ -8,6 +8,7 @@ export const boardService = {
   getEmptyBoard,
   getCardById,
   getEmptyCard,
+  getEmptyGroup,
 }
 
 const STORAGE_KEY = 'boardDB'
@@ -63,6 +64,17 @@ async function save(board) {
 
 async function getEmptyBoard() {
   return {}
+}
+
+function getEmptyGroup() {
+  return {
+    id: _makeId(),
+    title: "",
+    style: {
+      bgColor: '#000',
+    },
+    cards: [],
+  }
 }
 
 function getEmptyCard() {

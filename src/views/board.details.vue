@@ -3,7 +3,7 @@
     <div>
       <board-header />
     </div>
-    <group-list :groups="currBoard.groups" @saveGroup="saveGroup" />
+    <group-list :groups="currBoard.groups" @saveGroup="saveGroup" @addGroup="addGroup" />
   </section>
 </template>
 <script>
@@ -21,6 +21,9 @@ export default {
     }
   },
   methods: {
+    addGroup(group) {
+      this.$store.commit({ type: 'addGroup', group })
+    },
     async saveGroup(updatedGroup) {
       const idx = this.board.groups.findIndex((group) => group.id === updatedGroup.id)
       const board = JSON.parse(JSON.stringify(this.board))
