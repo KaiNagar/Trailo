@@ -1,22 +1,17 @@
 <template>
   <section>
-    <h1>this is group list</h1>
-    <div>
-      <h1>title</h1>
-    </div>
-    <div>
-      <h1>main content</h1>
-    </div>
-    <div>
-      <h1>add button</h1>
+    <div v-for="group in groups" :key="group.id">
+      <group-preview :group="group" />
     </div>
   </section>
 </template>
 
 <script>
+import groupPreview from './group.preview.vue'
 export default {
   name: 'groupList',
-  components: {},
+  props: ['groups'],
+  components: {groupPreview},
   data() {
     return {}
   },

@@ -6,15 +6,18 @@ export const boardService = {
   save,
   remove,
   getEmptyBoard,
+  getCardById,
 }
 
 const STORAGE_KEY = 'boardDB'
-_setBoard()
+_setBoards()
 
-function _setBoard() {
+let gCurrCard = localStorage.getItem('currCard')
+
+function _setBoards() {
   let board = localStorage.getItem(STORAGE_KEY)
   if (!board || !board.length)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(_createBoard()))
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(_createBoards()))
 }
 
 async function query(filterBy = '') {
@@ -33,6 +36,14 @@ async function getById(boardId) {
   } catch (err) {
     console.error('cannot get board:', err)
   }
+}
+async function getCardById(credentials) {
+  if (!credentials.boardId) return gCurrCard
+  let board = await getById(credentials.boardId)
+  let group = board.groups.find((group) => group.id === credentials.groupId)
+  let card = group.cards.find((card) => card.id === credentials.cardId)
+  localStorage.setItem('currCard', JSON.stringify(card))
+  return card
 }
 
 async function save(board) {
@@ -56,6 +67,10 @@ async function remove(boardId) {
   } catch (err) {
     console.error('cannot remove board', err)
   }
+}
+
+function _createBoards() {
+  return [_createBoard(), _createBoard(), _createBoard()]
 }
 
 function _createBoard() {

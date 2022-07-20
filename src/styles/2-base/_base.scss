@@ -9,7 +9,7 @@
 
 html { 
    font-family: Bahnschrift, sans-serif; 
-   color: $clr3;
+//    color: $clr3;
    line-height: 1.8;
    line-height: lh(26px);
 
@@ -18,16 +18,16 @@ html {
    }
 }
 
-body {
-    margin: 0;
-    background-color: $clr2;
+// body {
+//     margin: 0;
+//     background-color: $clr2;
 
-    @include for-normal-layout {
-        &.sidebar-open {
-            overflow: hidden;
-        }
-    }
-}
+//     @include for-normal-layout {
+//         &.sidebar-open {
+//             overflow: hidden;
+//         }
+//     }
+// }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;

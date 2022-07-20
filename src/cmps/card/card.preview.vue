@@ -1,19 +1,23 @@
 <template>
   <section>
-    <h1>this is card preview</h1>
+    <pre>{{ card }}</pre>
+    <router-link :to="'/board/card/' + card.id">Read</router-link>
   </section>
 </template>
 
 <script>
 export default {
   name: 'cardPreview',
+  props: ['card'],
   components: {},
   data() {
     return {}
   },
   methods: {},
   computed: {},
-  created() {},
+  created() {
+    
+  },
 }
 </script>
 

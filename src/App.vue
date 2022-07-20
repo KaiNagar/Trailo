@@ -7,17 +7,16 @@
 
 <script>
 import appHeader from '@/cmps/app.header.vue'
-import homePage from '@/views/home.page.vue'
 
 export default {
-  components: { appHeader, homePage },
+  components: { appHeader },
   data() {
     return {}
   },
   methods: {},
   computed: {},
   created() {
-    this.$store.dispatch({type:'loadBoard'})
+    this.$store.dispatch({ type: 'loadBoards' })
   },
 }
 </script>

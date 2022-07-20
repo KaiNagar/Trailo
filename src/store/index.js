@@ -5,22 +5,42 @@ import { boardService } from '@/services/board.service.js'
 const store = createStore({
   strict: true,
   state: {
-    board: {},
+    boards: [],
+    cardLoc: {
+      boardId: null,
+      groupId: null,
+      cardId: null,
+    },
   },
   getters: {
-    board({ board }) {
-      return board
+    boards({ boards }) {
+      return boards
+    },
+    cardLoc({ cardLoc }) {
+      return cardLoc
     },
   },
   mutations: {
-    setBoard(state, { board }) {
-      state.board = board
+    setBoards(state, { boards }) {
+      state.boards = boards
+    },
+    setCardLoc(state, { cardLoc }) {
+      state.cardLoc = cardLoc
     },
   },
   actions: {
-    async loadBoard({ commit }) {
-      const board = await boardService.query()
-      console.log(board)
+    async loadBoards({ commit }) {
+      try {
+        const boards = await boardService.query()
+        commit({ type: 'setBoards', boards })
+        return boards
+      } catch (err) {
+        console.error('cannot get boards:', err)
+      }
+    },
+    async setCardLoc({ commit }, { credentials }) {
+      console.log(credentials)
+      commit({ type: 'setCardLoc', cardLoc: credentials })
     },
   },
 })
