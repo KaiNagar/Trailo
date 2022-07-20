@@ -108,7 +108,7 @@ function _createBoard() {
     groups: [
       {
         id: _makeId(),
-        title: 'new group',
+        title: 'This is stav\'s list',
         style: {
           bgColor: '#000',
         },
@@ -116,6 +116,8 @@ function _createBoard() {
           {
             id: _makeId(),
             title: 'new card1',
+            style: { bgImg: null, bgColor: '#29cce5', isFull: false, },
+            labels: ['#c377e0', '#51e898', '#ff78cb']
           },
           {
             id: _makeId(),
