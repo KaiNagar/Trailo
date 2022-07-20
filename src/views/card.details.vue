@@ -1,11 +1,14 @@
 <template>
-  <div class="card-details-container">
+  <div v-if="card" class="card-details-container">
     <section class="card-details">
+      <router-link :to="'/board/' + board._id">X</router-link>
       <button>Cover</button>
       <h1>{{ card.title }}</h1>
       <p>in list____</p>
       <p>labels</p>
-      <div>{{ labelsToShow }}</div>
+      <div v-for="label in labelsToShow" :key="label.id">
+        <span :style="labelColor(label.color)">{{ label.title }}</span>
+      </div>
       <button @click="onChecklist">+Checklist</button>
       <article v-for="(checklist, idx) in card.checklists" :key="idx">
         <action-checklist :checklist="checklist" />
@@ -27,19 +30,28 @@ export default {
     }
   },
   methods: {
-    onChecklist() {},
+    labelColor(color) {
+      return { backgroundColor: color }
+    },
   },
   computed: {
-    currBoard() {
-      return this.$store.getters.currBoard
-    },
     labelsToShow() {
-      return this.currBoard?.labels.filter((label) => this.card.labelIds.includes(label.id))
+      let labelsToShow = []
+      this.board.labels.filter((boardLabel) => {
+        this.card.labelIds.forEach((id) => {
+          if (id === boardLabel.id) labelsToShow.push(boardLabel)
+        })
+      })
+      return labelsToShow
     },
   },
-  async created() {
-    const { cardId, groupId } = this.$route.params
-    const currGroup = this.currBoard.groups.find((group) => group.id === groupId)
+  created() {
+    const { cardId, groupId, boardId } = this.$route.params
+    const currBoard = this.$store.getters.boards.find(
+      (board) => board._id === boardId,
+    )
+    this.board = currBoard
+    const currGroup = currBoard.groups.find((group) => group.id === groupId)
     const currCard = currGroup.cards.find((card) => card.id === cardId)
     this.card = currCard
   },

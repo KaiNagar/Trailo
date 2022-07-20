@@ -5,22 +5,24 @@ import { boardService } from '@/services/board.service.js'
 const store = createStore({
   strict: true,
   state: {
-    boardId:null,
+    boardId: null,
     boards: [],
-    currBoard:null,
+    currBoard: null,
+    currGroup:null,
+    currCard:null,
   },
   getters: {
     boards({ boards }) {
       return boards
     },
-    boardId({ boardId }) {
-      return boardId
-    },
+    // board({ boardId }) {
+    //   return boardId
+    // },
     currBoard({ currBoard }) {
       return currBoard
     },
-    groupId({ groupId }) {
-      return groupId
+    currGroup({ currGroup }) {
+      return currGroup
     },
   },
   mutations: {
@@ -31,11 +33,11 @@ const store = createStore({
       state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
-      console.log('SETTING BOARD',currBoard);
+      console.log('SETTING BOARD', currBoard)
       state.currBoard = currBoard
     },
-    setGroupId(state, { groupId }) {
-      state.groupId = groupId
+    setCurrGroup(state, { groupId }) {
+      state.currGroup = state.currBoard.groups.find((group) => group.id === groupId)
     },
   },
   actions: {
@@ -48,11 +50,10 @@ const store = createStore({
         console.error('cannot get boards:', err)
       }
     },
-    async saveBoard({commit}, {board}){
+    async saveBoard({ commit }, { board }) {
       const newBoard = await boardService.save(board)
       console.log('newBoard', newBoard)
-      commit({type:'setCurrBoard',currBoard:newBoard})
-      
+      commit({ type: 'setCurrBoard', currBoard: newBoard })
     },
   },
 })

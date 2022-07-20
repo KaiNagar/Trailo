@@ -13,8 +13,6 @@ export const boardService = {
 const STORAGE_KEY = 'boardDB'
 _setBoards()
 
-
-
 let gCredentials = localStorage.getItem('credentials')
 
 function _setBoards() {
@@ -47,12 +45,11 @@ async function getCardById(credentials) {
   let card = group.cards.find((card) => card.id === credentials.cardId)
   card = {
     card,
-    loc: credentials
+    loc: credentials,
   }
   localStorage.setItem('currCard', JSON.stringify(card))
   return card
 }
-
 
 async function save(board) {
   if (board._id) {
@@ -64,8 +61,6 @@ async function save(board) {
   }
 }
 
-
-
 async function getEmptyBoard() {
   return {}
 }
@@ -74,8 +69,8 @@ function getEmptyCard() {
   return {
     id: _makeId(),
     title: 'new card',
-    style: { bgImg: null, bgColor: null, isFull: false, },
-    labels: []
+    style: { bgImg: null, bgColor: null, isFull: false },
+    labels: [],
   }
 }
 
@@ -108,14 +103,14 @@ function _createBoard() {
     },
     labels: [
       {
-        id: _makeId(),
+        id: 'l101',
         title: 'done',
         color: '#74ff54',
       },
       {
-        id: _makeId(),
+        id: 'l102',
         title: 'in progress',
-        color: '#7bff5b',
+        color: '#700f5b',
       },
     ],
     members: [
@@ -128,7 +123,7 @@ function _createBoard() {
     groups: [
       {
         id: _makeId(),
-        title: 'This is stav\'s list',
+        title: "This is stav's list",
         boardId,
         style: {
           bgColor: '#000',
@@ -137,26 +132,27 @@ function _createBoard() {
           {
             id: _makeId(),
             title: 'new card1',
-            style: { bgImg: null, bgColor: '#29cce5', isFull: false, },
-            labels: ['#c377e0', '#51e898', '#ff78cb']
+            labelIds: ['l101', 'l102'],
+            style: { bgImg: null, bgColor: '#29cce5', isFull: false },
+            labels: ['#c377e0', '#51e898', '#ff78cb'],
           },
           {
             id: _makeId(),
             title: 'new card2',
-            labelIds:['l101','l102'],
+            labelIds: ['l101', 'l102'],
             checklists: [
               {
-                  id: 'YEhmF',
-                  title: 'Checklist',
-                  todos: [
-                      {
-                          id: '212jX',
-                          title: 'To Do 1',
-                          isDone: false
-                      }
-                  ]
-              }
-          ],
+                id: 'YEhmF',
+                title: 'Checklist',
+                todos: [
+                  {
+                    id: '212jX',
+                    title: 'To Do 1',
+                    isDone: false,
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

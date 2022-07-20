@@ -13,13 +13,13 @@ export default {
   components: { cardPreview },
   data() {
     return {
-      boardId: null,
-      groupId: null,
+      board: null,
+      group: null,
     }
   },
   methods: {
     openCard(cardId) {
-      this.$router.push(`/board/${this.boardId}/${this.groupId}/${cardId}`)
+      this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
     },
     saveGroup(card){
       console.log(card);
@@ -27,8 +27,8 @@ export default {
   },
   computed: {},
   created() {
-    this.boardId = this.$store.getters.boardId
-    this.groupId = this.$store.getters.groupId
+    this.board = this.$store.getters.currBoard
+    this.group = this.$store.getters.currGroup
   },
 }
 </script>

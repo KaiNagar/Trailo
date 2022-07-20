@@ -3,7 +3,7 @@
   <!-- <button @click="$emit('openCard', card.id)">Read</button> -->
 
   <section class="card-preview" @click="$emit('openCard', card.id)">
-    <input type="text" v-model="card.title" @click.stop @input.stop="saveCard">
+    <input type="text" v-model="card.title" @input.stop="saveCard">
 
     <div class="labels">
       <div class="label" v-for="(label, idx) in card.labels" :key="idx" :style="{ 'background-color': label }"></div>

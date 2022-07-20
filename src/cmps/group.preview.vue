@@ -36,6 +36,8 @@ export default {
     },
   },
   computed: {},
-  created() {},
+  created() {
+    this.$store.commit({ type: 'setCurrGroup', groupId: this.group.id })
+  },
 }
 </script>
