@@ -24,13 +24,10 @@ export default {
     return {
       board: null,
       card: {},
-      actions: 'actions',
     }
   },
   methods: {
-    onChecklist() {
-      this.actions = 'checklist'
-    },
+    onChecklist() {},
   },
   computed: {
     currBoard() {
