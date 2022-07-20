@@ -10,13 +10,13 @@
 html { 
    font-family: Bahnschrift, sans-serif; 
 
-   @media (max-width: 1300px) {
-       font-size: 13px;
-   }
+//    @media (max-width: 1300px) {
+//        font-size: 13px;
+//    }
 }
 
 body {
-
+    margin: 0;
 //     @include for-normal-layout {
 //         &.sidebar-open {
 //             overflow: hidden;

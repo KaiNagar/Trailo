@@ -2,20 +2,19 @@
   <section>
     <div>
       <board-header />
-      <board-filter />
+      
     </div>
     <group-list :groups="board.groups"/>
   </section>
 </template>
 <script>
-import boardFilter from '@/cmps/board/board.filter.vue'
 import boardHeader from '@/cmps/board/board.header.vue'
 import groupList from '@/cmps/group.list.vue'
 import { boardService } from '../services/board.service'
 
 export default {
   name: 'boardApp',
-  components: { boardFilter, boardHeader, groupList },
+  components: {  boardHeader, groupList },
   data() {
     return {
       board: {},

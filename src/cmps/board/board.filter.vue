@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="board-filter">
     <h1>this is border filter</h1>
   </section>
 </template>

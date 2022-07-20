@@ -42,6 +42,10 @@ async function getCardById(credentials) {
   let board = await getById(credentials.boardId)
   let group = board.groups.find((group) => group.id === credentials.groupId)
   let card = group.cards.find((card) => card.id === credentials.cardId)
+  card = {
+    card,
+    loc:credentials
+  }
   localStorage.setItem('currCard', JSON.stringify(card))
   return card
 }
@@ -116,6 +120,7 @@ function _createBoard() {
           {
             id: _makeId(),
             title: 'new card1',
+            
           },
           {
             id: _makeId(),

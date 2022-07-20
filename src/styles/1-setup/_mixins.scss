@@ -1,28 +1,28 @@
 /* Media queries Breakpoint mixins */
 
-@mixin for-mobile-layout {
-  @media (max-width: $break-narrow) {
-    @content;
-  }
-}
+// @mixin for-mobile-layout {
+//   @media (max-width: $break-narrow) {
+//     @content;
+//   }
+// }
 
-@mixin for-narrow-layout {
-  @media (min-width: $break-narrow) {
-    @content;
-  }
-}
+// @mixin for-narrow-layout {
+//   @media (min-width: $break-narrow) {
+//     @content;
+//   }
+// }
 
-@mixin for-normal-layout {
-  @media (min-width: $break-normal) {
-    @content;
-  }
-}
+// @mixin for-normal-layout {
+//   @media (min-width: $break-normal) {
+//     @content;
+//   }
+// }
 
-@mixin for-wide-layout {
-  @media (min-width: $break-wide) {
-    @content;
-  }
-}
+// @mixin for-wide-layout {
+//   @media (min-width: $break-wide) {
+//     @content;
+//   }
+// }
 
 @mixin layoutGTC($max) {
   grid-template-columns:
@@ -38,7 +38,7 @@
   position: relative;
   overflow: hidden;
   &:before {
-    content: "";
+    content: '';
     display: block;
     width: 100%;
     padding-top: ($height / $width) * 100%;
@@ -66,16 +66,38 @@
 }
 
 // Buttons
+@mixin headers-btns {
+  background-color: transparent;
+  border: 0;
+  border-radius: rem(3px);
+  font-size: rem(14px);
+  padding: 6px 12px 6px 10px;
+  margin-inline-end: rem(4px);
+  margin-bottom: rem(8px);
+  color: rgb(23, 43, 77);
+  line-height: 32px;
+  cursor: pointer;
+  &:hover{
+    background-color: rgba(0, 0, 0, 0.1);
 
-@mixin btn($type: regular, $bg: $clr1, $clr: $clr3, $padding: em(24px) em(44px), $hover: darken($bg, 8%)) {
+  }
+}
+
+@mixin btn(
+  $type: regular,
+  $bg: $clr1,
+  $clr: $clr3,
+  $padding: em(24px) em(44px),
+  $hover: darken($bg, 8%)
+) {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
   text-transform: uppercase;
   padding: $padding;
   line-height: 1.25;
-  font-size: em(14px);
-  font-variation-settings: "wght" 430;
+  font-size: rem(14px);
+  font-variation-settings: 'wght' 430;
   border: none;
   cursor: pointer;
 
@@ -107,22 +129,19 @@
 // Type
 
 @mixin type($type: bold) {
-  // type options: 
-  // 1.bold 
-  // 2.boldCondensed 
+  // type options:
+  // 1.bold
+  // 2.boldCondensed
   // 3.condensed
   @if $type == bold {
-    font-variation-settings: "wght" 430;
-  } 
-  @else if $type == boldCondensed {
-    font-variation-settings: "wght" 430, "wdth" 80;
+    font-variation-settings: 'wght' 430;
+  } @else if $type == boldCondensed {
+    font-variation-settings: 'wght' 430, 'wdth' 80;
     letter-spacing: em(6.72px);
-  } 
-  @else if $type == condensed {
-    font-variation-settings: "wdth" 80;
+  } @else if $type == condensed {
+    font-variation-settings: 'wdth' 80;
     letter-spacing: em(6.72px);
-  }
-  @else if $type == light {
-    font-variation-settings: "wght" 200;
+  } @else if $type == light {
+    font-variation-settings: 'wght' 200;
   }
 }

@@ -1,0 +1,24 @@
+.main-header {
+  background: rgb(230, 233, 239);
+  padding: 0px;
+  margin: 0px;
+  .left-header {
+    align-items: center;
+    button {
+      @include headers-btns;
+    }
+    .create-btn {
+      padding: 0 rem(12px);
+    }
+  }
+
+  .right-header {
+    align-items: center;
+    button{
+        background-color: transparent;
+        border: 0;
+    }
+  }
+  .search-board-input {
+  }
+}
