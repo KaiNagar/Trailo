@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <div v-for="group in groups" :key="group.id">
+  <section class="group-list">
+    <div  v-for="group in groups" :key="group.id">
       <group-preview :group="group" />
     </div>
   </section>
