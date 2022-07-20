@@ -1,6 +1,11 @@
 <template>
   <section>
-    <h1>this is card actions</h1>
+    <h1>actions</h1>
+    <h1>actions</h1>
+    <h1>actions</h1>
+    <h1>actions</h1>
+    <h1>actions</h1>
+    <h1>actions</h1>
   </section>
 </template>
 

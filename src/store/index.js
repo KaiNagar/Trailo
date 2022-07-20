@@ -8,8 +8,8 @@ const store = createStore({
     boardId: null,
     boards: [],
     currBoard: null,
-    currGroup:null,
-    currCard:null,
+    currGroup: null,
+    currCard: null,
   },
   getters: {
     boards({ boards }) {
@@ -37,7 +37,9 @@ const store = createStore({
       state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
-      state.currGroup = state.currBoard.groups.find((group) => group.id === groupId)
+      state.currGroup = state.currBoard.groups.find(
+        (group) => group.id === groupId,
+      )
     },
   },
   actions: {
@@ -54,6 +56,9 @@ const store = createStore({
       const newBoard = await boardService.save(board)
       console.log('newBoard', newBoard)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
+    },
+    async saveCard({ commit, state }, { location: { card, board, group } }) {
+      console.log(card, board, group)
     },
   },
 })
