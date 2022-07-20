@@ -5,12 +5,12 @@
       <div class="g-menu">---</div>
     </div>
 
-    
-      <card-list :cards="group.cards" />
-    
+    <div class="card-list">
+      <card-list :cards="group.cards" :saveGroup="saveGroup" />
+    </div>
 
     <div class="g-footer">
-      <button>add card</button>
+      <button @click="addCard">add card</button>
     </div>
   </section>
 </template>
@@ -24,15 +24,19 @@ export default {
   data() {
     return {}
   },
-  methods: {},
+  methods: {
+    async addCard() {
+      const card = this.$store.getters.empetyCard
+      this.group.cards.push(card)
+    },
+    saveGroup(card) {
+      console.log(card);
+      this.$emit('saveGroup', this.group)
+    }
+  },
   computed: {},
   created() {
     this.$store.commit({ type: 'setGroupId', groupId: this.group.id })
-    // let credentials = { ...this.$store.getters.cardLoc }
-    // credentials.groupId = this.group.id
-    // this.$store.dispatch({ type: 'setCardLoc', credentials })
-
-    // console.log(this.group);
   },
 }
 </script>
