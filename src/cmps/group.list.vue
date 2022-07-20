@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section class="group-list">
     <div v-for="group in groups" :key="group.id">
-      <group-preview  :group="group" />
+      <group-preview :group="group" />
     </div>
   </section>
 </template>
@@ -17,6 +17,6 @@ export default {
   },
   methods: {},
   computed: {},
-  created() {},
+  created() { },
 }
 </script>
