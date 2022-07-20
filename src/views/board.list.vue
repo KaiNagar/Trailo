@@ -1,17 +1,12 @@
 <template>
-  <main v-if="boards">
-    <h1>Hello trailo</h1>
-    <h2>many boards</h2>
-    <div v-for="board in boards" :key="board._id">
-      {{board._id}}
-      {{board.title}}
+  <section class="board-list-container" v-if="boards">
+    <h1>Most popular templates</h1>
+    <div class="board-list" v-for="board in boards" :key="board._id">
+      {{ board._id }}
+      {{ board.title }}
       <router-link :to="'/board/' + board._id">Go to board</router-link>
     </div>
-    <pre>
-      {{boards}}
-    </pre>
-    
-  </main>
+  </section>
 </template>
 <script>
 export default {
@@ -22,8 +17,7 @@ export default {
       boards: [],
     }
   },
-  methods: {
-  },
+  methods: {},
   computed: {},
   created() {
     this.boards = this.$store.getters.boards
