@@ -12,7 +12,7 @@ export const boardService = {
 const STORAGE_KEY = 'boardDB'
 _setBoards()
 
-let gCurrCard = localStorage.getItem('currCard')
+let gCredentials = localStorage.getItem('credentials')
 
 function _setBoards() {
   let board = localStorage.getItem(STORAGE_KEY)
@@ -49,6 +49,7 @@ async function getCardById(credentials) {
   localStorage.setItem('currCard', JSON.stringify(card))
   return card
 }
+
 
 async function save(board) {
   if (board._id) {
@@ -112,7 +113,7 @@ function _createBoard() {
     groups: [
       {
         id: _makeId(),
-        title: 'new group',
+        title: 'This is stav\'s list',
         style: {
           bgColor: '#000',
         },
@@ -120,11 +121,13 @@ function _createBoard() {
           {
             id: _makeId(),
             title: 'new card1',
-            
+            style: { bgImg: null, bgColor: '#29cce5', isFull: false, },
+            labels: ['#c377e0', '#51e898', '#ff78cb']
           },
           {
             id: _makeId(),
             title: 'new card2',
+            labelIds:['l101','l102'],
           },
         ],
       },

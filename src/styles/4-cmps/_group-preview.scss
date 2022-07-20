@@ -1,0 +1,46 @@
+.group{
+    width: 272px;
+    border: 1px black solid;
+    background-color:#ebecf0 ;
+    color: #172b4d;
+    font-size: 14px;
+    .g-header{
+        padding: 10px 15px ;
+        line-height: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px;
+
+    }
+
+    .card-list{
+        display: flex;
+        flex-direction: column;
+        padding: 0 8px;
+
+        .card-preview{
+            width: 98%;
+            border: 1px black solid;
+            border-radius: 3px;
+
+            .labels{
+                display: flex;
+                // border: 1px green solid;
+
+                .label{
+                    height: 8px;
+                    width: 40px;
+                    padding-inline-end: 3px;
+                    padding-block-end: 3px;
+
+                    margin-inline-end: 5px;
+                    border-radius: 50px;
+
+                }
+            }
+        }
+    }
+
+
+}
