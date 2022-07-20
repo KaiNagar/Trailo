@@ -4,22 +4,60 @@
       <div>
         <router-link :to="'/board/' + board._id">X</router-link>
         <!-- <button>Cover</button> -->
-        <h1>{{ card.title }}</h1>
-        <p>in list____</p>
-        <p>labels</p>
-        <div v-for="label in labelsToShow" :key="label.id">
-          <span :style="labelColor(label.color)">{{ label.title }}</span>
+        <div class="card-header">
+          <div class="flex">
+            <div class="actionImg flex">img</div>
+            <div>
+              <h1>{{ card.title }}</h1>
+              in list <span class="group-title">{{ group.title }}</span>
+            </div>
+          </div>
         </div>
-        <button @click="labelMenu = !labelMenu">+</button>
-        <div v-if="labelMenu" class="label-menu">
-          <span
-            @click="addLabel(label)"
-            :style="labelColor(label.color)"
-            v-for="label in board.labels"
-            :key="label.id"
-          >
-            {{ label.title }}</span
-          >
+        <div class="card-labels flex column">
+          <h3>Labels</h3>
+          <div class="labels-preview flex">
+            <div
+              class="label-btn"
+              v-for="label in labelsToShow"
+              :key="label.id"
+              @click="openLabelsMenu($event)"
+            >
+              <span :style="labelColor(label.color)">{{ label.title }}</span>
+            </div>
+            <button @click="isLabelMenuOpen = !isLabelMenuOpen">+</button>
+            <div :style="{left:LabelsMenuX}" v-if="isLabelMenuOpen" class="labels-menu">
+              <header>
+                <h3>Labels</h3>
+                <button
+                  class="close-label-menu"
+                  @click="isLabelMenuOpen = false"
+                >
+                  X
+                </button>
+              </header>
+              <hr />
+              <input type="text" placeholder="Search labels..." />
+              <main>
+                <h3>Labels</h3>
+                <div
+                  class="board-label flex space-between align-center"
+                  @click="setLabel(label, labelSelected(label.id))"
+                  v-for="label in board.labels"
+                  :key="label.id"
+                  :style="labelColor(label.color)"
+                >
+                  {{ label.title }}
+                  <span v-if="labelSelected(label.id)">V</span>
+                  <span>E</span>
+                </div>
+                <button class="create-label">Create a new label</button>
+                <hr />
+                <button disabled class="disabled-btn color-blind-btn">
+                  Enable color blind friendly mode
+                </button>
+              </main>
+            </div>
+          </div>
         </div>
       </div>
       <div>
@@ -47,27 +85,47 @@ export default {
       board: null,
       group: null,
       card: null,
-      labelMenu: false,
+      isLabelMenuOpen: false,
+      labelMenuX: null,
     }
   },
   methods: {
     labelColor(color) {
       return { backgroundColor: color }
     },
-    addLabel(newLabel) {
-      this.card.labelIds.push(newLabel.id)
+    labelSelected(labelId) {
+      if (this.card.labelIds.includes(labelId)) return true
+      else return false
+    },
+    setLabel(newLabel, active) {
       const cardIdx = this.group.cards.findIndex(
         (card) => card.id === this.card.id,
       )
       const groupIdx = this.board.groups.findIndex(
         (group) => group.id === this.group.id,
       )
+      if (!active) {
+        this.card.labelIds.push(newLabel.id)
+      } else {
+        const labelIdx = this.card.labelIds.findIndex(
+          (id) => newLabel.id === id,
+        )
+        this.card.labelIds.splice(labelIdx, 1)
+      }
       this.board.groups[groupIdx].cards[cardIdx] = this.card
       this.$store.dispatch({
         type: 'saveBoard',
         board: JSON.parse(JSON.stringify(this.board)),
       })
     },
+    openLabelsMenu(ev) {
+      this.isLabelMenuOpen = true
+      this.labelMenuX = ev.pageX - ev.offsetX
+    },
+    // setLabelMenuX(ev) {
+    //   console.log(ev.offsetX)
+    //   // this.labelMenuX = ev.offsetX
+    // },
   },
   computed: {
     labelsToShow() {
@@ -78,6 +136,9 @@ export default {
         })
       })
       return labelsToShow
+    },
+    LabelsMenuX() {
+      return this.labelMenuX 
     },
   },
   created() {

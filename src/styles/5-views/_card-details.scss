@@ -1,24 +1,90 @@
+.card-details-container {
+  display: flex;
+  align-items: flex-start;
+  background-color: #000000a3;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+  .card-details {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    min-height: 600px;
+    width: 50%;
+    padding: 20px;
+    position: relative;
+    background-color: rgb(241, 238, 238);
+    top: 6%;
+    .card-header {
+      font-size: rem(14px);
+      h1 {
+        font-size: rem(20px);
+        padding: 4px 8px;
+        margin: -4px -8px;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .actionImg {
+        width: 32px;
+        height: 32px;
+        background-color: red;
+        justify-content: center;
+        align-items: center;
+      }
 
-.card-details-container{
-    display: flex;
-    align-items: flex-start;
-    background-color: #000000a3;
-    height: 100%;
-    justify-content: center;
-    left: 0;
-    overflow-y: auto;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 20;
-    .card-details{
-        min-height: 600px;
-        width: 50%;
-        padding: 20px;
-        position: relative;
-        background-color: rgb(241, 238, 238);
-        top: 6%;
+      .group-title {
+        text-decoration: underline;
+      }
     }
+  }
+  .card-labels {
+    h3 {
+      font-size: rem(12px);
+      font-weight: 600;
+      margin: 0 8px 4px 0;
+      color: rgb(94, 108, 132);
+      line-height: 1.666666667;
+      //   max-width: 20px
+    }
+  }
+  .labels-menu {
+    background-color: white;
+    padding: 1rem;
+    position: absolute;
+    .create-label,
+    .color-blind-btn {
+      width: 100%;
+      margin: 8px 4px 8px 0;
+      padding: 6px 12px;
+    }
+    .color-blind-btn{
+      cursor: no-drop;
+    }
+  }
+  .labels-preview {
+    flex-wrap: wrap;
+    span {
+      @include headers-btns;
+      font-weight: 600;
+    }
+    .label-btn {
+      margin: 0 0 4px 0;
+    }
+    button {
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
+      border: 0;
+      border-radius: rem(3px);
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.12);
+      }
+    }
+  }
 }
-
-
