@@ -5,9 +5,7 @@
       <div class="g-menu">---</div>
     </div>
 
-    
-      <card-list :cards="group.cards" />
-    
+    <card-list :cards="group.cards" />
 
     <div class="g-footer">
       <button>add card</button>

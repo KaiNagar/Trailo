@@ -46,7 +46,7 @@ async function getCardById(credentials) {
   let card = group.cards.find((card) => card.id === credentials.cardId)
   card = {
     card,
-    loc:credentials
+    loc: credentials
   }
   localStorage.setItem('currCard', JSON.stringify(card))
   return card
@@ -129,7 +129,64 @@ function _createBoard() {
           {
             id: _makeId(),
             title: 'new card2',
+<<<<<<< HEAD
             labelIds:['l101','l102'],
+            checklists: [
+              {
+                  id: 'YEhmF',
+                  title: 'Checklist',
+                  todos: [
+                      {
+                          id: '212jX',
+                          title: 'To Do 1',
+                          isDone: false
+                      }
+                  ]
+              }
+          ],
+=======
+            labelIds: ['l101', 'l102'],
+          },
+        ],
+      },
+      {
+        id: _makeId(),
+        title: 'This is stav\'s list',
+        style: {
+          bgColor: '#000',
+        },
+        cards: [
+          {
+            id: _makeId(),
+            title: 'new card1',
+            style: { bgImg: null, bgColor: '#29cce5', isFull: false, },
+            labels: ['#c377e0', '#51e898', '#ff78cb']
+          },
+          {
+            id: _makeId(),
+            title: 'new card2',
+            labelIds: ['l101', 'l102'],
+          },
+        ],
+      },
+      {
+        id: _makeId(),
+        title: 'This is stav\'s list',
+        style: {
+          bgColor: '#000',
+        },
+        cards: [
+          {
+            id: _makeId(),
+            title: 'new card1',
+            style: { bgImg: null, bgColor: '#29cce5', isFull: false, },
+            labels: ['#c377e0', '#51e898', '#ff78cb']
+          },
+          {
+            id: _makeId(),
+            title: 'new card2',
+            labelIds: ['l101', 'l102'],
+>>>>>>> 1085d1a79d3cb405fc24d445e25eb7ea7186b9d3
           },
         ],
       },

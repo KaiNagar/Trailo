@@ -1,10 +1,12 @@
 .group{
-    width: 272px;
+    border-radius: 3px;
     border: 1px black solid;
+    width: 272px;
     background-color:#ebecf0 ;
     color: #172b4d;
     font-size: 14px;
     .g-header{
+        border-radius: 3px;
         padding: 10px 15px ;
         line-height: 20px;
         width: 100%;
@@ -13,7 +15,7 @@
         padding-bottom: 10px;
 
     }
-
+    
     .card-list{
         display: flex;
         flex-direction: column;

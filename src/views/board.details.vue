@@ -24,8 +24,10 @@ export default {
   computed: {},
   async created() {
     const { boardId } = this.$route.params
-    this.board = await boardService.getById(boardId)
+    const board = await boardService.getById(boardId)
+    this.board = board
     this.$store.commit({ type: 'setBoardId', boardId })
+    this.$store.commit({ type: 'setCurrBoard', currBoard: board })
     // this.credentials.boardId = boardId
     // this.$store.dispatch({type:'setCardLoc',credentials:this.credentials})
   },
