@@ -6,18 +6,25 @@ const store = createStore({
   strict: true,
   state: {
     boards: [],
-    cardLoc: {
-      boardId: null,
-      groupId: null,
-      cardId: null,
-    },
+    // cardLoc: {
+    //   boardId: null,
+    //   groupId: null,
+    //   cardId: null,
+    // },
   },
   getters: {
     boards({ boards }) {
       return boards
     },
+    board({board})
     cardLoc({ cardLoc }) {
       return cardLoc
+    },
+    boardId({ boardId }) {
+      return boardId
+    },
+    groupId({ groupId }) {
+      return groupId
     },
   },
   mutations: {
@@ -26,6 +33,12 @@ const store = createStore({
     },
     setCardLoc(state, { cardLoc }) {
       state.cardLoc = cardLoc
+    },
+    setBoardId(state, { boardId }) {
+      state.boardId = boardId
+    },
+    setGroupId(state, { groupId }) {
+      state.groupId = groupId
     },
   },
   actions: {

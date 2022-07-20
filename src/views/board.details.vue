@@ -2,9 +2,8 @@
   <section>
     <div>
       <board-header />
-      
     </div>
-    <group-list :groups="board.groups"/>
+    <group-list :groups="board.groups" />
   </section>
 </template>
 <script>
@@ -14,11 +13,11 @@ import { boardService } from '../services/board.service'
 
 export default {
   name: 'boardApp',
-  components: {  boardHeader, groupList },
+  components: { boardHeader, groupList },
   data() {
     return {
       board: {},
-      credentials:{}
+      credentials: {},
     }
   },
   methods: {},
@@ -26,8 +25,9 @@ export default {
   async created() {
     const { boardId } = this.$route.params
     this.board = await boardService.getById(boardId)
-    this.credentials.boardId = boardId
-    this.$store.dispatch({type:'setCardLoc',credentials:this.credentials})
+    this.$store.commit({ type: 'setBoardId', boardId })
+    // this.credentials.boardId = boardId
+    // this.$store.dispatch({type:'setCardLoc',credentials:this.credentials})
   },
 }
 </script>

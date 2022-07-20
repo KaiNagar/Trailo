@@ -1,7 +1,7 @@
 <template>
   <section>
     <div v-for="group in groups" :key="group.id">
-      <group-preview :group="group" />
+      <group-preview  :group="group" />
     </div>
   </section>
 </template>
@@ -11,7 +11,7 @@ import groupPreview from './group.preview.vue'
 export default {
   name: 'groupList',
   props: ['groups'],
-  components: {groupPreview},
+  components: { groupPreview },
   data() {
     return {}
   },

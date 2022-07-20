@@ -27,10 +27,11 @@ export default {
   },
   computed: {},
   async created() {
-    const { cardId } = this.$route.params
-    let credentials = { ...this.$store.getters.cardLoc }
-    credentials.cardId = cardId
-    this.card = await boardService.getCardById(credentials)
+    const { boardId, cardId, groupId } = this.$route.params
+    const currBoard = await boardService.getById(boardId)
+    const currGroup = currBoard.groups.find((group) => group.id === groupId)
+    const currCard = currGroup.cards.find((card) => card.id === cardId)
+    this.card = currCard
   },
 }
 </script>
