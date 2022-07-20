@@ -45,8 +45,8 @@ export default {
   data() {
     return {
       board: null,
-      group:null,
-      card:null,
+      group: null,
+      card: null,
       labelMenu: false,
     }
   },
@@ -56,9 +56,16 @@ export default {
     },
     addLabel(newLabel) {
       this.card.labelIds.push(newLabel.id)
+      const cardIdx = this.group.cards.findIndex(
+        (card) => card.id === this.card.id,
+      )
+      const groupIdx = this.board.groups.findIndex(
+        (group) => group.id === this.group.id,
+      )
+      this.board.groups[groupIdx].cards[cardIdx] = this.card
       this.$store.dispatch({
-        type: 'saveCard',
-        location: { card: this.card, board: this.board,group:this.group },
+        type: 'saveBoard',
+        board: JSON.parse(JSON.stringify(this.board)),
       })
     },
   },
