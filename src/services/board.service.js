@@ -12,6 +12,8 @@ export const boardService = {
 const STORAGE_KEY = 'boardDB'
 _setBoards()
 
+
+
 let gCredentials = localStorage.getItem('credentials')
 
 function _setBoards() {
