@@ -1,12 +1,19 @@
 <template>
   <section class="board-list-container" v-if="boards">
-    <h1>Most popular templates</h1>
     <div class="board-list">
-      <div class="board-preview" v-for="board in boards" :key="board._id">
+      <div class="board-preview">
+        <h1>Recently viewed</h1>
         <ul>
-          <li>
-            {{ board.title }}
-            <router-link :to="'/board/' + board._id">Go to board</router-link>
+          <li
+            @click="onSelectedBoard(board._id)"
+            v-for="board in boards"
+            :style="boardUrl(board.bgCover)"
+            :key="board._id"
+          >
+            <h1>{{ board.title }}</h1>
+          </li>
+          <li class="board-list-new-board">
+            <p>Create new board</p>
           </li>
         </ul>
       </div>
@@ -22,7 +29,14 @@ export default {
       boards: [],
     }
   },
-  methods: {},
+  methods: {
+    onSelectedBoard(boardId) {
+      this.$router.push('/board/' + boardId)
+    },
+    boardUrl(bgCover) {
+      return { backgroundImage: 'url(' + bgCover + ')' }
+    },
+  },
   computed: {},
   created() {
     this.boards = this.$store.getters.boards

@@ -1,27 +1,44 @@
 .board-list-container{
     position: relative;
-    background-color: blanchedalmond;
-    .board-list{
-            background-color: aquamarine;
-            display: flex;
-            height: 80px;
-            position: relative;
-            flex-direction: column;
-            padding: 8px;
-            margin: 5px;
-            border-radius: 3px;
+    border: 1px solid black;
+    top: 40px;
+   
+    margin: 0 10% 0;
+    flex-direction: column;
+    min-height: 50vh;
+    h1{
+        margin-left: 4%;
+        color: #172B4D;
+    }
             .board-preview ul{
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: flex-start;
-                background-color: lightblue;
-                list-style: none;
-                
+                max-width: 900px;
+                height: 120px;
                 li{
-                    background-color: lightcoral;
+                    background: #091e420a;
+                    background-size: cover;
+                    background-position: center center;
+                    border-radius: 3px;
+                    color: #FFFFFF;
+                    position: relative;
+                    text-decoration: none;
+                    flex: 1 0 22%;
+                    margin-right: 2%;
+                    margin-bottom: 2%;
+                    list-style: none;
+                    cursor: pointer;
+                    &:hover{
+                        filter: brightness(90%);
+                    }
+                    h1{
+                        font-size: 16px;
+                        font-weight: 700;
+                        margin-left: 4%;
+                        color: #FFFFFF;
+                    }
                 }
             }
         }
-    }
     
     
