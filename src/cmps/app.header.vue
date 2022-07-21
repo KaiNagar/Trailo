@@ -2,12 +2,14 @@
   <section class="main-header ">
 
     <button class="header-menu">---</button>
-    <div class="logo">
-      <!-- <div class="loader">[]</div> -->
-      <!-- Trailo -->
-      <img src="../../src/styles/cenzored-header-gif.gif" alt="">
-      <span>ai</span>
-    </div>
+    <router-link to="/">
+      <div class="logo">
+        <!-- <div class="loader">[]</div> -->
+        <!-- Trailo -->
+        <img src="../../src/styles/cenzored-header-gif.gif" alt="">
+        <span>ai</span>
+      </div>
+    </router-link>
     <div class="actions">
 
       <button>Recent <span class="arrow"></span></button>
@@ -17,12 +19,6 @@
     </div>
 
 
-    <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/">Boards</router-link>
-      <router-link to="/login">login</router-link>
-    </nav>
 
     <!-- <div class="search">
       <span></span>
@@ -30,7 +26,8 @@
     <input class="search-board-input" type="text" placeholder="Search" />
     <div class="right-header flex">
       <button>🔔</button>
-      <button>About</button>
+      <router-link to="/about"><button>About</button></router-link>
+
       <div class="profile">
         <button>KN</button>
       </div>
