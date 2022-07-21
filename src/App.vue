@@ -1,6 +1,6 @@
 <template>
   <section>
-    <app-header />
+    <app-header :boards="boards" />
     <router-view />
   </section>
 </template>
@@ -11,12 +11,14 @@ import appHeader from '@/cmps/app.header.vue'
 export default {
   components: { appHeader },
   data() {
-    return {}
+    return {
+      boards: null
+    }
   },
   methods: {},
   computed: {},
-  created() {
-    this.$store.dispatch({ type: 'loadBoards' })
+  async created() {
+    this.boards = await this.$store.dispatch({ type: 'loadBoards' })
   },
 }
 </script>
