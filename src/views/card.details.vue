@@ -7,6 +7,13 @@
         :class="cardCoverClass"
         class="card-cover"
       >
+        <div class="close-details-container flex">
+          <router-link
+            class="close-details-btn flex"
+            :to="'/board/' + board._id"
+            >X</router-link
+          >
+        </div>
         <div class="cover-menu-container">
           <button
             class="cover-menu-btn"
@@ -16,88 +23,117 @@
           </button>
         </div>
       </div>
-      <div class="flex space-between">
-        <div>
-          <div class="close-details-container flex">
-            <router-link
-              class="close-details-btn flex"
-              :to="'/board/' + board._id"
-              >X</router-link
-            >
-          </div>
+
+      <div>
+        <div class="flex column">
           <div v-if="isCoverMenuOpen" class="cover-menu">
             <h1>Cover</h1>
           </div>
-          <div class="card-header">
+
+          <div class="card-header flex">
+            <div class="actionImg flex">img</div>
             <div class="flex">
-              <div class="actionImg flex">img</div>
               <div>
                 <h1>{{ card.title }}</h1>
                 in list <span class="group-title">{{ group.title }}</span>
               </div>
             </div>
           </div>
-          <div class="card-labels flex column">
-            <h3>Labels</h3>
-            <div class="labels-preview flex">
-              <div
-                class="label-btn"
-                v-for="label in labelsToShow"
-                :key="label.id"
-                @click="openLabelsMenu($event)"
-              >
-                <span :style="labelColor(label.color)">{{ label.title }}</span>
-              </div>
-              <button @click="isLabelMenuOpen = !isLabelMenuOpen">+</button>
-              <div
-                :style="{ left: LabelsMenuX }"
-                v-if="isLabelMenuOpen"
-                class="labels-menu"
-              >
-                <header>
-                  <h3>Labels</h3>
-                  <button
-                    class="close-label-menu"
-                    @click="isLabelMenuOpen = false"
-                  >
-                    X
-                  </button>
-                </header>
-                <hr />
-                <input type="text" placeholder="Search labels..." />
-                <main>
-                  <h3>Labels</h3>
-                  <div
-                    class="board-label flex space-between align-center"
-                    @click="setLabel(label, labelSelected(label.id))"
-                    v-for="label in board.labels"
-                    :key="label.id"
-                    :style="labelColor(label.color)"
-                  >
-                    {{ label.title }}
-                    <span v-if="labelSelected(label.id)">V</span>
-                    <span>E</span>
-                  </div>
-                  <button class="create-label">Create a new label</button>
+          <div class="flex space-between">
+            <div class="card-labels flex column">
+              <h3>Labels</h3>
+              <div class="labels-preview flex">
+                <div
+                  class="label-btn"
+                  v-for="label in labelsToShow"
+                  :key="label.id"
+                  @click="openLabelsMenu($event)"
+                >
+                  <span :style="labelColor(label.color)">{{
+                    label.title
+                  }}</span>
+                </div>
+
+                <button @click="isLabelMenuOpen = !isLabelMenuOpen">+</button>
+
+                <!-- <labels-menu @setLabel="setLabel($event)" v-if="isLabelMenuOpen"/> -->
+                <div
+                  :style="{ left: LabelsMenuX }"
+                  v-if="isLabelMenuOpen"
+                  class="labels-menu"
+                >
+                  <header>
+                    <h3>Labels</h3>
+                    <button
+                      class="close-label-menu"
+                      @click="isLabelMenuOpen = false"
+                    >
+                      X
+                    </button>
+                  </header>
                   <hr />
-                  <button disabled class="disabled-btn color-blind-btn">
-                    Enable color blind friendly mode
-                  </button>
-                </main>
+                  <input type="text" placeholder="Search labels..." />
+                  <main>
+                    <h3>Labels</h3>
+                    <div
+                      class="board-label flex space-between align-center"
+                      @click="setLabel(label, labelSelected(label.id))"
+                      v-for="label in board.labels"
+                      :key="label.id"
+                      :style="labelColor(label.color)"
+                    >
+                      {{ label.title }}
+                      <span v-if="labelSelected(label.id)">V</span>
+                      <span>E</span>
+                    </div>
+                    <button class="create-label">Create a new label</button>
+                    <hr />
+                    <button disabled class="disabled-btn color-blind-btn">
+                      Enable color blind friendly mode
+                    </button>
+                  </main>
+                </div>
+
+                <!-- <button @click="onChecklist">+Checklist</button> -->
+                <form
+                  @submit.prevent="addChecklist"
+                  v-if="isChecklistMenuOpen"
+                  class="checklist-menu flex column"
+                >
+                  <header>
+                    <h3>Add checklist</h3>
+                    <button>X</button>
+                  </header>
+                  <hr />
+                  <main class="flex column">
+                    <h3>Title</h3>
+                    <input v-model="newChecklist.title" type="text" />
+                    <select
+                      disabled
+                      name=""
+                      id=""
+                      placeholder="copy items from"
+                    >
+                      <option value="">Comming Soon</option>
+                    </select>
+                    <button>Add</button>
+                  </main>
+                </form>
               </div>
+              <article v-for="(checklist, idx) in card.checklists" :key="idx">
+                <action-checklist :checklist="checklist" />
+              </article>
+            </div>
+
+            <div>
+              <card-actions
+                @openChecklistMenu="isChecklistMenuOpen = true"
+                @openLabelsMenu="onChecklist"
+              />
             </div>
           </div>
         </div>
-        <div>
-          <card-actions />
-        </div>
       </div>
-
-      <!-- <button @click="onChecklist">+Checklist</button>
-
-      <article v-for="(checklist, idx) in card.checklists" :key="idx">
-        <action-checklist :checklist="checklist" />
-      </article> -->
     </section>
   </div>
 </template>
@@ -105,10 +141,12 @@
 <script>
 import actionChecklist from '../cmps/card/action.checklist.vue'
 import cardActions from '../cmps/card/card.actions.vue'
+import labelsMenu from '../cmps/labels.menu.vue'
+import { boardService } from '../services/board.service'
 
 export default {
   name: 'cardDetails',
-  components: { actionChecklist, cardActions },
+  components: { actionChecklist, cardActions, labelsMenu },
   data() {
     return {
       board: null,
@@ -116,8 +154,10 @@ export default {
       card: null,
       isLabelMenuOpen: false,
       isCoverMenuOpen: false,
+      isChecklistMenuOpen: false,
       labelMenuX: null,
       coverShow: true,
+      newChecklist: boardService.getEmptyChecklist(),
     }
   },
   methods: {
@@ -154,6 +194,26 @@ export default {
       this.labelMenuX = ev.pageX - ev.offsetX
       console.log(ev.pageX - ev.offsetX)
     },
+
+    onChecklist() {
+      isChecklistMenuOpen = true
+    },
+    addChecklist() {
+      if (!this.card.checklists) this.card.checklists = []
+      const cardIdx = this.group.cards.findIndex(
+        (card) => card.id === this.card.id,
+      )
+      const groupIdx = this.board.groups.findIndex(
+        (group) => group.id === this.group.id,
+      )
+      this.card.checklists.push(this.newChecklist)
+      this.isChecklistMenuOpen = false
+      this.board.groups[groupIdx].cards[cardIdx] = this.card
+      this.$store.dispatch({
+        type: 'saveBoard',
+        board: JSON.parse(JSON.stringify(this.board)),
+      })
+    },
   },
   computed: {
     labelsToShow() {
@@ -170,7 +230,7 @@ export default {
     },
     cardCoverStyle() {
       if (this.card.style.bgImg)
-        return { backgroupImage: this.card.style.bgImg }
+        return { backgroupImage: `url(${this.card.style.bgImg})` }
       else return { backgroundColor: this.card.style.bgColor }
     },
     cardCoverClass() {
