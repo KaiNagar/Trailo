@@ -117,17 +117,17 @@ function _createBoard() {
       {
         id: 'l101',
         title: 'done',
-        color: '#74ff54',
+        color: '#c377e0'
       },
       {
         id: 'l102',
         title: 'in progress',
-        color: '#700f5b',
+        color: '#51e898'
       },
       {
         id: 'l103',
         title: 'WIP',
-        color: '#700f5b',
+        color: '#ff78cb'
       },
     ],
     members: [
@@ -150,13 +150,13 @@ function _createBoard() {
             id: _makeId(),
             title: 'new card1',
             labelIds: ['l101', 'l102'],
-            style: { bgImg: null, bgColor: '#29cce5', isFull: false },
-            labels: ['#c377e0', '#51e898', '#ff78cb'],
+            style: { bgImg:'https://images.unsplash.com/photo-1658250709337-46fb7cc5e74a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80', bgColor: '', isFull: false},
           },
           {
             id: _makeId(),
             title: 'new card2',
             labelIds: ['l101', 'l102'],
+            style: { bgColor: '#47e18c', isFull: false, bgImg: null },
             checklists: [
               {
                 id: 'YEhmF',
