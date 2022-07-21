@@ -40,7 +40,11 @@ export default {
     return {}
   },
   methods: {},
-  computed: {},
+  computed: {
+    boards() {
+      this.$store.getters.boards
+    },
+  },
   created() {},
 }
 </script>
