@@ -75,6 +75,7 @@ function getEmptyGroup() {
   }
 }
 
+
 function getEmptyCard() {
   return {
     id: _makeId(),
@@ -178,8 +179,10 @@ function _createBoard() {
               },
             ],
           },
+          
         ],
       },
+      
       {
         id: _makeId(),
         title: "These shoes are meant for walking",
@@ -201,6 +204,44 @@ function _createBoard() {
             labelIds: ['l101', 'l102'],
             style: { bgColor: '', isFull: false, bgImg:'https://images.unsplash.com/photo-1538471726790-0f6b031f1982?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' },
           },
+        ],
+      },
+
+      {
+        id: _makeId(),
+        title: "This is stav's list",
+        cards: [
+          {
+            id: _makeId(),
+            title: 'WTF',
+            labelIds: ['l101', 'l102'],
+            style: {
+              bgImg:
+                'https://images.unsplash.com/photo-1658250709337-46fb7cc5e74a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+              bgColor: '',
+              isFull: false,
+            },
+          },
+          {
+            id: _makeId(),
+            title: 'new card2',
+            labelIds: ['l101', 'l102'],
+            style: { bgColor: '#47e18c', isFull: false, bgImg: null },
+            checklists: [
+              {
+                id: 'YEhmF',
+                title: 'Checklist',
+                todos: [
+                  {
+                    id: '212jX',
+                    title: 'To Do 1',
+                    isDone: false,
+                  },
+                ],
+              },
+            ],
+          },
+          
         ],
       },
     ],

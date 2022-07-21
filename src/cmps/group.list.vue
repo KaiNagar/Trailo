@@ -1,7 +1,7 @@
 <template>
   <section class="group-list">
     <article class="list" v-for="group in groups" :key="group.id">
-      <group-preview :group="group" @saveGroup="saveGroup" />
+      <group-preview :group="group" @addCard="addCard" />
     </article>
     <div>
       <input
@@ -10,7 +10,7 @@
         class="new-group group"
         placeholder="+ Add new list"
       />
-      <form @submit.prevent="addNewGroup">
+      <!-- <form @submit.prevent="addNewGroup">
         <input
           class="new-group group"
           type="text"
@@ -19,9 +19,9 @@
           v-model="newGroup.title"
           ref="groupTitle"
           placeholder="Enter list title"
-        />
-        <button>Add list</button>
-      </form>
+        /> -->
+        <button @click="addGroup">Add list</button>
+      <!-- </form> -->
     </div>
   </section>
 </template>
@@ -40,6 +40,7 @@ export default {
       showAddGroupInput: false,
       newGroup: boardService.getEmptyGroup(),
     }
+
   },
   methods: {
     addNewGroup() {
@@ -48,9 +49,12 @@ export default {
       this.$emit('saveGroups', this.groups)
       this.$refs.groupTitle.value = ''
     },
-    saveGroup(group) {
-      // this.$emit('saveGroups', group)
+    addCard(card) {
+      this.$emit('addCard', card)
     },
+    addGroup(){
+     this.$emit('addGroup',this.newGroup)
+    }
   },
   computed: {},
   created() {

@@ -1,4 +1,5 @@
 .main-header {
+  position: fixed;
   // max-width: 100vw;
   background: #026aa7;
   color: #fff;
@@ -73,6 +74,8 @@
       }
     }
   }
+
+
 
   // SEARCH
   .search {
@@ -157,3 +160,4 @@
     }
   }
 }
+

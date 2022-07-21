@@ -33,7 +33,8 @@ export default {
       const card = boardService.getEmptyCard()
       // const group = JSON.parse(JSON.stringify(this.group))
       // group.cards.push(card)
-      // this.$emit('saveGroup', group)
+      card.groupId = this.group.id
+      this.$emit('addCard', card)
     },
 
     onEditTitle() {
