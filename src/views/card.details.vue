@@ -32,16 +32,15 @@
 
           <div class="card-header flex">
             <div class="actionImg flex">img</div>
-            <div class="flex">
-              <div>
-                <h1>{{ card.title }}</h1>
-                in list <span class="group-title">{{ group.title }}</span>
-              </div>
+            <span class="icon-sm icon-member"></span>
+            <div class="in-list-txt">
+              <h1>{{ card.title }}</h1>
+              in list <span class="group-title">{{ group.title }}</span>
             </div>
           </div>
           <div class="flex space-between">
-            <div class="card-labels flex column">
-              <h3>Labels</h3>
+            <div class="details-column flex column">
+              <h3 class="labels-header">Labels</h3>
               <div class="labels-preview flex">
                 <div
                   class="label-btn"
@@ -54,7 +53,12 @@
                   }}</span>
                 </div>
 
-                <button @click="isLabelMenuOpen = !isLabelMenuOpen">+</button>
+                <button
+                  class="add-label-btn"
+                  @click="isLabelMenuOpen = !isLabelMenuOpen"
+                >
+                  +
+                </button>
 
                 <!-- <labels-menu @setLabel="setLabel($event)" v-if="isLabelMenuOpen"/> -->
                 <div
@@ -73,7 +77,7 @@
                   </header>
                   <hr />
                   <input type="text" placeholder="Search labels..." />
-                  <main>
+                  <main class="main-labels-content">
                     <h3>Labels</h3>
                     <div
                       class="board-label flex space-between align-center"
@@ -120,16 +124,21 @@
                   </main>
                 </form>
               </div>
-              <article
-                v-for="(checklist, idx) in card.checklists"
-                :key="checklist.id"
-              >
-                <action-checklist
-                  @saveChecklist="saveChecklist"
-                  :checklist="checklist"
-                  :idx="idx"
-                />
-              </article>
+
+              <action-description />
+               
+              <div class="checklist-container">
+                <article
+                  v-for="(checklist, idx) in card.checklists"
+                  :key="checklist.id"
+                >
+                  <action-checklist
+                    @saveChecklist="saveChecklist"
+                    :checklist="checklist"
+                    :idx="idx"
+                  />
+                </article>
+              </div>
             </div>
 
             <div>
@@ -147,13 +156,14 @@
 
 <script>
 import actionChecklist from '../cmps/card/action.checklist.vue'
+import actionDescription from '../cmps/card/action.description.vue'
 import cardActions from '../cmps/card/card.actions.vue'
 import labelsMenu from '../cmps/labels.menu.vue'
 import { boardService } from '../services/board.service'
 
 export default {
   name: 'cardDetails',
-  components: { actionChecklist, cardActions, labelsMenu },
+  components: { actionChecklist, cardActions, labelsMenu,actionDescription },
   data() {
     return {
       board: null,
@@ -217,7 +227,7 @@ export default {
         board: JSON.parse(JSON.stringify(this.board)),
       })
     },
-    saveChecklist({info}) {
+    saveChecklist({ info }) {
       const cardIdx = this.group.cards.findIndex(
         (card) => card.id === this.card.id,
       )
