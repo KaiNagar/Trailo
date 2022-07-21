@@ -1,0 +1,110 @@
+.card-description {
+  position: relative;
+  h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 13px 0 0 1px;
+  }
+  .desc-body-container {
+    padding: 8px 12px;
+    margin-top: 18px;
+    margin-inline-start: 1px;
+    background-color: #eaecf0;
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+    display: block;
+    min-height: 40px;
+    cursor: pointer;
+    &:hover {
+      background-color: #e2e4e9;
+    }
+  }
+  .desc-body {
+    padding: 0 280px 15px 0;
+    margin: 0 0 5px 0;
+    font-size: rem(14px);
+    font-weight: 400;
+    line-height: 1.42857143;
+  }
+  .edit-desc {
+    padding-top: 4px;
+    padding-inline-start: 2px;
+    textarea {
+      font-size: rem(14px);
+      border: 0;
+      resize: none;
+      width: 512px;
+      min-height: 108px;
+      padding: 8px 12px;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      margin-inline-start: -1px;
+      &:focus {
+        outline: none;
+        box-shadow: inset 0 0 0 2px #0079bf;
+        border-radius: rem(3px);
+        overflow: hidden;
+        overflow-wrap: break-word;
+      }
+    }
+  }
+
+  img {
+    width: 17px;
+    height: 14px;
+    position: absolute;
+    left: rem(-32px);
+    top: rem(28px);
+    color: #42526e;
+  }
+  .text-area-actions {
+    margin-top: 0.25rem;
+    padding-bottom: rem(9px);
+    .save-desc-btn {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      background-color: #0079bf;
+      cursor: pointer;
+      border: 0;
+      border-radius: rem(3px);
+      padding: rem(6.5px) rem(12px);
+      color: white;
+      margin-inline-end: rem(3px);
+      margin-inline-start: -1px;
+      font-size: rem(14px);
+      &:hover {
+        background-color: #026aa7;
+      }
+    }
+    .cancel-desc-btn {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      border-radius: rem(3px);
+      padding: rem(6.5px) rem(13px);
+      margin-inline-end: rem(4px);
+      font-size: rem(14px);
+      &:hover {
+        background-color: #091e4214;
+      }
+    }
+    .formatting-desc-btn {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      background-color: #091e420a;
+      border: 0;
+      cursor: pointer;
+      border-radius: rem(3px);
+      padding: rem(6.5px) rem(13px);
+      font-size: rem(14px);
+      margin-inline-end: rem(-3px);
+      margin-top: rem(-2px);
+      &:hover {
+        background-color: rgba(9, 30, 66, 0.0784313725);
+      }
+    }
+  }
+}

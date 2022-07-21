@@ -11,23 +11,38 @@
         <h3>{{ checklist.title }}</h3>
         <button class="delete-checklist-btn">Delete</button>
       </div>
-      <div>0%</div>
+      <div class="progress-bar-preview">
+        <span class="progress-count">0%</span>
+        <div class="progress-bar-container">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
 
-      <div v-for="(todo, idx) in checklist.todos" :key="idx">
-        <input @change="saveChecklist" v-model="todo.isDone" type="checkbox" />
-        <input @change="updateTodo" type="text" :value="todo.title" />
+      <div
+        class="todo-container"
+        v-for="(todo, idx) in checklist.todos"
+        :key="idx"
+      >
+        <input
+          class="todo-checkbox"
+          @change="saveChecklist"
+          v-model="todo.isDone"
+          type="checkbox"
+        />
+        <span class="check-mark"></span>
+        <span
+          class="todo-title"
+          v-if="!isEditing"
+          @click.stop="isEditing = true"
+          >{{ todo.title }}</span
+        >
+        <input v-else @change="updateTodo" type="text" :value="todo.title" />
         <button @click="removeTodo(idx)">X</button>
       </div>
-      
-      <!-- <button v-show="!isEditTitle" @click="onAddItem">Add an item</button> -->
-      <!-- <div v-show="isEditTitle" class="checklist-todo"> -->
-        
+
       <form class="flex column" @submit.prevent="saveChecklist">
         <input ref="newItemInput" type="text" placeholder="Add an item" />
-        <!-- <button @click="addTodo">Add</button> -->
       </form>
-      <!-- <button @click="isEditTitle = false">Cancel</button> -->
-      <!-- </div> -->
     </div>
   </section>
 </template>
@@ -43,6 +58,7 @@ export default {
   data() {
     return {
       newItem: { title: '', isDone: false },
+      isEditing: false,
     }
   },
   methods: {

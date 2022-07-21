@@ -24,12 +24,15 @@ const router = createRouter({
       path: '/board/:boardId',
       name: 'board',
       component: boardDetails,
+      children: [
+        {
+          path: '/board/:boardId/:groupId/:cardId',
+          name: 'card',
+          component: cardDetails,
+        },
+      ],
     },
-    {
-      path: '/board/:boardId/:groupId/:cardId',
-      name: 'card',
-      component: cardDetails,
-    },
+
     {
       path: '/about',
       name: 'about',

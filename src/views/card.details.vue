@@ -125,8 +125,8 @@
                 </form>
               </div>
 
-              <action-description />
-               
+              <action-description  />
+
               <div class="checklist-container">
                 <article
                   v-for="(checklist, idx) in card.checklists"
@@ -163,7 +163,7 @@ import { boardService } from '../services/board.service'
 
 export default {
   name: 'cardDetails',
-  components: { actionChecklist, cardActions, labelsMenu,actionDescription },
+  components: { actionChecklist, cardActions, labelsMenu, actionDescription },
   data() {
     return {
       board: null,

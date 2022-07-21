@@ -4,6 +4,7 @@
       <board-header />
       <group-list :groups="currBoard.groups" @saveGroups="saveGroups" />
     </div>
+    <router-view />
   </section>
 </template>
 <script>
