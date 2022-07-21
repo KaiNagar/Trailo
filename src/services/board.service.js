@@ -87,15 +87,9 @@ function getEmptyCard() {
 
 function getEmptyChecklist() {
   return {
-    id:_makeId(),
+    id: _makeId(),
     title: 'Checklist',
-    todos: [
-      {
-        id:_makeId(),
-        title: 'Enter todo',
-        isDone: false,
-      },
-    ],
+    todos: [],
   }
 }
 
@@ -129,17 +123,17 @@ function _createBoard() {
       {
         id: 'l101',
         title: 'done',
-        color: '#c377e0'
+        color: '#c377e0',
       },
       {
         id: 'l102',
         title: 'in progress',
-        color: '#51e898'
+        color: '#51e898',
       },
       {
         id: 'l103',
         title: 'WIP',
-        color: '#ff78cb'
+        color: '#ff78cb',
       },
     ],
     members: [
@@ -158,7 +152,12 @@ function _createBoard() {
             id: _makeId(),
             title: 'WTF',
             labelIds: ['l101', 'l102'],
-            style: { bgImg:'https://images.unsplash.com/photo-1658250709337-46fb7cc5e74a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80', bgColor: '', isFull: false},
+            style: {
+              bgImg:
+                'https://images.unsplash.com/photo-1658250709337-46fb7cc5e74a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+              bgColor: '',
+              isFull: false,
+            },
           },
           {
             id: _makeId(),

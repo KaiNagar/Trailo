@@ -120,8 +120,15 @@
                   </main>
                 </form>
               </div>
-              <article v-for="(checklist, idx) in card.checklists" :key="idx">
-                <action-checklist :checklist="checklist" />
+              <article
+                v-for="(checklist, idx) in card.checklists"
+                :key="checklist.id"
+              >
+                <action-checklist
+                  @saveChecklist="saveChecklist"
+                  :checklist="checklist"
+                  :idx="idx"
+                />
               </article>
             </div>
 
@@ -194,10 +201,6 @@ export default {
       this.labelMenuX = ev.pageX - ev.offsetX
       console.log(ev.pageX - ev.offsetX)
     },
-
-    // onChecklist() {
-    //   this.isChecklistMenuOpen = true
-    // },
     addChecklist() {
       if (!this.card.checklists) this.card.checklists = []
       const cardIdx = this.group.cards.findIndex(
@@ -208,6 +211,20 @@ export default {
       )
       this.card.checklists.push(this.newChecklist)
       this.isChecklistMenuOpen = false
+      this.board.groups[groupIdx].cards[cardIdx] = this.card
+      this.$store.dispatch({
+        type: 'saveBoard',
+        board: JSON.parse(JSON.stringify(this.board)),
+      })
+    },
+    saveChecklist({info}) {
+      const cardIdx = this.group.cards.findIndex(
+        (card) => card.id === this.card.id,
+      )
+      const groupIdx = this.board.groups.findIndex(
+        (group) => group.id === this.group.id,
+      )
+      this.card.checklists.splice(info.idx, 1, info.checklist)
       this.board.groups[groupIdx].cards[cardIdx] = this.card
       this.$store.dispatch({
         type: 'saveBoard',

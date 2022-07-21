@@ -1,0 +1,26 @@
+.modal {
+    position: absolute;
+    top: 40px;
+    border-radius: 3px;
+    z-index: 10;
+    background-color: white;
+    width: 304px;
+    height: 200px;
+    left: 0;
+    border: 1px #dfe2e7 solid;
+    padding: 0 .8em;
+
+    .m-header {
+        text-align: center;
+        color: #6b778c;
+        line-height: 40px;
+        border-bottom: 1px #dfe2e7  solid;
+
+        button {
+            position: absolute;
+            right: 13px;
+            color: #6b778c;
+        }
+
+    }
+}
