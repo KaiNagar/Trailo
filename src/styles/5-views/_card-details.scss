@@ -15,10 +15,55 @@
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     min-height: 600px;
     width: 50%;
-    padding: 20px;
+    // padding: 20px;
     position: relative;
     background-color: rgb(241, 238, 238);
     top: 6%;
+    .card-cover {
+      position: relative;
+      .cover-menu-container {
+        position: absolute;
+        width: 100%;
+        padding: 8px;
+        bottom: 0;
+        right: 0;
+        text-align: end;
+      }
+      .cover-menu-btn {
+        @include headers-btns;
+        margin: 0;
+        padding: 6px 12px 6px 6px;
+        line-height: 1.42857143;
+      }
+    }
+    .card-cover-color {
+      width: 100%;
+      height: rem(116px);
+    }
+    .card-cover-img {
+      width: 100%;
+      height: rem(160px);
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    .close-details-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: rem(40px);
+      height: rem(40px);
+      margin: rem(4px);
+      padding: rem(4px);
+      justify-content: center;
+      align-items: center;
+      .close-details-btn {
+        justify-content: center;
+        align-items: center;
+        width: rem(20px);
+        height: rem(20px);
+        text-decoration: none;
+      }
+    }
     .card-header {
       font-size: rem(14px);
       h1 {
@@ -61,7 +106,7 @@
       margin: 8px 4px 8px 0;
       padding: 6px 12px;
     }
-    .color-blind-btn{
+    .color-blind-btn {
       cursor: no-drop;
     }
   }
