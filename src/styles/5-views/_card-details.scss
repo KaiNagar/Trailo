@@ -44,6 +44,7 @@
     .card-cover-img {
       width: 100%;
       height: rem(160px);
+      background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
     }
@@ -60,7 +61,7 @@
       background-color: #00000014;
       border-radius: 50%;
       cursor: pointer;
-      &:hover{
+      &:hover {
         background-color: #00000029;
       }
       .close-details-btn {
@@ -75,7 +76,7 @@
       font-size: rem(14px);
       width: 100%;
       margin: 12px 40px 8px 56px;
-      // height: 61px;
+      height: 61px;
       h1 {
         font-size: rem(20px);
         padding: 4px 8px;
@@ -86,7 +87,7 @@
       .actionImg {
         width: 32px;
         height: 32px;
-        
+
         background-color: red;
         justify-content: center;
         align-items: center;
@@ -110,7 +111,8 @@
   .labels-menu {
     background-color: white;
     padding: 1rem;
-    // position: absolute;
+    position: absolute;
+    top: 0;
     .create-label,
     .color-blind-btn {
       width: 100%;

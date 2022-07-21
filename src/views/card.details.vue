@@ -102,7 +102,7 @@
                 >
                   <header>
                     <h3>Add checklist</h3>
-                    <button>X</button>
+                    <button @click.stop="isChecklistMenuOpen = false">X</button>
                   </header>
                   <hr />
                   <main class="flex column">
@@ -120,15 +120,22 @@
                   </main>
                 </form>
               </div>
-              <article v-for="(checklist, idx) in card.checklists" :key="idx">
-                <action-checklist :checklist="checklist" />
+              <article
+                v-for="(checklist, idx) in card.checklists"
+                :key="checklist.id"
+              >
+                <action-checklist
+                  @saveChecklist="saveChecklist"
+                  :checklist="checklist"
+                  :idx="idx"
+                />
               </article>
             </div>
 
             <div>
               <card-actions
                 @openChecklistMenu="isChecklistMenuOpen = true"
-                @openLabelsMenu="onChecklist"
+                @openLabelsMenu="isLabelMenuOpen = true"
               />
             </div>
           </div>
@@ -194,10 +201,6 @@ export default {
       this.labelMenuX = ev.pageX - ev.offsetX
       console.log(ev.pageX - ev.offsetX)
     },
-
-    onChecklist() {
-      isChecklistMenuOpen = true
-    },
     addChecklist() {
       if (!this.card.checklists) this.card.checklists = []
       const cardIdx = this.group.cards.findIndex(
@@ -208,6 +211,20 @@ export default {
       )
       this.card.checklists.push(this.newChecklist)
       this.isChecklistMenuOpen = false
+      this.board.groups[groupIdx].cards[cardIdx] = this.card
+      this.$store.dispatch({
+        type: 'saveBoard',
+        board: JSON.parse(JSON.stringify(this.board)),
+      })
+    },
+    saveChecklist({info}) {
+      const cardIdx = this.group.cards.findIndex(
+        (card) => card.id === this.card.id,
+      )
+      const groupIdx = this.board.groups.findIndex(
+        (group) => group.id === this.group.id,
+      )
+      this.card.checklists.splice(info.idx, 1, info.checklist)
       this.board.groups[groupIdx].cards[cardIdx] = this.card
       this.$store.dispatch({
         type: 'saveBoard',
@@ -230,7 +247,7 @@ export default {
     },
     cardCoverStyle() {
       if (this.card.style.bgImg)
-        return { backgroupImage: `url(${this.card.style.bgImg})` }
+        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       else return { backgroundColor: this.card.style.bgColor }
     },
     cardCoverClass() {
