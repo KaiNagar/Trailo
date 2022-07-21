@@ -19,7 +19,7 @@
     // padding: 20px;
     position: relative;
     background-color: #f4f5f7;
-    top: 6%;
+    top: rem(50px);
     .card-cover {
       position: relative;
       .cover-menu-container {
@@ -73,22 +73,28 @@
       }
     }
     .card-header {
+      position: relative;
       font-size: rem(14px);
       width: 100%;
       margin: 12px 40px 8px 56px;
-      height: 61px;
+      // height: 61px;
       h1 {
         font-size: rem(20px);
-        padding: 4px 8px;
-        margin: -4px -8px;
+        padding: 10px 6px;
+        margin: -4px -8px -5px -8px;
         font-weight: 600;
         line-height: 1.25;
+      }
+      .in-list-txt {
+        margin-inline-start: 2px;
+        margin-bottom: rem(6px);
       }
       .actionImg {
         width: 32px;
         height: 32px;
-
-        background-color: red;
+        position: absolute;
+        top: rem(5px);
+        left: -2.5rem;
         justify-content: center;
         align-items: center;
       }
@@ -98,15 +104,80 @@
       }
     }
   }
-  .card-labels {
+  .details-column {
+    margin-inline-start: rem(55px);
+    margin-top: rem(7px);
     h3 {
       font-size: rem(12px);
       font-weight: 600;
-      margin: 0 8px 4px 0;
+      margin: 0 8px 3px 0;
       color: rgb(94, 108, 132);
       line-height: 1.666666667;
-      //   max-width: 20px
     }
+
+    .card-description {
+      position: relative;
+      h2 {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 13px 0 0 1px;
+      }
+      .desc-body-container {
+        padding: 8px 12px;
+        margin-top: 18px;
+        margin-inline-start: 1px;
+        background-color: #eaecf0;
+        border: none;
+        border-radius: 3px;
+        box-shadow: none;
+        display: block;
+        min-height: 40px;
+        cursor: pointer;
+        &:hover {
+          background-color: #e2e4e9;
+        }
+      }
+      .desc-body {
+        padding: 0 280px 15px 0;
+        margin: 0 0 5px 0;
+        font-size: rem(14px);
+        font-weight: 400;
+        line-height: 1.42857143;
+      }
+      .edit-desc {
+        padding-top: 4px;
+        padding-inline-start: 2px;
+        textarea {
+          font-size: rem(14px);
+          border: 0;
+          resize: none;
+          width: 512px;
+          min-height: 108px;
+          padding: 8px 12px;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+          &:focus {
+            outline: none;
+            box-shadow: inset 0 0 0 2px #0079bf;
+            border-radius: rem(3px);
+            overflow: hidden;
+            overflow-wrap: break-word;
+          }
+        }
+      }
+
+      img {
+        width: 17px;
+        height: 14px;
+        position: absolute;
+        left: rem(-32px);
+        top: rem(28px);
+        color: #42526e;
+      }
+    }
+  }
+  .add-label-btn {
+    scale: 2;
   }
   .labels-menu {
     background-color: white;
@@ -123,6 +194,7 @@
       cursor: no-drop;
     }
   }
+
   .labels-preview {
     flex-wrap: wrap;
     span {

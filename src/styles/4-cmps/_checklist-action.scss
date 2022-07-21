@@ -1,0 +1,33 @@
+.card-checklist {
+  position: relative;
+  .checklist-icon {
+    img {
+      width: 23px;
+      position: absolute;
+      top: rem(-1px);
+      left: rem(-33px);
+    }
+  }
+  .checklist-action {
+    h3 {
+      margin-top: rem(35px);
+      margin-inline-start: rem(1px);
+      font-size: 1rem;
+      color: #172b4d;
+    }
+    .delete-checklist-btn {
+      @include headers-btns;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      margin: 0;
+      padding: 0px 12px;
+      background-color: #091e420a;
+      position: absolute;
+      top: rem(-3px);
+      right: rem(2px);
+      &:hover {
+        background-color: #091e4214;
+      }
+    }
+  }
+}
