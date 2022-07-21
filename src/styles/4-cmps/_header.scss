@@ -1,25 +1,139 @@
 .main-header {
-  background:  hsl(220,22%,92%);
+  background: #026aa7;
   color: #fff;
   padding: 0px;
   margin: 0px;
-  .left-header {
-    align-items: center;
-    button {
-      @include headers-btns;
-    }
-    .create-btn {
-      padding: 0 rem(12px);
+  max-height: 43px;
+  display: flex;
+  padding: 6px 4px;
+  align-items: center;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  
+  button {
+    background-color: none;
+
+  }
+
+  .header-menu {
+    margin-inline-start: 0.5em;
+  }
+
+  .search {
+    span {
+      &::before {
+        font-family: trello;
+        content: '\f002';
+      }
     }
   }
 
-  .right-header {
-    align-items: center;
-    button{
-        background-color: transparent;
-        border: 0;
+  .search-board-input {
+    background-color: #3588b9;
+    box-shadow: none;
+    border: 1px rgba(255, 255, 255, 0.342) solid;
+    border-radius: 3px;
+    padding: 3px 0;
+    width: 30%;
+
+    &::placeholder {
+      color: white;
+      font-size: 14px;
+
+    }
+
+  }
+
+  .arrow::before {
+    font-family: fa;
+    content: '˅';
+  }
+
+  .create-btn {
+    font-family: fa;
+
+    ::before {
+      content: '\2b';
     }
   }
-  // .search-board-input {
-  // }
+
+  nav{
+    position: absolute;
+    left: 0;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    >*{
+      margin-block-start: 1em;
+    }
+  }
+
+  .actions {
+    margin-inline-start: 1em;
+    display: flex;
+    align-items: center;
+    max-height: 44px;
+
+    >* {
+      display: flex;
+      padding: 0.5em 1.6em;
+      border-radius: 3px;
+    }
+
+    :hover {
+      background-color: #4e97c2;
+    }
+
+
+  }
+
+  .logo {
+    background-image: url('../cenzored-header-gif.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 250px;
+    height: .7em;
+    position: relative;
+    width: 80px;
+
+    :hover {
+      // background-color: #4e97c2;
+    }
+    span {
+      font-size: 1em;
+      position: absolute;
+      left: 38px;
+      bottom: -4.8px;
+      font-weight: 600;
+    }
+    
+    display: flex;
+    margin-inline-start: 0.6em;
+    font-size: 1.5em;
+  }
+
+  button,
+  input[type="submit"],
+  input[type="reset"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    background-color: tomato;
+
+
+  }
 }

@@ -1,34 +1,39 @@
 <template>
-  <section class="main-header flex space-between">
-    <div class="left-header flex">
-      <button>Menu</button>
-      <div>
-        <img
-          style="width: 20px"
-          src="https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn"
-          alt=""
-        />
-      </div>
-      <div>
-        <button>Workspace 🔽</button>
-        <button>Recent 🔽</button>
-        <button>Starred 🔽</button>
-        <button>Templates 🔽</button>
-        <button class="create-btn">Create</button>
-      </div>
+  <section class="main-header ">
+
+    <button class="header-menu">---</button>
+    <div class="logo">
+      <!-- <div class="loader">[]</div> -->
+      <!-- Trailo -->
+      <img src="../../src/styles/cenzored-header-gif.gif" alt="">
+      <span>ai</span>
     </div>
+    <div class="actions">
+
+      <button>Recent <span class="arrow"></span></button>
+      <button>Starred <span class="arrow"></span></button>
+      <button>Templates <span class="arrow"></span></button>
+      <button class="create-btn"></button>
+    </div>
+
 
     <nav>
       <router-link to="/">Home</router-link>
-      <router-link style="margin: 1rem" to="/about">About</router-link>
-      <router-link style="margin: 1rem" to="/">Boards</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/">Boards</router-link>
       <router-link to="/login">login</router-link>
     </nav>
+
+    <!-- <div class="search">
+      <span></span>
+    </div> -->
+    <input class="search-board-input" type="text" placeholder="Search" />
     <div class="right-header flex">
-      <input class="search-board-input" type="text" placeholder="Search" />
       <button>🔔</button>
       <button>About</button>
-      <button>KN</button>
+      <div class="profile">
+        <button>KN</button>
+      </div>
     </div>
   </section>
 </template>
@@ -45,6 +50,6 @@ export default {
       this.$store.getters.boards
     },
   },
-  created() {},
+  created() { },
 }
 </script>
