@@ -3,11 +3,16 @@
     src: url(~@/assets/fonts/Bahnschrift/bahnschrift.ttf);
 }
 @font-face{
-    font-family: fa;
-    src: url('../fa/fa-solid-900.ttf;')
+    font-family: fa-font;
+    src: url('../fonts/fa/fa-regular-400.ttf')
 }
 
 @font-face{
     font-family: trellicons;
     src: url('../fa/trellicons.ttf')
+}
+
+@font-face{
+    font-family: fa-solid;
+    src: url(../fonts/fa/fa-solid-900.ttf);
 }
