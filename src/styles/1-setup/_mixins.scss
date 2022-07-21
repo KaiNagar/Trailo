@@ -83,6 +83,38 @@
   }
 }
 
+@mixin cancel-btns{
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+          Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+        border-radius: 0.1875rem;
+        padding: 0.40625rem 0.8125rem;
+        margin-inline-end: 0.25rem;
+        font-size: 0.875rem;
+        &:hover {
+          background-color: rgba(9, 30, 66, 0.0784313725);
+        }
+}
+
+@mixin save-btns{
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+          Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+        background-color: #0079bf;
+        cursor: pointer;
+        border: 0;
+        border-radius: 0.1875rem;
+        padding: 0.40625rem 0.75rem;
+        color: white;
+        margin-inline-end: 0.1875rem;
+        margin-inline-start: -1px;
+        font-size: 0.875rem;
+        &:hover{
+          background-color: #026aa7;
+        }
+}
+
 @mixin btn(
   $type: regular,
   $bg: $clr1,

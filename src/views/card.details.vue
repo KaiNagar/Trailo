@@ -53,16 +53,13 @@
                   }}</span>
                 </div>
 
-                <button
-                  class="add-label-btn"
-                  @click="isLabelMenuOpen = !isLabelMenuOpen"
-                >
+                <button class="add-label-btn" @click="openLabelsMenu($event)">
                   +
                 </button>
 
                 <!-- <labels-menu @setLabel="setLabel($event)" v-if="isLabelMenuOpen"/> -->
                 <div
-                  :style="{ left: LabelsMenuX }"
+                  ref="labelsMenu"
                   v-if="isLabelMenuOpen"
                   class="labels-menu"
                 >
@@ -125,7 +122,7 @@
                 </form>
               </div>
 
-              <action-description  />
+              <action-description />
 
               <div class="checklist-container">
                 <article
@@ -134,11 +131,13 @@
                 >
                   <action-checklist
                     @saveChecklist="saveChecklist"
+                    @removeChecklist="removeChecklist"
                     :checklist="checklist"
                     :idx="idx"
                   />
                 </article>
               </div>
+              
             </div>
 
             <div>
@@ -186,12 +185,7 @@ export default {
       else return false
     },
     setLabel(newLabel, active) {
-      const cardIdx = this.group.cards.findIndex(
-        (card) => card.id === this.card.id,
-      )
-      const groupIdx = this.board.groups.findIndex(
-        (group) => group.id === this.group.id,
-      )
+      const pos = this.getCurrPos
       if (!active) {
         this.card.labelIds.push(newLabel.id)
       } else {
@@ -200,7 +194,7 @@ export default {
         )
         this.card.labelIds.splice(labelIdx, 1)
       }
-      this.board.groups[groupIdx].cards[cardIdx] = this.card
+      this.board.groups[pos.groupIdx].cards[pos.cardIdx] = this.card
       this.$store.dispatch({
         type: 'saveBoard',
         board: JSON.parse(JSON.stringify(this.board)),
@@ -209,33 +203,32 @@ export default {
     openLabelsMenu(ev) {
       this.isLabelMenuOpen = true
       this.labelMenuX = ev.pageX - ev.offsetX
-      console.log(ev.pageX - ev.offsetX)
+      console.log(this.labelMenuX)
     },
+
     addChecklist() {
-      if (!this.card.checklists) this.card.checklists = []
-      const cardIdx = this.group.cards.findIndex(
-        (card) => card.id === this.card.id,
-      )
-      const groupIdx = this.board.groups.findIndex(
-        (group) => group.id === this.group.id,
-      )
+      const pos = this.getCurrPos
       this.card.checklists.push(this.newChecklist)
       this.isChecklistMenuOpen = false
-      this.board.groups[groupIdx].cards[cardIdx] = this.card
+      this.board.groups[pos.groupIdx].cards[pos.cardIdx] = this.card
       this.$store.dispatch({
         type: 'saveBoard',
         board: JSON.parse(JSON.stringify(this.board)),
       })
     },
     saveChecklist({ info }) {
-      const cardIdx = this.group.cards.findIndex(
-        (card) => card.id === this.card.id,
-      )
-      const groupIdx = this.board.groups.findIndex(
-        (group) => group.id === this.group.id,
-      )
+      const pos = this.getCurrPos
       this.card.checklists.splice(info.idx, 1, info.checklist)
-      this.board.groups[groupIdx].cards[cardIdx] = this.card
+      this.board.groups[pos.groupIdx].cards[pos.cardIdx] = this.card
+      this.$store.dispatch({
+        type: 'saveBoard',
+        board: JSON.parse(JSON.stringify(this.board)),
+      })
+    },
+    removeChecklist(idx) {
+      const pos = this.getCurrPos
+      this.card.checklists.splice(idx, 1)
+      this.board.groups[pos.groupIdx].cards[pos.cardIdx] = this.card
       this.$store.dispatch({
         type: 'saveBoard',
         board: JSON.parse(JSON.stringify(this.board)),
@@ -252,8 +245,10 @@ export default {
       })
       return labelsToShow
     },
-    LabelsMenuX() {
-      return this.labelMenuX
+    setLabelMenu() {
+      return {
+        left: this.labelMenuX,
+      }
     },
     cardCoverStyle() {
       if (this.card.style.bgImg)
@@ -263,6 +258,18 @@ export default {
     cardCoverClass() {
       if (this.card.style.bgImg) return 'card-cover-img'
       else return 'card-cover-color'
+    },
+    getCurrPos() {
+      const cardIdx = this.group.cards.findIndex(
+        (card) => card.id === this.card.id,
+      )
+      const groupIdx = this.board.groups.findIndex(
+        (group) => group.id === this.group.id,
+      )
+      return {
+        cardIdx,
+        groupIdx,
+      }
     },
   },
   created() {

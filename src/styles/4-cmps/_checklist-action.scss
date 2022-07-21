@@ -44,6 +44,11 @@
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     }
+    .done {
+      text-decoration: line-through;
+      color: #5e6c84;
+    }
+
     .todo-checkbox {
       position: absolute;
       top: 0;
@@ -118,6 +123,58 @@
       border-top-left-radius: rem(4px);
       background-color: #5ba4cf;
       height: 8px;
+
+      transition: all 0.5s;
+    }
+  }
+  .add-item-form {
+    .add-item-btn-toggle {
+      background-color: transparent;
+      border: 0;
+      border-radius: 0.1875rem;
+      font-size: 0.875rem;
+      padding: 6px 12px 6px 10px;
+      margin-inline-end: 0.25rem;
+      margin-bottom: 0.5rem;
+      color: rgb(23, 43, 77);
+      line-height: 32px;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      padding: 1px 12px;
+      background-color: rgba(9, 30, 66, 0.0392156863);
+      &:hover {
+        background-color: rgba(9, 30, 66, 0.0784313725);
+      }
+    }
+  }
+  textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: rem(56px);
+    margin-top: rem(-3px);
+    margin-left: rem(1px);
+    padding: 7px 6px 9px 10px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: rem(14px);
+    &:focus {
+      outline: none;
+      box-shadow: inset 0 0 0 1px #0079bf;
+      border: 1px solid #0079bf;
+      border-radius: rem(3px);
+      overflow: hidden;
+      overflow-wrap: break-word;
+    }
+  }
+  .adding-items-actions {
+    margin-top: 0.25rem;
+    margin-inline-start: 2px;
+    .cancel-item-btn {
+      @include cancel-btns;
+    }
+    .add-item-btn {
+      @include save-btns;
     }
   }
 }
