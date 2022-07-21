@@ -1,9 +1,9 @@
 <template>
-  <section class="card-preview" @click="$emit('openCard', card.id)">
+  <section class="card-preview">
     <div class="card-preview-cover">
       <div :class="showCardCoverClass" :style="showCardCover"></div>
     </div>
-    <div class="labels">
+    <!-- <div class="labels">
       <div
         class="card-preview-label"
         v-for="(label, idx) in card.labels"
@@ -11,9 +11,9 @@
         :style="{ 'background-color': label }"
       >
         <p>{{ label.title }}</p>
-      </div>
-    </div>
-    <h1>{{ card.title }}</h1>
+      </div> -->
+    <!-- </div> -->
+    <span>{{ card.title }}</span>
   </section>
 </template>
 

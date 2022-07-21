@@ -1,7 +1,7 @@
 <template>
   <section class="group">
     <div class="g-header">
-      <h3 v-show="!isEditTitle" @click="onEditTitle">{{ group.title }}</h3>
+      <h3>{{ group.title }}</h3>
       <div class="g-menu">---</div>
     </div>
     <div>

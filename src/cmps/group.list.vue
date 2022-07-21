@@ -1,17 +1,16 @@
 <template>
   <section class="group-list">
-    <div v-for="group in groups" :key="group.id">
+    <article class="list" v-for="group in groups" :key="group.id">
       <group-preview :group="group" @saveGroup="saveGroup" />
-    </div>
-    <div class="group-list">
-      <div
+    </article>
+    <div>
+      <input
+        type="text"
         @click="showAddGroupInput = !showAddGroupInput"
-        v-if="!showAddGroupInput"
         class="new-group group"
-      >
-        + Add another list
-      </div>
-      <form v-else @submit.prevent="addNewGroup">
+        placeholder="+ Add new list"
+      />
+      <form @submit.prevent="addNewGroup">
         <input
           class="new-group group"
           type="text"

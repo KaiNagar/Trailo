@@ -180,6 +180,29 @@ function _createBoard() {
           },
         ],
       },
+      {
+        id: _makeId(),
+        title: "These shoes are meant for walking",
+        cards: [
+          {
+            id: _makeId(),
+            title: 'And thats what they do',
+            labelIds: ['l101', 'l102'],
+            style: {
+              bgImg:
+                'https://images.unsplash.com/photo-1658279366986-4f188712a3e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+              bgColor: '',
+              isFull: true,
+            },
+          },
+          {
+            id: _makeId(),
+            title: 'My Trailo',
+            labelIds: ['l101', 'l102'],
+            style: { bgColor: '', isFull: false, bgImg:'https://images.unsplash.com/photo-1538471726790-0f6b031f1982?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' },
+          },
+        ],
+      },
     ],
   }
 }

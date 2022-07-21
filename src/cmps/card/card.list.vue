@@ -1,7 +1,12 @@
 <template>
   <section class="card-list">
     <div v-for="card in cards" :key="card._id">
-      <card-preview @openCard="openCard" :card="card" :saveGroup="saveGroup" />
+      <card-preview
+        @openCard="openCard"
+        :card="card"
+        @click="openCard(card.id)"
+        :saveGroup="saveGroup"
+      />
     </div>
   </section>
 </template>

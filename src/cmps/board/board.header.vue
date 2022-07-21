@@ -1,5 +1,5 @@
 <template>
-  <section class="board-header flex space-between">
+  <section class="board-header">
     <h1>this is board header</h1>
     <board-filter />
   </section>
@@ -10,7 +10,7 @@ import boardFilter from '@/cmps/board/board.filter.vue'
 
 export default {
   name: 'boardHeader',
-  components: {boardFilter},
+  components: { boardFilter },
   data() {
     return {}
   },

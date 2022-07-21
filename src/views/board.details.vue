@@ -1,9 +1,9 @@
 <template>
   <section v-if="currBoard">
-    <div>
+    <div class="group-page-container" :style="onBoardBgColor">
       <board-header />
+      <group-list :groups="currBoard.groups" @saveGroups="saveGroups" />
     </div>
-    <group-list :groups="currBoard.groups" @saveGroups="saveGroups" />
   </section>
 </template>
 <script>
@@ -36,6 +36,9 @@ export default {
   computed: {
     currBoard() {
       return this.$store.getters.currBoard
+    },
+    onBoardBgColor() {
+      return { backgroundImage: 'url(' + this.currBoard.bgCover + ')' }
     },
   },
   async created() {
