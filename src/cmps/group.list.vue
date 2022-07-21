@@ -4,7 +4,25 @@
       <group-preview :group="group" @saveGroup="saveGroup" />
     </div>
     <div class="group-list">
-      <div @click="$emit('addGroup',newGroup)" class="new-group group"><span>+</span> Add another list</div>
+      <div
+        @click="showAddGroupInput = !showAddGroupInput"
+        v-if="!showAddGroupInput"
+        class="new-group group"
+      >
+        + Add another list
+      </div>
+      <form v-else @submit.prevent="addNewGroup">
+        <input
+          class="new-group group"
+          type="text"
+          @keyup.enter="showAddGroupInput = false"
+          @blur="showAddGroupInput = false"
+          v-model="newGroup.title"
+          ref="groupTitle"
+          placeholder="Enter list title"
+        />
+        <button>Add list</button>
+      </form>
     </div>
   </section>
 </template>
@@ -20,19 +38,24 @@ export default {
   components: { groupPreview },
   data() {
     return {
-      newGroup: boardService.getEmptyGroup()
+      showAddGroupInput: false,
+      newGroup: boardService.getEmptyGroup(),
     }
   },
   methods: {
-    addGroup() {
-      const newGroup = boardService.getEmptyGroup()
-
+    addNewGroup() {
+      this.newGroup.title = this.$refs.groupTitle.value
+      this.groups.push(this.newGroup)
+      this.$emit('saveGroups', this.groups)
+      this.$refs.groupTitle.value = ''
     },
     saveGroup(group) {
-      this.$emit('saveGroup', group)
+      // this.$emit('saveGroups', group)
     },
   },
   computed: {},
-  created() { },
+  created() {
+    console.log('this.groups', this.groups)
+  },
 }
 </script>

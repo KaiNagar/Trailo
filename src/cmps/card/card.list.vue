@@ -9,7 +9,9 @@
 <script>
 import cardPreview from './card.preview.vue'
 export default {
-  props: ['cards'],
+  props: {
+    cards: Object,
+  },
   components: { cardPreview },
   data() {
     return {

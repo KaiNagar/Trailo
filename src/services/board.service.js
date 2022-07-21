@@ -71,10 +71,7 @@ function getEmptyGroup() {
   return {
     id: _makeId(),
     title: '',
-    style: {
-      bgColor: '#000',
-    },
-    cards: [],
+    cards:[]
   }
 }
 
@@ -83,7 +80,8 @@ function getEmptyCard() {
     id: _makeId(),
     title: 'new card',
     style: { bgImg: null, bgColor: null, isFull: false },
-    labels: [],
+    checklists: [],
+    labelIds:[]
   }
 }
 
@@ -98,12 +96,6 @@ function getEmptyChecklist() {
         isDone: false,
       },
     ],
-  }
-}
-
-function getEmptyTodo(){
-  return{
-    
   }
 }
 
@@ -161,10 +153,6 @@ function _createBoard() {
       {
         id: _makeId(),
         title: "This is stav's list",
-        boardId,
-        style: {
-          bgColor: '#000',
-        },
         cards: [
           {
             id: _makeId(),

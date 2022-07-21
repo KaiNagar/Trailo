@@ -25,9 +25,7 @@ export default {
   },
   components: {},
   data() {
-    return {
-      isEditTitle: false,
-    }
+    return {}
   },
   methods: {},
   computed: {

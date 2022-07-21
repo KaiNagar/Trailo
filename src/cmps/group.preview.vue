@@ -1,10 +1,9 @@
 <template>
   <section class="group">
     <div class="g-header">
-      {{ group.title }}
+      <h3 v-show="!isEditTitle" @click="onEditTitle">{{ group.title }}</h3>
       <div class="g-menu">---</div>
     </div>
-
     <div>
       <card-list :cards="group.cards" :saveGroup="addCard" />
     </div>
@@ -25,14 +24,21 @@ export default {
   },
   components: { cardList },
   data() {
-    return {}
+    return {
+      isEditTitle: false,
+    }
   },
   methods: {
     addCard() {
       const card = boardService.getEmptyCard()
-      const group = JSON.parse(JSON.stringify(this.group))
-      group.cards.push(card)
-      this.$emit('saveGroup', group)
+      // const group = JSON.parse(JSON.stringify(this.group))
+      // group.cards.push(card)
+      // this.$emit('saveGroup', group)
+    },
+
+    onEditTitle() {
+      this.isEditTitle = true
+      // this.$refs.titleInput.focus()
     },
   },
   computed: {},

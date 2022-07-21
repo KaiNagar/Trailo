@@ -3,7 +3,7 @@
     <div>
       <board-header />
     </div>
-    <group-list :groups="currBoard.groups" @saveGroup="saveGroup" @addGroup="addGroup" />
+    <group-list :groups="currBoard.groups" @saveGroups="saveGroups" />
   </section>
 </template>
 <script>
@@ -21,15 +21,17 @@ export default {
     }
   },
   methods: {
-    addGroup(group) {
-      this.$store.commit({ type: 'addGroup', group })
+    saveGroups(groups) {
+      const newBoard = JSON.parse(JSON.stringify(this.board))
+      newBoard.groups = groups
+      this.$store.dispatch({ type: 'saveBoard', board: newBoard })
     },
-    async saveGroup(updatedGroup) {
-      const idx = this.board.groups.findIndex((group) => group.id === updatedGroup.id)
-      const board = JSON.parse(JSON.stringify(this.board))
-      board.groups.splice(idx, 1, updatedGroup)
-      await this.$store.dispatch({ type: 'saveBoard', board })
-    },
+    // async saveGroup(updatedGroup) {
+    //   const idx = this.board.groups.findIndex((group) => group.id === updatedGroup.id)
+    //   const board = JSON.parse(JSON.stringify(this.board))
+    //   board.groups.splice(idx, 1, updatedGroup)
+    //   await this.$store.dispatch({ type: 'saveBoard', board })
+    // },
   },
   computed: {
     currBoard() {
