@@ -1,33 +1,46 @@
 <template>
-
-  <!-- <button @click="$emit('openCard', card.id)">Read</button> -->
-
   <section class="card-preview" @click="$emit('openCard', card.id)">
-    <input type="text" v-model="card.title" @input.stop="saveCard">
-
-    <div class="labels">
-      <div class="label" v-for="(label, idx) in card.labels" :key="idx" :style="{ 'background-color': label }"></div>
+    <div class="card-preview-cover">
+      <div :class="showCardCoverClass" :style="showCardCover"></div>
     </div>
+    <div class="labels">
+      <div
+        class="card-preview-label"
+        v-for="(label, idx) in card.labels"
+        :key="idx"
+        :style="{ 'background-color': label }"
+      >
+        <p>{{ label.title }}</p>
+      </div>
+    </div>
+    <h1>{{ card.title }}</h1>
   </section>
-
-
 </template>
 
 <script>
 export default {
   name: 'cardPreview',
-  props: ['card'],
+  props: {
+    card: Object,
+  },
   components: {},
   data() {
-    return {}
-  },
-  methods: {
-    saveCard(){
-     this.$emit('saveGroup',this.card)
+    return {
+      isEditTitle: false,
     }
   },
-  computed: {},
-  created() { },
+  methods: {},
+  computed: {
+    showCardCover() {
+      if (this.card.style.bgImg) return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      return { backgroundColor: this.card.style.bgColor }
+    },
+    showCardCoverClass() {
+      if (this.card.style.bgImg) return 'card-img'
+      return 'card-color'
+    },
+  },
+  created() {},
 }
 </script>
 

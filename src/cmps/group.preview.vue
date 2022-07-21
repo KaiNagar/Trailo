@@ -5,7 +5,7 @@
       <div class="g-menu">---</div>
     </div>
 
-    <div class="card-list">
+    <div>
       <card-list :cards="group.cards" :saveGroup="addCard" />
     </div>
 
