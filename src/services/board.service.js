@@ -9,6 +9,7 @@ export const boardService = {
   getCardById,
   getEmptyCard,
   getEmptyGroup,
+  getEmptyChecklist,
 }
 
 const STORAGE_KEY = 'boardDB'
@@ -62,8 +63,6 @@ async function save(board) {
   }
 }
 
-
-
 async function getEmptyBoard() {
   return {}
 }
@@ -71,7 +70,7 @@ async function getEmptyBoard() {
 function getEmptyGroup() {
   return {
     id: _makeId(),
-    title: "",
+    title: '',
     style: {
       bgColor: '#000',
     },
@@ -85,6 +84,26 @@ function getEmptyCard() {
     title: 'new card',
     style: { bgImg: null, bgColor: null, isFull: false },
     labels: [],
+  }
+}
+
+function getEmptyChecklist() {
+  return {
+    id:_makeId(),
+    title: 'Checklist',
+    todos: [
+      {
+        id:_makeId(),
+        title: 'Enter todo',
+        isDone: false,
+      },
+    ],
+  }
+}
+
+function getEmptyTodo(){
+  return{
+    
   }
 }
 
@@ -107,7 +126,8 @@ function _createBoard() {
     _id: boardId,
     title: 'board title new',
     createdAt: Date.now() - 100000,
-    bgCover: 'https://images.unsplash.com/photo-1654446138056-8996ca1e96a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    bgCover:
+      'https://images.unsplash.com/photo-1654446138056-8996ca1e96a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     createdBy: {
       _id: 'u101',
       fullname: 's@r',
@@ -148,7 +168,7 @@ function _createBoard() {
         cards: [
           {
             id: _makeId(),
-            title: 'new card1',
+            title: 'WTF',
             labelIds: ['l101', 'l102'],
             style: { bgImg: null, bgColor: '#29cce5', isFull: false },
             labels: ['#c377e0', '#51e898', '#ff78cb'],
