@@ -66,7 +66,6 @@
     </div>
 
 
-
     <div class="search">
       <img src="../styles/svgs/search.svg">
       <input class="search-board-input" type="text" placeholder="Search" />
