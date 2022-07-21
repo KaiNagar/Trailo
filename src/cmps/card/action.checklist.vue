@@ -29,7 +29,7 @@ export default {
     return {
       isEditTitle: true,
       newItem: { title: null, isDone: false },
-      todos:[]
+      todos:[],
     }
   },
   methods: {

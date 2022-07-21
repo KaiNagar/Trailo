@@ -102,7 +102,7 @@
                 >
                   <header>
                     <h3>Add checklist</h3>
-                    <button>X</button>
+                    <button @click.stop="isChecklistMenuOpen = false">X</button>
                   </header>
                   <hr />
                   <main class="flex column">
@@ -128,7 +128,7 @@
             <div>
               <card-actions
                 @openChecklistMenu="isChecklistMenuOpen = true"
-                @openLabelsMenu="onChecklist"
+                @openLabelsMenu="isLabelMenuOpen = true"
               />
             </div>
           </div>
@@ -195,9 +195,9 @@ export default {
       console.log(ev.pageX - ev.offsetX)
     },
 
-    onChecklist() {
-      isChecklistMenuOpen = true
-    },
+    // onChecklist() {
+    //   this.isChecklistMenuOpen = true
+    // },
     addChecklist() {
       if (!this.card.checklists) this.card.checklists = []
       const cardIdx = this.group.cards.findIndex(
@@ -230,7 +230,7 @@ export default {
     },
     cardCoverStyle() {
       if (this.card.style.bgImg)
-        return { backgroupImage: `url(${this.card.style.bgImg})` }
+        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       else return { backgroundColor: this.card.style.bgColor }
     },
     cardCoverClass() {
