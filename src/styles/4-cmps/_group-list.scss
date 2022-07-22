@@ -1,6 +1,5 @@
 .group-page-container {
   background-size: 100% 100%;
-  //   background-repeat: no-repeat;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -39,13 +38,12 @@
   .group-list {
     display: flex;
     position: relative;
-    bottom: 8px;
 
     .new-group {
-      // height: 3em;
-      // line-height: 3em;
-      // background-color: rgb(195 200 209);
-      // padding-inline-start: 1em;
+      height: 3em;
+      line-height: 3em;
+      background-color: rgb(195 200 209);
+      padding-inline-start: 1em;
     }
   }
 }

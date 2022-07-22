@@ -1,7 +1,7 @@
 <template>
   <section class="group-list">
-    <article v-for="group in groups" :key="group.id">
-      <group-preview :group="group" @addCard="addCard" />
+    <article v-for="(group, idx) in groups" :key="group.id">
+      <group-preview :group="group" :idx="idx" @addCard="addCard" />
     </article>
     <div>
       <input
@@ -10,7 +10,7 @@
         class="new-group group"
         placeholder="+ Add new list"
       />
-      <!-- <form @submit.prevent="addNewGroup">
+      <form @submit.prevent="addNewGroup">
         <input
           class="new-group group"
           type="text"
@@ -19,9 +19,9 @@
           v-model="newGroup.title"
           ref="groupTitle"
           placeholder="Enter list title"
-        /> -->
-      <button @click="addGroup">Add list</button>
-      <!-- </form> -->
+        />
+        <button @click="addGroup">Add list</button>
+      </form>
     </div>
   </section>
 </template>
