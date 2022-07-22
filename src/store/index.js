@@ -24,6 +24,9 @@ const store = createStore({
     emptyTodo() {
       return boardService.getEmptyTodo()
     },
+    emptyCard(){
+      return boardService.getEmptyCard()
+    }
   },
   mutations: {
     setBoards(state, { boards }) {
