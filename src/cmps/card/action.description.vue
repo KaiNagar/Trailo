@@ -8,7 +8,13 @@
     </div>
     <div class="desc-textarea">
       <h2>Description</h2>
-      <button class="edit-desc-btn">Edit</button>
+      <button
+        v-if="description && !editing"
+        @click="openEditDesc"
+        class="edit-desc-btn"
+      >
+        Edit
+      </button>
 
       <div
         :style="descBodyStyle"

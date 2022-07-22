@@ -207,6 +207,7 @@
     }
     .cancel-todo-btn {
       @include cancel-btns;
+      z-index: 10;
     }
     .screen-edit-todo{
       position: absolute;
