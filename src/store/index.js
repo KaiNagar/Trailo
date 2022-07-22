@@ -1,6 +1,8 @@
 // import { userStore } from './modules/user.store.js'
 import { createStore } from 'vuex'
 import { boardService } from '@/services/board.service.js'
+import { menuModule } from './menu.module'
+
 
 const store = createStore({
   strict: true,
@@ -70,6 +72,9 @@ const store = createStore({
       commit({ type: 'setCurrBoard', currBoard: board })
     },
   },
+  modules: {
+    menuModule,
+}
 })
 
 export default store

@@ -1,24 +1,12 @@
 <template>
   <div v-if="card" class="card-details-container">
     <section class="card-details flex column">
-      <div
-        v-if="coverShow"
-        :style="cardCoverStyle"
-        :class="cardCoverClass"
-        class="card-cover"
-      >
+      <div v-if="coverShow" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
         <div class="close-details-container flex">
-          <router-link
-            class="close-details-btn flex"
-            :to="'/board/' + board._id"
-            >X</router-link
-          >
+          <router-link class="close-details-btn flex" :to="'/board/' + board._id">X</router-link>
         </div>
         <div class="cover-menu-container">
-          <button
-            class="cover-menu-btn"
-            @click="isCoverMenuOpen = !isCoverMenuOpen"
-          >
+          <button class="cover-menu-btn" @click="isCoverMenuOpen = !isCoverMenuOpen">
             <span>IMG</span> Cover
           </button>
         </div>
@@ -42,14 +30,9 @@
             <div class="details-column flex column">
               <h3 class="labels-header">Labels</h3>
               <div class="labels-preview flex">
-                <div
-                  class="label-btn"
-                  v-for="label in labelsToShow"
-                  :key="label.id"
-                  @click="openLabelsMenu($event)"
-                >
+                <div class="label-btn" v-for="label in labelsToShow" :key="label.id" @click="openLabelsMenu($event)">
                   <span :style="labelColor(label.color)">{{
-                    label.title
+                      label.title
                   }}</span>
                 </div>
 
@@ -58,17 +41,10 @@
                 </button>
 
                 <!-- <labels-menu @setLabel="setLabel($event)" v-if="isLabelMenuOpen"/> -->
-                <div
-                  ref="labelsMenu"
-                  v-if="isLabelMenuOpen"
-                  class="labels-menu"
-                >
+                <div ref="labelsMenu" v-if="isLabelMenuOpen" class="labels-menu">
                   <header>
                     <h3>Labels</h3>
-                    <button
-                      class="close-label-menu"
-                      @click="isLabelMenuOpen = false"
-                    >
+                    <button class="close-label-menu" @click="isLabelMenuOpen = false">
                       X
                     </button>
                   </header>
@@ -76,13 +52,9 @@
                   <input type="text" placeholder="Search labels..." />
                   <main class="main-labels-content">
                     <h3>Labels</h3>
-                    <div
-                      class="board-label flex space-between align-center"
-                      @click="setLabel(label, labelSelected(label.id))"
-                      v-for="label in board.labels"
-                      :key="label.id"
-                      :style="labelColor(label.color)"
-                    >
+                    <div class="board-label flex space-between align-center"
+                      @click="setLabel(label, labelSelected(label.id))" v-for="label in board.labels" :key="label.id"
+                      :style="labelColor(label.color)">
                       {{ label.title }}
                       <span v-if="labelSelected(label.id)">V</span>
                       <span>E</span>
@@ -97,36 +69,23 @@
 
                 <!-- <button @click="onChecklist">+Checklist</button> -->
 
-                <checklist-menu
-                  :getCurrPos="getCurrPos"
-                  :newChecklist="newChecklist"
-                  @addChecklist="addChecklist"
-                  @closeChecklistMenu="isChecklistMenuOpen = false"
-                  v-if="isChecklistMenuOpen"
-                />
+                <checklist-menu :getCurrPos="getCurrPos" :newChecklist="newChecklist" @addChecklist="addChecklist"
+                  @closeChecklistMenu="isChecklistMenuOpen = false" v-if="isChecklistMenuOpen" />
               </div>
               <action-description />
 
               <div class="checklist-container">
-                <article
-                  v-for="(checklist, idx) in card.checklists"
-                  :key="checklist.id"
-                >
-                  <action-checklist
-                    @saveChecklist="saveChecklist"
-                    @removeChecklist="removeChecklist"
-                    :checklist="checklist"
-                    :idx="idx"
-                  />
+                <article v-for="(checklist, idx) in card.checklists" :key="checklist.id">
+                  <action-checklist @saveChecklist="saveChecklist" @removeChecklist="removeChecklist"
+                    :checklist="checklist" :idx="idx" />
                 </article>
               </div>
             </div>
 
             <div>
-              <card-actions
-                @openChecklistMenu="isChecklistMenuOpen = true"
-                @openLabelsMenu="isLabelMenuOpen = true"
-              />
+              <card-actions @openChecklistMenu="isChecklistMenuOpen = true"
+                @openAttachmentsMenu="openMenu('attachments')"
+                @openLabelsMenu="isLabelMenuOpen = true" />
             </div>
           </div>
         </div>
@@ -160,9 +119,20 @@ export default {
       labelMenuX: null,
       coverShow: true,
       newChecklist: null,
+     
     }
   },
   methods: {
+    // openMenu(action) {
+     
+    //   for (let action in this.menu) {
+    //     this.menu[action] = false
+    //     if (action === modalAction) {
+    //       console.log(action);
+    //       // this.isModal[action] = true
+    //     }
+    //   }
+    // },
     labelColor(color) {
       return { backgroundColor: color }
     },
@@ -221,6 +191,7 @@ export default {
         board: JSON.parse(JSON.stringify(this.board)),
       })
     },
+
   },
   computed: {
     labelsToShow() {
