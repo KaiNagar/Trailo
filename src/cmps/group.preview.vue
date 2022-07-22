@@ -1,7 +1,7 @@
 <template>
   <section class="group">
     <div class="g-header">
-      <h3>{{ group.title }}</h3>
+      <span>{{ group.title }}</span>
       <div class="g-menu">---</div>
     </div>
     <div>

@@ -1,6 +1,6 @@
 <template>
   <section class="card-preview">
-    <div class="card-preview-cover">
+    <div v-if="card.style.bgColor || card.style.bgImg" class="card-preview-cover">
       <div :class="showCardCoverClass" :style="showCardCover"></div>
     </div>
     <!-- <div class="labels">
@@ -13,7 +13,9 @@
         <p>{{ label.title }}</p>
       </div> -->
     <!-- </div> -->
-    <span>{{ card.title }}</span>
+    <div class="card-title">
+      <span>{{ card.title }}</span>
+    </div>
   </section>
 </template>
 
@@ -26,8 +28,8 @@ export default {
   components: {},
   data() {
     return {
-      board:null,
-      group:null,
+      board: null,
+      group: null,
     }
   },
   methods: {},

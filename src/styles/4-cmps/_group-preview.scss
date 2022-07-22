@@ -1,28 +1,24 @@
-    .list{
-        // height: 100%;
-        margin: 0 20px;
-        // background-color: #ebecf0;
-        
-        
         .group {
-            background-color: #ebecf0;
-        display: inline-block;
-        // height: 100%;
-        padding: 6px 8px 2px;
-        // white-space: nowrap;
+        margin: 0 20px;
+        background-color: #ebecf0;
+         border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        line-height: 20px;
+        max-height: 100%;
+        font-weight: 400;
+        font-size: 14px;
+
         width: 272px;
         }
         .g-header {
             cursor: pointer;
-            line-height: 10px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0px 10px;
-            h3{
-                margin: 0 0 4px;
-                font-size: 14px;
-                line-height: 24px;
+            line-height: 20px;
+            padding: 4px 8px;
+            cursor: pointer;
+
+            span{
+                padding: 4px 8px;
         }
     }
     .g-footer{
@@ -31,4 +27,3 @@
         max-height: 38px;
         min-height: 38px;
     }
-}
