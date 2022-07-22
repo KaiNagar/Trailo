@@ -26,7 +26,7 @@ const router = createRouter({
       component: boardDetails,
       children: [
         {
-          path: '/board/:boardId/:groupId/:cardId',
+          path: ':groupId/:cardId',
           name: 'card',
           component: cardDetails,
         },
