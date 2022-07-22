@@ -10,13 +10,12 @@
     justify-content: space-between;
 }
 .group-list {
-    // display: flex;
-    // margin: 0 10px;
-    // display: inline-block;
+    display: flex;
     // height: 100%;
-    // margin: 0 22px;
-    // white-space: nowrap;
-    // width: 272px;
+    position: relative;
+    bottom: 8px;
+
+
 
     .new-group {
         // height: 3em;
