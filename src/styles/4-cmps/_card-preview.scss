@@ -1,7 +1,6 @@
 .card-list {
-    // font-size: 20px;
     margin: 0 4px;
-    // z-index: 1;
+    padding: 0px 5px 0px;
     
     textarea,
     input {
@@ -21,10 +20,12 @@
         border-radius: 3px;
         font-weight: 400;
         font-size: 14px;
+        max-width: 300px;
         line-height: 20px;
-        padding: 6px 8px 2px;
         cursor: pointer;
-        // height: 200px;
+        .card-title{
+            padding: 6px 8px 2px;
+        }
     
     .labels {
         display: flex;
@@ -40,16 +41,18 @@
 }
 }
 .card-preview-cover{
-    border-top-left-radius:3px;
+    border-radius: 3px 3px 0 0;
     min-height: 32px;
     position: relative;
+    background-color: aliceblue;
+ 
     .card-color{
         height: 100%;
     }
     .card-img{
-        height: 100%;
+        border-radius: 3px;
+        height: 163.333px;
         background:rgb(191, 77, 77);
-        position: absolute;
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
