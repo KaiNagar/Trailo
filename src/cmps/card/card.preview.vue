@@ -25,7 +25,10 @@ export default {
   },
   components: {},
   data() {
-    return {}
+    return {
+      board:null,
+      group:null,
+    }
   },
   methods: {},
   computed: {
@@ -38,7 +41,10 @@ export default {
       return 'card-color'
     },
   },
-  created() {},
+  created() {
+    this.board = this.$store.getters.currBoard
+    this.group = this.$store.getters.currGroup
+  },
 }
 </script>
 

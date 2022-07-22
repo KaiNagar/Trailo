@@ -176,41 +176,10 @@
     .add-item-btn {
       @include save-btns;
     }
-    .assign-item-btn {
-      @include cancel-btns;
-      padding: 6px 8px;
-      margin-inline-end: 6px;
-    }
-    .duedate-item-btn {
-      @include cancel-btns;
-      display: flex;
-      margin-inline-end: 0;
-      padding: 4px 11.3px;
-
-      img {
-        width: rem(14px);
-        margin: 3px 3px 3px 0;
-        // margin: rem(3px)
-      }
-    }
-    .mention-item-btn {
-      @include cancel-btns;
-
-      span {
-        width: 20px;
-        height: 20px;
-      }
-    }
-    .emoji-item-btn {
-      @include cancel-btns;
-
-      span {
-        width: 20px;
-        height: 20px;
-      }
-    }
+    
   }
   .edit-todo-container {
+    position: relative;
     textarea {
       resize: none;
       overflow: hidden;
@@ -231,5 +200,24 @@
     .cancel-todo-btn {
       @include cancel-btns;
     }
+    .screen-edit-todo{
+      position: absolute;
+      background-color: #091e420a;;
+      border-radius: rem(3px);
+      bottom: -11px;
+      right: 0;
+      width: 107.5%;
+      height: 122%;
+      pointer-events: none;
+    }
   }
+  .screen-preview-todo{
+    position: absolute;
+    background-color: green;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
 }
