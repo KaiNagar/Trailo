@@ -48,6 +48,14 @@
       text-decoration: line-through;
       color: #5e6c84;
     }
+    // .screen-preview-todo{
+    //   position: absolute;
+    //   // background-color: green;
+    //   bottom: 0;
+    //   right: 0;
+    //   width: 100%;
+    //   height: 100%;
+    // }
 
     .todo-checkbox {
       position: absolute;
@@ -211,13 +219,6 @@
       pointer-events: none;
     }
   }
-  .screen-preview-todo{
-    position: absolute;
-    background-color: green;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-  }
+  
   
 }
