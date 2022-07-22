@@ -137,7 +137,7 @@
                   />
                 </article>
               </div>
-              
+
             </div>
 
             <div>
@@ -208,6 +208,7 @@ export default {
 
     addChecklist() {
       const pos = this.getCurrPos
+      if(!this.card.checklists) this.card.checklists = []
       this.card.checklists.push(this.newChecklist)
       this.isChecklistMenuOpen = false
       this.board.groups[pos.groupIdx].cards[pos.cardIdx] = this.card

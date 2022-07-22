@@ -24,9 +24,10 @@
         class="todo-container"
         v-for="(todo, idx) in checklist.todos"
         :key="idx"
-        @mouseover="showTodoActions = true"
-        @mouseleave="showTodoActions = false"
+        @mouseenter=" isPreviewHover = true"
+        @mouseleave="isPreviewHover = false"
       >
+          <div v-if="isPreviewHover" class="screen-preview-todo"></div>
         <input
           class="todo-checkbox"
           :checked="todo.isDone"
@@ -39,16 +40,25 @@
           :class="todoClass(todo)"
           class="todo-title"
           v-if="!todo.isEditing"
-          @click.stop="editTodo(todo, idx)"
+          @click.stop="editTodo(todo)"
           >{{ todo.title }}</span
         >
-        <div class="edit-todo-container" v-if="todo.isEditing">
-          <textarea  type="text" :value="todo.title" />
-          <div>
-            <button @click="saveTodo" class="save-todo-btn">Save</button>
-            <span @click="todo.isEditing = false" class="cancel-todo-btn"
-              >X</span
-            >
+        <div
+          @mouseenter="isEditHover = true"
+          @mouseleave="isEditHover = false"
+          class="edit-todo-container"
+          v-if="todo.isEditing"
+        >
+          <div v-if="isEditHover" class="screen-edit-todo"></div>
+          <textarea type="text" :value="todo.title" />
+          <div class="flex space-between">
+            <div>
+              <button @click="saveTodo" class="save-todo-btn">Save</button>
+              <span @click="todo.isEditing = false" class="cancel-todo-btn"
+                >X</span
+              >
+            </div>
+            <todo-actionbar />
           </div>
         </div>
         <!-- <button @click="removeTodo(idx)">X</button> -->
@@ -77,24 +87,7 @@
               >
             </div>
 
-            <div class="flex">
-              <button disabled class="assign-item-btn">
-                <span>O</span><a href=""> Assign</a>
-              </button>
-              <button disabled class="duedate-item-btn">
-                <img
-                  src="https://cdn-icons.flaticon.com/png/512/3114/premium/3114812.png?token=exp=1658390452~hmac=22a95cd407481e545903c33da7835ced"
-                  alt="Duedate icon"
-                />
-                <a href=""> Due date</a>
-              </button>
-              <button disabled class="mention-item-btn">
-                <span>O</span>
-              </button>
-              <button disabled class="emoji-item-btn">
-                <span>O</span>
-              </button>
-            </div>
+            <todo-actionbar />
           </div>
         </div>
       </form>
@@ -103,18 +96,21 @@
 </template>
 
 <script>
+import todoActionbar from '../todo.actionbar.vue'
 export default {
   name: 'Checklist',
   props: {
     checklist: Object,
     idx: Number,
   },
-  components: {},
+  components: { todoActionbar },
   data() {
     return {
       newItem: this.$store.getters.emptyTodo,
       isAdding: false,
       showTodoActions: false,
+      isEditHover: false,
+      isPreviewHover: false,
     }
   },
   methods: {
@@ -138,7 +134,8 @@ export default {
         info: { checklist: this.checklist, idx: this.idx },
       })
     },
-    editTodo(todo, idx) {
+    editTodo(todo) {
+      this.checklist.todos.forEach((todo) => (todo.isEditing = false))
       todo.isEditing = true
     },
 
