@@ -2,15 +2,20 @@
   <form @submit.prevent="addChecklist" class="checklist-menu flex column">
     <header class="menu-header flex align-center">
       <span>Add checklist</span>
-      <button @click.stop="this.$emit('closeChecklistMenu')">X</button>
+      <span
+        class="close-list-btn"
+        @click="this.$emit('closeChecklistMenu')"
+        >X</span
+      >
     </header>
     <main class="menu-main-content flex column">
-      <h3>Title</h3>
-      <input v-model="newChecklist.title" type="text" />
-      <select disabled name="" id="" placeholder="copy items from">
-        <option value="">Comming Soon</option>
+      <label for="checklist-title">Title</label>
+      <input id="checklist-title" v-model="newChecklist.title" type="text" />
+      <label for="copy-item">Copy items from...</label>
+      <select disabled id="copy-item" placeholder="copy items from">
+        <option value="">(none)</option>
       </select>
-      <button>Add</button>
+      <button class="add-checklist-btn">Add</button>
     </main>
   </form>
 </template>
@@ -27,7 +32,9 @@ export default {
   },
   methods: {
     addChecklist() {
+      if(!this.newChecklist.title) return
       this.$emit('addChecklist', this.newChecklist)
+      this.newChecklist.title = 'New Checklist'
     },
   },
   computed: {},

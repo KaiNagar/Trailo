@@ -30,6 +30,7 @@
           class="todo-checkbox"
           :checked="todo.isDone"
           @change="toggleIsDone(todo, idx)"
+          @click.stop
           type="checkbox"
         />
         <span class="check-mark"></span>
@@ -38,7 +39,6 @@
           :class="todoClass(todo)"
           class="todo-title"
           v-if="!todo.isEditing"
-          
           >{{ todo.title }}</span
         >
         <div class="edit-todo-container" v-if="todo.isEditing">
@@ -50,14 +50,23 @@
               <button @click="saveTodo(todo, idx)" class="save-todo-btn">
                 Save
               </button>
-              <span @click.stop="closeEditTodo(todo, idx)" class="cancel-todo-btn"
+              <span
+                @click.stop="closeEditTodo(todo, idx)"
+                class="cancel-todo-btn"
                 >X</span
               >
             </div>
             <todo-actionbar />
+            <button @click.stop="removeTodo(idx)">remove</button>
           </div>
         </div>
-        <!-- <button @click="removeTodo(idx)">X</button> -->
+        <button
+          v-if="!todo.isEditing"
+          class="remove-todo"
+          @click.stop="removeTodo(idx)"
+        >
+          X
+        </button>
       </div>
 
       <form class="add-item-form">
@@ -150,7 +159,7 @@ export default {
       this.$emit('saveChecklist', {
         info: { checklist: this.checklist, idx: this.idx },
       })
-      console.log(todo);
+      console.log(todo)
     },
 
     toggleIsDone(todo, idx) {
