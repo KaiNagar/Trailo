@@ -27,8 +27,11 @@ export default {
       newBoard.groups = groups
       this.$store.dispatch({ type: 'saveBoard', board: newBoard })
     },
-    addGroup(group) {
-      this.$store.commit({ type: 'addGroup', group })
+    addGroup(newGroup) {
+      const board = { ...this.board, groups: [...this.board.groups, newGroup] }
+      console.log('board', board)
+      this.$store.dispatch({ type: 'saveBoard', board })
+      // this.$store.commit({ type: 'addGroup', group })
     },
     updateGroup(newGroup) {
       const idx = this.board.groups.findIndex((currGroup) => currGroup.id === newGroup.id)
