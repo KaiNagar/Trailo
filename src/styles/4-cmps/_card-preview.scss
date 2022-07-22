@@ -1,10 +1,8 @@
 .card-list {
     font-size: 20px;
     margin: 0 4px;
-    min-height: 0;
     z-index: 1;
     
-
     textarea,
     input {
         outline: none;
@@ -21,45 +19,33 @@
         position: relative;
         border-radius: 3px;
         cursor: pointer;
-
-        .labels {
-            display: flex;
-            .card-preview-label {
-                height: 8px;
-                width: 40px;
-                padding-inline-end: 3px;
-                padding-block-end: 3px;
-                margin-inline-end: 5px;
-                border-radius: 50px;
-
-                
-            }
-            span{
-                word-wrap: break-word;
-        clear: both;
-        color: #172b4d;
-        display: block;
-        margin: 0 0 4px;
-        overflow: hidden;
-        text-decoration: none;
-            }
+        height: 200px;
+    
+    .labels {
+        display: flex;
+        .card-preview-label {
+            height: 8px;
+            width: 40px;
+            padding-inline-end: 3px;
+            padding-block-end: 3px;
+            margin-inline-end: 5px;
+            border-radius: 50px;
         }
-    }
+}
+}
 }
 .card-preview-cover{
-    min-height: 100px;
     .card-color{
         height: 50px;
     }
     .card-img{
         background:rgb(191, 77, 77);
-        height: 100%;
+        height: 10rem;
         width: 100%;
         position: absolute;
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
-
+    
 }
-
