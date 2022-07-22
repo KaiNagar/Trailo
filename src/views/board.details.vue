@@ -1,10 +1,11 @@
 <template>
   <section v-if="currBoard">
     <div class="group-page-container" :style="onBoardBgColor">
+    <!-- <div class="group-page-container" > -->
       <board-header />
       <group-list :groups="currBoard.groups" @addCard="addCard" @addGroup="addGroup" />
     </div>
-    <router-view />
+    <!-- <router-view /> -->
   </section>
 </template>
 <script>
