@@ -26,7 +26,6 @@
       position: relative;
       .cover-menu-container {
         position: absolute;
-        width: 100%;
         padding: 8px;
         bottom: 0;
         right: 0;
@@ -51,6 +50,7 @@
       background-repeat: no-repeat;
     }
     .close-details-container {
+      z-index: 10;
       position: absolute;
       top: 0;
       right: 0;
@@ -122,24 +122,7 @@
   .add-label-btn {
     scale: 2;
   }
-  .labels-menu {
-    background-color: white;
-    padding: 1rem;
-    position: absolute;
-    top: 0;
-    // left: 372;
-    z-index: 1;
-    .create-label,
-    .color-blind-btn {
-      width: 100%;
-      margin: 8px 4px 8px 0;
-      padding: 6px 12px;
-    }
-    .color-blind-btn {
-      cursor: no-drop;
-    }
-  }
-
+  
   .labels-preview {
     flex-wrap: wrap;
     span {

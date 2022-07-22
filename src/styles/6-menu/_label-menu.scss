@@ -1,23 +1,26 @@
-.checklist-menu {
-    position: absolute;
-    top: 464px;
-  right:-120px;
-  background-color: white;
-  border-radius: rem(3px);
+.labels-menu {
   z-index: 10;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  border-radius: rem(3px);
   .menu-header {
     position: relative;
     justify-content: center;
-    .close-list-btn {
+    margin-bottom: 11px;
+
+    .close-label-menu {
       color: #6b778c;
       position: absolute;
-      padding: 0 15.9px;
-      margin: 0;
+      padding: 0;
+      margin: 4px;
       border: 0;
       background-color: transparent;
       font-size: rem(14px);
       top: 0px;
-      right: 3px;
+      right: 2px;
       &:hover {
         cursor: pointer;
         color: #172b4d;
@@ -27,8 +30,8 @@
     span {
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-      padding: 0 98px;
-      margin: 0px 14px 0px 12px;
+      padding: 0 120.7px;
+      margin: 0px 12px;
       line-height: 2.85714286;
       font-weight: 400;
       color: #5e6c84;
@@ -41,18 +44,13 @@
       }
     }
   }
-  .menu-main-content {
-    margin: 9px 12px;
-    label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-bottom: 3px;
-    }
-    input {
+  .main-labels-content {
+    padding: 0 rem(12px);
+    .search-labels {
       background-color: white;
       padding: 8px;
       border-radius: rem(3px);
-      margin-bottom: 10px;
+      margin-bottom: 13px;
       box-shadow: inset 0 0 0 2px #dfe1e6;
       &:focus {
         outline: none;
@@ -63,21 +61,22 @@
         overflow-wrap: break-word;
       }
     }
-    select {
-      color: #172b4d;
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-      font-size: rem(14px);
-      font-weight: 400;
-      line-height: 1.42857143;
-      border: 1px solid rgb(51, 48, 48);
-      border-radius: rem(3px);
+    h3{
+        margin-bottom: 8px;
     }
-    .add-checklist-btn {
-      @include save-btns;
-      margin-top: rem(21px);
-      margin-bottom: 2.5px;
-      width: 73.53px;
+    .label-picker{
+        padding: 0;
+        margin: 4px 0;
+        height:32px ;
+        border-radius: rem(4px);
+
     }
+  }
+
+  .create-label,
+  .color-blind-btn {
+  }
+  .color-blind-btn {
+    cursor: no-drop;
   }
 }

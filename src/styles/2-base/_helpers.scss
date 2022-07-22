@@ -1,55 +1,84 @@
-// Flex 
+// Flex
 .flex {
-    display: flex;
+  display: flex;
 }
 .flex.inline-flex {
-    display: inline-flex;
+  display: inline-flex;
 }
 .align-self-center {
-    align-self: center;
+  align-self: center;
 }
-.flex.space-between{
-    justify-content: space-between;
+.flex.space-between {
+  justify-content: space-between;
 }
-.flex.align-center{
-    align-items: center;
-}
-
-.flex.column{
-    flex-direction: column;
+.flex.align-center {
+  align-items: center;
 }
 
-// List 
+.flex.column {
+  flex-direction: column;
+}
+
+// List
 .clean-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-// Text 
+// .btn-helper
+
+// cover helpers
+
+.set-attachment-cover {
+  border: 0;
+  width: 88px;
+  height: 44px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size:cover;
+  border-radius: rem(3px);
+}
+.cover-btn-pick {
+  border: 0;
+  width: 50px;
+  height: 32px;
+  border-radius: rem(3px);
+  cursor: pointer;
+}
+
+// Text
 .vertical-text {
-    writing-mode: tb-rl;
-    transform: rotate(-180deg);  
+  writing-mode: tb-rl;
+  transform: rotate(-180deg);
 }
 
 .tag-text {
-    color: $clr1;
-    text-transform: uppercase;
-    @include type(boldCondensed);
+  color: $clr1;
+  text-transform: uppercase;
+  @include type(boldCondensed);
 }
 
 // btn
 
-.disabled-btn{
-    cursor:no-drop;
+.disabled-btn {
+  cursor: no-drop;
 }
 
 // Aspect ratios
 
-.ratio-16-9 { @include aspect-ratio(100, 56); }
+.ratio-16-9 {
+  @include aspect-ratio(100, 56);
+}
 
-.ratio-square { @include aspect-ratio(100, 100); }
+.ratio-square {
+  @include aspect-ratio(100, 100);
+}
 
-.ratio-card { @include aspect-ratio(100, 80); }
+.ratio-card {
+  @include aspect-ratio(100, 80);
+}
 
-.ratio-poster { @include aspect-ratio(100, 150); }
+.ratio-poster {
+  @include aspect-ratio(100, 150);
+}

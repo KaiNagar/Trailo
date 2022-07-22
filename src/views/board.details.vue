@@ -1,7 +1,7 @@
 <template>
   <section v-if="currBoard">
     <div class="group-page-container" :style="onBoardBgColor">
-    <!-- <div class="group-page-container" > -->
+      <!-- <div class="group-page-container" > -->
       <board-header />
       <group-list :groups="currBoard.groups" @addCard="addCard" @addGroup="addGroup" />
     </div>
@@ -28,8 +28,8 @@ export default {
       newBoard.groups = groups
       this.$store.dispatch({ type: 'saveBoard', board: newBoard })
     },
-    addGroup(group){
-      this.$store.commit({type:'addGroup',group})
+    addGroup(group) {
+      this.$store.commit({ type: 'addGroup', group })
     },
 
     // async saveGroup(updatedGroup) {
@@ -41,8 +41,13 @@ export default {
     // },
 
     addCard(card) {
-      this.$store.commit({ type: 'addCard', card })
-    }
+      // this.board.groups
+      //   .find((group) => group.id === this.$store.getters.currGroup.id)
+      //   .cards.push(card)
+      // this.$store.dispatch({ type: 'saveBoard', board: JSON.parse(JSON.stringify(this.board)) })
+      // console.log(card)
+      // this.$store.commit({ type: 'addCard', card })
+    },
   },
   computed: {
     currBoard() {
@@ -58,6 +63,5 @@ export default {
     this.$store.commit({ type: 'setCurrBoard', currBoard: board })
     this.board = board
   },
-
 }
 </script>

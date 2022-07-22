@@ -86,7 +86,7 @@ function getEmptyTodo() {
 function getEmptyCard() {
   return {
     id: _makeId(),
-    title: 'new card',
+    title: '',
     style: { bgImg: null, bgColor: null, isFull: false },
     checklists: [],
     labelIds: [],

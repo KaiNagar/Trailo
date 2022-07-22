@@ -1,23 +1,56 @@
 <template>
   <div v-if="card" class="card-details-container">
     <section class="card-details flex column">
-      <div v-if="coverShow" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
         <div class="close-details-container flex">
           <router-link class="close-details-btn flex" :to="'/board/' + board._id">X</router-link>
         </div>
+      <div
+        v-if="isCoverOn"
+        :style="cardCoverStyle"
+        :class="cardCoverClass"
+        class="card-cover"
+      >
         <div class="cover-menu-container">
           <button class="cover-menu-btn" @click="isCoverMenuOpen = !isCoverMenuOpen">
             <span>IMG</span> Cover
           </button>
         </div>
+        <div v-if="isCoverMenuOpen" class="cover-menu">
+          <div class="menu-header">
+            <h1>Cover</h1>
+            <button>X</button>
+          </div>
+          <div class="cover-size">
+            <button @click="setFullCover(false)">half</button>
+            <button @click="setFullCover(true)">full</button>
+          </div>
+          <div v-if="card.style.isFull" class="cover-color">
+            <button @click="setCoverMode(false)">white</button>
+            <button @click="setCoverMode(true)">black</button>
+          </div>
+          <div v-if="card.attachments" class="cover-attachments">
+            <button
+              :style="{ backgroundImage: 'url(' + attachment.url + ')' }"
+              @click="setCoverAttachment(attachment.url)"
+              v-for="attachment in card.attachments"
+              :key="attachment.id"
+              class="set-attachment-cover"
+            ></button>
+          </div>
+          <div class="colors">
+            <button
+              @click="setCoverColor(color)"
+              :style="{ backgroundColor: color }"
+              class="cover-btn-pick"
+              v-for="color in colors"
+              :key="color"
+            ></button>
+          </div>
+        </div>
       </div>
 
       <div>
         <div class="flex column">
-          <div v-if="isCoverMenuOpen" class="cover-menu">
-            <h1>Cover</h1>
-          </div>
-
           <div class="card-header flex">
             <div class="actionImg flex">img</div>
             <span class="icon-sm icon-member"></span>
@@ -41,20 +74,35 @@
                 </button>
 
                 <!-- <labels-menu @setLabel="setLabel($event)" v-if="isLabelMenuOpen"/> -->
-                <div ref="labelsMenu" v-if="isLabelMenuOpen" class="labels-menu">
-                  <header>
-                    <h3>Labels</h3>
-                    <button class="close-label-menu" @click="isLabelMenuOpen = false">
+                <div
+                  ref="labelsMenu"
+                  v-if="isLabelMenuOpen"
+                  class="labels-menu"
+                >
+                  <header class="menu-header flex">
+                    <span>Labels</span>
+                    <button
+                      class="close-label-menu"
+                      @click="isLabelMenuOpen = false"
+                    >
                       X
                     </button>
                   </header>
-                  <hr />
-                  <input type="text" placeholder="Search labels..." />
+
                   <main class="main-labels-content">
+                    <input
+                      class="search-labels"
+                      type="text"
+                      placeholder="Search labels..."
+                    />
                     <h3>Labels</h3>
-                    <div class="board-label flex space-between align-center"
-                      @click="setLabel(label, labelSelected(label.id))" v-for="label in board.labels" :key="label.id"
-                      :style="labelColor(label.color)">
+                    <div
+                      class="label-picker flex space-between align-center"
+                      @click="setLabel(label, labelSelected(label.id))"
+                      v-for="label in board.labels"
+                      :key="label.id"
+                      :style="labelColor(label.color)"
+                    >
                       {{ label.title }}
                       <span v-if="labelSelected(label.id)">V</span>
                       <span>E</span>
@@ -68,10 +116,15 @@
                 </div>
 
                 <!-- <button @click="onChecklist">+Checklist</button> -->
-
-                <checklist-menu :getCurrPos="getCurrPos" :newChecklist="newChecklist" @addChecklist="addChecklist"
-                  @closeChecklistMenu="isChecklistMenuOpen = false" v-if="isChecklistMenuOpen" />
+                <checklist-menu
+                  :getCurrPos="getCurrPos"
+                  :newChecklist="newChecklist"
+                  @addChecklist="addChecklist"
+                  @closeChecklistMenu="isChecklistMenuOpen = false"
+                  v-if="isChecklistMenuOpen"
+                />
               </div>
+
               <action-description />
 
               <div class="checklist-container">
@@ -83,9 +136,11 @@
             </div>
 
             <div>
-              <card-actions @openChecklistMenu="isChecklistMenuOpen = true"
-                @openAttachmentsMenu="openMenu('attachments')"
-                @openLabelsMenu="isLabelMenuOpen = true" />
+              <card-actions
+                :isCoverOn="isCoverOn"
+                @openChecklistMenu="isChecklistMenuOpen = true"
+                @openLabelsMenu="isLabelMenuOpen = true"
+              />
             </div>
           </div>
         </div>
@@ -117,9 +172,21 @@ export default {
       isCoverMenuOpen: false,
       isChecklistMenuOpen: false,
       labelMenuX: null,
-      coverShow: true,
+      coverShow: null,
       newChecklist: null,
-     
+      isCoverOn: null,
+      colors: [
+        '#7BC86C',
+        '#F5DD29',
+        '#FFAF3F',
+        '#EF7564',
+        '#CD8DE5',
+        '#5BA4CF',
+        '#29CCE5',
+        '#6DECA9',
+        '#FF8ED4',
+        '#172B4D',
+      ],
     }
   },
   methods: {
@@ -140,8 +207,15 @@ export default {
       if (this.card.labelIds.includes(labelId)) return true
       else return false
     },
-    setLabel(newLabel, active) {
+    sendToSave(newCard) {
       const pos = this.getCurrPos
+      this.board.groups[pos.groupIdx].cards[pos.cardIdx] = newCard
+      this.$store.dispatch({
+        type: 'saveBoard',
+        board: JSON.parse(JSON.stringify(this.board)),
+      })
+    },
+    setLabel(newLabel, active) {
       if (!active) {
         this.card.labelIds.push(newLabel.id)
       } else {
@@ -150,11 +224,7 @@ export default {
         )
         this.card.labelIds.splice(labelIdx, 1)
       }
-      this.board.groups[pos.groupIdx].cards[pos.cardIdx] = this.card
-      this.$store.dispatch({
-        type: 'saveBoard',
-        board: JSON.parse(JSON.stringify(this.board)),
-      })
+      this.sendToSave(this.card)
     },
     openLabelsMenu(ev) {
       this.isLabelMenuOpen = true
@@ -163,33 +233,35 @@ export default {
     },
 
     addChecklist(newChecklist) {
-      const pos = this.getCurrPos
       if (!this.card.checklists) this.card.checklists = []
       this.card.checklists.push(newChecklist)
       this.isChecklistMenuOpen = false
-      this.board.groups[pos.groupIdx].cards[pos.cardIdx] = this.card
-      this.$store.dispatch({
-        type: 'saveBoard',
-        board: JSON.parse(JSON.stringify(this.board)),
-      })
+      this.sendToSave(this.card)
     },
     saveChecklist({ info }) {
-      const pos = this.getCurrPos
       this.card.checklists.splice(info.idx, 1, info.checklist)
-      this.board.groups[pos.groupIdx].cards[pos.cardIdx] = this.card
-      this.$store.dispatch({
-        type: 'saveBoard',
-        board: JSON.parse(JSON.stringify(this.board)),
-      })
+      this.sendToSave(this.card)
     },
     removeChecklist(idx) {
-      const pos = this.getCurrPos
       this.card.checklists.splice(idx, 1)
-      this.board.groups[pos.groupIdx].cards[pos.cardIdx] = this.card
-      this.$store.dispatch({
-        type: 'saveBoard',
-        board: JSON.parse(JSON.stringify(this.board)),
-      })
+      this.sendToSave(this.card)
+    },
+    setCoverColor(color) {
+      this.card.style.bgImg = null
+      this.card.style.bgColor = color
+      this.sendToSave(this.card)
+    },
+    setFullCover(isFull) {
+      this.card.style.isFull = isFull
+      this.sendToSave(this.card)
+    },
+    setCoverMode(isDarkMode) {
+      this.card.style.isDarkMode = isDarkMode
+      this.sendToSave(this.card)
+    },
+    setCoverAttachment(url) {
+      this.card.style.bgImg = url
+      this.sendToSave(this.card)
     },
 
   },
@@ -202,6 +274,9 @@ export default {
         })
       })
       return labelsToShow
+    },
+    labelsToPick() {
+      return this.board.labels
     },
     setLabelMenu() {
       return {
@@ -244,9 +319,18 @@ export default {
         JSON.stringify(this.group.cards.find((card) => card.id === cardId)),
       )
     },
+    isCoverActive() {
+      if (this.card.style.bgColor || this.card.style.bgImg) return true
+      return false
+    },
   },
   created() {
     this.newChecklist = boardService.getEmptyChecklist()
+    this.isCoverOn = this.isCoverActive
+    this.card.attachments = [{
+      id:'a101',
+      url:'https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg'
+    }]
   },
 }
 </script>

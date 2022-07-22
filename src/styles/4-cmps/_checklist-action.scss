@@ -32,13 +32,27 @@
   }
   .todo-container {
     position: relative;
-    display: block;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
     margin-bottom: rem(14px);
+    .remove-todo {
+      background-color: transparent;
+      position: absolute;
+      right: 0;
+      top: 1px;
+      border: 0;
+      cursor: pointer;
+      &:hover{
+
+      }
+    }
+    .remove-todo {
+      background-color: transparent;
+      border: 0;
+    }
     .todo-title {
       font-size: rem(14px);
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
@@ -159,6 +173,7 @@
   textarea {
     width: 100%;
     resize: vertical;
+    background-color: white;
     min-height: rem(56px);
     margin-top: rem(-3px);
     margin-left: rem(1px);
@@ -184,10 +199,10 @@
     .add-item-btn {
       @include save-btns;
     }
-    
   }
   .edit-todo-container {
     position: relative;
+
     textarea {
       resize: none;
       overflow: hidden;
@@ -209,9 +224,9 @@
       @include cancel-btns;
       z-index: 10;
     }
-    .screen-edit-todo{
+    .screen-edit-todo {
       position: absolute;
-      background-color: #091e420a;;
+      background-color: #091e420a;
       border-radius: rem(3px);
       bottom: -11px;
       right: 0;
@@ -220,6 +235,4 @@
       pointer-events: none;
     }
   }
-  
-  
 }

@@ -1,6 +1,6 @@
 .group {
   color: #172b4d;
-  margin: 0 20px;
+  margin: 0 4px;
   background-color: #ebecf0;
   border-radius: 3px;
   display: flex;
@@ -11,55 +11,99 @@
   font-size: 14px;
 
   width: 272px;
-}
-.g-header {
-  cursor: pointer;
-  line-height: 20px;
-  padding: 0.6em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  img {
-    width: 10px;
-    filter: invert(11%) sepia(82%) saturate(1065%) hue-rotate(194deg)
+  
+  .g-header {
+    cursor: pointer;
+    line-height: 20px;
+    padding: 0.6em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      width: 10px;
+      filter: invert(11%) sepia(82%) saturate(1065%) hue-rotate(194deg)
       brightness(93%) contrast(91%);
-  }
-  span {
-    font-weight: 600;
-    padding: 0px 5px;
-  }
+    }
+    span {
+      font-weight: 600;
+      padding: 0px 5px;
+    }
+}
+
 }
 .g-footer {
+  line-height: 20px;
   min-height: 38px;
-  .g-footer-textarea{
-    overflow: hidden;
-    padding: 6px 8px 2px;
-    position: relative;
+  padding-bottom: 8px;
 
+  .g-footer-add-area{
+    position: relative;
+    border-radius: 3px;
+    margin: 6px 0 0px 12px;
+    border-radius: 3px;
     .g-footer-title{
       line-height: 20px;
       color: #6b778c;
+      &:hover{
+        background-color: #091e4214;
+      }
       
       img{
         margin-left: 10px;
-      width: 12px;
-      filter: invert(49%) sepia(10%) saturate(737%) hue-rotate(179deg) brightness(92%) contrast(90%);
+        width: 12px;
+        filter: invert(49%) sepia(10%) saturate(737%) hue-rotate(179deg) brightness(92%) contrast(90%);
       }
     }
-      textarea{
-        color: #172b4d;
-        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
-        transition-duration: 85ms;
-        width: 100%;
-        border-radius: 3px;
-        resize: none;
-        height: 54px;
-        overflow-wrap: break-word;
-        border: none;
-        box-shadow: 0 1px 0 #091e4240;
-        &:focus-visible{
-          outline: none;
-        }
-      }
   }
 }
+  textarea{
+    box-shadow: 0 1px 0 #091e4240;
+    color: #172b4d;
+    padding: 5px 8px 2px;
+    font-family: Helvetica Neue,sans-serif;
+    transition-duration: 85ms;
+    width: 100%;
+    border-radius: 3px;
+    resize: none;
+    font-weight: 400;
+    font-size: 14px;
+    overflow-wrap: break-word;
+    border: none;
+    overflow: hidden;
+    max-height: 64px;
+    padding-bottom: 8px;
+    
+    &:focus-visible{
+        outline: none;
+      }
+    }
+    .add-card {
+      display: flex;
+      align-items: center;
+      float: left;
+      font-family: Helvetica Neue,sans-serif;
+      
+      button{
+        margin:6px 0px;
+        background-color: #0079bf;
+        padding: 8px 13px;
+        border-radius: 3px;
+        border: none;
+        box-shadow: none;
+        color: #fff;
+        cursor: pointer;
+        &:hover{
+          background-color: #0066a1;
+        }
+      }
+      span{
+        img{
+      width: 12px;
+      margin: 7px 13px -3px;
+      cursor: pointer;
+         
+filter: invert(14%) sepia(16%) saturate(3613%) hue-rotate(187deg) brightness(91%) contrast(94%);
+        }
+
+      }
+    }
