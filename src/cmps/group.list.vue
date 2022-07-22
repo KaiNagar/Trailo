@@ -1,6 +1,6 @@
 <template>
   <section class="group-list">
-    <article class="list" v-for="group in groups" :key="group.id">
+    <article v-for="group in groups" :key="group.id">
       <group-preview :group="group" @addCard="addCard" />
     </article>
     <div>
@@ -20,7 +20,7 @@
           ref="groupTitle"
           placeholder="Enter list title"
         /> -->
-        <button @click="addGroup">Add list</button>
+      <button @click="addGroup">Add list</button>
       <!-- </form> -->
     </div>
   </section>
@@ -40,7 +40,6 @@ export default {
       showAddGroupInput: false,
       newGroup: boardService.getEmptyGroup(),
     }
-
   },
   methods: {
     addNewGroup() {
@@ -52,9 +51,9 @@ export default {
     addCard(card) {
       this.$emit('addCard', card)
     },
-    addGroup(){
-     this.$emit('addGroup',this.newGroup)
-    }
+    addGroup() {
+      this.$emit('addGroup', this.newGroup)
+    },
   },
   computed: {},
   created() {

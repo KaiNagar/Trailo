@@ -15,7 +15,7 @@
 .g-header {
   cursor: pointer;
   line-height: 20px;
-  padding: 1em;
+  padding: 0.6em;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,11 +26,40 @@
   }
   span {
     font-weight: 600;
+    padding: 0px 5px;
   }
 }
 .g-footer {
-  display: flex;
-  justify-content: space-between;
-  max-height: 38px;
   min-height: 38px;
+  .g-footer-textarea{
+    overflow: hidden;
+    padding: 6px 8px 2px;
+    position: relative;
+
+    .g-footer-title{
+      line-height: 20px;
+      color: #6b778c;
+      
+      img{
+        margin-left: 10px;
+      width: 12px;
+      filter: invert(49%) sepia(10%) saturate(737%) hue-rotate(179deg) brightness(92%) contrast(90%);
+      }
+    }
+      textarea{
+        color: #172b4d;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+        transition-duration: 85ms;
+        width: 100%;
+        border-radius: 3px;
+        resize: none;
+        height: 54px;
+        overflow-wrap: break-word;
+        border: none;
+        box-shadow: 0 1px 0 #091e4240;
+        &:focus-visible{
+          outline: none;
+        }
+      }
+  }
 }

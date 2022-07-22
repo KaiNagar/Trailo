@@ -2,14 +2,29 @@
   <section class="group">
     <div class="g-header">
       <span>{{ group.title }}</span>
-      <div class="g-menu fa"> <img src="../styles/svgs/fa/solid/ellipsis.svg" alt=""></div>
+      <div class="g-menu fa"><img src="../styles/svgs/fa/solid/ellipsis.svg" alt="" /></div>
     </div>
     <div>
       <card-list :cards="group.cards" :saveGroup="addCard" />
     </div>
 
-    <div class="g-footer">
-      <button @click="addCard">add card</button>
+    <div class="g-footer flex space-between">
+      <div class="g-footer-textarea">
+        <span v-if="!isEditable" class="g-footer-title" @click="onOpenTextarea">
+          <span><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span>
+          Add a card</span
+        >
+        <div v-else>
+          <textarea
+            name="textarea"
+            id="textarea"
+            cols="30"
+            rows="10"
+            placeholder="Enter a title for this card..."
+          ></textarea>
+          <button @click="addCard">add card</button><span><button>X</button></span>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -25,7 +40,7 @@ export default {
   components: { cardList },
   data() {
     return {
-      isEditTitle: false,
+      isEditable: false,
     }
   },
   methods: {
@@ -41,6 +56,9 @@ export default {
     onEditTitle() {
       this.isEditTitle = true
       // this.$refs.titleInput.focus()
+    },
+    onOpenTextarea() {
+      return (this.isEditable = true)
     },
   },
   computed: {},
