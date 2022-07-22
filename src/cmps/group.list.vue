@@ -1,7 +1,7 @@
 <template>
   <section class="group-list">
     <article v-for="(group, idx) in groups" :key="group.id">
-      <group-preview :group="group" :idx="idx" @addCard="addCard" />
+      <group-preview :group="group" :idx="idx" @updateGroup="updateGroup" />
     </article>
     <div>
       <input
@@ -48,8 +48,8 @@ export default {
       this.$emit('saveGroups', this.groups)
       this.$refs.groupTitle.value = ''
     },
-    addCard(card) {
-      this.$emit('addCard', card)
+    updateGroup(group) {
+      this.$emit('updateGroup', group)
     },
     addGroup() {
       this.$emit('addGroup', this.newGroup)

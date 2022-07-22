@@ -69,7 +69,7 @@ const store = createStore({
     },
     async saveBoard({ commit }, { board }) {
       const newBoard = await boardService.save(board)
-      commit({ type: 'setCurrBoard', currBoard: board })
+      commit({ type: 'setCurrBoard', currBoard: newBoard })
     },
   },
   modules: {

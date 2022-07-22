@@ -19,14 +19,26 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    img {
-      width: 10px;
-      filter: invert(11%) sepia(82%) saturate(1065%) hue-rotate(194deg)
-      brightness(93%) contrast(91%);
+    position: relative;
+
+    .g-menu.fa{
+      width: 1rem;
+      height: 1rem;
+      position: absolute;
+      top: 11px;
+      right: 9px;
+
+      img {
+        width: 10px;
+        filter: invert(11%) sepia(82%) saturate(1065%) hue-rotate(194deg)
+        brightness(93%) contrast(91%);
+        // margin: 1px 5px -1px 0px;
+      }
     }
     span {
       font-weight: 600;
-      padding: 0px 5px;
+      padding: 1px 7px;
+      max-width: 228px;
     }
 }
 
