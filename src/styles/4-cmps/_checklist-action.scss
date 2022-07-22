@@ -179,17 +179,17 @@
     .assign-item-btn {
       @include cancel-btns;
       padding: 6px 8px;
-      margin-inline-end:6px ;
+      margin-inline-end: 6px;
     }
     .duedate-item-btn {
       @include cancel-btns;
       display: flex;
       margin-inline-end: 0;
       padding: 4px 11.3px;
-      
-      img{
+
+      img {
         width: rem(14px);
-        margin:  3px 3px 3px 0;
+        margin: 3px 3px 3px 0;
         // margin: rem(3px)
       }
     }
@@ -208,6 +208,27 @@
         width: 20px;
         height: 20px;
       }
+    }
+  }
+  .edit-todo-container {
+    textarea {
+      resize: none;
+      overflow: hidden;
+      overflow-wrap: break-word;
+      margin-top: -8px;
+      background-color: #091e420a;
+      border-color: #091e4221;
+      border-radius: rem(3px);
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    }
+    .save-todo-btn {
+      @include save-btns;
+    }
+    .cancel-todo-btn {
+      @include cancel-btns;
     }
   }
 }

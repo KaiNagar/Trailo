@@ -7,6 +7,7 @@ export const boardService = {
   remove,
   getEmptyBoard,
   getCardById,
+  getEmptyTodo,
   getEmptyCard,
   getEmptyGroup,
   getEmptyChecklist,
@@ -71,10 +72,16 @@ function getEmptyGroup() {
   return {
     id: _makeId(),
     title: '',
-    cards:[]
+    cards: [],
   }
 }
-
+function getEmptyTodo() {
+  return {
+    id: _makeId(),
+    title: '',
+    isDone: false,
+  }
+}
 
 function getEmptyCard() {
   return {
@@ -82,7 +89,7 @@ function getEmptyCard() {
     title: 'new card',
     style: { bgImg: null, bgColor: null, isFull: false },
     checklists: [],
-    labelIds:[]
+    labelIds: [],
   }
 }
 
@@ -179,13 +186,12 @@ function _createBoard() {
               },
             ],
           },
-          
         ],
       },
-      
+
       {
         id: _makeId(),
-        title: "These shoes are meant for walking",
+        title: 'These shoes are meant for walking',
         cards: [
           {
             id: _makeId(),
@@ -202,7 +208,12 @@ function _createBoard() {
             id: _makeId(),
             title: 'My Trailo',
             labelIds: ['l101', 'l102'],
-            style: { bgColor: '', isFull: false, bgImg:'https://images.unsplash.com/photo-1538471726790-0f6b031f1982?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' },
+            style: {
+              bgColor: '',
+              isFull: false,
+              bgImg:
+                'https://images.unsplash.com/photo-1538471726790-0f6b031f1982?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+            },
           },
         ],
       },
@@ -241,7 +252,6 @@ function _createBoard() {
               },
             ],
           },
-          
         ],
       },
     ],

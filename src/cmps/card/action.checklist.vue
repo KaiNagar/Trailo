@@ -29,23 +29,32 @@
       >
         <input
           class="todo-checkbox"
-          :checked="checked(todo)"
+          :checked="todo.isDone"
           @change="toggleIsDone(todo, idx)"
           type="checkbox"
         />
         <span class="check-mark"></span>
+
         <span
           :class="todoClass(todo)"
           class="todo-title"
-          v-if="!isEditing"
-          @click.stop="isEditing = true"
+          v-if="!todo.isEditing"
+          @click.stop="editTodo(todo, idx)"
           >{{ todo.title }}</span
         >
-        <input v-else @change="updateTodo" type="text" :value="todo.title" />
-        <!-- <button v-if="showTodoActions" @click="removeTodo(idx)">X</button> -->
+        <div class="edit-todo-container" v-if="todo.isEditing">
+          <textarea  type="text" :value="todo.title" />
+          <div>
+            <button @click="saveTodo" class="save-todo-btn">Save</button>
+            <span @click="todo.isEditing = false" class="cancel-todo-btn"
+              >X</span
+            >
+          </div>
+        </div>
+        <!-- <button @click="removeTodo(idx)">X</button> -->
       </div>
 
-      <form class="add-item-form" @submit.prevent="saveChecklist">
+      <form class="add-item-form">
         <button
           class="add-item-btn-toggle"
           v-if="!isAdding"
@@ -54,10 +63,15 @@
           Add an item
         </button>
         <div v-else>
-          <textarea ref="newItemInput" type="text" placeholder="Add an item" />
+          <textarea
+            @keydown.enter.prevent="saveChecklist"
+            ref="newItemInput"
+            type="text"
+            placeholder="Add an item"
+          />
           <div class="adding-items-actions flex space-between">
             <div>
-              <button class="add-item-btn">Add</button>
+              <button @click="saveChecklist" class="add-item-btn">Add</button>
               <span @click="isAdding = false" class="cancel-item-btn"
                 >Cancel</span
               >
@@ -98,8 +112,7 @@ export default {
   components: {},
   data() {
     return {
-      newItem: { title: '', isDone: false },
-      isEditing: false,
+      newItem: this.$store.getters.emptyTodo,
       isAdding: false,
       showTodoActions: false,
     }
@@ -113,6 +126,7 @@ export default {
       this.$emit('saveChecklist', {
         info: { checklist: this.checklist, idx: this.idx },
       })
+      this.newItem = this.$store.getters.emptyTodo
       this.$refs.newItemInput.value = ''
     },
     removeChecklist(idx) {
@@ -124,20 +138,16 @@ export default {
         info: { checklist: this.checklist, idx: this.idx },
       })
     },
-    updateTodo() {
-      this.$emit('saveChecklist', {
-        info: { checklist: this.checklist, idx: this.idx },
-      })
+    editTodo(todo, idx) {
+      todo.isEditing = true
     },
+
     toggleIsDone(todo, idx) {
       todo.isDone = !todo.isDone
       this.checklist.todos[idx] = todo
       this.$emit('saveChecklist', {
         info: { checklist: this.checklist, idx: this.idx },
       })
-    },
-    checked(todo) {
-      return todo.isDone ? true : false
     },
     todoClass(todo) {
       return todo.isDone ? 'done' : ''
