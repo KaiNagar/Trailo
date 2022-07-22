@@ -46,7 +46,11 @@
       </div>
 
       <form class="add-item-form" @submit.prevent="saveChecklist">
-        <button class="add-item-btn-toggle" v-if="!isAdding" @click="isAdding = true">
+        <button
+          class="add-item-btn-toggle"
+          v-if="!isAdding"
+          @click="isAdding = true"
+        >
           Add an item
         </button>
         <div v-else>
@@ -54,21 +58,28 @@
           <div class="adding-items-actions flex space-between">
             <div>
               <button class="add-item-btn">Add</button>
-              <span @click="isAdding = false" class="cancel-item-btn">Cancel</span>
+              <span @click="isAdding = false" class="cancel-item-btn"
+                >Cancel</span
+              >
             </div>
+
             <div class="flex">
-              <div>
-                <span>O</span><a class="Assign-item-btn" href=""> Assign</a>
-              </div>
-              <div>
-                <span>O</span><a class="duedate-item-btn" href=""> Due date</a>
-              </div>
-              <div>
+              <button disabled class="assign-item-btn">
+                <span>O</span><a href=""> Assign</a>
+              </button>
+              <button disabled class="duedate-item-btn">
+                <img
+                  src="https://cdn-icons.flaticon.com/png/512/3114/premium/3114812.png?token=exp=1658390452~hmac=22a95cd407481e545903c33da7835ced"
+                  alt="Duedate icon"
+                />
+                <a href=""> Due date</a>
+              </button>
+              <button disabled class="mention-item-btn">
                 <span>O</span>
-              </div>
-              <div>
-                <span class="emoji-item-btn">O</span>
-              </div>
+              </button>
+              <button disabled class="emoji-item-btn">
+                <span>O</span>
+              </button>
             </div>
           </div>
         </div>

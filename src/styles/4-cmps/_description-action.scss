@@ -71,27 +71,6 @@
     .formatting-desc-btn {
       @include cancel-btns;
     }
-    .assign-item-btn {
-      font-size: rem(14px);
-    }
-    .duedate-item-btn {
-      font-size: rem(14px);
-    }
-    .mention-item-btn {
-      font-size: rem(14px);
-
-      span {
-        width: 20px;
-        height: 20px;
-      }
-    }
-    .emoji-item-btn {
-      font-size: rem(14px);
-
-      span {
-        width: 20px;
-        height: 20px;
-      }
-    }
+    
   }
 }
