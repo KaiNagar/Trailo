@@ -1,0 +1,48 @@
+.cover-menu {
+  .set-attachment-cover {
+    border: 0;
+    width: 88px;
+    height: 44px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: rem(3px);
+  }
+  .cover-btn-pick-color {
+    border: 0;
+    width: 50px;
+    height: 32px;
+    border-radius: rem(3px);
+    cursor: pointer;
+  }
+  .cover-btn-pick-img {
+    border: 0;
+    width: 50px;
+    height: 32px;
+    border-radius: rem(3px);
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+  }
+  .remove-cover-btn {
+    @include cancel-btns;
+    width: 100%;
+  }
+  .cover-full {
+    border: 0;
+    width: 50px;
+    height: 32px;
+    border-radius: rem(3px);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .cover-half {
+    border: 0;
+    width: 50px;
+    height: 32px;
+    border-radius: rem(3px);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -16px;
+  }
+}

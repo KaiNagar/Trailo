@@ -1,9 +1,65 @@
 <template>
   <div v-if="card" class="card-details-container">
     <section class="card-details flex column">
-        <div class="close-details-container flex">
-          <router-link class="close-details-btn flex" :to="'/board/' + board._id">X</router-link>
+      <div class="close-details-container flex">
+        <router-link class="close-details-btn flex" :to="'/board/' + board._id"
+          >X</router-link
+        >
+      </div>
+      <div v-if="isCoverMenuOpen" class="cover-menu">
+        <div class="menu-header">
+          <h1>Cover</h1>
+          <button @click="isCoverMenuOpen = false">X</button>
         </div>
+        <div class="cover-size">
+          <button
+            :class="coverSize(false)"
+            :style="setCoverSizeStyle"
+            @click="setFullCover(false)"
+          >
+            half
+          </button>
+          <button
+            :class="coverSize(true)"
+            :style="setCoverSizeStyle"
+            @click="setFullCover(true)"
+          >
+            full
+          </button>
+        </div>
+        <button class="remove-cover-btn" @click="removeCover">
+          Remove cover
+        </button>
+        <div v-if="card.style.isFull && card.style.bgImg" class="cover-color">
+          <button @click="setCoverMode(false)">white</button>
+          <button @click="setCoverMode(true)">black</button>
+        </div>
+        <div class="colors">
+          <button
+            @click="setCoverColor(color)"
+            :style="{ backgroundColor: color }"
+            class="cover-btn-pick-color"
+            v-for="color in colors"
+            :key="color"
+          ></button>
+        </div>
+        <div v-if="card.attachments" class="cover-attachments">
+          <button
+            :style="{ backgroundImage: 'url(' + attachment.url + ')' }"
+            @click="setCoverImg(attachment.url)"
+            v-for="attachment in card.attachments"
+            :key="attachment.id"
+            class="set-attachment-cover"
+          ></button>
+        </div>
+        <button
+          @click="setCoverImg(url)"
+          :style="{ backgroundImage: 'url(' + url + ')' }"
+          class="cover-btn-pick-img"
+          v-for="url in coverImgsUrls"
+          :key="url"
+        ></button>
+      </div>
       <div
         v-if="isCoverOn"
         :style="cardCoverStyle"
@@ -11,41 +67,12 @@
         class="card-cover"
       >
         <div class="cover-menu-container">
-          <button class="cover-menu-btn" @click="isCoverMenuOpen = !isCoverMenuOpen">
+          <button
+            class="cover-menu-btn"
+            @click="isCoverMenuOpen = !isCoverMenuOpen"
+          >
             <span>IMG</span> Cover
           </button>
-        </div>
-        <div v-if="isCoverMenuOpen" class="cover-menu">
-          <div class="menu-header">
-            <h1>Cover</h1>
-            <button>X</button>
-          </div>
-          <div class="cover-size">
-            <button @click="setFullCover(false)">half</button>
-            <button @click="setFullCover(true)">full</button>
-          </div>
-          <div v-if="card.style.isFull" class="cover-color">
-            <button @click="setCoverMode(false)">white</button>
-            <button @click="setCoverMode(true)">black</button>
-          </div>
-          <div v-if="card.attachments" class="cover-attachments">
-            <button
-              :style="{ backgroundImage: 'url(' + attachment.url + ')' }"
-              @click="setCoverAttachment(attachment.url)"
-              v-for="attachment in card.attachments"
-              :key="attachment.id"
-              class="set-attachment-cover"
-            ></button>
-          </div>
-          <div class="colors">
-            <button
-              @click="setCoverColor(color)"
-              :style="{ backgroundColor: color }"
-              class="cover-btn-pick"
-              v-for="color in colors"
-              :key="color"
-            ></button>
-          </div>
         </div>
       </div>
 
@@ -63,9 +90,14 @@
             <div class="details-column flex column">
               <h3 class="labels-header">Labels</h3>
               <div class="labels-preview flex">
-                <div class="label-btn" v-for="label in labelsToShow" :key="label.id" @click="openLabelsMenu($event)">
+                <div
+                  class="label-btn"
+                  v-for="label in labelsToShow"
+                  :key="label.id"
+                  @click="openLabelsMenu($event)"
+                >
                   <span :style="labelColor(label.color)">{{
-                      label.title
+                    label.title
                   }}</span>
                 </div>
 
@@ -128,9 +160,16 @@
               <action-description />
 
               <div class="checklist-container">
-                <article v-for="(checklist, idx) in card.checklists" :key="checklist.id">
-                  <action-checklist @saveChecklist="saveChecklist" @removeChecklist="removeChecklist"
-                    :checklist="checklist" :idx="idx" />
+                <article
+                  v-for="(checklist, idx) in card.checklists"
+                  :key="checklist.id"
+                >
+                  <action-checklist
+                    @saveChecklist="saveChecklist"
+                    @removeChecklist="removeChecklist"
+                    :checklist="checklist"
+                    :idx="idx"
+                  />
                 </article>
               </div>
             </div>
@@ -140,6 +179,7 @@
                 :isCoverOn="isCoverOn"
                 @openChecklistMenu="isChecklistMenuOpen = true"
                 @openLabelsMenu="isLabelMenuOpen = true"
+                @openCoverMenu="isCoverMenuOpen = true"
               />
             </div>
           </div>
@@ -187,11 +227,19 @@ export default {
         '#FF8ED4',
         '#172B4D',
       ],
+      coverImgsUrls: [
+        'https://images.unsplash.com/photo-1603955389958-8ab4c2025b71?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        'https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        'https://images.unsplash.com/photo-1568043210943-0e8aac4b9734?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
+        'https://images.unsplash.com/photo-1455218873509-8097305ee378?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG5hdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+        'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      ],
     }
   },
   methods: {
     // openMenu(action) {
-     
+
     //   for (let action in this.menu) {
     //     this.menu[action] = false
     //     if (action === modalAction) {
@@ -249,6 +297,7 @@ export default {
     setCoverColor(color) {
       this.card.style.bgImg = null
       this.card.style.bgColor = color
+      this.isCoverOn = true
       this.sendToSave(this.card)
     },
     setFullCover(isFull) {
@@ -259,11 +308,20 @@ export default {
       this.card.style.isDarkMode = isDarkMode
       this.sendToSave(this.card)
     },
-    setCoverAttachment(url) {
+    setCoverImg(url) {
+      this.card.style.bgColor = null
       this.card.style.bgImg = url
+      this.isCoverOn = true
       this.sendToSave(this.card)
     },
-
+    removeCover() {
+      this.card.style = { isFull: false, bgColor: null, bgImg: null }
+      this.sendToSave(this.card)
+    },
+    
+    coverSize(isFull) {
+      return isFull ? 'cover-full' : 'cover-half'
+    },
   },
   computed: {
     labelsToShow() {
@@ -292,6 +350,7 @@ export default {
       if (this.card.style.bgImg) return 'card-cover-img'
       else return 'card-cover-color'
     },
+
     getCurrPos() {
       const cardIdx = this.group.cards.findIndex(
         (card) => card.id === this.card.id,
@@ -302,6 +361,13 @@ export default {
       return {
         cardIdx,
         groupIdx,
+      }
+    },
+    setCoverSizeStyle() {
+      if (this.card.style.bgColor) {
+        return { backgroundColor: this.card.style.bgColor }
+      } else if (this.card.style.bgImg) {
+        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       }
     },
     board() {
@@ -327,10 +393,6 @@ export default {
   created() {
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
-    this.card.attachments = [{
-      id:'a101',
-      url:'https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg'
-    }]
   },
 }
 </script>
