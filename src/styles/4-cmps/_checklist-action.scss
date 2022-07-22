@@ -217,11 +217,12 @@
       overflow-wrap: break-word;
       margin-top: -8px;
       background-color: #091e420a;
-      border-color: #091e4221;
+      // border-color: #091e4221;
       border-radius: rem(3px);
       &:focus {
         outline: none;
-        border: none;
+        box-shadow: none;
+        border: 1px solid #091e4221;
       }
     }
     .save-todo-btn {

@@ -30,7 +30,8 @@ export default {
   },
   methods: {
     addCard() {
-      const card = boardService.getEmptyCard()
+      const card = this.$store.getters.emptyCard
+      // const card = boardService.getEmptyCard()
       // const group = JSON.parse(JSON.stringify(this.group))
       // group.cards.push(card)
       card.groupId = this.group.id
