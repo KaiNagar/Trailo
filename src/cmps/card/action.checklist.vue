@@ -24,10 +24,7 @@
         class="todo-container"
         v-for="(todo, idx) in checklist.todos"
         :key="idx"
-        @mouseenter=" isPreviewHover = true"
-        @mouseleave="isPreviewHover = false"
       >
-          <div v-if="isPreviewHover" class="screen-preview-todo"></div>
         <input
           class="todo-checkbox"
           :checked="todo.isDone"
@@ -40,21 +37,19 @@
           :class="todoClass(todo)"
           class="todo-title"
           v-if="!todo.isEditing"
-          @click.stop="editTodo(todo)"
+          @click.stop="openEditTodo(todo, idx)"
           >{{ todo.title }}</span
         >
-        <div
-          @mouseenter="isEditHover = true"
-          @mouseleave="isEditHover = false"
-          class="edit-todo-container"
-          v-if="todo.isEditing"
-        >
-          <div v-if="isEditHover" class="screen-edit-todo"></div>
-          <textarea type="text" :value="todo.title" />
+        <div class="edit-todo-container" v-if="todo.isEditing">
+          <!-- <div v-if="isEditHover" class="screen-edit-todo"></div> -->
+
+          <textarea type="text" v-model="todo.title" />
           <div class="flex space-between">
             <div>
-              <button @click="saveTodo" class="save-todo-btn">Save</button>
-              <span @click="todo.isEditing = false" class="cancel-todo-btn"
+              <button @click="saveTodo(todo, idx)" class="save-todo-btn">
+                Save
+              </button>
+              <span @click="closeEditTodo(todo, idx)" class="cancel-todo-btn"
                 >X</span
               >
             </div>
@@ -110,7 +105,6 @@ export default {
       isAdding: false,
       showTodoActions: false,
       isEditHover: false,
-      isPreviewHover: false,
     }
   },
   methods: {
@@ -134,9 +128,28 @@ export default {
         info: { checklist: this.checklist, idx: this.idx },
       })
     },
-    editTodo(todo) {
-      this.checklist.todos.forEach((todo) => (todo.isEditing = false))
+    saveTodo(todo, idx) {
+      console.log(todo);
+      this.checklist.todos.splice(idx, 1, todo)
+      this.closeEditTodo(todo, idx)
+      this.$emit('saveChecklist', {
+        info: { checklist: this.checklist, idx: this.idx },
+      })
+    },
+    openEditTodo(todo, idx) {
       todo.isEditing = true
+      this.checklist.todos.forEach((todo) => (todo.isEditing = false))
+      this.checklist.todos[idx].isEditing = true
+      this.$emit('saveChecklist', {
+        info: { checklist: this.checklist, idx: this.idx },
+      })
+    },
+    closeEditTodo(todo, idx) {
+      todo.isEditing = false
+      this.checklist.todos[idx].isEditing = false
+      this.$emit('saveChecklist', {
+        info: { checklist: this.checklist, idx: this.idx },
+      })
     },
 
     toggleIsDone(todo, idx) {

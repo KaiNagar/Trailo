@@ -8,8 +8,17 @@
     </div>
     <div class="desc-textarea">
       <h2>Description</h2>
-      <div v-if="!editing" @click="openEditDesc" class="desc-body-container">
-        <div class="desc-body">Add a more detailed description...</div>
+      <button class="edit-desc-btn">Edit</button>
+
+      <div
+        :style="descBodyStyle"
+        v-if="!editing"
+        @click="openEditDesc"
+        class="desc-body-container"
+      >
+        <div class="desc-body">
+          {{ descValue }}
+        </div>
       </div>
       <div v-else class="edit-desc">
         <textarea
@@ -52,7 +61,21 @@ export default {
       this.editing = false
     },
   },
-  computed: {},
+  computed: {
+    descValue() {
+      return this.description.length
+        ? this.description
+        : 'Add a more detailed description...'
+    },
+    descBodyStyle() {
+      return this.description.length
+        ? {
+            backgroundColor: 'transparent',
+            padding: 0,
+          }
+        : ''
+    },
+  },
   created() {},
 }
 </script>
