@@ -26,7 +26,8 @@ export default {
   },
   methods: {
     openCard(cardId) {
-      this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
+      console.log(cardId);
+      // this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
     },
     saveGroup(card) {
       console.log(card)
