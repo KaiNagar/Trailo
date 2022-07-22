@@ -2,7 +2,7 @@
   <section class="group">
     <div class="g-header">
       <h3>{{ group.title }}</h3>
-      <div class="g-menu">---</div>
+      <div class="g-menu fa"> <img src="../styles/svgs/fa/solid/ellipsis.svg" alt=""></div>
     </div>
     <div>
       <card-list :cards="group.cards" :saveGroup="addCard" />

@@ -17,8 +17,13 @@
             line-height: 10px;
             width: 100%;
             display: flex;
+            align-items: center;
             justify-content: space-between;
             padding: 0px 10px;
+            .g-menu{
+                width: 12px;
+
+            }
             h3{
                 margin: 0 0 4px;
                 font-size: 14px;

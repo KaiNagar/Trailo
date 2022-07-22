@@ -9,10 +9,16 @@
 
 @font-face{
     font-family: trellicons;
-    src: url('../fa/trellicons.ttf')
+    src: url(../fa/trellicons.ttf)
 }
 
 @font-face{
     font-family: fa-solid;
-    src: url(../fonts/fa/fa-solid-900.ttf);
+    src: url('../fonts/fa/fa-solid-900.ttf');
 }
+
+@font-face{
+    font-family: fa-regular;
+    src: url('../fonts/fa/fa-regular-400.ttf');
+}
+
