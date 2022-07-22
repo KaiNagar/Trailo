@@ -284,6 +284,7 @@ export default {
       if (!this.card.checklists) this.card.checklists = []
       this.card.checklists.push(newChecklist)
       this.isChecklistMenuOpen = false
+      console.log(this.card);
       this.sendToSave(this.card)
     },
     saveChecklist({ info }) {

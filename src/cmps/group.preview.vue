@@ -2,7 +2,9 @@
   <section class="group">
     <div class="g-header">
       <span>{{ group.title }}</span>
-      <div class="g-menu fa"><img src="../styles/svgs/fa/solid/ellipsis.svg" alt="" /></div>
+      <div class="g-menu fa">
+        <img src="../styles/svgs/fa/solid/ellipsis.svg" alt="" />
+      </div>
     </div>
     <div>
       <card-list :cards="group.cards" :updateGroup="updateGroup" />
@@ -11,7 +13,9 @@
     <div class="g-footer flex space-between">
       <div class="g-footer-add-area">
         <span @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title">
-          <span><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span>
+          <span
+            ><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon"
+          /></span>
           Add a card</span
         >
         <div v-else>
@@ -58,7 +62,7 @@ export default {
       const updateGroup = { ...this.group, cards: [...this.group.cards, { ...this.newCard }] }
       this.$emit('updateGroup', updateGroup)
       this.$refs.textarea.value = ''
-      this.newCard.title = ''
+      this.newCard = this.$store.getters.emptyCard
     },
     onOpenTextarea() {
       this.isEditable = true
@@ -71,8 +75,7 @@ export default {
   },
   created() {
     this.$store.commit({ type: 'setCurrGroup', groupId: this.group.id })
-    const newCard = this.$store.getters.emptyCard
-    this.newCard = newCard
+    this.newCard = this.$store.getters.emptyCard
   },
 }
 </script>

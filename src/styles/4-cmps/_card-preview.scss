@@ -1,61 +1,104 @@
 .card-list {
-    margin: 0 4px;
-    padding: 0px 4px;
-    flex: 1 1 auto;
-    z-index: 1;
-    
-    textarea,
-    input {
-        outline: none;
-        background-color: inherit;
-        width: 100%;
-        border: none;
-        font-size: inherit;
-        font-family: inherit;
+  margin: 0 4px;
+  padding: 0px 4px;
+  flex: 1 1 auto;
+  z-index: 1;
+
+  textarea,
+  input {
+    outline: none;
+    background-color: inherit;
+    width: 100%;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+  }
+
+  .card-preview {
+    box-shadow: 0 1px 0 #091e4240;
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 8px;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: 14px;
+    max-width: 300px;
+    line-height: 20px;
+    cursor: pointer;
+    .card-title {
+      // padding: 2px 8px 2px;
+      // margin-top: 10px ;
+      // margin-bottom: 2px;
     }
 
-    .card-preview {
-        box-shadow: 0 1px 0 #091e4240;
-        background-color: #fff;
-        position: relative;
-        margin-bottom: 8px;
-        border-radius: 3px;
-        font-weight: 400;
-        font-size: 14px;
-        max-width: 300px;
-        line-height: 20px;
-        cursor: pointer;
-        .card-title{
-            padding: 6px 8px 2px;
-        }
-    
     .labels {
-        display: flex;
-        .card-preview-label {
-            height: 8px;
-            width: 40px;
-            padding-inline-end: 3px;
-            padding-block-end: 3px;
-            margin-inline-end: 5px;
-            border-radius: 50px;
-        }
-}
-}
-}
-.card-preview-cover{
-    min-height: 32px;
-    position: relative;
-    
-    .card-color{
-        border-radius: 3px;
-        height: 32px;
+      display: flex;
+      .card-preview-label {
+        height: 8px;
+        width: 40px;
+        padding-inline-end: 3px;
+        padding-block-end: 3px;
+        margin-inline-end: 5px;
+        border-radius: 50px;
+      }
     }
-    .card-img{
-        border-radius: 3px;
-        height: 163.333px;
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
+  }
+}
+.card-preview-cover {
+  min-height: 32px;
+  position: relative;
+
+  .card-color {
+    border-radius: 3px;
+    height: 32px;
+  }
+  .card-img {
+    border-radius: 3px;
+    height: 163.333px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+.card-preview-details {
+  padding: rem(6px);
+  .all-todos-done {
+    background-color: #61bd4f;
+    border-radius: 3px;
+    color: #fff;
+    img {
+      filter: brightness(0) invert(1);
     }
-    
+  }
+  .card-preview-labels {
+    .label-preview {
+      z-index: 20;
+      color: white;
+      font-size: rem(12px);
+      font-weight: 700;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      padding: 0 8px;
+      margin: 0 4px 4px 0;
+      border-radius: rem(4px);
+
+      transition: all 0.4s;
+    }
+    .close-labels {
+      height: 8px;
+      background-color: green;
+      width: 10px;
+    }
+  }
+}
+.card-checklist-count {
+  padding: 2px 2px 2px 2px;
+  margin: 3px 3px 1px 2px;
+  font-size: rem(12px);
+  width: 47.63px;
+
+  img {
+    width: 1rem;
+    margin: 2px;
+  }
 }
