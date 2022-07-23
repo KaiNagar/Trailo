@@ -5,6 +5,7 @@ export const menuModule = {
   state: {
     menu: {
       attachments: false,
+      cover:false
     },
   },
   getters: {

@@ -50,17 +50,13 @@
         </button> -->
       </div>
       <div @click="$emit('openCoverMenu')" v-if="!isCoverOn" class="action-btn-container">
-        <!-- <button>
-          <img
-            src="https://cdn-icons.flaticon.com/png/512/2997/premium/2997909.png?token=exp=1658390555~hmac=9c40e471840c10a015aece690be7f947"
-            alt="Cover icon" />Cover
-        </button> --> 
 
         <button>Cover</button>
       </div>
 
       <menu-attachments @attachFile="attachFile"/>
-
+      <menu-cover :card="card" />
+      
       <div class="action-btn-container">
         <button disabled><span>icon</span> Custom Fields</button>
       </div>
@@ -71,14 +67,17 @@
 <script>
 import appModal from '../app.modal.vue'
 import menuAttachments from './action.attachments.vue'
+import menuCover from '../menu.cover.vue'
 export default {
   name: 'cardActions',
   components: {
     appModal,
-    menuAttachments
+    menuAttachments,
+    menuCover
   },
   props: {
     isCoverOn: Boolean,
+    card:Object
   },
   data() {
     return {

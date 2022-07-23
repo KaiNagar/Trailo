@@ -1,5 +1,7 @@
 <template>
-  
+  <app-modal>
+    <template #title></template>
+  </app-modal>
   <div class="cover-menu">
     <div class="menu-header">
       <h1>Cover</h1>
