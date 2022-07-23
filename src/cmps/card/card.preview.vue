@@ -20,17 +20,23 @@
       <div class="card-title">
         <span>{{ card.title }}</span>
       </div>
+      <div class="flex">
+        <div
+          :class="isTodosDone"
+          v-if="isHavingTodos"
+          class="card-checklist-count flex"
+        >
+          <img
+            src="https://cdn-icons.flaticon.com/png/512/2440/premium/2440972.png?token=exp=1658390307~hmac=3f013390315ecbdaec4f9d1514b8ec42"
+            alt=""
+          />
+          <span :class="isTodosDone">{{ checklistCount }}</span>
+        </div>
 
-      <div
-        :class="isTodosDone"
-        v-if="card.checklists"
-        class="card-checklist-count flex"
-      >
-        <img
-          src="https://cdn-icons.flaticon.com/png/512/2440/premium/2440972.png?token=exp=1658390307~hmac=3f013390315ecbdaec4f9d1514b8ec42"
-          alt=""
-        />
-        <span :class="isTodosDone">{{ checklistCount }}</span>
+        <div class="card-attachments-preview">
+          <img src="" alt="">
+          <span class="card-attachment-count">{{attachmentCount}}</span>
+        </div>
       </div>
     </div>
   </section>
@@ -52,6 +58,8 @@ export default {
   },
   methods: {
     toggleLabels() {
+      console.log(this.card)
+
       const newBoard = { ...this.board }
       this.isLabelsOpen = !this.isLabelsOpen
 
@@ -97,6 +105,9 @@ export default {
         return 'all-todos-done'
       }
     },
+    isHavingTodos() {
+      return this.card.checklists?.some((checklist) => checklist.todos.length)
+    },
     cardLabels() {
       const labels = this.board.labels
       const labelsToShow = labels.filter((label) =>
@@ -107,6 +118,9 @@ export default {
     labelsStatus() {
       return this.isLabelsOpen ? true : false
     },
+    attachmentCount(){
+      return this.card?.attachments?.length
+    }
   },
   created() {
     this.board = this.$store.getters.currBoard

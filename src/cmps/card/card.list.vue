@@ -5,7 +5,6 @@
         @openCard="openCard"
         :card="card"
         @click="openCard(card.id)"
-        :saveGroup="saveGroup"
       />
     </div>
     <router-view></router-view>
@@ -27,12 +26,8 @@ export default {
   },
   methods: {
     openCard(cardId) {
-      // console.log(cardId);
       console.log(this.board._id , this.group.id , cardId);
       this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
-    },
-    saveGroup(card) {
-      console.log(card)
     },
   },
   computed: {},

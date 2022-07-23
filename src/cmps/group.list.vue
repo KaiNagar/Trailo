@@ -5,13 +5,19 @@
     </article>
     <div>
       <div v-if="!showForm" class="new-group group" @click="showForm = true">
-        <span><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span
+        <span
+          ><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span
         ><span class="g-list-title"> Add another list</span>
       </div>
 
       <div v-if="showForm" class="group new-group-form">
         <form @submit.prevent="addGroup">
-          <input type="text" v-model="newGroup.title" ref="input" placeholder="Enter list title" />
+          <input
+            type="text"
+            v-model="newGroup.title"
+            ref="input"
+            placeholder="Enter list title"
+          />
           <button>Add list</button>
         </form>
       </div>
@@ -35,18 +41,14 @@ export default {
     }
   },
   methods: {
-    // addNewGroup() {
-    //   this.newGroup.title = this.$refs.groupTitle.value
-    //   this.groups.push(this.newGroup)
-    //   this.$emit('saveGroups', this.groups)
-    //   this.$refs.groupTitle.value = ''
-    // },
     updateGroup(group) {
       this.$emit('updateGroup', group)
     },
     addGroup() {
       if (this.newGroup.title === '') return
       this.$emit('addGroup', this.newGroup)
+      this.showForm = false
+      this.newGroup = boardService.getEmptyGroup()
     },
   },
   computed: {},
