@@ -49,8 +49,8 @@
             alt="Attachments icon" />Attachment
         </button> -->
       </div>
-      <div v-if="!isCoverOn" class="action-btn-container">
-        <!-- <button>
+      <div @click="$emit('openCoverMenu')" v-if="!isCoverOn" class="action-btn-container">
+        <button>
           <img
             src="https://cdn-icons.flaticon.com/png/512/2997/premium/2997909.png?token=exp=1658390555~hmac=9c40e471840c10a015aece690be7f947"
             alt="Cover icon" />Cover

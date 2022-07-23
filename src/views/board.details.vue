@@ -1,9 +1,8 @@
 <template>
   <section v-if="currBoard">
     <div class="group-page-container" :style="onBoardBgColor">
-      <!-- <div class="group-page-container" > -->
       <board-header />
-      <group-list :groups="currBoard.groups" @addCard="addCard" @addGroup="addGroup" />
+      <group-list :groups="currBoard.groups" @updateGroup="updateGroup" @addGroup="addGroup" />
     </div>
     <!-- <router-view /> -->
   </section>
@@ -28,25 +27,17 @@ export default {
       newBoard.groups = groups
       this.$store.dispatch({ type: 'saveBoard', board: newBoard })
     },
-    addGroup(group) {
-      this.$store.commit({ type: 'addGroup', group })
+    addGroup(newGroup) {
+      const board = { ...this.board, groups: [...this.board.groups, newGroup] }
+      console.log('board', board)
+      this.$store.dispatch({ type: 'saveBoard', board })
+      // this.$store.commit({ type: 'addGroup', group })
     },
-
-    // async saveGroup(updatedGroup) {
-    //   const idx = this.board.groups.findIndex((group) => group.id === updatedGroup.id)
-    //   const board = JSON.parse(JSON.stringify(this.board))
-    //   board.groups.splice(idx, 1, updatedGroup)
-    //   console.log(board.groups[idx].cards);
-    //   await this.$store.dispatch({ type: 'saveBoard', board })
-    // },
-
-    addCard(card) {
-      // this.board.groups
-      //   .find((group) => group.id === this.$store.getters.currGroup.id)
-      //   .cards.push(card)
-      // this.$store.dispatch({ type: 'saveBoard', board: JSON.parse(JSON.stringify(this.board)) })
-      // console.log(card)
-      // this.$store.commit({ type: 'addCard', card })
+    updateGroup(newGroup) {
+      const idx = this.board.groups.findIndex((currGroup) => currGroup.id === newGroup.id)
+      const board = JSON.parse(JSON.stringify(this.board))
+      board.groups.splice(idx, 1, newGroup)
+      this.$store.dispatch({ type: 'saveBoard', board })
     },
   },
   computed: {

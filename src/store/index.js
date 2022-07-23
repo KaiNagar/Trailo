@@ -12,6 +12,7 @@ const store = createStore({
     currBoard: null,
     currGroup: null,
     currCard: null,
+    // isLabelsOpen:null
   },
   getters: {
     boards({ boards }) {
@@ -28,7 +29,8 @@ const store = createStore({
     },
     emptyCard(){
       return boardService.getEmptyCard()
-    }
+    },
+    isLabelsOpen({currBoard}){return currBoard.labelsOpen}
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -56,6 +58,10 @@ const store = createStore({
       group.cards.push(card)
       boardService.save(state.currBoard)
     },
+    setIsLabelsOpen(state,{isLabelsOpen}){
+      // state.isLabelsOpen = isLabelsOpen
+      state.currBoard.labelsOpen = isLabelsOpen
+    }
   },
   actions: {
     async loadBoards({ commit }) {
@@ -69,7 +75,7 @@ const store = createStore({
     },
     async saveBoard({ commit }, { board }) {
       const newBoard = await boardService.save(board)
-      commit({ type: 'setCurrBoard', currBoard: board })
+      commit({ type: 'setCurrBoard', currBoard: newBoard })
     },
   },
   modules: {

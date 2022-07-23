@@ -2,31 +2,34 @@
   <section class="group">
     <div class="g-header">
       <span>{{ group.title }}</span>
-      <div class="g-menu fa"><img src="../styles/svgs/fa/solid/ellipsis.svg" alt="" /></div>
+      <div class="g-menu fa">
+        <img src="../styles/svgs/fa/solid/ellipsis.svg" alt="" />
+      </div>
     </div>
     <div>
-      <card-list :cards="group.cards" :saveGroup="addCard" />
+      <card-list :cards="group.cards" :updateGroup="updateGroup" />
     </div>
 
     <div class="g-footer flex space-between">
       <div class="g-footer-add-area">
         <span @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title">
-          <span><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span>
+          <span
+            ><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon"
+          /></span>
           Add a card</span
         >
         <div v-else>
           <textarea
             name="textarea"
             id="textarea"
-            ref="input"
-            v-model="newCard.title"
+            ref="textarea"
             cols="30"
             rows="30"
             placeholder="Enter a title for this card..."
-            @keydown.enter="addCard"
+            @keydown.enter.prevent="updateGroup"
           ></textarea>
           <div class="add-card">
-            <button @click="addCard">Add card</button
+            <button @click="updateGroup">Add card</button
             ><span @click="onCloseTextarea"
               ><img src="../styles/svgs/fa/solid/x.svg" alt="X"
             /></span>
@@ -53,12 +56,16 @@ export default {
     }
   },
   methods: {
-    addCard() {
-      // this.newCard.groupId = this.group.id
-      this.$emit('addCard', this.newCard)
+    updateGroup() {
+      this.newCard.title = this.$refs.textarea.value
+      if (this.newCard.title === '') return
+      const updateGroup = { ...this.group, cards: [...this.group.cards, { ...this.newCard }] }
+      this.$emit('updateGroup', updateGroup)
+      this.$refs.textarea.value = ''
+      this.newCard = this.$store.getters.emptyCard
     },
     onOpenTextarea() {
-      return (this.isEditable = true)
+      this.isEditable = true
     },
   },
   computed: {
@@ -68,8 +75,7 @@ export default {
   },
   created() {
     this.$store.commit({ type: 'setCurrGroup', groupId: this.group.id })
-    const newCard = this.$store.getters.emptyCard
-    this.newCard = newCard
+    this.newCard = this.$store.getters.emptyCard
   },
 }
 </script>

@@ -1,27 +1,20 @@
 <template>
   <section class="group-list">
     <article v-for="(group, idx) in groups" :key="group.id">
-      <group-preview :group="group" :idx="idx" @addCard="addCard" />
+      <group-preview :group="group" :idx="idx" @updateGroup="updateGroup" />
     </article>
     <div>
-      <input
-        type="text"
-        @click="showAddGroupInput = !showAddGroupInput"
-        class="new-group group"
-        placeholder="+ Add new list"
-      />
-      <form @submit.prevent="addNewGroup">
-        <input
-          class="new-group group"
-          type="text"
-          @keyup.enter="showAddGroupInput = false"
-          @blur="showAddGroupInput = false"
-          v-model="newGroup.title"
-          ref="groupTitle"
-          placeholder="Enter list title"
-        />
-        <button @click="addGroup">Add list</button>
-      </form>
+      <div v-if="!showForm" class="new-group group" @click="showForm = true">
+        <span><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span
+        ><span class="g-list-title"> Add another list</span>
+      </div>
+
+      <div v-if="showForm" class="group new-group-form">
+        <form @submit.prevent="addGroup">
+          <input type="text" v-model="newGroup.title" ref="input" placeholder="Enter list title" />
+          <button>Add list</button>
+        </form>
+      </div>
     </div>
   </section>
 </template>
@@ -37,27 +30,26 @@ export default {
   components: { groupPreview },
   data() {
     return {
-      showAddGroupInput: false,
+      showForm: false,
       newGroup: boardService.getEmptyGroup(),
     }
   },
   methods: {
-    addNewGroup() {
-      this.newGroup.title = this.$refs.groupTitle.value
-      this.groups.push(this.newGroup)
-      this.$emit('saveGroups', this.groups)
-      this.$refs.groupTitle.value = ''
-    },
-    addCard(card) {
-      this.$emit('addCard', card)
+    // addNewGroup() {
+    //   this.newGroup.title = this.$refs.groupTitle.value
+    //   this.groups.push(this.newGroup)
+    //   this.$emit('saveGroups', this.groups)
+    //   this.$refs.groupTitle.value = ''
+    // },
+    updateGroup(group) {
+      this.$emit('updateGroup', group)
     },
     addGroup() {
+      if (this.newGroup.title === '') return
       this.$emit('addGroup', this.newGroup)
     },
   },
   computed: {},
-  created() {
-    console.log('this.groups', this.groups)
-  },
+  created() {},
 }
 </script>
