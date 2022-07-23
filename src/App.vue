@@ -1,8 +1,6 @@
 <template>
-  <section>
     <app-header :boards="boards" />
     <router-view />
-  </section>
 </template>
 
 <script>

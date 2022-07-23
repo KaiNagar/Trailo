@@ -1,5 +1,6 @@
 <template>
   <section class="card-actions flex column">
+
     <div class="suggested-tab">
       <h3>Suggested <span>S</span></h3>
       <div class="action-btn-container">
@@ -20,16 +21,15 @@
 
 
       </div>
-      <div @click="$emit('openLabelsMenu')" class="action-btn-container">
+      <!-- <div @click="$emit('openLabelsMenu')" class="action-btn-container">
         <button><img
             src="../../assets/icons/icons-label.png"
             alt="Labels icon" /> Labels</button>
-      </div>
+      </div> -->
+
       <div @click="$emit('openChecklistMenu')" class="action-btn-container">
         <button>
-          <img
-            src="../../assets/icons/icons-tick-box.png"
-            alt="Checklist icon" />
+          <img src="../../assets/icons/icons-tick-box.png" alt="Checklist icon" />
           Checklist
         </button>
 
@@ -37,9 +37,7 @@
       </div>
       <div class="action-btn-container">
         <button>
-          <img
-            src="../../assets/icons/icons-clock.png"
-            alt="Date icon" />
+          <img src="../../assets/icons/icons-clock.png" alt="Date icon" />
           Dates
         </button>
         <button>Dates</button>
@@ -56,9 +54,12 @@
         <button>Cover</button>
       </div>
 
-      <menu-attachments @attachFile="attachFile"/>
-      <menu-cover :card="card" />
+        
+      <menu-labels :card="card"></menu-labels>
       
+      <menu-attachments @attachFile="attachFile" />
+      <menu-cover :card="card" />
+
       <div class="action-btn-container">
         <button disabled><span>icon</span> Custom Fields</button>
       </div>
@@ -70,16 +71,18 @@
 import appModal from '../app.modal.vue'
 import menuAttachments from './action.attachments.vue'
 import menuCover from '../menu.cover.vue'
+import menuLabels from '../labels.menu.vue'
 export default {
   name: 'cardActions',
   components: {
     appModal,
     menuAttachments,
-    menuCover
+    menuCover,
+    menuLabels
   },
   props: {
     isCoverOn: Boolean,
-    card:Object
+    card: Object
   },
   data() {
     return {
@@ -87,13 +90,13 @@ export default {
     }
   },
   methods: {
-    attachFile(file){
+    attachFile(file) {
       this.$emit('attachFile', file)
     }
   },
   computed: {
-    
-    
+
+
   },
   created() { },
 }
