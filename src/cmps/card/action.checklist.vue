@@ -41,8 +41,13 @@
           v-if="!todo.isEditing"
           >{{ todo.title }}</span
         >
-        <div class="edit-todo-container" v-if="todo.isEditing">
-          <!-- <div v-if="isEditHover" class="screen-edit-todo"></div> -->
+        <div
+          @mouseenter="isEditHover = true"
+          @mouseleave="isEditHover = false"
+          class="edit-todo-container"
+          v-if="todo.isEditing"
+        >
+          <div v-if="isEditHover" class="screen-edit-todo"></div>
 
           <textarea type="text" v-model="todo.title" />
           <div class="flex space-between">
@@ -57,7 +62,7 @@
               >
             </div>
             <todo-actionbar />
-            <button @click.stop="removeTodo(idx)">remove</button>
+            <button class="remove-todo-edit" @click.stop="removeTodo(idx)"><span></span></button>
           </div>
         </div>
         <button
@@ -159,7 +164,6 @@ export default {
       this.$emit('saveChecklist', {
         info: { checklist: this.checklist, idx: this.idx },
       })
-      console.log(todo)
     },
 
     toggleIsDone(todo, idx) {

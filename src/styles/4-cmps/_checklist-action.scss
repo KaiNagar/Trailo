@@ -45,8 +45,7 @@
       top: 1px;
       border: 0;
       cursor: pointer;
-      &:hover{
-
+      &:hover {
       }
     }
     .remove-todo {
@@ -219,6 +218,23 @@
     }
     .save-todo-btn {
       @include save-btns;
+    }
+    .remove-todo-edit {
+      background-color: transparent;
+      border: 0;
+      font-family: trellicons;
+      font-size: 1rem;
+      padding: 0 10px;
+      color: #445470;
+      border-radius: rem(3px);
+      cursor: pointer;
+      span::before {
+        content: '\e952';
+      }
+      &:hover {
+        background-color: #091e4214;
+        color: #172b4d;
+      }
     }
     .cancel-todo-btn {
       @include cancel-btns;

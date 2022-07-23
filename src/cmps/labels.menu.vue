@@ -1,16 +1,17 @@
 <template>
   <section>
-
     <div class="action-btn-container">
-      <button @click="openMenu('labels')"><img src="../assets/icons/icons-label.png" alt="Labels icon" />
-        Labels</button>
-
+      <button @click="openMenu('labels')">
+        <span class="label-icon"></span>
+        Labels
+      </button>
     </div>
-
 
     <app-modal v-if="menu.labels" @closeModal="closeMenu">
       <template #title>Labels</template>
-      <template #part-1> <input type="text" placeholder="Search labels..." /></template>
+      <template #part-1>
+        <input type="text" placeholder="Search labels..."
+      /></template>
 
       <template #part-2>
         <h3>Labels</h3>
@@ -26,19 +27,13 @@
         </div>
       </template>
 
-
       <template #part-3>
         <button>Create a new label</button>
       </template>
     </app-modal>
   </section>
 
-
-
-
-
-
-  <section v-if="menu.labelso">
+  <!-- <section v-if="menu.labelso">
     <div class="labels-menu">
       <header>
         <h3>Labels</h3>
@@ -50,8 +45,13 @@
       <input type="text" placeholder="Search labels..." />
       <main>
         <h3>Labels</h3>
-        <div class="board-label flex space-between align-center" @click="setLabel(label, labelSelected(label.id))"
-          v-for="label in labels" :key="label.id" :style="labelColor(label.color)">
+        <div
+          class="board-label flex space-between align-center"
+          @click="setLabel(label, labelSelected(label.id))"
+          v-for="label in labels"
+          :key="label.id"
+          :style="labelColor(label.color)"
+        >
           {{ label.title }}
           <span v-if="labelSelected(label.id)">V</span>
           <span>E</span>
@@ -63,7 +63,7 @@
         </button>
       </main>
     </div>
-  </section>
+  </section> -->
 </template>
 
 <script>
@@ -74,7 +74,6 @@ export default {
   },
   components: {
     appModal,
-
   },
   data() {
     return {
@@ -88,7 +87,7 @@ export default {
         { title: '', id: this._makeId, hex: '#0079bf' },
         { title: '', id: this._makeId, hex: '#0079bf' },
         { title: '', id: this._makeId, hex: '#ff78cb' },
-      ]
+      ],
     }
   },
   methods: {
@@ -124,21 +123,18 @@ export default {
         text += possible.charAt(Math.floor(Math.random() * possible.length))
       }
       return text
-    }
+    },
   },
   computed: {
     menu() {
       return this.$store.getters.menu
     },
-
   },
   created() {
     // console.log(this.board);
-
   },
-  unmounted() { },
+  unmounted() {},
 }
 </script>
 
-<style>
-</style>
+<style></style>

@@ -4,7 +4,8 @@
 
         <div class="action-btn-container">
 
-            <button @click.stop="openMenu('attachments')"> Attachments
+            <button @click.stop="openMenu('attachments')">
+                <span class="attach-icon"></span> Attachments
                 <app-modal @closeModal="closeMenu" v-if="menu.attachments">
                     <template #title>Attachments</template>
                     <template #part-1>
