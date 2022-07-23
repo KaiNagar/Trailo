@@ -1,42 +1,48 @@
 <template>
-    <div class="action-btn-container">
 
-        <button @click.stop="openMenu('attachments')"> Attachments
-            <app-modal @closeModal="closeMenu" v-if="menu.attachments">
-                <template #title>Attachments</template>
-                <template #attachments>
-                    <ul>
-                        <div class="computer">
-                            <li class="cmp">Computer</li>
-                            <input @change="addFile" type="file">
-                        </div>
-                        <li>Trello</li>
-                        <li>Google Drive</li>
-                        <li>Dropbox</li>
-                        <li>Box</li>
-                        <li>OneDrive</li>
-                    </ul>
-                </template>
+    <section>
 
-                <template #attach-link>
-                    <form @submit.prevent="readLink" class="link-box">
-                        <span class="link">Attach a link</span>
-                        <input v-model="url" type="url">
-                        <button>Attach</button>
-                    </form>
-                </template>
+        <div class="action-btn-container">
 
-                <template #tip>
-                    <p>Tip: You can drag and drop files and links onto cards to upload them.</p>
-                </template>
-            </app-modal>
-        </button>
-    </div>
+            <button @click.stop="openMenu('attachments')"> Attachments
+                <app-modal @closeModal="closeMenu" v-if="menu.attachments">
+                    <template #title>Attachments</template>
+                    <template #part-1>
+                        <ul>
+                            <div class="computer">
+                                <li class="cmp">Computer</li>
+                                <input @change="addFile" type="file">
+                            </div>
+                            <li>Trello</li>
+                            <li>Google Drive</li>
+                            <li>Dropbox</li>
+                            <li>Box</li>
+                            <li>OneDrive</li>
+                        </ul>
+                    </template>
+
+                    <template #part-2>
+                        <form @submit.prevent="readLink" class="link-box">
+                            <span class="link">Attach a link</span>
+                            <input v-model="url" type="url">
+                            <button>Attach</button>
+                        </form>
+                    </template>
+
+                    <template #part-3>
+                        <p>Tip: You can drag and drop files and links onto cards to upload them.</p>
+                    </template>
+                </app-modal>
+            </button>
+        </div>
+    </section>
 </template>
  <script>
 import appModal from '../app.modal.vue'
 export default {
     name: 'ProjectApp',
+    emits: ['attachFile'],
+   
     components: {
         appModal,
     },

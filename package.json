@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "moment": "^2.29.4",
     "sass": "^1.53.0",
     "vue": "^3.2.37",
     "vue-icon": "^2.3.0",

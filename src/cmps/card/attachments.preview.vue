@@ -1,43 +1,76 @@
 <template>
-    <section class="attachments-preview" >
-        <img class="details-icon" src="../../styles/svgs/fa/solid/paperclip.svg">
-        <header>
-            <span>Attachments</span>
-        </header>
+  <section class="attachments-preview">
+    
 
-        <div class="body">
-            <img src="">
-            <!-- <div>{{ file.name }}</div> -->
-            <div> THIS IS URL NAME</div>
-
-            <div class="actions">
-                <span>Added 5 minutes ago - </span>
-                <span class="action">Comment</span>
-                <span class="action">Delete</span>
-                <span class="action">Edit</span>
-            </div>
-            <footer><span class="action">Make cover</span></footer>
+    <div class="attch-preview-body flex">
+      <div
+        :style="{
+          backgroundImage: 'url(' + file.url + ')',
+        }"
+        class="img"
+      ></div>
+      <div>
+        <div class="attach-title">
+          {{ file.title }}.jpg <span class="arrow">↗</span>
         </div>
 
-    </section>
+        <div>
+          <div class="actions">
+            <span>{{createdAtFormat}}</span>
+            <span class="action">Comment</span> -
+            <span class="action">Delete</span> -
+            <span class="action">Edit</span>
+          </div>
+          <span
+            >IMG<span class="action" @click="makeOrRemove(file)">
+              {{ toggleCover }}</span
+            ></span
+          >
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
- <script>
+<script>
+import moment from 'moment'
+
 export default {
-    name: 'ProjectApp',
-    props: {
-        file: Object
+  name: 'ProjectApp',
+  props: {
+    file: Object,
+    card: Object,
+  },
+  components: {},
+  data() {
+    return {}
+  },
+  created() {
+    this.file.createdAt = (Date.now()-1000*60*4)
+  },
+  methods: {
+    makeCover(file) {
+      this.$emit('makeFileCover', file)
     },
-    components: {},
-    data() {
-        return {
-            files: []
-        };
+    makeOrRemove(file) {
+      if (this.card.style.bgImg === this.file.url) {
+        this.card.style = { bgImg: null,bgColor:null,isFull:false}
+      }else this.card.style.bgImg = file.url
+      this.$emit('makeOrRemove', this.card)
     },
-    created() { },
-    methods: {},
-    computed: {},
-    unmounted() { },
-};
+  },
+  computed: {
+    toggleCover() {
+      return this.card.style.bgImg === this.file.url
+        ? 'Remove cover'
+        : 'Make cover'
+    },
+    createdAtFormat(){
+      const byMinutes = Math.floor(this.file.createdAt/ 1000 / 60) % 60 
+      console.log(moment(this.file.createdAt).fromNow());
+      return moment(this.file.createdAt).fromNow()
+    }
+  },
+  unmounted() {},
+}
 </script>
- <style>
- </style>
+<style></style>

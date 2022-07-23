@@ -34,7 +34,6 @@ export default {
     addChecklist() {
       if(!this.newChecklist.title) return
       this.$emit('addChecklist', this.newChecklist)
-      this.newChecklist.title = 'New Checklist'
     },
   },
   computed: {},

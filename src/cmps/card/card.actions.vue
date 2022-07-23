@@ -21,25 +21,27 @@
 
       </div>
       <div @click="$emit('openLabelsMenu')" class="action-btn-container">
-        <button><span>icon</span> Labels</button>
+        <button><img
+            src="../../assets/icons/icons-label.png"
+            alt="Labels icon" /> Labels</button>
       </div>
       <div @click="$emit('openChecklistMenu')" class="action-btn-container">
-        <!-- <button>
+        <button>
           <img
-            src="https://cdn-icons.flaticon.com/png/512/2440/premium/2440972.png?token=exp=1658390307~hmac=3f013390315ecbdaec4f9d1514b8ec42"
+            src="../../assets/icons/icons-tick-box.png"
             alt="Checklist icon" />
           Checklist
-        </button> -->
+        </button>
 
-        <button>Checklist</button>
+        <!-- <button>Checklist</button> -->
       </div>
       <div class="action-btn-container">
-        <!-- <button>
+        <button>
           <img
-            src="https://cdn-icons.flaticon.com/png/512/3114/premium/3114812.png?token=exp=1658390452~hmac=22a95cd407481e545903c33da7835ced"
+            src="../../assets/icons/icons-clock.png"
             alt="Date icon" />
           Dates
-        </button> -->
+        </button>
         <button>Dates</button>
       </div>
       <div class="action-btn-container">
@@ -50,17 +52,13 @@
         </button> -->
       </div>
       <div @click="$emit('openCoverMenu')" v-if="!isCoverOn" class="action-btn-container">
-        <!-- <button>
-          <img
-            src="https://cdn-icons.flaticon.com/png/512/2997/premium/2997909.png?token=exp=1658390555~hmac=9c40e471840c10a015aece690be7f947"
-            alt="Cover icon" />Cover
-        </button> --> 
 
         <button>Cover</button>
       </div>
 
       <menu-attachments @attachFile="attachFile"/>
-
+      <menu-cover :card="card" />
+      
       <div class="action-btn-container">
         <button disabled><span>icon</span> Custom Fields</button>
       </div>
@@ -71,14 +69,17 @@
 <script>
 import appModal from '../app.modal.vue'
 import menuAttachments from './action.attachments.vue'
+import menuCover from '../menu.cover.vue'
 export default {
   name: 'cardActions',
   components: {
     appModal,
-    menuAttachments
+    menuAttachments,
+    menuCover
   },
   props: {
     isCoverOn: Boolean,
+    card:Object
   },
   data() {
     return {
