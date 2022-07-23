@@ -1,22 +1,15 @@
 <template>
+  
   <div class="cover-menu">
     <div class="menu-header">
       <h1>Cover</h1>
       <button @click="this.$emit('closeCoverMenu')">X</button>
     </div>
     <div class="cover-size">
-      <button
-        :class="coverSize(false)"
-        :style="setCoverSizeStyle"
-        @click="setFullCover(false)"
-      >
+      <button :class="coverSize(false)" :style="setCoverSizeStyle" @click="setFullCover(false)">
         half
       </button>
-      <button
-        :class="coverSize(true)"
-        :style="setCoverSizeStyle"
-        @click="setFullCover(true)"
-      >
+      <button :class="coverSize(true)" :style="setCoverSizeStyle" @click="setFullCover(true)">
         full
       </button>
     </div>
@@ -26,40 +19,31 @@
       <button @click="setCoverMode(true)">black</button>
     </div>
     <div class="colors">
-      <button
-        @click="setCoverColor(color)"
-        :style="{ backgroundColor: color }"
-        class="cover-btn-pick-color"
-        v-for="color in colors"
-        :key="color"
-      ></button>
+      <button @click="setCoverColor(color)" :style="{ backgroundColor: color }" class="cover-btn-pick-color"
+        v-for="color in colors" :key="color"></button>
     </div>
     <div v-if="card.attachments" class="cover-attachments">
-      <button
-        :style="{ backgroundImage: 'url(' + attachment.url + ')' }"
-        @click="setCoverImg(attachment.url)"
-        v-for="attachment in card.attachments"
-        :key="attachment.id"
-        class="set-attachment-cover"
-      ></button>
+      <button :style="{ backgroundImage: 'url(' + attachment.url + ')' }" @click="setCoverImg(attachment.url)"
+        v-for="attachment in card.attachments" :key="attachment.id" class="set-attachment-cover"></button>
     </div>
-    <button
-      @click="setCoverImg(url)"
-      :style="{ backgroundImage: 'url(' + url + ')' }"
-      class="cover-btn-pick-img"
-      v-for="url in coverImgsUrls"
-      :key="url"
-    ></button>
+    <button @click="setCoverImg(url)" :style="{ backgroundImage: 'url(' + url + ')' }" class="cover-btn-pick-img"
+      v-for="url in coverImgsUrls" :key="url"></button>
   </div>
 </template>
 
+
+
 <script>
+import appModal from './app.modal.vue'
 export default {
   name: 'Covermenu',
   props: {
     card: Object,
   },
-  components: {},
+  components: {
+    appModal,
+
+  },
   data() {
     return {
       colors: [
@@ -112,6 +96,40 @@ export default {
     coverSize(isFull) {
       return isFull ? 'cover-full' : 'cover-half'
     },
+
+    openMenu(menuAction) {
+      this.$store.commit({ type: 'openMenu', menuAction })
+    },
+    closeMenu() {
+      this.$store.commit({ type: 'closeMenu' })
+    },
+    addFile(ev) {
+      var file = ev.target.files[0]
+      var fReader = new FileReader()
+      fReader.readAsDataURL(file)
+      fReader.onloadend = (event) => {
+        this._makeFileObj(event.target.result)
+        this.closeMenu()
+      }
+    },
+    _makeFileObj(url) {
+      this.file = { id: this._makeId(), title: 'new file', url }
+      this.$emit('attachFile', this.file)
+    },
+    readLink() {
+      const url = this.url
+      this._makeFileObj(url)
+      this.closeMenu()
+    },
+    _makeId(length = 8) {
+      var text = ''
+      var possible =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+      for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length))
+      }
+      return text
+    }
   },
   computed: {
     setCoverSizeStyle() {
@@ -121,7 +139,11 @@ export default {
         return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       }
     },
+
+    menu() {
+      return this.$store.getters.menu
+    }
   },
-  created() {},
+  created() { },
 }
 </script>
