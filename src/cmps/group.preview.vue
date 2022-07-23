@@ -59,7 +59,10 @@ export default {
     updateGroup() {
       this.newCard.title = this.$refs.textarea.value
       if (this.newCard.title === '') return
-      const updateGroup = { ...this.group, cards: [...this.group.cards, { ...this.newCard }] }
+      const updateGroup = {
+        ...this.group,
+        cards: [...this.group.cards, { ...this.newCard }],
+      }
       this.$emit('updateGroup', updateGroup)
       this.$refs.textarea.value = ''
       this.newCard = this.$store.getters.emptyCard

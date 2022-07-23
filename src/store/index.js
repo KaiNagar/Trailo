@@ -3,7 +3,6 @@ import { createStore } from 'vuex'
 import { boardService } from '@/services/board.service.js'
 import { menuModule } from './menu.module'
 
-
 const store = createStore({
   strict: true,
   state: {
@@ -27,10 +26,12 @@ const store = createStore({
     emptyTodo() {
       return boardService.getEmptyTodo()
     },
-    emptyCard(){
+    emptyCard() {
       return boardService.getEmptyCard()
     },
-    isLabelsOpen({currBoard}){return currBoard.labelsOpen}
+    isLabelsOpen({ currBoard }) {
+      return currBoard.labelsOpen
+    },
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -58,10 +59,10 @@ const store = createStore({
       group.cards.push(card)
       boardService.save(state.currBoard)
     },
-    setIsLabelsOpen(state,{isLabelsOpen}){
+    setIsLabelsOpen(state, { isLabelsOpen }) {
       // state.isLabelsOpen = isLabelsOpen
       state.currBoard.labelsOpen = isLabelsOpen
-    }
+    },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -77,10 +78,18 @@ const store = createStore({
       const newBoard = await boardService.save(board)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
     },
+    async updateGroup({ commit }, { board, group }) {
+      const idx = board.groups.findIndex(
+        (currGroup) => currGroup.id === group.id,
+      )
+      board.groups.splice(idx, 1, group)
+      const newBoard = await boardService.save(board)
+      commit({ type: 'setCurrBoard', currBoard: newBoard })
+    },
   },
   modules: {
     menuModule,
-}
+  },
 })
 
 export default store

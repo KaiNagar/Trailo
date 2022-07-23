@@ -23,7 +23,7 @@
 
       <div
         :class="isTodosDone"
-        v-if="card.checklists"
+        v-if="isHavingTodos"
         class="card-checklist-count flex"
       >
         <img
@@ -96,6 +96,9 @@ export default {
       if (allTodos === dones && allTodos !== 0) {
         return 'all-todos-done'
       }
+    },
+    isHavingTodos() {
+      return this.card.checklists?.some((checklist) => checklist.todos.length)
     },
     cardLabels() {
       const labels = this.board.labels
