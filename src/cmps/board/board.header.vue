@@ -1,7 +1,7 @@
 <template>
   <section class="board-header">
-    <h1>this is board header</h1>
-    <board-filter />
+    <h1>{{ currBoard.title }}</h1>
+    <!-- <board-filter /> -->
   </section>
 </template>
 
@@ -12,11 +12,15 @@ export default {
   name: 'boardHeader',
   components: { boardFilter },
   data() {
-    return {}
+    return {
+      currBoard: [],
+    }
   },
   methods: {},
   computed: {},
-  created() {},
+  created() {
+    this.currBoard = this.$store.getters.currBoard
+  },
 }
 </script>
 
