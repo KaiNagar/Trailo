@@ -1,4 +1,5 @@
 <template>
+    
   <app-modal>
     <template #title></template>
   </app-modal>
@@ -8,10 +9,18 @@
       <button @click="this.$emit('closeCoverMenu')">X</button>
     </div>
     <div class="cover-size">
-      <button :class="coverSize(false)" :style="setCoverSizeStyle" @click="setFullCover(false)">
+      <button
+        :class="coverSize(false)"
+        :style="setCoverSizeStyle"
+        @click="setFullCover(false)"
+      >
         half
       </button>
-      <button :class="coverSize(true)" :style="setCoverSizeStyle" @click="setFullCover(true)">
+      <button
+        :class="coverSize(true)"
+        :style="setCoverSizeStyle"
+        @click="setFullCover(true)"
+      >
         full
       </button>
     </div>
@@ -21,19 +30,32 @@
       <button @click="setCoverMode(true)">black</button>
     </div>
     <div class="colors">
-      <button @click="setCoverColor(color)" :style="{ backgroundColor: color }" class="cover-btn-pick-color"
-        v-for="color in colors" :key="color"></button>
+      <button
+        @click="setCoverColor(color)"
+        :style="{ backgroundColor: color }"
+        class="cover-btn-pick-color"
+        v-for="color in colors"
+        :key="color"
+      ></button>
     </div>
     <div v-if="card.attachments" class="cover-attachments">
-      <button :style="{ backgroundImage: 'url(' + attachment.url + ')' }" @click="setCoverImg(attachment.url)"
-        v-for="attachment in card.attachments" :key="attachment.id" class="set-attachment-cover"></button>
+      <button
+        :style="{ backgroundImage: 'url(' + attachment.url + ')' }"
+        @click="setCoverImg(attachment.url)"
+        v-for="attachment in card.attachments"
+        :key="attachment.id"
+        class="set-attachment-cover"
+      ></button>
     </div>
-    <button @click="setCoverImg(url)" :style="{ backgroundImage: 'url(' + url + ')' }" class="cover-btn-pick-img"
-      v-for="url in coverImgsUrls" :key="url"></button>
+    <button
+      @click="setCoverImg(url)"
+      :style="{ backgroundImage: 'url(' + url + ')' }"
+      class="cover-btn-pick-img"
+      v-for="url in coverImgsUrls"
+      :key="url"
+    ></button>
   </div>
 </template>
-
-
 
 <script>
 import appModal from './app.modal.vue'
@@ -44,7 +66,6 @@ export default {
   },
   components: {
     appModal,
-
   },
   data() {
     return {
@@ -131,7 +152,7 @@ export default {
         text += possible.charAt(Math.floor(Math.random() * possible.length))
       }
       return text
-    }
+    },
   },
   computed: {
     setCoverSizeStyle() {
@@ -144,8 +165,8 @@ export default {
 
     menu() {
       return this.$store.getters.menu
-    }
+    },
   },
-  created() { },
+  created() {},
 }
 </script>

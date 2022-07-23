@@ -66,7 +66,7 @@ export default {
     },
     createdAtFormat(){
       const byMinutes = Math.floor(this.file.createdAt/ 1000 / 60) % 60 
-      console.log(moment(this.file.createdAt).fromNow());
+      // console.log(moment(this.file.createdAt).fromNow());
       return moment(this.file.createdAt).fromNow()
     }
   },

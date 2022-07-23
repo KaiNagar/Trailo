@@ -2,7 +2,9 @@
   <div v-if="card" class="card-details-container">
     <section class="card-details flex column">
       <div class="close-details-container flex">
-        <router-link class="close-details-btn flex" :to="'/board/' + board._id">X</router-link>
+        <router-link class="close-details-btn flex" :to="'/board/' + board._id"
+          ><span class="close-icon"></span
+        ></router-link>
       </div>
 
       <cover-menu
@@ -16,10 +18,18 @@
         v-if="isCoverMenuOpen"
       />
 
-      <div v-if="isCoverOn" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
+      <div
+        v-if="isCoverOn"
+        :style="cardCoverStyle"
+        :class="cardCoverClass"
+        class="card-cover"
+      >
         <div class="cover-menu-container">
-          <button class="cover-menu-btn" @click="isCoverMenuOpen = !isCoverMenuOpen">
-            <span>IMG</span> Cover
+          <button
+            class="cover-menu-btn"
+            @click="isCoverMenuOpen = !isCoverMenuOpen"
+          >
+            <span class="cover-icon"></span>Cover
           </button>
         </div>
       </div>
@@ -27,7 +37,7 @@
       <div>
         <div class="flex column">
           <div class="card-header flex">
-            <div class="actionImg flex">img</div>
+            <div class="actionImg flex"><span class="tablet-icon"></span></div>
             <span class="icon-sm icon-member"></span>
             <div class="in-list-txt">
               <h1>{{ card.title }}</h1>
@@ -44,10 +54,15 @@
                   :key="label.id"
                   @click="openLabelsMenu($event)"
                 >
-                  <span :style="labelColor(label.color)">{{ label.title }}</span>
+                  <span :style="labelColor(label.color)">{{
+                    label.title
+                  }}</span>
                 </div>
 
-                <button class="add-label-btn" @click="openLabelsMenu($event)">+</button>
+                <button
+                  class="add-icon"
+                  @click="openLabelsMenu($event)"
+                ></button>
 
                 <labels-menu
                   :labels="board.labels"
@@ -73,7 +88,10 @@
               <div v-if="card.attachments" class="card-attachments-container">
                 <header class="attch-preview-header">
                   <span class="title">Attachments</span>
-                  <img class="details-icon" src="../styles/svgs/fa/solid/paperclip.svg" />
+                  <img
+                    class="details-icon"
+                    src="../styles/svgs/fa/solid/paperclip.svg"
+                  />
                 </header>
 
                 <div
@@ -81,13 +99,20 @@
                   v-for="file in card.attachments"
                   :key="file.id"
                 >
-                  <attachments-preview @makeOrRemove="sendToSave" :file="file" :card="card" />
+                  <attachments-preview
+                    @makeOrRemove="sendToSave"
+                    :file="file"
+                    :card="card"
+                  />
                 </div>
                 <button class="add-attach-btn">Add an attachment</button>
               </div>
 
               <div class="checklist-container">
-                <article v-for="(checklist, idx) in card.checklists" :key="checklist.id">
+                <article
+                  v-for="(checklist, idx) in card.checklists"
+                  :key="checklist.id"
+                >
                   <action-checklist
                     @saveChecklist="saveChecklist"
                     @removeChecklist="removeChecklist"
@@ -207,7 +232,8 @@ export default {
     },
 
     cardCoverStyle() {
-      if (this.card.style.bgImg) return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      if (this.card.style.bgImg)
+        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       else return { backgroundColor: this.card.style.bgColor }
     },
     cardCoverClass() {
@@ -216,8 +242,12 @@ export default {
     },
 
     getCurrPos() {
-      const cardIdx = this.group.cards.findIndex((card) => card.id === this.card.id)
-      const groupIdx = this.board.groups.findIndex((group) => group.id === this.group.id)
+      const cardIdx = this.group.cards.findIndex(
+        (card) => card.id === this.card.id,
+      )
+      const groupIdx = this.board.groups.findIndex(
+        (group) => group.id === this.group.id,
+      )
       return {
         cardIdx,
         groupIdx,
@@ -228,11 +258,15 @@ export default {
     },
     group() {
       const { groupId } = this.$route.params
-      return JSON.parse(JSON.stringify(this.board.groups.find((group) => group.id === groupId)))
+      return JSON.parse(
+        JSON.stringify(this.board.groups.find((group) => group.id === groupId)),
+      )
     },
     card() {
       const { cardId } = this.$route.params
-      return JSON.parse(JSON.stringify(this.group.cards.find((card) => card.id === cardId)))
+      return JSON.parse(
+        JSON.stringify(this.group.cards.find((card) => card.id === cardId)),
+      )
     },
     isCoverActive() {
       if (this.card.style.bgColor || this.card.style.bgImg) return true
