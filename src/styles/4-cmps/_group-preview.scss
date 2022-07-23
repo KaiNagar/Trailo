@@ -41,6 +41,36 @@
     }
 }
 
+.edit-group-title{
+  width: 90%;
+  // background-color: #0066a1;
+  textarea{
+    background-color: #fff;
+    padding-left: 4px;
+    width: 99%;
+    box-shadow: 0 0 0 2px #0079bfc2;
+    border: 1px solid transparent;
+    resize: none;
+    overflow-wrap: break-word;
+    color: #172b4d;
+    min-height: 24px;
+    height: 24px;
+
+  }
+
+  // box-shadow: 0 1px 0 #091e4240;
+  // font-family: Helvetica Neue,sans-serif;
+  // width: 96%;
+  // border-radius: 3px;
+  // font-weight: 400;
+  // font-size: 14px;
+  // overflow: hidden;
+  // max-height: 64px;
+  // padding-bottom: 8px;
+  
+
+}
+
 }
 .g-footer {
   transition-duration: 85ms;
@@ -69,7 +99,7 @@
     }
   }
 }
-  textarea{
+  .g-footer-textarea{
     box-shadow: 0 1px 0 #091e4240;
     color: #172b4d;
     padding: 5px 8px 2px;

@@ -1,7 +1,10 @@
 <template>
   <section class="group">
     <div class="g-header">
-      <span>{{ group.title }}</span>
+      <div @click="onTitleEditable" class="edit-group-title">
+        <span v-if="!isTitleEditable">{{ group.title }}</span>
+        <textarea v-else @blur="updateGroupTitle" ref="textarea" cols="30" rows="10"></textarea>
+      </div>
       <div class="g-menu fa">
         <img src="../assets/icons/icons-more.png" alt="" />
       </div>
@@ -18,7 +21,7 @@
         >
         <div v-else>
           <textarea
-            name="textarea"
+            class="g-footer-textarea"
             id="textarea"
             ref="textarea"
             cols="30"
@@ -50,7 +53,9 @@ export default {
   data() {
     return {
       isEditable: false,
+      isTitleEditable: false,
       newCard: {},
+      groupToEdit: {},
     }
   },
   methods: {
@@ -68,6 +73,15 @@ export default {
     onOpenTextarea() {
       this.isEditable = true
     },
+    onTitleEditable() {
+      this.isTitleEditable = true
+    },
+    updateGroupTitle() {
+      this.groupToEdit.title = this.$refs.textarea.value
+      // const newGroup =
+      console.log(this.groupToEdit)
+      this.$emit('updateGroupTitle', this.groupToEdit)
+    },
   },
   computed: {
     onCloseTextarea() {
@@ -77,6 +91,7 @@ export default {
   created() {
     this.$store.commit({ type: 'setCurrGroup', groupId: this.group.id })
     this.newCard = this.$store.getters.emptyCard
+    this.groupToEdit = this.$store.getters.emptyCard
   },
 }
 </script>

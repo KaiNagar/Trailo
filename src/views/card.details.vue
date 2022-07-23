@@ -5,14 +5,16 @@
         <router-link class="close-details-btn flex" :to="'/board/' + board._id">X</router-link>
       </div>
 
-      <cover-menu :card="card" 
-      @closeCoverMenu="isCoverMenuOpen = false"
-      @setCoverColor="sendToSave"
-      @setFullCover="sendToSave" 
-      @setCoverMode="sendToSave" 
-      @setCoverImg="sendToSave" 
-      @removeCover="sendToSave"
-        v-if="isCoverMenuOpen" />
+      <cover-menu
+        :card="card"
+        @closeCoverMenu="isCoverMenuOpen = false"
+        @setCoverColor="sendToSave"
+        @setFullCover="sendToSave"
+        @setCoverMode="sendToSave"
+        @setCoverImg="sendToSave"
+        @removeCover="sendToSave"
+        v-if="isCoverMenuOpen"
+      />
 
       <div v-if="isCoverOn" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
         <div class="cover-menu-container">
@@ -36,15 +38,16 @@
             <div class="details-column flex column">
               <h3 class="labels-header">Labels</h3>
               <div class="labels-preview flex">
-                <div class="label-btn" v-for="label in labelsToShow" :key="label.id" @click="openLabelsMenu($event)">
-                  <span :style="labelColor(label.color)">{{
-                      label.title
-                  }}</span>
+                <div
+                  class="label-btn"
+                  v-for="label in labelsToShow"
+                  :key="label.id"
+                  @click="openLabelsMenu($event)"
+                >
+                  <span :style="labelColor(label.color)">{{ label.title }}</span>
                 </div>
 
-                <button class="add-label-btn" @click="openLabelsMenu($event)">
-                  +
-                </button>
+                <button class="add-label-btn" @click="openLabelsMenu($event)">+</button>
 
                 <labels-menu
                   :labels="board.labels"
@@ -70,10 +73,7 @@
               <div v-if="card.attachments" class="card-attachments-container">
                 <header class="attch-preview-header">
                   <span class="title">Attachments</span>
-                  <img
-                    class="details-icon"
-                    src="../styles/svgs/fa/solid/paperclip.svg"
-                  />
+                  <img class="details-icon" src="../styles/svgs/fa/solid/paperclip.svg" />
                 </header>
 
                 <div
@@ -81,28 +81,32 @@
                   v-for="file in card.attachments"
                   :key="file.id"
                 >
-                  <attachments-preview
-                    @makeOrRemove="sendToSave"
-                    :file="file"
-                    :card="card"
-                  />
+                  <attachments-preview @makeOrRemove="sendToSave" :file="file" :card="card" />
                 </div>
                 <button class="add-attach-btn">Add an attachment</button>
               </div>
 
               <div class="checklist-container">
                 <article v-for="(checklist, idx) in card.checklists" :key="checklist.id">
-                  <action-checklist @saveChecklist="saveChecklist" @removeChecklist="removeChecklist"
-                    :checklist="checklist" :idx="idx" />
+                  <action-checklist
+                    @saveChecklist="saveChecklist"
+                    @removeChecklist="removeChecklist"
+                    :checklist="checklist"
+                    :idx="idx"
+                  />
                 </article>
               </div>
             </div>
 
             <div>
-              <card-actions :isCoverOn="isCoverOn" @openChecklistMenu="isChecklistMenuOpen = true"
-                @openLabelsMenu="isLabelMenuOpen = true" @openCoverMenu="isCoverMenuOpen = true"
+              <card-actions
+                :isCoverOn="isCoverOn"
+                @openChecklistMenu="isChecklistMenuOpen = true"
+                @openLabelsMenu="isLabelMenuOpen = true"
+                @openCoverMenu="isCoverMenuOpen = true"
                 @attachFile="attachFile"
-                :card="card" />
+                :card="card"
+              />
             </div>
           </div>
         </div>
@@ -131,7 +135,7 @@ export default {
     checklistMenu,
     attachmentsPreview,
     coverMenu,
-    menuAttachments
+    menuAttachments,
   },
   data() {
     return {
@@ -203,8 +207,7 @@ export default {
     },
 
     cardCoverStyle() {
-      if (this.card.style.bgImg)
-        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      if (this.card.style.bgImg) return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       else return { backgroundColor: this.card.style.bgColor }
     },
     cardCoverClass() {
@@ -213,12 +216,8 @@ export default {
     },
 
     getCurrPos() {
-      const cardIdx = this.group.cards.findIndex(
-        (card) => card.id === this.card.id,
-      )
-      const groupIdx = this.board.groups.findIndex(
-        (group) => group.id === this.group.id,
-      )
+      const cardIdx = this.group.cards.findIndex((card) => card.id === this.card.id)
+      const groupIdx = this.board.groups.findIndex((group) => group.id === this.group.id)
       return {
         cardIdx,
         groupIdx,
@@ -229,15 +228,11 @@ export default {
     },
     group() {
       const { groupId } = this.$route.params
-      return JSON.parse(
-        JSON.stringify(this.board.groups.find((group) => group.id === groupId)),
-      )
+      return JSON.parse(JSON.stringify(this.board.groups.find((group) => group.id === groupId)))
     },
     card() {
       const { cardId } = this.$route.params
-      return JSON.parse(
-        JSON.stringify(this.group.cards.find((card) => card.id === cardId)),
-      )
+      return JSON.parse(JSON.stringify(this.group.cards.find((card) => card.id === cardId)))
     },
     isCoverActive() {
       if (this.card.style.bgColor || this.card.style.bgImg) return true
