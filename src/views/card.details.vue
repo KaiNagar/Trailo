@@ -62,7 +62,6 @@
                   +
                 </button>
 
-
                 <labels-menu
                   :labels="board.labels"
                   :card="card"
@@ -72,7 +71,6 @@
                 />
 
                 <!-- <button @click="onChecklist">+Checklist</button> -->
-
 
                 <checklist-menu
                   :getCurrPos="getCurrPos"
@@ -85,7 +83,28 @@
 
               <action-description />
 
-              <attachments-preview />
+              <div v-if="card.attachments" class="card-attachments-container">
+                <header class="attch-preview-header">
+                  <span class="title">Attachments</span>
+                  <img
+                    class="details-icon"
+                    src="../styles/svgs/fa/solid/paperclip.svg"
+                  />
+                </header>
+
+                <div
+                  class="card-attachment-preview"
+                  v-for="file in card.attachments"
+                  :key="file.id"
+                >
+                  <attachments-preview
+                    @makeOrRemove="sendToSave"
+                    :file="file"
+                    :card="card"
+                  />
+                </div>
+                <button class="add-attach-btn">Add an attachment</button>
+              </div>
 
               <div class="checklist-container">
                 <article
@@ -153,7 +172,7 @@ export default {
     labelColor(color) {
       return { backgroundColor: color }
     },
-    
+
     sendToSave(newCard) {
       const pos = this.getCurrPos
       this.board.groups[pos.groupIdx].cards[pos.cardIdx] = newCard
@@ -162,16 +181,21 @@ export default {
         board: { ...this.board },
       })
     },
-    
+
     openLabelsMenu(ev) {
       this.isLabelMenuOpen = true
+    },
+    makeFileCover(file) {
+      this.card.style.bgColor = null
+      this.card.style.bgImg = file.url
+      this.sendToSave(this.card)
     },
 
     addChecklist(newChecklist) {
       if (!this.card.checklists) this.card.checklists = []
       this.card.checklists.push(newChecklist)
       this.isChecklistMenuOpen = false
-      console.log(this.card)
+      this.newChecklist = boardService.getEmptyChecklist()
       this.sendToSave(this.card)
     },
     saveChecklist({ info }) {
@@ -202,6 +226,7 @@ export default {
     labelsToPick() {
       return this.board.labels
     },
+
     cardCoverStyle() {
       if (this.card.style.bgImg)
         return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
@@ -247,13 +272,13 @@ export default {
   created() {
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
-    this.card.attachments = [
-      {
-        id: 'a101',
-        title: 'blabla',
-        url: 'https://images.unsplash.com/photo-1603955389958-8ab4c2025b71?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      },
-    ]
+    // this.card.attachments = [
+    //   {
+    //     id: 'a101',
+    //     title: 'blabla',
+    //     url: 'https://images.unsplash.com/photo-1603955389958-8ab4c2025b71?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   },
+    // ]
   },
 }
 </script>

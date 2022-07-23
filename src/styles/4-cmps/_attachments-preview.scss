@@ -1,18 +1,75 @@
-.attachments-preview{
-    border: 1px black solid;
-    width: 100%;
-    img.details-icon{
-        width: 1.2em;
-        position: relative;
-        right: 50px;
+.attachments-preview {
+  position: relative;
+  width: 100%;
+  margin-bottom: 0 0 25px;
+  margin-top: 5px;
+  
+  .attch-preview-body {
+    margin-bottom: 12px;
+    .img {
+      width: 112px;
+      height: 80px;
+      margin-inline-end: 16px;
+      margin-inline-start: 1px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: rem(4px);
     }
+    .attach-title {
+      font-size: rem(14px);
+      font-weight: 700;
+      margin-top:7px;
+      .arrow {
+        font-weight: 700;
+        font-size: 13px;
+      }
+    }
+    .actions {
+      margin-bottom: 9px;
+      margin-inline-start: 0px;
+    }
+    .action {
+      text-decoration: underline;
+      color: #5e6c84;
+      cursor: pointer;
+    }
+  }
+  
+}
+.card-attachments-container{
+  .attch-preview-header {
+    position: relative;
+    margin-inline-start:1px;
+    padding: 8px 0;
+    
+    img {
+      position: absolute;
+      width: 2rem;
+      padding: 8px;
+      left: -40px;
+      top: 0px;
+    }
+    .title {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      font-weight: 600;
+      line-height: 1.25;
+      font-size: 1rem;
+      color: rgb(23, 43, 77);
 
-    header {
-        position: relative;
-        bottom: 1.5em;
-        font-size: 18px;
-        color: #87857a96;
-        font-weight: 600;
-        
     }
+  }
+  .add-attach-btn {
+    @include cancel-btns;
+    padding: 6.5px 12px;
+    margin-top: 6px;
+    margin-bottom: 17px;
+    margin-inline-start: 1px;
+    color: #172b4d;
+    background-color: #091e420a;
+    &:hover {
+      background-color: #091e4214;
+    }
+  }
 }
