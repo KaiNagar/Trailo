@@ -158,7 +158,7 @@
               </div>
 
               <action-description />
-
+              <attachments-preview/>
               <div class="checklist-container">
                 <article
                   v-for="(checklist, idx) in card.checklists"
@@ -196,6 +196,7 @@ import cardActions from '../cmps/card/card.actions.vue'
 import labelsMenu from '../cmps/labels.menu.vue'
 import checklistMenu from '../cmps/checklist.menu.vue'
 import { boardService } from '../services/board.service'
+import attachmentsPreview from '../cmps/card/attachments.preview.vue'
 
 export default {
   name: 'cardDetails',
@@ -205,6 +206,7 @@ export default {
     labelsMenu,
     actionDescription,
     checklistMenu,
+    attachmentsPreview,
   },
   data() {
     return {

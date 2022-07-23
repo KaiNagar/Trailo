@@ -43,14 +43,16 @@
 
 }
 .g-footer {
+  transition-duration: 85ms;
   line-height: 20px;
   min-height: 38px;
   padding-bottom: 8px;
-
+  
   .g-footer-add-area{
     position: relative;
+    transition-duration: 85ms;
     border-radius: 3px;
-    margin: 6px 0 0px 12px;
+    margin: 6px 0 0px 10px;
     border-radius: 3px;
     .g-footer-title{
       line-height: 20px;
@@ -72,8 +74,7 @@
     color: #172b4d;
     padding: 5px 8px 2px;
     font-family: Helvetica Neue,sans-serif;
-    transition-duration: 85ms;
-    width: 100%;
+    width: 96%;
     border-radius: 3px;
     resize: none;
     font-weight: 400;
