@@ -1,6 +1,31 @@
 .board-header{
     // background-color: aqua;
+    background: #ffffff3d;
     height: auto;
     padding: 8px 4px 4px 12px;
     position: relative;
+    h1{
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 32px;
+        padding: 0 12px;
+        margin: 0 0 12px;
+    }
+}
+.board-header-btn{
+    background-color: #00000014;
+    color: #172b4d;
+    border-radius: 3px;
+    cursor: pointer;
+    float: left;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 4px 4px 0;
+    max-width: 400px;
+    overflow: hidden;
+    padding-left: 32px;
+    position: relative;
+    text-decoration: none;
+    text-overflow: ellipsis;
 }
