@@ -1,7 +1,6 @@
-.board-filter {
-  position: relative;
-  button {
-    @include headers-btns;
+.filter-btn{
+  img{
+    height: 13px;
   }
   .filter-menu {
     right: 1rem;
@@ -26,3 +25,4 @@
     align-items: flex-start;
   }
 }
+

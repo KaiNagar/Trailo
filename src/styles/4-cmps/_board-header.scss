@@ -1,9 +1,21 @@
 .board-header{
-    // background-color: aqua;
     background: #ffffff3d;
+    // background: rgb(255 255 255 / 71%);
     height: auto;
-    padding: 8px 4px 4px 12px;
+    padding: 4px 2px 2px 12px;
     position: relative;
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+    padding-left: 32px;
+    button {
+        padding-left: 32px;
+        @include headers-btns;
+      }
+      img{
+        filter: invert(31%) sepia(19%) saturate(791%) hue-rotate(180deg) brightness(93%) contrast(94%);
+      }
+
     h1{
         font-size: 18px;
         font-weight: 700;
@@ -12,20 +24,27 @@
         margin: 0 0 12px;
     }
 }
-.board-header-btn{
-    background-color: #00000014;
-    color: #172b4d;
-    border-radius: 3px;
-    cursor: pointer;
-    float: left;
-    font-size: 14px;
-    height: 32px;
-    line-height: 32px;
-    margin: 0 4px 4px 0;
-    max-width: 400px;
-    overflow: hidden;
-    padding-left: 32px;
-    position: relative;
-    text-decoration: none;
-    text-overflow: ellipsis;
+.board-header-menu-btn{
+    img{
+        width: 16px;
+    }
+}
+
+.board-header-star{
+    @include headers-btns;
+    line-height: 0;
+    padding: 6px;
+}
+.board-header-span{
+    @include headers-btns;
+    // padding-right: 12px;
+    span{
+        padding: 0px 12px 0px 12px;
+    }
+
+}
+.board-header-right-btn{
+    display: flex;
+    position: absolute;
+    right: 20px;
 }

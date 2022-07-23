@@ -12,7 +12,7 @@ export default {
   components: { appHeader },
   data() {
     return {
-      boards: null
+      boards: null,
     }
   },
   methods: {},

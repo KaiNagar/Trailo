@@ -67,18 +67,23 @@
 
 // Buttons
 @mixin headers-btns {
-  background-color: transparent;
   border: 0;
   border-radius: rem(3px);
   font-size: rem(14px);
-  padding: 6px 12px 6px 10px;
+  text-align: center;
   margin-inline-end: rem(4px);
   margin-bottom: rem(8px);
   color: rgb(23, 43, 77);
-  line-height: 32px;
   cursor: pointer;
+  background-color: #00000014;
+    
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 4px 4px 0;
+    max-width: 400px;
   &:hover{
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #00000029;
 
   }
 }

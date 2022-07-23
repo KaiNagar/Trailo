@@ -1,6 +1,8 @@
 <template>
   <section class="board-filter">
-    <button @click="filterOpen = !filterOpen" class="filter-btn">Filter</button>
+    <button @click="filterOpen = !filterOpen" class="filter-btn">
+      <span><img src="../../assets/icons/icons-bars.png" alt="" /></span> Filter
+    </button>
     <div class="filter-menu" v-if="filterOpen">
       <div class="filter-menu-header flex">
         <span class="filter-title">Filter</span>
@@ -38,9 +40,7 @@
                 id="cards-assigned"
                 type="checkbox"
               />
-              <label for="cards-assigned"
-                ><span>img</span> Cards assign to me</label
-              >
+              <label for="cards-assigned"><span>img</span> Cards assign to me</label>
             </div>
             <!-- <div class="select-member">
               <input id="select-member" type="checkbox" />
@@ -77,9 +77,7 @@
                   id="due-next-day"
                   type="checkbox"
                 />
-                <label for="due-next-day"
-                  ><span>img</span> Due in the next day</label
-                >
+                <label for="due-next-day"><span>img</span> Due in the next day</label>
               </div>
               <div v-if="moreOptions" class="more-date-options">
                 <div class="due-next-week flex">
@@ -89,9 +87,7 @@
                     id="due-next-week"
                     type="checkbox"
                   />
-                  <label for="due-next-week"
-                    ><span>img</span> Due in the next week</label
-                  >
+                  <label for="due-next-week"><span>img</span> Due in the next week</label>
                 </div>
                 <div class="due-next-month flex">
                   <input
@@ -100,9 +96,7 @@
                     id="due-next-month"
                     type="checkbox"
                   />
-                  <label for="due-next-month">
-                    <span>img</span> Due in the next month</label
-                  >
+                  <label for="due-next-month"> <span>img</span> Due in the next month</label>
                 </div>
                 <div class="completed flex">
                   <input
@@ -165,9 +159,9 @@ export default {
     }
   },
   methods: {
-    setFilterBy(){
-      console.log(this.filterBy);
-    }
+    setFilterBy() {
+      console.log(this.filterBy)
+    },
   },
   computed: {},
   created() {},

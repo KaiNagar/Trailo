@@ -1,10 +1,25 @@
 <template>
   <section class="board-header">
-    <h1>{{ currBoard.title }}</h1>
-    <!-- <board-filter /> -->
-    <button>
-      <img src="../../assets/icons/icons-star.png" alt="" />
-    </button>
+    <button>Board</button>
+    <h1 class="board-header-title">{{ currBoard.title }}</h1>
+
+    <span class="board-header-star">
+      <img src="../../assets/icons/icon-star.png" alt="" />
+    </span>
+
+    <div class="board-header-span">
+      <span>{{ currBoard.title }}</span>
+    </div>
+    <span class="board-header-span"
+      ><span><img src="../../assets/icons/icons-lock.png" alt="" /></span> Private</span
+    >
+
+    <div class="board-header-right-btn">
+      <board-filter />
+      <button class="board-header-menu-btn">
+        <span><img src="../../assets/icons/icons-more.png" alt="" /></span> Show menu
+      </button>
+    </div>
   </section>
 </template>
 
@@ -27,4 +42,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>

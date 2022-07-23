@@ -3,7 +3,7 @@
     <div class="g-header">
       <span>{{ group.title }}</span>
       <div class="g-menu fa">
-        <img src="../styles/svgs/fa/solid/ellipsis.svg" alt="" />
+        <img src="../assets/icons/icons-more.png" alt="" />
       </div>
     </div>
     <div>
@@ -13,9 +13,7 @@
     <div class="g-footer flex space-between">
       <div class="g-footer-add-area">
         <span @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title">
-          <span
-            ><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon"
-          /></span>
+          <span><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span>
           Add a card</span
         >
         <div v-else>

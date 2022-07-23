@@ -8,6 +8,7 @@
   "dependencies": {
     "sass": "^1.53.0",
     "vue": "^3.2.37",
+    "vue-icon": "^2.3.0",
     "vue-router": "^4.1.2",
     "vuex": "^4.0.2"
   },
