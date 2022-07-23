@@ -55,6 +55,9 @@
     color: #172b4d;
     min-height: 24px;
     height: 24px;
+    &:focus{
+      outline:none;
+    }
 
   }
 

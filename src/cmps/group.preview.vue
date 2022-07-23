@@ -1,10 +1,18 @@
 <template>
-  <section class="group">
+  <section v-if="group" class="group">
     <div class="g-header">
-      <div @click="onTitleEditable" class="edit-group-title">
-        <span v-if="!isTitleEditable">{{ group.title }}</span>
-        <textarea v-else @blur="updateGroupTitle" ref="textarea" cols="30" rows="10"></textarea>
-      </div>
+      <!-- <div @click="onTitleEditable" class="edit-group-title"> -->
+      <span>{{ group.title }}</span>
+      <!-- <textarea
+          v-else
+          @blur="updateGroupTitle"
+          @keydown.enter.prevent="updateGroupTitle"
+          ref="contentTextArea"
+          id="contentTextArea"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div> -->
       <div class="g-menu fa">
         <img src="../assets/icons/icons-more.png" alt="" />
       </div>
@@ -19,7 +27,7 @@
           <span><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span>
           Add a card</span
         >
-        <div v-else>
+        <div v-if="isEditable">
           <textarea
             class="g-footer-textarea"
             id="textarea"
@@ -72,22 +80,27 @@ export default {
     },
     onOpenTextarea() {
       this.isEditable = true
+      setTimeout(() => {
+        this.$refs.textarea.focus()
+      })
+    },
+    onCloseTextarea() {
+      this.isEditable = false
     },
     onTitleEditable() {
       this.isTitleEditable = true
+      setTimeout(() => {
+        this.$refs.contentTextArea.focus()
+      })
     },
     updateGroupTitle() {
-      this.groupToEdit.title = this.$refs.textarea.value
-      // const newGroup =
-      console.log(this.groupToEdit)
-      this.$emit('updateGroupTitle', this.groupToEdit)
+      this.isTitleEditable = false
+      if (this.group.title === '') return
+      this.group.title = this.$refs.contentTextArea.value
+      this.$emit('updateGroupTitle', this.group)
     },
   },
-  computed: {
-    onCloseTextarea() {
-      return (this.isEditable = false)
-    },
-  },
+  computed: {},
   created() {
     this.$store.commit({ type: 'setCurrGroup', groupId: this.group.id })
     this.newCard = this.$store.getters.emptyCard
