@@ -59,7 +59,7 @@
         <button>Cover</button>
       </div>
 
-      <menu-attachments />
+      <menu-attachments @attachFile="attachFile"/>
 
       <div class="action-btn-container">
         <button disabled><span>icon</span> Custom Fields</button>
@@ -86,7 +86,9 @@ export default {
     }
   },
   methods: {
-   
+    attachFile(file){
+      this.$emit('attachFile', file)
+    }
   },
   computed: {
     

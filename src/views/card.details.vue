@@ -180,6 +180,7 @@
                 @openChecklistMenu="isChecklistMenuOpen = true"
                 @openLabelsMenu="isLabelMenuOpen = true"
                 @openCoverMenu="isCoverMenuOpen = true"
+                @attachFile="attachFile"
               />
             </div>
           </div>
@@ -325,6 +326,12 @@ export default {
     coverSize(isFull) {
       return isFull ? 'cover-full' : 'cover-half'
     },
+    attachFile(file){
+      if(!this.card.attachments) this.card.attachments = []
+      this.card.attachments.push(file)
+      console.log(this.card.attachments);
+      this.sendToSave(this.card)
+    }
   },
   computed: {
     labelsToShow() {

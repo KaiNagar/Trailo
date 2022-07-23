@@ -45,7 +45,7 @@ export default {
             url: null,
             file: {}
 
-            
+
         };
     },
     created() {
@@ -58,29 +58,23 @@ export default {
         closeMenu() {
             this.$store.commit({ type: 'closeMenu' })
         },
-        async addFile(ev) {
-            let formData = new FormData();
-            let photo = ev.target.files[0]
-
-            formData.append("photo", photo);
-
-            const ctrl = new AbortController()    // timeout
-            setTimeout(() => ctrl.abort(), 5000);
-
-            try {
-                let imgUrl = await fetch('/upload/image',
-                    { method: "POST", body: formData, signal: ctrl.signal });
-                console.log('HTTP response code:', imgUrl.url);
-                this.file = { id: this._makeId(), title: 'new file', url: imgUrl.url }
-                console.log(this.file);
-            } catch (e) {
-                console.log('Huston we have problem...:', e);
+        addFile(ev) {
+            var file = ev.target.files[0]
+            var fReader = new FileReader()
+            fReader.readAsDataURL(file)
+            fReader.onloadend = (event) => {
+                this._makeFileObj(event.target.result)
+                this.closeMenu()
             }
-            this.closeMenu()
         },
-        readLink(ev) {
-            const url = this.url
+        _makeFileObj(url) {
             this.file = { id: this._makeId(), title: 'new file', url }
+            this.$emit('attachFile', this.file)
+        },
+        readLink() {
+            const url = this.url
+            this._makeFileObj(url)
+            this.closeMenu()
         },
         _makeId(length = 8) {
             var text = ''
