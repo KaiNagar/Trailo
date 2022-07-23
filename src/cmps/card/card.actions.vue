@@ -50,16 +50,16 @@
         </button> -->
       </div>
       <div @click="$emit('openCoverMenu')" v-if="!isCoverOn" class="action-btn-container">
-        <button>
+        <!-- <button>
           <img
             src="https://cdn-icons.flaticon.com/png/512/2997/premium/2997909.png?token=exp=1658390555~hmac=9c40e471840c10a015aece690be7f947"
             alt="Cover icon" />Cover
-        </button> -->
+        </button> --> 
 
         <button>Cover</button>
       </div>
 
-      <menu-attachments />
+      <menu-attachments @attachFile="attachFile"/>
 
       <div class="action-btn-container">
         <button disabled><span>icon</span> Custom Fields</button>
@@ -86,7 +86,9 @@ export default {
     }
   },
   methods: {
-   
+    attachFile(file){
+      this.$emit('attachFile', file)
+    }
   },
   computed: {
     

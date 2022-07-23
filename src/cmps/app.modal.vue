@@ -16,6 +16,18 @@
         </section>
     </section>
 
+    <section class="cover">
+        <slot name="title"></slot>
+        <slot name="size"></slot>
+        <slot name="remove"></slot>
+        <slot name="remove"></slot>
+        <slot name="text-color"></slot>
+        <slot name="colors"></slot>
+        <slot name="attachments"></slot>
+        <slot name="upload"></slot>
+        <slot name="tip"></slot>
+    </section>
+
 
 </template>
  <script>

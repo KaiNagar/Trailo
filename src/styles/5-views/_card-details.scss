@@ -11,14 +11,15 @@
   width: 100%;
   z-index: 20;
   .card-details {
+    z-index: 10;
     min-height: 600px;
     margin-bottom: rem(145px);
     padding-bottom: 1rem;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     min-height: 600px;
-    width: 768px;
-    max-width: 95vw;
+    max-width: 768px;
+    // max-width: 95vw;
     width: 100%;
     position: relative;
     background-color: #f4f5f7;
