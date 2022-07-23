@@ -49,11 +49,13 @@
   position: relative;
 
   .card-color {
-    border-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
     height: 32px;
   }
   .card-img {
-    border-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
     height: 163.333px;
     background-size: cover;
     background-position: center center;
