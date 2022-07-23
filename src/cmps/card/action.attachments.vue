@@ -6,7 +6,10 @@
                 <template #title>Attachments</template>
                 <template #attachments>
                     <ul>
-                        <li>Computer</li>
+                        <div class="computer">
+                            <li class="cmp">Computer</li>
+                            <input @change="addFile" type="file">
+                        </div>
                         <li>Trello</li>
                         <li>Google Drive</li>
                         <li>Dropbox</li>
@@ -38,7 +41,11 @@ export default {
         appModal,
     },
     data() {
-        return {};
+        return {
+            file: {
+                computer: null
+            }
+        };
     },
     created() {
 
@@ -49,6 +56,10 @@ export default {
         },
         closeMenu() {
             this.$store.commit({ type: 'closeMenu' })
+        },
+        addFile(ev) {
+            if (!ev.target.files.length) return
+            const attachedFile = ev.target.files[0]
         }
     },
     computed: {
