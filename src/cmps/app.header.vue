@@ -10,6 +10,8 @@
       </router-link>
     </div>
 
+
+
     <div class="actions">
 
       <div class="action">
@@ -43,7 +45,6 @@
           </template>
         </app-modal>
       </div>
-
 
       <div class="action">
         <button @click="openModal('templates')" class="btn">Templates <img class="arrow" src="../styles/svgs/arrow.svg"

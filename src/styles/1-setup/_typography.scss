@@ -9,7 +9,7 @@
 
 @font-face{
     font-family: trellicons;
-    src: url(/src/assets/fonts/trellicons.ttf)
+    src: url('@/styles/fonts/trellicons.ttf')
 }
 
 @font-face{
@@ -21,4 +21,5 @@
     font-family: fa-regular;
     src: url('../fonts/fa/fa-regular-400.ttf');
 }
+
 

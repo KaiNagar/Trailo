@@ -25,6 +25,9 @@
     max-width: 300px;
     line-height: 20px;
     cursor: pointer;
+    &:hover{
+      background-color: #f2f1f1de;
+    }
     .card-title {
       // padding: 2px 8px 2px;
       // margin-top: 10px ;
