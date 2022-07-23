@@ -1,12 +1,9 @@
 <template>
   <section>
-    <div
-      :style="{ left: LabelsMenuX }"
-      class="labels-menu"
-    >
+    <div class="labels-menu">
       <header>
         <h3>Labels</h3>
-        <button class="close-label-menu" @click="isLabelMenuOpen = false">
+        <button class="close-label-menu" @click="$emit('closeLabelsMenu')">
           X
         </button>
       </header>
@@ -17,7 +14,7 @@
         <div
           class="board-label flex space-between align-center"
           @click="setLabel(label, labelSelected(label.id))"
-          v-for="label in board.labels"
+          v-for="label in labels"
           :key="label.id"
           :style="labelColor(label.color)"
         >
@@ -37,18 +34,32 @@
 
 <script>
 export default {
-  props: [],
+  props: {
+    labels: Array,
+    card: Object,
+  },
   components: {},
   data() {
     return {}
   },
   methods: {
+    labelColor(color) {
+      return { backgroundColor: color }
+    },
     labelSelected(labelId) {
       if (this.card.labelIds.includes(labelId)) return true
       else return false
     },
-    setLabe(newLabel, isActive) {
-      this.$emit('setLabel', (newLabel, isActive))
+    setLabel(newLabel, active) {
+      if (!active) {
+        this.card.labelIds.push(newLabel.id)
+      } else {
+        const labelIdx = this.card.labelIds.findIndex(
+          (id) => newLabel.id === id,
+        )
+        this.card.labelIds.splice(labelIdx, 1)
+      }
+      this.$emit('setLabel', this.card)
     },
   },
   computed: {},
