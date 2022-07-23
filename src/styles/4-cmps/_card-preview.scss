@@ -94,13 +94,28 @@
   }
 }
 .card-checklist-count {
-  padding: 2px 2px 2px 2px;
-  margin: 3px 3px 1px 2px;
-  font-size: rem(12px);
-  width: 47.63px;
-
+  padding-inline-end: 6px;
+  // height: 24px;
+  
+  
+  span{
+    font-size: rem(12px);
+    margin-inline-start:2px ;  
+  }
   img {
+    padding: 1px;
     width: 1rem;
-    margin: 2px;
+    height: 1rem;
+    margin: 4px 3px;
+  }
+}
+.card-attachment-count{
+  margin-inline-end: 10px;
+  span{
+    margin-inline-start:2px ;
+    font-size: rem(12px);
+  }
+  img{
+    margin: 8px 3px;
   }
 }

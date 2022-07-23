@@ -14,28 +14,25 @@
           v-for="label in cardLabels"
           :style="{ backgroundColor: label.color }"
           :key="label.id"
-          >{{ this.board.labelsOpen ? label.title : '' }}</span
+          >{{ isBoardLabelsOpen ? label.title : '' }}</span
         >
       </div>
       <div class="card-title">
         <span>{{ card.title }}</span>
       </div>
-      <div class="flex">
+
+      <div v-if="haveActions" class="flex align-center">
+        <div class="card-attachment-count flex align-center" v-if="isHavingAttachments">
+          <img src="../../assets/icons/icons-attach.png" alt="" />
+          <span >{{ attachmentCount }}</span>
+        </div>
         <div
           :class="isTodosDone"
           v-if="isHavingTodos"
-          class="card-checklist-count flex"
+          class="card-checklist-count flex align-center"
         >
-          <img
-            src="https://cdn-icons.flaticon.com/png/512/2440/premium/2440972.png?token=exp=1658390307~hmac=3f013390315ecbdaec4f9d1514b8ec42"
-            alt=""
-          />
+          <img src="../../assets/icons/icons-tick-box.png" alt="" />
           <span :class="isTodosDone">{{ checklistCount }}</span>
-        </div>
-
-        <div class="card-attachments-preview">
-          <img src="" alt="">
-          <span class="card-attachment-count">{{attachmentCount}}</span>
         </div>
       </div>
     </div>
@@ -58,7 +55,6 @@ export default {
   },
   methods: {
     toggleLabels() {
-      console.log(this.card)
 
       const newBoard = { ...this.board }
       this.isLabelsOpen = !this.isLabelsOpen
@@ -108,6 +104,9 @@ export default {
     isHavingTodos() {
       return this.card.checklists?.some((checklist) => checklist.todos.length)
     },
+    isHavingAttachments() {
+      return this.card.attachments?.length
+    },
     cardLabels() {
       const labels = this.board.labels
       const labelsToShow = labels.filter((label) =>
@@ -118,9 +117,15 @@ export default {
     labelsStatus() {
       return this.isLabelsOpen ? true : false
     },
-    attachmentCount(){
+    attachmentCount() {
       return this.card?.attachments?.length
-    }
+    },
+    haveActions() {
+      const card = this.card
+      if (!this.isHavingTodos && !this.isHavingAttachments) return false
+      return true
+    },
+    isBoardLabelsOpen(){return this.isLabelsOpen}
   },
   created() {
     this.board = this.$store.getters.currBoard
