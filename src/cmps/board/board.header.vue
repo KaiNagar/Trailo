@@ -2,9 +2,9 @@
   <section class="board-header">
     <h1>{{ currBoard.title }}</h1>
     <!-- <board-filter /> -->
-    <!-- <button>
-      <img src="../../assets/icons8-star-16.png" alt="" />
-    </button> -->
+    <button>
+      <img src="../../assets/icons/icons-star.png" alt="" />
+    </button>
   </section>
 </template>
 
