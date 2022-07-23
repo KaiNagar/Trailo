@@ -16,6 +16,7 @@ import boardHeader from '@/cmps/board/board.header.vue'
 import groupList from '@/cmps/group.list.vue'
 import { boardService } from '../services/board.service'
 
+
 export default {
   name: 'boardApp',
   components: { boardHeader, groupList },

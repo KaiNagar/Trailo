@@ -20,40 +20,28 @@
             </section>
         </section>
 
-        <!-- <slot name="cover" class="cover">
-            <slot name="title"></slot>
-            <slot name="size"></slot>
-            <slot name="remove"></slot>
-            <slot name="remove"></slot>
-            <slot name="text-color"></slot>
-            <slot name="colors"></slot>
-            <slot name="attachments"></slot>
-            <slot name="upload"></slot>
-            <slot name="tip"></slot>
-        </slot> -->
 
     </section>
 
 </template>
- <script>
+<script>
 export default {
-    name: 'appModal',
-    props: {
-        newItems: Array,
-    },
-    components: {},
-    data() {
-        return {
-            items: null
-        };
-    },
-    created() {
-        this.items = this.newItems
-    },
-    methods: {},
-    computed: {},
-    unmounted() { },
-};
+  name: 'appModal',
+  props: {
+    newItems: Array,
+  },
+  components: {},
+  data() {
+    return {
+      items: null,
+    }
+  },
+  created() {
+    this.items = this.newItems
+  },
+  methods: {},
+  computed: {},
+  unmounted() {},
+}
 </script>
- <style>
- </style>
+<style></style>

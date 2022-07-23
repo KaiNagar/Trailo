@@ -13,7 +13,7 @@
       @setCoverImg="sendToSave" 
       @removeCover="sendToSave"
         v-if="isCoverMenuOpen" />
-        
+
       <div v-if="isCoverOn" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
         <div class="cover-menu-container">
           <button class="cover-menu-btn" @click="isCoverMenuOpen = !isCoverMenuOpen">
@@ -46,20 +46,49 @@
                   +
                 </button>
 
-
-                <labels-menu :labels="board.labels" :card="card" @setLabel="sendToSave"
-                  @closeLabelsMenu="isLabelMenuOpen = false" v-if="isLabelMenuOpen" />
+                <labels-menu
+                  :labels="board.labels"
+                  :card="card"
+                  @setLabel="sendToSave"
+                  @closeLabelsMenu="isLabelMenuOpen = false"
+                  v-if="isLabelMenuOpen"
+                />
 
                 <!-- <button @click="onChecklist">+Checklist</button> -->
 
-
-                <checklist-menu :getCurrPos="getCurrPos" :newChecklist="newChecklist" @addChecklist="addChecklist"
-                  @closeChecklistMenu="isChecklistMenuOpen = false" v-if="isChecklistMenuOpen" />
+                <checklist-menu
+                  :getCurrPos="getCurrPos"
+                  :newChecklist="newChecklist"
+                  @addChecklist="addChecklist"
+                  @closeChecklistMenu="isChecklistMenuOpen = false"
+                  v-if="isChecklistMenuOpen"
+                />
               </div>
 
               <action-description />
-              <!-- <menu-attachments @attachFile="attachFile" /> -->
-              <attachments-preview />
+
+              <div v-if="card.attachments" class="card-attachments-container">
+                <header class="attch-preview-header">
+                  <span class="title">Attachments</span>
+                  <img
+                    class="details-icon"
+                    src="../styles/svgs/fa/solid/paperclip.svg"
+                  />
+                </header>
+
+                <div
+                  class="card-attachment-preview"
+                  v-for="file in card.attachments"
+                  :key="file.id"
+                >
+                  <attachments-preview
+                    @makeOrRemove="sendToSave"
+                    :file="file"
+                    :card="card"
+                  />
+                </div>
+                <button class="add-attach-btn">Add an attachment</button>
+              </div>
 
               <div class="checklist-container">
                 <article v-for="(checklist, idx) in card.checklists" :key="checklist.id">
@@ -131,12 +160,17 @@ export default {
     openLabelsMenu(ev) {
       this.isLabelMenuOpen = true
     },
+    makeFileCover(file) {
+      this.card.style.bgColor = null
+      this.card.style.bgImg = file.url
+      this.sendToSave(this.card)
+    },
 
     addChecklist(newChecklist) {
       if (!this.card.checklists) this.card.checklists = []
       this.card.checklists.push(newChecklist)
       this.isChecklistMenuOpen = false
-      console.log(this.card)
+      this.newChecklist = boardService.getEmptyChecklist()
       this.sendToSave(this.card)
     },
     saveChecklist({ info }) {
@@ -167,6 +201,7 @@ export default {
     labelsToPick() {
       return this.board.labels
     },
+
     cardCoverStyle() {
       if (this.card.style.bgImg)
         return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
@@ -212,13 +247,13 @@ export default {
   created() {
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
-    this.card.attachments = [
-      {
-        id: 'a101',
-        title: 'blabla',
-        url: 'https://images.unsplash.com/photo-1603955389958-8ab4c2025b71?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      },
-    ]
+    // this.card.attachments = [
+    //   {
+    //     id: 'a101',
+    //     title: 'blabla',
+    //     url: 'https://images.unsplash.com/photo-1603955389958-8ab4c2025b71?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    //   },
+    // ]
   },
 }
 </script>
