@@ -22,9 +22,12 @@
       background-color: #e2e4e9;
     }
   }
-  .desc-textarea{
+  .desc-textarea {
     position: relative;
-    .edit-desc-btn{
+    h3 {
+      color: #445470;
+    }
+    .edit-desc-btn {
       @include headers-btns;
       background-color: #091e420a;
       padding: 0px 11.7px;
@@ -32,11 +35,10 @@
       top: 7px;
       left: 92px;
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-      Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif; ;
-      &:hover{
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      &:hover {
         background-color: rgba(9, 30, 66, 0.0784313725);
       }
-      
     }
   }
   .desc-body {
@@ -70,13 +72,14 @@
     }
   }
 
-  img {
+  .description-icon {
     width: 17px;
     height: 14px;
     position: absolute;
-    left: rem(-32px);
-    top: rem(28px);
+    left: rem(-35px);
+    top: rem(26px);
     color: #42526e;
+    font-size: rem(24px);
   }
   .text-area-actions {
     margin-top: 0.25rem;
@@ -90,6 +93,5 @@
     .formatting-desc-btn {
       @include cancel-btns;
     }
-    
   }
 }

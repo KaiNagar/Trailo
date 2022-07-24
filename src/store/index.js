@@ -11,7 +11,7 @@ const store = createStore({
     currBoard: null,
     currGroup: null,
     currCard: null,
-    // isLabelsOpen:null
+    isLabelsOpen:null
   },
   getters: {
     boards({ boards }) {
