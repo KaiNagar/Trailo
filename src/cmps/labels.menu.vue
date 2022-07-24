@@ -34,7 +34,13 @@
       </template>
 
       <template #part-3>
-        <button>Create a new label</button>
+        <button @click="isCreateLabel = true" v-if="!isCreateLabel">
+          Create a new label
+        </button>
+        <div v-if="isCreateLabel">
+          <input v-model="newLabel.title" type="text" />
+          <button @click="createLabel">Create</button>
+        </div>
       </template>
     </app-modal>
   </section>
@@ -73,6 +79,7 @@
 </template>
 
 <script>
+import { boardService } from '../services/board.service'
 import appModal from './app.modal.vue'
 export default {
   props: {
@@ -84,6 +91,8 @@ export default {
   data() {
     return {
       board: null,
+      isCreateLabel: false,
+      newLabel: boardService.getEmptyLabel(),
       // labels: [
       //   { title: '', id: this._makeId, hex: '#61bd4f' },
       //   { title: '', id: this._makeId, hex: '#ff9f1a' },
@@ -117,7 +126,11 @@ export default {
       this.$emit('setLabel', this.card)
     },
     createLabel() {
-      console.log('newLabel')
+      this.newLabel.color = '#055a8c'
+      this.isCreateLabel = false
+      this.board.labels.push(this.newLabel)
+      this.$emit('createLabel', this.newLabel)
+      this.newLabel = boardService.getEmptyLabel()
     },
     openMenu(menuAction) {
       this.$store.commit({ type: 'openMenu', menuAction })
