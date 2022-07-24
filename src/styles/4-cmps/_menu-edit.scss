@@ -1,0 +1,31 @@
+.edit-menu {
+  header {
+    font-size: 12px;
+  }
+
+  input.name {
+    border: 1px rgba(23, 43, 77, 0.281) solid;
+    line-height: 2em;
+    background-color: #fafbfc;
+    padding-left: 1em;
+    margin-bottom: .7em;
+    // height: 100px;
+  }
+  button {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    background-color: #0079bf;
+    border: none;
+    outline: none;
+    // padding: 0 1em;
+    padding: 0;
+    width: 93px;
+    height: 2em;
+    border-radius: 3px;
+    line-height: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    margin-bottom: 0.7em;
+  }
+}
