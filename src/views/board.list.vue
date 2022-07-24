@@ -12,11 +12,18 @@
           >
             <h1>{{ board.title }}</h1>
           </li>
-          <li class="board-list-new-board">
-            <p @click="openMenu('create')">Create new board</p>
-            <!-- <button @click="saveBoard">Add board</button> -->
+          <li class="board-list-new-board" @click="openMenu('create')">
+            <p>Create new board</p>
             <app-modal v-if="menu.create" @closeModal="closeMenu">
-              <template #title> in preparation </template>
+              <template #title>Create new board</template>
+              <template #part-3>
+                <p>Board title</p>
+                <input id="title" type="text" v-model="newBoard.title" />
+                <p>Board title if required</p>
+              </template>
+              <template #part-6>
+                <button @click="saveBoard">Create</button>
+              </template>
             </app-modal>
           </li>
         </ul>
@@ -46,7 +53,7 @@ export default {
       return { backgroundImage: 'url(' + bgCover + ')' }
     },
     saveBoard() {
-      console.log('hi')
+      this.$router.push('/board/' + this.newBoard._id)
       this.$store.dispatch({ type: 'saveBoard', board: this.newBoard })
     },
     openMenu(menuAction) {

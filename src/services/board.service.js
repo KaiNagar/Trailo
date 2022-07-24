@@ -123,7 +123,7 @@ function getEmptyBoard() {
     title: '',
     createdAt: Date.now() - 100000,
     labelsOpen:false,
-    bgCover:null,
+    bgCover:'https://images.unsplash.com/photo-1658279165324-454de0ee3da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
     createdBy: {},
     labels:[],
     members:[],
