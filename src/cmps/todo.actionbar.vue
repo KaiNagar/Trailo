@@ -1,20 +1,20 @@
 <template>
   <div class="todo-action-bar flex">
     <button disabled class="assign-item-btn">
-      <span>O</span><a href=""> Assign</a>
+      <span class="assign-icon"></span><a href=""> Assign</a>
     </button>
     <button disabled class="duedate-item-btn">
       <img
-        src="https://cdn-icons.flaticon.com/png/512/3114/premium/3114812.png?token=exp=1658390452~hmac=22a95cd407481e545903c33da7835ced"
+        src="../assets/icons/icons-clock.png"
         alt="Duedate icon"
       />
       <a href=""> Due date</a>
     </button>
     <button disabled class="mention-item-btn">
-      <span>O</span>
+      <span class="emoji-icon"></span>
     </button>
     <button disabled class="emoji-item-btn">
-      <span>O</span>
+      <span class="mention-icon"></span>
     </button>
   </div>
 </template>

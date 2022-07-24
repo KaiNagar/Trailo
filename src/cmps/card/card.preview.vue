@@ -8,31 +8,55 @@
     </div>
     <div class="card-preview-details">
       <div class="card-preview-labels">
-        <span
-          class="label-preview"
-          @click.stop="toggleLabels"
-          v-for="label in cardLabels"
-          :style="{ backgroundColor: label.color }"
-          :key="label.id"
-          >{{ isBoardLabelsOpen ? label.title : '' }}</span
-        >
+        <div v-if="this.$store.getters.isLabelsOpen">
+          <span
+            @mouseenter="isLabelHover = true"
+            @mouseleave="isLabelHover = false"
+            class="label-preview-show"
+            @click.stop="toggleLabels"
+            v-for="label in cardLabels"
+            :style="{
+              backgroundColor: isLabelHover
+                ? LightenDarkenColor(label.color)
+                : label.color,
+            }"
+            :key="label.id"
+            >{{ label.title }}</span
+          >
+        </div>
+
+        <div v-else class="flex">
+          <span
+            @mouseenter="isLabelHover = true"
+            @mouseleave="isLabelHover = false"
+            class="label-preview-hide"
+            @click.stop="toggleLabels"
+            v-for="label in cardLabels"
+            :style="{
+              backgroundColor: isLabelHover
+                ? LightenDarkenColor(label.color)
+                : label.color,
+            }"
+            :key="label.id"
+          ></span>
+        </div>
       </div>
       <div class="card-title">
         <span>{{ card.title }}</span>
       </div>
 
       <div v-if="haveActions" class="flex align-center">
-        <div class="card-attachment-count flex align-center" v-if="isHavingAttachments">
-          <img src="../../assets/icons/icons-attach.png" alt="" />
-          <span >{{ attachmentCount }}</span>
+        <div class="card-attachment-count flex" v-if="isHavingAttachments">
+          <span class="attach-icon"></span>
+          <span class="count">{{ attachmentCount }}</span>
         </div>
         <div
           :class="isTodosDone"
           v-if="isHavingTodos"
           class="card-checklist-count flex align-center"
         >
-          <img src="../../assets/icons/icons-tick-box.png" alt="" />
-          <span :class="isTodosDone">{{ checklistCount }}</span>
+          <span class="checklist-icon"></span>
+          <span class="count" :class="isTodosDone">{{ checklistCount }}</span>
         </div>
       </div>
     </div>
@@ -51,11 +75,11 @@ export default {
       board: null,
       group: null,
       isLabelsOpen: this.$store.getters.isLabelsOpen,
+      isLabelHover: false,
     }
   },
   methods: {
     toggleLabels() {
-
       const newBoard = { ...this.board }
       this.isLabelsOpen = !this.isLabelsOpen
 
@@ -66,6 +90,18 @@ export default {
 
       newBoard.labelsOpen = this.isLabelsOpen
       this.$store.dispatch({ type: 'saveBoard', board: newBoard })
+    },
+    LightenDarkenColor(col, amt = -30) {
+      col = col.split('#')[1]
+      col = parseInt(col, 16)
+      return (
+        '#' +
+        (
+          ((col & 0x0000ff) + amt) |
+          ((((col >> 8) & 0x00ff) + amt) << 8) |
+          (((col >> 16) + amt) << 16)
+        ).toString(16)
+      )
     },
   },
   computed: {
@@ -107,6 +143,9 @@ export default {
     isHavingAttachments() {
       return this.card.attachments?.length
     },
+    toggleLabelsPreview() {
+      return this.isLabelsOpen
+    },
     cardLabels() {
       const labels = this.board.labels
       const labelsToShow = labels.filter((label) =>
@@ -122,10 +161,12 @@ export default {
     },
     haveActions() {
       const card = this.card
-      if (!this.isHavingTodos && !this.isHavingAttachments) return false
-      return true
+      if (card.checklists || this.isHavingAttachments) return true
+      return false
     },
-    isBoardLabelsOpen(){return this.isLabelsOpen}
+    isBoardLabelsOpen() {
+      return this.isLabelsOpen
+    },
   },
   created() {
     this.board = this.$store.getters.currBoard

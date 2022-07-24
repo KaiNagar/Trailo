@@ -1,15 +1,35 @@
 <template>
   <section class="card-checklist">
-    <div class="checklist-icon">
-      <img
-        src="https://cdn-icons.flaticon.com/png/512/2440/premium/2440972.png?token=exp=1658390307~hmac=3f013390315ecbdaec4f9d1514b8ec42"
-        alt="Checklist icon"
-      />
+    <div class="checklist-icon-container">
+      <span class="checklist-icon"></span>
     </div>
     <div class="checklist-action">
       <div class="checklist-header">
-        <h3>{{ checklist.title }}</h3>
-        <button class="delete-checklist-btn" @click="removeChecklist(idx)">
+        <h3 @click="isEditTitle = true" v-if="!isEditTitle">
+          {{ checklist.title }}
+        </h3>
+        <div v-else>
+          <textarea
+            ref="editTitle"
+            :value="checklist.title"
+            class="edit-title-textarea"
+            type="text"
+          />
+          <div class="flex align-center">
+            <button class="save-edit-title" @click="updateChecklist">
+              Save
+            </button>
+            <span
+              class="close-edit-title close-icon"
+              @click="isEditTitle = false"
+            ></span>
+          </div>
+        </div>
+        <button
+          class="delete-checklist-btn"
+          v-if="!isEditTitle"
+          @click="removeChecklist(idx)"
+        >
           Delete
         </button>
       </div>
@@ -48,30 +68,36 @@
           v-if="todo.isEditing"
         >
           <div v-if="isEditHover" class="screen-edit-todo"></div>
-
           <textarea type="text" v-model="todo.title" />
-          <div class="flex space-between">
-            <div>
+          <div class="flex align-center space-between">
+            <div class="flex align-center">
               <button @click="saveTodo(todo, idx)" class="save-todo-btn">
                 Save
               </button>
-              <span
-                @click.stop="closeEditTodo(todo, idx)"
-                class="cancel-todo-btn"
-                >X</span
-              >
+              <div class="close-icon-container">
+                <span
+                  @click.stop="closeEditTodo(todo, idx)"
+                  class="close-icon"
+                ></span>
+              </div>
             </div>
-            <todo-actionbar />
-            <button class="remove-todo-edit" @click.stop="removeTodo(idx)"><span></span></button>
+            <div class="flex">
+              <todo-actionbar />
+              <button
+                class="remove-todo-edit menu-icon"
+                @click.stop="removeTodo(idx)"
+              >
+                <span class="close-icon"></span>
+              </button>
+            </div>
           </div>
         </div>
+
         <button
           v-if="!todo.isEditing"
-          class="remove-todo"
+          class="remove-todo close-icon"
           @click.stop="removeTodo(idx)"
-        >
-          X
-        </button>
+        ></button>
       </div>
 
       <form class="add-item-form">
@@ -120,6 +146,7 @@ export default {
       isAdding: false,
       showTodoActions: false,
       isEditHover: false,
+      isEditTitle: false,
     }
   },
   methods: {
@@ -134,6 +161,14 @@ export default {
       this.newItem = this.$store.getters.emptyTodo
       this.$refs.newItemInput.value = ''
     },
+    updateChecklist() {
+      const newTitle = this.$refs.editTitle.value
+      this.checklist.title = newTitle
+      this.$emit('saveChecklist', {
+        info: { checklist: this.checklist, idx: this.idx },
+      })
+      this.isEditTitle = false
+    },
     removeChecklist(idx) {
       this.$emit('removeChecklist', idx)
     },
@@ -144,6 +179,7 @@ export default {
       })
     },
     saveTodo(todo, idx) {
+      console.log(todo.isEditing)
       this.checklist.todos.splice(idx, 1, todo)
       this.closeEditTodo(todo, idx)
       this.$emit('saveChecklist', {
@@ -159,11 +195,13 @@ export default {
       })
     },
     closeEditTodo(todo, idx) {
+      console.log(todo.isEditing)
       todo.isEditing = false
       this.checklist.todos[idx].isEditing = false
       this.$emit('saveChecklist', {
         info: { checklist: this.checklist, idx: this.idx },
       })
+      console.log(todo.isEditing)
     },
 
     toggleIsDone(todo, idx) {

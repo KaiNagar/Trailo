@@ -1,5 +1,9 @@
 <template>
-  <div v-if="card" class="card-details-container">
+  <div
+    
+    v-if="card"
+    class="card-details-container"
+  >
     <section class="card-details flex column">
       <div class="close-details-container flex">
         <router-link class="close-details-btn flex" :to="'/board/' + board._id"
@@ -38,7 +42,6 @@
         <div class="flex column">
           <div class="card-header flex">
             <div class="actionImg flex"><span class="tablet-icon"></span></div>
-            <span class="icon-sm icon-member"></span>
             <div class="in-list-txt">
               <h1>{{ card.title }}</h1>
               in list <span class="group-title">{{ group.title }}</span>
@@ -88,10 +91,7 @@
               <div v-if="card.attachments" class="card-attachments-container">
                 <header class="attch-preview-header">
                   <span class="title">Attachments</span>
-                  <img
-                    class="details-icon"
-                    src="../styles/svgs/fa/solid/paperclip.svg"
-                  />
+                  <span class="attach-icon"></span>
                 </header>
 
                 <div

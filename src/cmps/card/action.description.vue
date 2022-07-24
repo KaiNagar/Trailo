@@ -1,10 +1,7 @@
 <template>
   <section class="card-description">
     <div>
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/54/54586.png"
-        alt="Description icon"
-      />
+      <span class="description-icon"></span>
     </div>
     <div class="desc-textarea">
       <h2>Description</h2>

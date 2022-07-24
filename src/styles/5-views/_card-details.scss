@@ -74,6 +74,9 @@
         width: rem(20px);
         height: rem(20px);
         text-decoration: none;
+        .close-icon{
+          font-size: rem(24px)
+        }
       }
     }
     .card-header {
@@ -94,13 +97,16 @@
         margin-bottom: rem(6px);
       }
       .actionImg {
-        width: 32px;
-        height: 32px;
+        // width: 32px;
+        // height: 32px;
         position: absolute;
-        top: rem(5px);
-        left: -2.5rem;
+        top: rem(9px);
+        left: rem(-36px);
         justify-content: center;
         align-items: center;
+        .tablet-icon{
+          font-size: 24px;
+        }
       }
 
       .group-title {

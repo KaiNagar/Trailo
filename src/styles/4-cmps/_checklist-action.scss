@@ -1,14 +1,38 @@
 .card-checklist {
   position: relative;
-  .checklist-icon {
-    img {
+  .checklist-icon-container {
+    .checklist-icon {
       width: 23px;
       position: absolute;
-      top: rem(-1px);
-      left: rem(-33px);
+      top: rem(3px);
+      left: rem(-35px);
+      font-size: rem(24px);
     }
   }
   .checklist-action {
+    .edit-title-textarea {
+      position: relative;
+      background-color: #eaecf0;
+      border: 1px solid #091e4221;
+      height: 54px;
+      overflow: hidden;
+      overflow-wrap: break-word;
+      resize: none;
+      border-radius: rem(3px);
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: rem(-3px)
+    }
+    .save-edit-title{
+      @include save-btns;
+      margin-inline-start: 1px;
+    }
+    .close-edit-title{
+      font-size: rem(24px);
+      padding: 6px 4px;
+    }
     h3 {
       margin-top: rem(35px);
       margin-inline-start: rem(1px);
@@ -61,14 +85,14 @@
       text-decoration: line-through;
       color: #5e6c84;
     }
-    // .screen-preview-todo{
-    //   position: absolute;
-    //   // background-color: green;
-    //   bottom: 0;
-    //   right: 0;
-    //   width: 100%;
-    //   height: 100%;
-    // }
+    .screen-preview-todo {
+      position: absolute;
+      // background-color: green;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
 
     .todo-checkbox {
       position: absolute;
@@ -128,7 +152,7 @@
     margin: rem(14px) 0;
     .progress-count {
       position: absolute;
-      top: rem(-4px);
+      top: rem(-6px);
       left: rem(-31px);
       font-size: rem(11px);
     }
@@ -189,6 +213,13 @@
       overflow-wrap: break-word;
     }
   }
+  .close-icon-container {
+    display: flex;
+    padding: 6px 4px;
+    .close-icon {
+      font-size: rem(24px);
+    }
+  }
   .adding-items-actions {
     margin-top: 0.25rem;
     margin-inline-start: 2px;
@@ -218,6 +249,7 @@
     }
     .save-todo-btn {
       @include save-btns;
+      z-index: 10;
     }
     .remove-todo-edit {
       background-color: transparent;
@@ -228,15 +260,12 @@
       color: #445470;
       border-radius: rem(3px);
       cursor: pointer;
-      span::before {
-        content: '\e952';
-      }
       &:hover {
         background-color: #091e4214;
         color: #172b4d;
       }
     }
-    .cancel-todo-btn {
+    .close-icon-btn {
       @include cancel-btns;
       z-index: 10;
     }
@@ -249,6 +278,7 @@
       width: 107.5%;
       height: 122%;
       pointer-events: none;
+      z-index: -1;
     }
   }
 }
