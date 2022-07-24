@@ -6,6 +6,7 @@ export const boardService = {
   save,
   remove,
   getEmptyBoard,
+  getEmptyLabel,
   getCardById,
   getEmptyTodo,
   getEmptyCard,
@@ -80,6 +81,13 @@ function getEmptyTodo() {
     id: _makeId(),
     title: '',
     isDone: false,
+  }
+}
+function getEmptyLabel(){
+  return {
+    id:_makeId(),
+    color:null,
+    title:''
   }
 }
 

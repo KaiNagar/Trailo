@@ -31,8 +31,10 @@
 
       <menu-labels
         @setLabel="$emit('setLabel', $event)"
+        @createLabel="$emit('createLabel',$event)"
         :card="card"
       ></menu-labels>
+      
       <menu-attachments @attachFile="attachFile" />
 
       <menu-cover
