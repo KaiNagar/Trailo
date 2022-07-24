@@ -70,8 +70,30 @@
 
 }
 
-.card-preview{
-    &.modal{
+
+
+.card-attachments-container{
+    position: relative;
+    .attachments-btn{
+        opacity: 0;
+        position: absolute;
+        bottom: 1em;
+    }
+    .modal{
+        text-align: start;
+        .button.close{
+            cursor: pointer;
+        }
+        // display: none;
         border: 1px red solid;
+        top: 0;
+        left: 0;
+        // bottom: 0;
+        ul{
+            li{
+                cursor: pointer;
+                margin-bottom: .5em;
+            }
+        }
     }
 }

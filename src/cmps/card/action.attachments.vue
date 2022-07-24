@@ -2,7 +2,7 @@
 
     <section>
 
-        <div class="action-btn-container">
+        <div class="action-btn-container attachments-btn">
 
             <button @click.stop="openMenu('attachments')">
                 <span class="attach-icon"></span> Attachments

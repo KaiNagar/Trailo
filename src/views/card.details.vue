@@ -57,7 +57,7 @@
                     @updateAttachment="updateAttachment" @removeAttachment="removeAttachment" />
                 </div>
                 <!--  -->
-                <button class="add-attach-btn">Add an attachment
+                <button @click="isMenu = false" class="add-attach-btn">Add an attachment
                   <menu-attachments class="from-details" />
                 </button>
                 <!--  -->
