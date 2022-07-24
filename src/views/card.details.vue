@@ -1,38 +1,18 @@
 <template>
-  <div
-    
-    v-if="card"
-    class="card-details-container"
-  >
+  <div v-if="card" class="card-details-container">
     <section class="card-details flex column">
       <div class="close-details-container flex">
-        <router-link class="close-details-btn flex" :to="'/board/' + board._id"
-          ><span class="close-icon"></span
-        ></router-link>
+        <router-link class="close-details-btn flex" :to="'/board/' + board._id"><span class="close-icon"></span>
+        </router-link>
       </div>
 
-      <cover-menu
-        :card="card"
-        @closeCoverMenu="isCoverMenuOpen = false"
-        @setCoverColor="sendToSave"
-        @setFullCover="sendToSave"
-        @setCoverMode="sendToSave"
-        @setCoverImg="sendToSave"
-        @removeCover="sendToSave"
-        v-if="isCoverMenuOpen"
-      />
+      <cover-menu :card="card" @closeCoverMenu="isCoverMenuOpen = false" @setCoverColor="sendToSave"
+        @setFullCover="sendToSave" @setCoverMode="sendToSave" @setCoverImg="sendToSave" @removeCover="sendToSave"
+        v-if="isCoverMenuOpen" />
 
-      <div
-        v-if="isCoverOn"
-        :style="cardCoverStyle"
-        :class="cardCoverClass"
-        class="card-cover"
-      >
+      <div v-if="isCoverOn" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
         <div class="cover-menu-container">
-          <button
-            class="cover-menu-btn"
-            @click="isCoverMenuOpen = !isCoverMenuOpen"
-          >
+          <button class="cover-menu-btn" @click="isCoverMenuOpen = !isCoverMenuOpen">
             <span class="cover-icon"></span>Cover
           </button>
         </div>
@@ -51,39 +31,21 @@
             <div class="details-column flex column">
               <h3 class="labels-header">Labels</h3>
               <div class="labels-preview flex">
-                <div
-                  class="label-btn"
-                  v-for="label in labelsToShow"
-                  :key="label.id"
-                  @click="openLabelsMenu($event)"
-                >
+                <div class="label-btn" v-for="label in labelsToShow" :key="label.id" @click="openLabelsMenu($event)">
                   <span :style="labelColor(label.color)">{{
-                    label.title
+                      label.title
                   }}</span>
                 </div>
 
-                <button
-                  class="add-icon"
-                  @click="openLabelsMenu($event)"
-                ></button>
+                <button class="add-icon" @click="openLabelsMenu($event)"></button>
 
-                <labels-menu
-                  :labels="board.labels"
-                  :card="card"
-                  @setLabel="sendToSave"
-                  @closeLabelsMenu="isLabelMenuOpen = false"
-                  v-if="isLabelMenuOpen"
-                />
+                <labels-menu :labels="board.labels" :card="card" @setLabel="sendToSave"
+                  @closeLabelsMenu="isLabelMenuOpen = false" v-if="isLabelMenuOpen" />
 
                 <!-- <button @click="onChecklist">+Checklist</button> -->
 
-                <checklist-menu
-                  :getCurrPos="getCurrPos"
-                  :newChecklist="newChecklist"
-                  @addChecklist="addChecklist"
-                  @closeChecklistMenu="isChecklistMenuOpen = false"
-                  v-if="isChecklistMenuOpen"
-                />
+                <checklist-menu :getCurrPos="getCurrPos" :newChecklist="newChecklist" @addChecklist="addChecklist"
+                  @closeChecklistMenu="isChecklistMenuOpen = false" v-if="isChecklistMenuOpen" />
               </div>
 
               <action-description />
@@ -94,44 +56,25 @@
                   <span class="attach-icon"></span>
                 </header>
 
-                <div
-                  class="card-attachment-preview"
-                  v-for="file in card.attachments"
-                  :key="file.id"
-                >
-                  <attachments-preview
-                    @makeOrRemove="sendToSave"
-                    :file="file"
-                    :card="card"
-                  />
+                <div class="card-attachment-preview" v-for="file in card.attachments" :key="file.id">
+                  <attachments-preview @makeOrRemove="sendToSave" :file="file" :card="card" />
                 </div>
                 <button class="add-attach-btn">Add an attachment</button>
               </div>
 
               <div class="checklist-container">
-                <article
-                  v-for="(checklist, idx) in card.checklists"
-                  :key="checklist.id"
-                >
-                  <action-checklist
-                    @saveChecklist="saveChecklist"
-                    @removeChecklist="removeChecklist"
-                    :checklist="checklist"
-                    :idx="idx"
-                  />
+                <article v-for="(checklist, idx) in card.checklists" :key="checklist.id">
+                  <action-checklist @saveChecklist="saveChecklist" @removeChecklist="removeChecklist"
+                    :checklist="checklist" :idx="idx" />
                 </article>
               </div>
             </div>
 
             <div>
-              <card-actions
-                :isCoverOn="isCoverOn"
-                @openChecklistMenu="isChecklistMenuOpen = true"
-                @openLabelsMenu="isLabelMenuOpen = true"
-                @openCoverMenu="isCoverMenuOpen = true"
-                @attachFile="attachFile"
-                :card="card"
-              />
+              <card-actions :isCoverOn="isCoverOn" @openChecklistMenu="isChecklistMenuOpen = true"
+                @openLabelsMenu="isLabelMenuOpen = true" @openCoverMenu="isCoverMenuOpen = true"
+                @attachFile="attachFile" :card="card" @setCoverColor="sendToSave" @setFullCover="sendToSave"
+                @setCoverMode="sendToSave" @setCoverImg="sendToSave" @removeCover="sendToSave" />
             </div>
           </div>
         </div>
@@ -216,6 +159,7 @@ export default {
       console.log(this.card.attachments)
       this.sendToSave(this.card)
     },
+
   },
   computed: {
     labelsToShow() {
@@ -276,6 +220,8 @@ export default {
   created() {
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
+    this.$store.commit({ type: 'setEditMenu', attachments: this.card.attachments })
+
     // this.card.attachments = [
     //   {
     //     id: 'a101',
