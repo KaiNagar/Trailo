@@ -43,53 +43,50 @@
 
 .edit-group-title{
   width: 90%;
-  // background-color: #0066a1;
+  display: flex;
   textarea{
+    font-family: Helvetica Neue,sans-serif;
     background-color: #fff;
-    padding-left: 4px;
+    padding: 1px 7px;
     width: 99%;
     box-shadow: 0 0 0 2px #0079bfc2;
-    border: 1px solid transparent;
+    font-weight: 600;
+    overflow: hidden;
+    border: 2px solid transparent;
     resize: none;
     overflow-wrap: break-word;
     color: #172b4d;
-    min-height: 24px;
-    height: 24px;
     &:focus{
       outline:none;
+
     }
 
   }
-
-  // box-shadow: 0 1px 0 #091e4240;
-  // font-family: Helvetica Neue,sans-serif;
-  // width: 96%;
-  // border-radius: 3px;
-  // font-weight: 400;
-  // font-size: 14px;
-  // overflow: hidden;
-  // max-height: 64px;
-  // padding-bottom: 8px;
   
-
 }
 
 }
 .g-footer {
   transition-duration: 85ms;
   line-height: 20px;
-  min-height: 38px;
+  min-height: 36px;
   padding-bottom: 8px;
+  text-align: center;
+  align-items: center;
   
   .g-footer-add-area{
     position: relative;
     transition-duration: 85ms;
     border-radius: 3px;
-    margin: 6px 0 0px 10px;
+    margin: 1px 0 0px 10px;
     border-radius: 3px;
-    .g-footer-title{
+    .g-footer-title-icon{
       line-height: 20px;
       color: #6b778c;
+      padding-left: 9px;
+      .g-footer-title{
+        padding: 3px;
+      }
       &:hover{
         background-color: #091e4214;
       }
@@ -107,7 +104,7 @@
     color: #172b4d;
     padding: 5px 8px 2px;
     font-family: Helvetica Neue,sans-serif;
-    width: 96%;
+    width: 98%;
     border-radius: 3px;
     resize: none;
     font-weight: 400;
@@ -115,8 +112,8 @@
     overflow-wrap: break-word;
     border: none;
     overflow: hidden;
+    margin: 0px 6px 1px -7px;
     max-height: 64px;
-    padding-bottom: 8px;
     
     &:focus-visible{
         outline: none;
@@ -129,7 +126,6 @@
       font-family: Helvetica Neue,sans-serif;
       
       button{
-        margin:6px 0px;
         background-color: #0079bf;
         padding: 8px 13px;
         border-radius: 3px;
@@ -141,13 +137,13 @@
           background-color: #0066a1;
         }
       }
-      span{
-        img{
+      .close-icon-span{
       width: 12px;
-      margin: 7px 13px -3px;
+      margin: 3px 8px -3px;
       cursor: pointer;
-      filter: invert(14%) sepia(16%) saturate(3613%) hue-rotate(187deg) brightness(91%) contrast(94%);
-        }
+      .close-icon{
+        font-size: 1.5rem;
+      }
 
       }
     }

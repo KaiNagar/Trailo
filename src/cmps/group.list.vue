@@ -16,8 +16,16 @@
 
       <div v-if="showForm" class="group new-group-form">
         <form @submit.prevent="addGroup">
-          <input type="text" v-model="newGroup.title" ref="input" placeholder="Enter list title" />
-          <button>Add list</button>
+          <input
+            type="text"
+            v-model="newGroup.title"
+            ref="input"
+            placeholder="Enter list title..."
+          />
+          <div class="g-add-list">
+            <button>Add list</button>
+            <span class="close-icon" @click="showForm = false"></span>
+          </div>
         </form>
       </div>
     </div>
@@ -44,6 +52,7 @@ export default {
       this.$emit('updateGroup', group)
     },
     addGroup() {
+      console.log('this.newGroup', this.newGroup)
       if (this.newGroup.title === '') return
       this.$emit('addGroup', this.newGroup)
       this.showForm = false

@@ -1,18 +1,17 @@
 <template>
   <section v-if="group" class="group">
-    <div class="g-header">
-      <!-- <div @click="onTitleEditable" class="edit-group-title"> -->
-      <span>{{ group.title }}</span>
-      <!-- <textarea
-          v-else
-          @blur="updateGroupTitle"
+    <div @click="onTitleEditable" class="g-header">
+      <div class="edit-group-title">
+        <span v-if="!isTitleEditable">{{ group.title }}</span>
+        <textarea
+          v-if="isTitleEditable"
           @keydown.enter.prevent="updateGroupTitle"
+          @blur="isTitleEditable = false"
+          v-model="group.title"
           ref="contentTextArea"
           id="contentTextArea"
-          cols="30"
-          rows="10"
         ></textarea>
-      </div> -->
+      </div>
       <div class="g-menu fa">
         <img src="../assets/icons/icons-more.png" alt="" />
       </div>
@@ -23,15 +22,15 @@
 
     <div class="g-footer flex space-between">
       <div class="g-footer-add-area">
-        <span @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title">
-          <span><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span>
-          Add a card</span
-        >
+        <div @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title-icon">
+          <span class="add-icon"></span><span class="g-footer-title">Add a card</span>
+        </div>
         <div v-if="isEditable">
           <textarea
             class="g-footer-textarea"
             id="textarea"
             ref="textarea"
+            @blur="onCloseTextarea"
             cols="30"
             rows="30"
             placeholder="Enter a title for this card..."
@@ -39,9 +38,9 @@
           ></textarea>
           <div class="add-card">
             <button @click="updateGroup">Add card</button
-            ><span @click="onCloseTextarea"
-              ><img src="../styles/svgs/fa/solid/x.svg" alt="X"
-            /></span>
+            ><span class="close-icon-span">
+              <span @click="onCloseTextarea" class="close-icon"></span>
+            </span>
           </div>
         </div>
       </div>
