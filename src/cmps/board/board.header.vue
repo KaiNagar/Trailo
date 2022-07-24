@@ -1,25 +1,25 @@
 <template>
   <section class="board-header">
-    <button>Board</button>
-    <h1 class="board-header-title">{{ currBoard.title }}</h1>
-
-    <span class="board-header-star">
-      <img src="../../assets/icons/icon-star.png" alt="" />
-    </span>
-
-    <div class="board-header-span disable-btn">
-      <span>{{ currBoard.title }}</span>
-    </div>
-    <span class="board-header-span"
-      ><span><img src="../../assets/icons/icons-lock.png" alt="" /></span> Private</span
-    >
-
-    <div class="board-header-right-btn">
-      <board-filter />
-      <button class="board-header-menu-btn disable-btn">
-        <span><img src="../../assets/icons/icons-more.png" alt="" /></span> Show menu
+    <nav>
+      <button>
+        <span><img src="../../assets/icons/icons-bar-chart.png" alt="" /></span> Board
+        <span><img src="../../assets/icons/icons-down.png" alt="" /></span>
       </button>
-    </div>
+      <h1 class="board-header-title">{{ currBoard.title }}</h1>
+
+      <button class="board-header-star">
+        <span class="star-icon"></span>
+      </button>
+
+      <button class="board-header-span"><span class="privet-icon"></span> Private</button>
+
+      <!-- <div class="board-header-right-btns"> -->
+      <board-filter />
+      <button class="board-header-menu-btn board-header-right-btns">
+        <span class="menu-icon"></span> Show menu
+      </button>
+      <!-- </div> -->
+    </nav>
   </section>
 </template>
 

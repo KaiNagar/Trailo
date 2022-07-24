@@ -11,7 +11,7 @@ const store = createStore({
     currBoard: null,
     currGroup: null,
     currCard: null,
-    isLabelsOpen:null
+    isLabelsOpen: null,
   },
   getters: {
     boards({ boards }) {
@@ -78,6 +78,11 @@ const store = createStore({
       const newBoard = await boardService.save(board)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
       return newBoard
+    },
+    async saveBoards({ commit }, { boards }) {
+      console.log(boards);
+      // boards = boards.map((board) => boardService.save(board))
+      commit({ type: 'setBoards', boards })
     },
     async updateGroup({ commit }, { board, group }) {
       const idx = board.groups.findIndex(
