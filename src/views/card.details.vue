@@ -3,8 +3,8 @@
     <section class="card-details flex column">
       <div class="close-details-container flex">
         <router-link class="close-details-btn flex" :to="'/board/' + board._id"
-          ><span class="close-icon"></span
-        ></router-link>
+          ><span class="close-icon"></span>
+        </router-link>
       </div>
 
       <div
@@ -43,9 +43,11 @@
                     :key="label.id"
                     @click="openLabelsMenu($event)"
                   >
-                    <span class="labels-title" :style="labelColor(label.color)">{{
-                      label.title
-                    }}</span>
+                    <span
+                      class="labels-title"
+                      :style="labelColor(label.color)"
+                      >{{ label.title }}</span
+                    >
                   </div>
 
                   <button
@@ -269,7 +271,12 @@ export default {
   created() {
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
-    console.log(this.card);
+    this.$store.commit({
+      type: 'setEditMenu',
+      attachments: this.card.attachments,
+    })
+    console.log(this.card)
+
     // this.card.attachments = [
     //   {
     //     id: 'a101',

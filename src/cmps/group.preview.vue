@@ -2,6 +2,15 @@
   <section v-if="group" class="group">
     <div @click="onTitleEditable" class="g-header">
       <div class="edit-group-title">
+        <!-- <div
+          class="contenteditable"
+          contenteditable
+          @keydown.enter.prevent="updateGroupTitle"
+          @input="group.title"
+        >
+          {{ group.title }}
+        </div> -->
+
         <span v-if="!isTitleEditable">{{ group.title }}</span>
         <textarea
           v-if="isTitleEditable"
@@ -54,7 +63,6 @@ export default {
   name: 'groupPreview',
   props: {
     group: Object,
-    idx: Number,
   },
   components: { cardList },
   data() {

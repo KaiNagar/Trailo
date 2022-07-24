@@ -7,7 +7,7 @@
       <img src="../../assets/icons/icon-star.png" alt="" />
     </span>
 
-    <div class="board-header-span">
+    <div class="board-header-span disable-btn">
       <span>{{ currBoard.title }}</span>
     </div>
     <span class="board-header-span"
@@ -16,7 +16,7 @@
 
     <div class="board-header-right-btn">
       <board-filter />
-      <button class="board-header-menu-btn">
+      <button class="board-header-menu-btn disable-btn">
         <span><img src="../../assets/icons/icons-more.png" alt="" /></span> Show menu
       </button>
     </div>

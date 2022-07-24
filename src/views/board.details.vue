@@ -2,7 +2,11 @@
   <section v-if="currBoard">
     <div class="group-page-container" :style="onBoardBgColor">
       <board-header />
-      <group-list :groups="currBoard.groups" @updateGroup="updateGroup" @addGroup="addGroup" />
+      <group-list
+        :groups="currBoard.groups"
+        @updateGroup="updateGroup"
+        @addGroup="addGroup"
+      />
     </div>
     <!-- <router-view /> -->
   </section>

@@ -24,9 +24,9 @@ export default {
     }
   },
   methods: {
-    // openCard(cardId) {
-    //   this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
-    // },
+    openCard(cardId) {
+      this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
+    },
   },
   computed: {},
   created() {

@@ -172,6 +172,7 @@ export default {
     this.board = this.$store.getters.currBoard
     this.group = this.$store.getters.currGroup
     this.isLabelsOpen = this.board.labelsOpen
+    console.log(this.card);
   },
 }
 </script>

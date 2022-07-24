@@ -1,9 +1,8 @@
 <template>
   <section class="group-list">
-    <article v-for="(group, idx) in groups" :key="group.id">
+    <article v-for="(group) in groups" :key="group.id">
       <group-preview
         :group="group"
-        :idx="idx"
         @updateGroupTitle="updateGroup"
         @updateGroup="updateGroup"
       />
@@ -60,6 +59,7 @@ export default {
     },
   },
   computed: {},
-  created() {},
+  created() {
+  },
 }
 </script>
