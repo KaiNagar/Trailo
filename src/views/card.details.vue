@@ -101,7 +101,6 @@ import actionDescription from '../cmps/card/action.description.vue'
 import cardActions from '../cmps/card/card.actions.vue'
 import labelsMenu from '../cmps/labels.menu.vue'
 import checklistMenu from '../cmps/checklist.menu.vue'
-import coverMenu from '../cmps/cover.menu.vue'
 import { boardService } from '../services/board.service'
 import attachmentsPreview from '../cmps/card/attachments.preview.vue'
 import menuAttachments from '../cmps/card/action.attachments.vue'
@@ -114,7 +113,6 @@ export default {
     actionDescription,
     checklistMenu,
     attachmentsPreview,
-    coverMenu,
     menuAttachments,
   },
   data() {

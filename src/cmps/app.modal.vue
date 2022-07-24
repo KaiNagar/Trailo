@@ -2,7 +2,7 @@
     <section>
         <section class="modal">
             <div class="m-header">
-              <div class="close" @click.stop="$emit('closeModal')">X</div>
+              <div class="close icon" @click.stop="$emit('closeModal')"></div>
                 <slot name="title">Title</slot>
             </div>
 

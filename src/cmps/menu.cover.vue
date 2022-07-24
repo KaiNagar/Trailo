@@ -2,30 +2,23 @@
   <div class="action-btn-container">
     <button @click="openMenu('cover')">
       Cover
-
       <div class="cover-menu">
         <app-modal v-if="menu.cover" @closeModal="closeMenu">
           <template #title>Cover</template>
           <template #part-1>
             <header>Size</header>
             <div class="cover-image part">
-              <button
-                :class="coverSize(false)"
-                :style="setCoverSizeStyle"
-                @click="setFullCover(false)"
-              >
-                <div class="liner black">
-                  <div class="first"></div>
-                  <div class="second"></div>
-                  <div class="circle"></div>
-                </div>
-              </button>
 
-              <button
-                :class="coverSize(true)"
-                :style="setCoverSizeStyle"
-                @click="setFullCover(true)"
-              >
+                <button :class="coverSize(false)" :style="setCoverSizeStyle" @click="setFullCover(false)">
+                  <div class="liner black ">
+                    <div class="first"></div>
+                    <div class="second"></div>
+                    <div class="circle"></div>
+                  </div>
+                </button>
+
+
+              <button :class="coverSize(true)" :style="setCoverSizeStyle" @click="setFullCover(true)">
                 <div class="liner">
                   <div class="first white"></div>
                   <div class="second white"></div>
@@ -44,19 +37,13 @@
             <header>Text-color</header>
             <div class="text-color part">
               <div class="light">
-                <button
-                  :style="setCoverSizeStyle"
-                  @click="setCoverMode(false)"
-                ></button>
+                <button :style="setCoverSizeStyle" @click="setCoverMode(false)"></button>
                 <span>white</span>
                 <div></div>
               </div>
 
-              <div class="dark">
-                <button
-                  :style="setCoverSizeStyle"
-                  @click="setCoverMode(true)"
-                ></button>
+              <div class="dark ">
+                <button :style="setCoverSizeStyle" @click="setCoverMode(true)"></button>
                 <span>black</span>
                 <div></div>
               </div>
@@ -66,13 +53,8 @@
           <template #part-3>
             <header>Colors</header>
             <div class="colors part">
-              <button
-                @click="setCoverColor(color)"
-                :style="{ backgroundColor: color }"
-                class="cover-btn-pick-color"
-                v-for="color in colors"
-                :key="color"
-              ></button>
+              <button @click="setCoverColor(color)" :style="{ backgroundColor: color }" class="cover-btn-pick-color"
+                v-for="color in colors" :key="color"></button>
             </div>
           </template>
 
@@ -80,13 +62,8 @@
             <div class="attachments part">
               <header>Attachments</header>
               <div v-if="card.attachments" class="attachments-images">
-                <button
-                  :style="{ backgroundImage: 'url(' + attachment.url + ')' }"
-                  @click="setCoverImg(attachment.url)"
-                  v-for="attachment in card.attachments"
-                  :key="attachment.id"
-                  class="set-attachment-cover"
-                ></button>
+                <button :style="{ backgroundImage: 'url(' + attachment.url + ')' }" @click="setCoverImg(attachment.url)"
+                  v-for="attachment in card.attachments" :key="attachment.id" class="set-attachment-cover"></button>
               </div>
 
               <div class="upload part">
@@ -99,12 +76,7 @@
           <template #part-5>
             <header>Photos from unsplash</header>
             <div class="unsplash part">
-              <img
-              @click="setCoverImg(image)"
-                v-for="(image, idx) in coverImgsUrls"
-                :key="idx"
-                :src="image"
-              />
+              <img @click="setCoverImg(image)" v-for="(image, idx) in coverImgsUrls" :key="idx" :src="image" />
             </div>
           </template>
         </app-modal>
@@ -255,8 +227,8 @@ export default {
         return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       }
     },
-    coverIsOpen(){
-        if (this.card.style.bgColor || this.card.style.bgImg) return true
+    coverIsOpen() {
+      if (this.card.style.bgColor || this.card.style.bgImg) return true
       return false
     },
 
@@ -264,6 +236,6 @@ export default {
       return this.$store.getters.menu
     },
   },
-  created() {},
+  created() { },
 }
 </script>
