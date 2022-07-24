@@ -2,7 +2,9 @@
   <section class="board-list-container" v-if="boards">
     <div class="board-list">
       <div class="board-preview">
-        <h1>Recently viewed</h1>
+        <span
+          ><span><img src="../assets/icons/icons-clock.png" alt="" /></span> Recently viewed</span
+        >
         <ul>
           <li
             @click="onSelectedBoard(board._id)"
