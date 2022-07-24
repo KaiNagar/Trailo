@@ -126,6 +126,7 @@
                 @setCoverImg="sendToSave"
                 @removeCover="sendToSave"
                 @setLabel="sendToSave"
+                @createLabel="createLabel"
               />
             </div>
           </div>
@@ -171,6 +172,14 @@ export default {
     labelColor(color) {
       return { backgroundColor: color }
     },
+    createLabel(newLabel) {
+      this.board.labels.push(newLabel)
+      this.$store.dispatch({
+        type: 'saveBoard',
+        board: { ...this.board },
+      })
+    },
+    
 
     sendToSave(newCard) {
       const pos = this.getCurrPos
@@ -225,7 +234,6 @@ export default {
     labelsToPick() {
       return this.board.labels
     },
-
     cardCoverStyle() {
       if (this.card.style.bgImg)
         return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
@@ -275,7 +283,6 @@ export default {
       type: 'setEditMenu',
       attachments: this.card.attachments,
     })
-    console.log(this.card)
 
     // this.card.attachments = [
     //   {
