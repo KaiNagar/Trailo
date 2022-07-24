@@ -7,17 +7,6 @@
         ></router-link>
       </div>
 
-      <cover-menu
-        :card="card"
-        @closeCoverMenu="isCoverMenuOpen = false"
-        @setCoverColor="sendToSave"
-        @setFullCover="sendToSave"
-        @setCoverMode="sendToSave"
-        @setCoverImg="sendToSave"
-        @removeCover="sendToSave"
-        v-if="isCoverMenuOpen"
-      />
-
       <div
         v-if="isCoverOn"
         :style="cardCoverStyle"
@@ -45,23 +34,25 @@
           </div>
           <div class="flex space-between">
             <div class="details-column flex column">
-              <h3 class="labels-header">Labels</h3>
-              <div class="labels-preview flex">
-                <div
-                  class="label-btn"
-                  v-for="label in labelsToShow"
-                  :key="label.id"
-                  @click="openLabelsMenu($event)"
-                >
-                  <span :style="labelColor(label.color)">{{
-                    label.title
-                  }}</span>
-                </div>
+              <div class="labels-preview-container">
+                <h3 class="labels-header">Labels</h3>
+                <div class="labels-preview flex">
+                  <div
+                    class="label-btn"
+                    v-for="label in labelsToShow"
+                    :key="label.id"
+                    @click="openLabelsMenu($event)"
+                  >
+                    <span class="labels-title" :style="labelColor(label.color)">{{
+                      label.title
+                    }}</span>
+                  </div>
 
-                <button
-                  class="add-icon"
-                  @click="openLabelsMenu($event)"
-                ></button>
+                  <button
+                    class="add-icon"
+                    @click="openLabelsMenu($event)"
+                  ></button>
+                </div>
 
                 <labels-menu
                   :labels="board.labels"
@@ -127,12 +118,12 @@
                 @openCoverMenu="isCoverMenuOpen = true"
                 @attachFile="attachFile"
                 :card="card"
-
                 @setCoverColor="sendToSave"
                 @setFullCover="sendToSave"
                 @setCoverMode="sendToSave"
                 @setCoverImg="sendToSave"
                 @removeCover="sendToSave"
+                @setLabel="sendToSave"
               />
             </div>
           </div>
@@ -278,6 +269,7 @@ export default {
   created() {
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
+    console.log(this.card);
     // this.card.attachments = [
     //   {
     //     id: 'a101',

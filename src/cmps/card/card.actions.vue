@@ -29,7 +29,10 @@
         <button><span class="cover-icon"></span> Cover</button>
       </div>
 
-      <menu-labels :card="card"></menu-labels>
+      <menu-labels
+        @setLabel="$emit('setLabel', $event)"
+        :card="card"
+      ></menu-labels>
       <menu-attachments @attachFile="attachFile" />
 
       <menu-cover

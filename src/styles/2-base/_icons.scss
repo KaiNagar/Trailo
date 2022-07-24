@@ -182,3 +182,11 @@
     content: '\e959';
   }
 }
+.check-icon {
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+    content: '\e916';
+  }
+}

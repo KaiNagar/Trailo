@@ -58,14 +58,14 @@
         <span
           :class="todoClass(todo)"
           class="todo-title"
-          v-if="!todo.isEditing"
+          v-if="!isEditingTodo(todo)"
           >{{ todo.title }}</span
         >
         <div
           @mouseenter="isEditHover = true"
           @mouseleave="isEditHover = false"
           class="edit-todo-container"
-          v-if="todo.isEditing"
+          v-if="isEditingTodo(todo)"
         >
           <div v-if="isEditHover" class="screen-edit-todo"></div>
           <textarea type="text" v-model="todo.title" />
@@ -179,9 +179,9 @@ export default {
       })
     },
     saveTodo(todo, idx) {
-      console.log(todo.isEditing)
+      todo.isEditing = false
+      this.checklist.todos[idx].isEditing = false
       this.checklist.todos.splice(idx, 1, todo)
-      this.closeEditTodo(todo, idx)
       this.$emit('saveChecklist', {
         info: { checklist: this.checklist, idx: this.idx },
       })
@@ -195,13 +195,11 @@ export default {
       })
     },
     closeEditTodo(todo, idx) {
-      console.log(todo.isEditing)
       todo.isEditing = false
       this.checklist.todos[idx].isEditing = false
       this.$emit('saveChecklist', {
         info: { checklist: this.checklist, idx: this.idx },
       })
-      console.log(todo.isEditing)
     },
 
     toggleIsDone(todo, idx) {
@@ -213,6 +211,9 @@ export default {
     },
     todoClass(todo) {
       return todo.isDone ? 'done' : ''
+    },
+    isEditingTodo(todo) {
+      return todo.isEditing
     },
   },
   computed: {
@@ -240,6 +241,7 @@ export default {
     },
   },
   created() {
+    this.checklistCopy = { ...this.checklist }
     this.getTodosStats
   },
 }

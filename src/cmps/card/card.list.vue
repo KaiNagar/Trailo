@@ -2,7 +2,6 @@
   <section class="card-list">
     <div v-for="card in cards" :key="card.id">
       <card-preview
-        @openCard="openCard"
         :card="card"
         @click="openCard(card.id)"
       />
@@ -25,9 +24,9 @@ export default {
     }
   },
   methods: {
-    openCard(cardId) {
-      this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
-    },
+    // openCard(cardId) {
+    //   this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
+    // },
   },
   computed: {},
   created() {

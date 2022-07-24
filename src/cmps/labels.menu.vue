@@ -15,10 +15,16 @@
 
       <template #part-2>
         <h3>Labels</h3>
-        <div v-for="label in labels" :key="label.id" class="labels">
-          <div class="label" :style="{ 'background-color': label.hex }">
+        <div v-for="label in board.labels" :key="label.id" class="labels">
+          <div
+            class="label"
+            @click="setLabel(label, labelSelected(label.id))"
+            :style="{ 'background-color': label.color }"
+          >
+            {{ label.title }}
+            <!--  -->
             <div class="icon edit"></div>
-
+            <span class="check-icon" v-if="labelSelected(label.id)"></span>
             <div class="pad">
               <div class="top"></div>
               <div class="bottom"></div>
@@ -77,17 +83,18 @@ export default {
   },
   data() {
     return {
-      labels: [
-        { title: '', id: this._makeId, hex: '#61bd4f' },
-        { title: '', id: this._makeId, hex: '#ff9f1a' },
-        { title: '', id: this._makeId, hex: '#eb5a46' },
-        { title: '', id: this._makeId, hex: '#c377e0' },
-        { title: '', id: this._makeId, hex: '#c377e0' },
-        { title: '', id: this._makeId, hex: '#0079bf' },
-        { title: '', id: this._makeId, hex: '#0079bf' },
-        { title: '', id: this._makeId, hex: '#0079bf' },
-        { title: '', id: this._makeId, hex: '#ff78cb' },
-      ],
+      board: null,
+      // labels: [
+      //   { title: '', id: this._makeId, hex: '#61bd4f' },
+      //   { title: '', id: this._makeId, hex: '#ff9f1a' },
+      //   { title: '', id: this._makeId, hex: '#eb5a46' },
+      //   { title: '', id: this._makeId, hex: '#c377e0' },
+      //   { title: '', id: this._makeId, hex: '#c377e0' },
+      //   { title: '', id: this._makeId, hex: '#0079bf' },
+      //   { title: '', id: this._makeId, hex: '#0079bf' },
+      //   { title: '', id: this._makeId, hex: '#0079bf' },
+      //   { title: '', id: this._makeId, hex: '#ff78cb' },
+      // ],
     }
   },
   methods: {
@@ -108,6 +115,9 @@ export default {
         this.card.labelIds.splice(labelIdx, 1)
       }
       this.$emit('setLabel', this.card)
+    },
+    createLabel() {
+      console.log('newLabel')
     },
     openMenu(menuAction) {
       this.$store.commit({ type: 'openMenu', menuAction })
@@ -131,7 +141,7 @@ export default {
     },
   },
   created() {
-    // console.log(this.board);
+    this.board = this.$store.getters.currBoard
   },
   unmounted() {},
 }

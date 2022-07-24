@@ -19,7 +19,7 @@
             <span>{{createdAtFormat}}</span>
             <span class="action">Comment</span> -
             <span class="action">Delete</span> -
-            <span class="action">Edit</span>
+            <span class="action" @click="isEditAttach = true">Edit</span>
           </div>
           <span
             >IMG<span class="action" @click="makeOrRemove(file)">
