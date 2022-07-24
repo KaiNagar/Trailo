@@ -77,6 +77,7 @@ const store = createStore({
     async saveBoard({ commit }, { board }) {
       const newBoard = await boardService.save(board)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
+      return newBoard
     },
     async updateGroup({ commit }, { board, group }) {
       const idx = board.groups.findIndex(

@@ -1,4 +1,4 @@
-import { storageService } from '@/services/storage.service.js'
+import { storageService } from "@/services/storage.service.js";
 
 export const boardService = {
   query,
@@ -12,180 +12,177 @@ export const boardService = {
   getEmptyCard,
   getEmptyGroup,
   getEmptyChecklist,
-}
+};
 
-const STORAGE_KEY = 'boardDB'
-_setBoards()
+const STORAGE_KEY = "boardDB";
+_setBoards();
 
-let gCredentials = localStorage.getItem('credentials')
+let gCredentials = localStorage.getItem("credentials");
 
 function _setBoards() {
-  let board = localStorage.getItem(STORAGE_KEY)
+  let board = localStorage.getItem(STORAGE_KEY);
   if (!board || !board.length)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(_createBoards()))
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(_createBoards()));
 }
 
-async function query(filterBy = '') {
+async function query(filterBy = "") {
   try {
-    const res = await storageService.query(STORAGE_KEY)
-    return res
+    const res = await storageService.query(STORAGE_KEY);
+    return res;
   } catch (err) {
-    console.error('cannot get board :', err)
+    console.error("cannot get board :", err);
   }
 }
 
 async function getById(boardId) {
   try {
-    const res = await storageService.get(STORAGE_KEY, boardId)
-    return res
+    const res = await storageService.get(STORAGE_KEY, boardId);
+    return res;
   } catch (err) {
-    console.error('cannot get board:', err)
+    console.error("cannot get board:", err);
   }
 }
 async function getCardById(credentials) {
-  if (!credentials.boardId) return gCurrCard
-  let board = await getById(credentials.boardId)
-  let group = board.groups.find((group) => group.id === credentials.groupId)
-  let card = group.cards.find((card) => card.id === credentials.cardId)
+  if (!credentials.boardId) return gCurrCard;
+  let board = await getById(credentials.boardId);
+  let group = board.groups.find((group) => group.id === credentials.groupId);
+  let card = group.cards.find((card) => card.id === credentials.cardId);
   card = {
     card,
     loc: credentials,
-  }
-  localStorage.setItem('currCard', JSON.stringify(card))
-  return card
+  };
+  localStorage.setItem("currCard", JSON.stringify(card));
+  return card;
 }
 
 async function save(board) {
   if (board._id) {
-    const res = await storageService.put(STORAGE_KEY, board)
-    return res
+    console.log(board._id);
+    const res = await storageService.put(STORAGE_KEY, board);
+    return res;
   } else {
-    const res = await storageService.post(STORAGE_KEY.board)
-    return res
+    console.log("no id");
+    board._id = _makeId();
+    const res = await storageService.post(STORAGE_KEY, board);
+    return res;
   }
 }
 
 function getEmptyGroup() {
   return {
     id: _makeId(),
-    title: '',
+    title: "",
     cards: [],
-  }
+  };
 }
 function getEmptyTodo() {
   return {
     id: _makeId(),
-    title: '',
+    title: "",
     isDone: false,
-  }
+  };
 }
-function getEmptyLabel(){
+function getEmptyLabel() {
   return {
-    id:_makeId(),
-    color:null,
-    title:''
-  }
+    id: _makeId(),
+    color: null,
+    title: "",
+  };
 }
 
 function getEmptyCard() {
   return {
     id: _makeId(),
-    title: '',
+    title: "",
     style: { bgImg: null, bgColor: null, isFull: false },
     checklists: [],
     labelIds: [],
-  }
+  };
 }
 
 function getEmptyChecklist() {
   return {
     id: _makeId(),
-    title: 'Checklist',
+    title: "Checklist",
     todos: [],
-  }
+  };
 }
 
 async function remove(boardId) {
   try {
-    const res = await storageService.remove(STORAGE_KEY, boardId)
-    return res
+    const res = await storageService.remove(STORAGE_KEY, boardId);
+    return res;
   } catch (err) {
-    console.error('cannot remove board', err)
+    console.error("cannot remove board", err);
   }
 }
 
 function _createBoards() {
-  return [_createBoard(), _createBoard(), _createBoard()]
+  return [_createBoard(), _createBoard(), _createBoard()];
 }
 function getEmptyBoard() {
   return {
-    _id:_makeId(),
-    title: '',
+    _id: "",
+    title: "",
     createdAt: Date.now() - 100000,
-    labelsOpen:false,
-    bgCover:'https://images.unsplash.com/photo-1658279165324-454de0ee3da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+    labelsOpen: false,
+    bgCover:
+      "https://images.unsplash.com/photo-1658279165324-454de0ee3da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80",
     createdBy: {},
-    labels:[],
-    members:[],
-    groups:[
-      {  id: _makeId(),
-        title: "To do",
-        cards:[]
-      },
+    labels: [],
+    members: [],
+    groups: [
+      { id: _makeId(), title: "To do", cards: [] },
       {
         id: _makeId(),
         title: "Doing",
-        cards:[]
+        cards: [],
       },
       {
         id: _makeId(),
         title: "Done",
-        cards:[]
-      }
-
-
-    ]
-  }
-
-  
+        cards: [],
+      },
+    ],
+  };
 }
 
 function _createBoard() {
-  const boardId = _makeId()
+  const boardId = _makeId();
   return {
     _id: boardId,
-    title: 'board title new',
+    title: "board title new",
     createdAt: Date.now() - 100000,
-    labelsOpen:false,
+    labelsOpen: false,
     bgCover:
-      'https://images.unsplash.com/photo-1654446138056-8996ca1e96a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      "https://images.unsplash.com/photo-1654446138056-8996ca1e96a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     createdBy: {
-      _id: 'u101',
-      fullname: 's@r',
-      imgUrl: 'url',
+      _id: "u101",
+      fullname: "s@r",
+      imgUrl: "url",
     },
     labels: [
       {
-        id: 'l101',
-        title: 'done',
-        color: '#c377e0',
+        id: "l101",
+        title: "done",
+        color: "#c377e0",
       },
       {
-        id: 'l102',
-        title: 'in progress',
-        color: '#51e898',
+        id: "l102",
+        title: "in progress",
+        color: "#51e898",
       },
       {
-        id: 'l103',
-        title: 'WIP',
-        color: '#ff78cb',
+        id: "l103",
+        title: "WIP",
+        color: "#ff78cb",
       },
     ],
     members: [
       {
         _id: _makeId(),
-        fullname: 'r@sk',
-        imgUrl: 'url',
+        fullname: "r@sk",
+        imgUrl: "url",
       },
     ],
     groups: [
@@ -195,28 +192,28 @@ function _createBoard() {
         cards: [
           {
             id: _makeId(),
-            title: 'WTF',
-            labelIds: ['l101', 'l102'],
+            title: "WTF",
+            labelIds: ["l101", "l102"],
             style: {
               bgImg:
-                'https://images.unsplash.com/photo-1658250709337-46fb7cc5e74a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-              bgColor: '',
+                "https://images.unsplash.com/photo-1658250709337-46fb7cc5e74a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+              bgColor: "",
               isFull: false,
             },
           },
           {
             id: _makeId(),
-            title: 'new card2',
-            labelIds: ['l101', 'l102'],
-            style: { bgColor: '#47e18c', isFull: false, bgImg: null },
+            title: "new card2",
+            labelIds: ["l101", "l102"],
+            style: { bgColor: "#47e18c", isFull: false, bgImg: null },
             checklists: [
               {
-                id: 'YEhmF',
-                title: 'Checklist',
+                id: "YEhmF",
+                title: "Checklist",
                 todos: [
                   {
-                    id: '212jX',
-                    title: 'To Do 1',
+                    id: "212jX",
+                    title: "To Do 1",
                     isDone: false,
                   },
                 ],
@@ -228,28 +225,28 @@ function _createBoard() {
 
       {
         id: _makeId(),
-        title: 'These shoes are meant for walking',
+        title: "These shoes are meant for walking",
         cards: [
           {
             id: _makeId(),
-            title: 'And thats what they do',
-            labelIds: ['l101', 'l102'],
+            title: "And thats what they do",
+            labelIds: ["l101", "l102"],
             style: {
               bgImg:
-                'https://images.unsplash.com/photo-1658279366986-4f188712a3e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-              bgColor: '',
+                "https://images.unsplash.com/photo-1658279366986-4f188712a3e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+              bgColor: "",
               isFull: true,
             },
           },
           {
             id: _makeId(),
-            title: 'My Trailo',
-            labelIds: ['l101', 'l102'],
+            title: "My Trailo",
+            labelIds: ["l101", "l102"],
             style: {
-              bgColor: '',
+              bgColor: "",
               isFull: false,
               bgImg:
-                'https://images.unsplash.com/photo-1538471726790-0f6b031f1982?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+                "https://images.unsplash.com/photo-1538471726790-0f6b031f1982?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
             },
           },
         ],
@@ -261,28 +258,28 @@ function _createBoard() {
         cards: [
           {
             id: _makeId(),
-            title: 'WTF',
-            labelIds: ['l101', 'l102'],
+            title: "WTF",
+            labelIds: ["l101", "l102"],
             style: {
               bgImg:
-                'https://images.unsplash.com/photo-1658250709337-46fb7cc5e74a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-              bgColor: '',
+                "https://images.unsplash.com/photo-1658250709337-46fb7cc5e74a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+              bgColor: "",
               isFull: false,
             },
           },
           {
             id: _makeId(),
-            title: 'new card2',
-            labelIds: ['l101', 'l102'],
-            style: { bgColor: '#47e18c', isFull: false, bgImg: null },
+            title: "new card2",
+            labelIds: ["l101", "l102"],
+            style: { bgColor: "#47e18c", isFull: false, bgImg: null },
             checklists: [
               {
-                id: 'YEhmF',
-                title: 'Checklist',
+                id: "YEhmF",
+                title: "Checklist",
                 todos: [
                   {
-                    id: '212jX',
-                    title: 'To Do 1',
+                    id: "212jX",
+                    title: "To Do 1",
                     isDone: false,
                   },
                 ],
@@ -292,7 +289,7 @@ function _createBoard() {
         ],
       },
     ],
-  }
+  };
 }
 
 // membersIds: ['u101'],
@@ -304,11 +301,11 @@ function _createBoard() {
 // },
 
 function _makeId(length = 8) {
-  var text = ''
+  var text = "";
   var possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   for (var i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length))
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
-  return text
+  return text;
 }

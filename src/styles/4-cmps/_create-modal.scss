@@ -1,0 +1,118 @@
+.modal {
+  
+  .background {
+    width: 200px;
+    height: 120px;
+    background-color: green;
+    margin: auto;
+    background-size: contain;
+    div {
+      margin: 0 auto;
+      height: 100%;
+      width: 90%;
+    }
+    img {
+      padding-top: 15px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    margin-bottom: 7px;
+  }
+
+  .background-gallery {
+    margin: 0 auto;
+    // IMAGES
+    .images {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      img {
+        background-color: black;
+        border-radius: 3px;
+        width: 64px;
+        height: 40px;
+        background-position: center;
+        cursor: pointer;
+        &:hover {
+          opacity: 80%;
+        }
+      }
+    }
+    margin-bottom: 7px;
+  }
+
+  //COLORS
+  .colors {
+    transition: 0.1s;
+    display: flex;
+    justify-content: space-between;
+    height: 32px;
+    // border: 1px black solid;
+    margin: 0;
+
+    > * {
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .color-container {
+      height: 100%;
+      width: 40px;
+      &:hover {
+        opacity: 80%;
+      }
+      div {
+        background-color: black;
+      }
+    }
+    .color {
+    }
+    .more {
+      background-color: #f5f6f8;
+      width: 40px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      font-size: 24px;
+      span {
+        position: relative;
+        bottom: 2.5px;
+        letter-spacing: 0.01em;
+      }
+      &::before {
+      }
+    }
+    margin-bottom: 7px;
+  }
+
+  .title {
+    input {
+      margin-bottom: 7px;
+      span {
+        margin: 0;
+        color: red;
+      }
+    }
+
+    span {
+      // border: 1px black solid;
+      margin-bottom: 7px;
+    }
+  }
+  button.create {
+    transition: 0.1s;
+    background-color: rgb(245 246 248);
+    font-size: 16px;
+    color: #172b4d;
+    padding: 0.5em;
+    text-align: center;
+    margin: 0 auto;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.281);
+    }
+  }
+}
