@@ -1,4 +1,10 @@
 .cover-menu {
+
+  // MODAL POSITION
+  .modal{
+    // left: 0;
+    right: 1.3em;
+  }
   header {
     // border: 1px black solid;
     line-height: 1.5em;
@@ -20,19 +26,7 @@
     border-radius: rem(3px);
     cursor: pointer;
   }
-  // .cover-btn-pick-img {
-  //   border: 0;
-  //   width: 50px;
-  //   height: 32px;
-  //   border-radius: rem(3px);
-  //   background-repeat: no-repeat;
-  //   background-size: cover;
-  //   cursor: pointer;
-  // }
-  // .remove-cover-btn {
-  //   @include cancel-btns;
-  //   width: 100%;
-  // }
+
   .cover-full {
     border-radius: rem(3px);
     background-repeat: no-repeat;
@@ -43,13 +37,17 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: -55px;
+    border: 1px black;
   }
-
+  // COVER
   .cover-image {
     display: flex;
     width: 100%;
     column-gap: 5px;
     grid-template-columns: repeat(2, 45%);
+    button.half {
+      border: 1px black solid;
+    }
     button {
       margin: 0;
       height: 64px;
@@ -62,7 +60,7 @@
       height: 25px;
       left: 5%;
       bottom: 0;
-      
+
       .first {
         border-radius: 3px;
         height: 5px;
@@ -102,8 +100,9 @@
   // ATTACHMENTS
   .attachments {
     .attachments-images {
-      grid-template-columns: repeat(3, 88px);
       display: grid;
+      grid-template-columns: repeat(3, 88px);
+      gap: 5px;
       > * {
         margin: 0;
         width: 88px;
@@ -135,7 +134,7 @@
 
     .light,
     .dark {
-      width: 130px;
+      width: 137px;
       height: 32px;
       border-radius: 5px;
       position: relative;
@@ -183,8 +182,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 88px);
-    column-gap: 5px;
-    row-gap: 8px;
+    gap: 5px;
     img {
       width: 88px;
       height: 48px;

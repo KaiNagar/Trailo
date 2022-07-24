@@ -1,4 +1,14 @@
 .modal {
+    .icon.close{
+        &::before{
+            content: "\e91c";
+            font-size: 20px;
+            cursor: pointer;
+        }
+        &:hover{
+            color: black;
+        }
+    }
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
     position: absolute;
     top: 40px;
@@ -97,3 +107,4 @@
         }
     }
 }
+
