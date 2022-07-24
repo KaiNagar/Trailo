@@ -9,6 +9,7 @@
     line-height: 20px;
     padding-left: 32px;
     button {
+        cursor: no-drop;
         padding-left: 32px;
         @include headers-btns;
       }

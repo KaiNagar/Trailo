@@ -44,28 +44,50 @@
 .edit-group-title{
   width: 90%;
   display: flex;
-  textarea{
-    font-family: Helvetica Neue,sans-serif;
-    background-color: #fff;
-    padding: 1px 7px;
-    width: 99%;
-    box-shadow: 0 0 0 2px #0079bfc2;
-    font-weight: 600;
-    overflow: hidden;
-    border: 2px solid transparent;
-    resize: none;
-    overflow-wrap: break-word;
-    color: #172b4d;
-    &:focus{
-      outline:none;
 
-    }
+textarea{
+  font-family: Helvetica Neue,sans-serif;
+  background-color: #fff;
+  padding: 1px 7px;
+  width: 99%;
+  box-shadow: 0 0 0 2px #0079bfc2;
+  font-weight: 600;
+  overflow: hidden;
+  border: 2px solid transparent;
+  resize: none;
+  overflow-wrap: break-word;
+  color: #172b4d;
+  &:focus{
+    outline:none;
 
   }
+}
+
+}
+// .contenteditable{
+//   &:focus-within{
+//     font-family: Helvetica Neue,sans-serif;
+//     background-color: #fff;
+//     padding: 1px 7px;
+//     width: 99%;
+//     box-shadow: 0 0 0 2px #0079bfc2;
+//     font-weight: 600;
+//     overflow: hidden;
+//     border: 2px solid transparent;
+//     resize: none;
+//     overflow-wrap: break-word;
+//     color: #172b4d;
+//   }
+//     &:focus{
+//       outline:none;
+
+    // }
+
+  // }
   
 }
 
-}
+
 .g-footer {
   transition-duration: 85ms;
   line-height: 20px;
