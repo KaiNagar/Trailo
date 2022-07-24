@@ -2,8 +2,8 @@
     <section>
         <section class="modal">
             <div class="m-header">
+              <div class="close" @click.stop="$emit('closeModal')">X</div>
                 <slot name="title">Title</slot>
-                <button @click.stop="$emit('closeModal')">X</button>
             </div>
 
             <section class="content" v-for="(item, idx) in items" :key="idx" @click="$emit('openBoard', item._id)">
