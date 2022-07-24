@@ -1,9 +1,5 @@
 <template>
-  <div
-    
-    v-if="card"
-    class="card-details-container"
-  >
+  <div v-if="card" class="card-details-container">
     <section class="card-details flex column">
       <div class="close-details-container flex">
         <router-link class="close-details-btn flex" :to="'/board/' + board._id"
@@ -131,6 +127,12 @@
                 @openCoverMenu="isCoverMenuOpen = true"
                 @attachFile="attachFile"
                 :card="card"
+
+                @setCoverColor="sendToSave"
+                @setFullCover="sendToSave"
+                @setCoverMode="sendToSave"
+                @setCoverImg="sendToSave"
+                @removeCover="sendToSave"
               />
             </div>
           </div>

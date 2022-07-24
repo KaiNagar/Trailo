@@ -1,6 +1,5 @@
 <template>
   <section class="card-actions flex column">
-
     <div class="suggested-tab">
       <h3>Suggested <span class="settings-icon"></span></h3>
       <div class="action-btn-container">
@@ -21,19 +20,32 @@
           Dates
         </button>
       </div>
-      <div class="action-btn-container">
-      </div>
-      <div @click="$emit('openCoverMenu')" v-if="!isCoverOn" class="action-btn-container">
+      <div class="action-btn-container"></div>
+      <div
+        @click="$emit('openCoverMenu')"
+        v-if="!isCoverOn"
+        class="action-btn-container"
+      >
         <button><span class="cover-icon"></span> Cover</button>
       </div>
 
-        
       <menu-labels :card="card"></menu-labels>
       <menu-attachments @attachFile="attachFile" />
-      <menu-cover :card="card" />
+
+      <menu-cover
+        @setCoverColor="$emit('setCoverColor', $event)"
+        @setFullCover="$emit('setFullCover', $event)"
+        @setCoverMode="$emit('setCoverMode', $event)"
+        @setCoverImg="$emit('setCoverImg', $event)"
+        @removeCover="$emit('removeCover', $event)"
+        @attachFile="$emit('attachFile', $event)"
+        :card="card"
+      />
 
       <div class="action-btn-container">
-        <button disabled><span class="custom-icon"></span> Custom Fields</button>
+        <button disabled>
+          <span class="custom-icon"></span> Custom Fields
+        </button>
       </div>
     </div>
   </section>
@@ -50,26 +62,21 @@ export default {
     appModal,
     menuAttachments,
     menuCover,
-    menuLabels
+    menuLabels,
   },
   props: {
     isCoverOn: Boolean,
-    card: Object
+    card: Object,
   },
   data() {
-    return {
-
-    }
+    return {}
   },
   methods: {
     attachFile(file) {
       this.$emit('attachFile', file)
-    }
+    },
   },
-  computed: {
-
-
-  },
-  created() { },
+  computed: {},
+  created() {},
 }
 </script>

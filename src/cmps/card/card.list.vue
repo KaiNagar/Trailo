@@ -1,6 +1,6 @@
 <template>
   <section class="card-list">
-    <div v-for="card in cards" :key="card._id">
+    <div v-for="card in cards" :key="card.id">
       <card-preview
         @openCard="openCard"
         :card="card"
@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     openCard(cardId) {
-      console.log(this.board._id , this.group.id , cardId);
       this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
     },
   },
