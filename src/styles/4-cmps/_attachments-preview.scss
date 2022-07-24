@@ -19,30 +19,35 @@
     .attach-title {
       font-size: rem(14px);
       font-weight: 700;
-      margin-top:7px;
+      margin-top: 8px;
       .arrow {
         font-weight: 700;
         font-size: 13px;
       }
     }
     .actions {
-      margin-bottom: 9px;
+      margin-bottom: 8px;
       margin-inline-start: 0px;
+      color: #5e6c84;
+
     }
     .action {
       text-decoration: underline;
       color: #5e6c84;
       cursor: pointer;
     }
+      .cover-icon {
+        margin-inline-start: 2px;
+        margin-inline-end: 6px;
+      }
   }
-  
 }
-.card-attachments-container{
+.card-attachments-container {
   .attch-preview-header {
     position: relative;
-    margin-inline-start:1px;
+    margin-inline-start: 1px;
     padding: 8px 0;
-    
+
     .attach-icon {
       position: absolute;
       width: 2rem;
@@ -58,7 +63,6 @@
       line-height: 1.25;
       font-size: 1rem;
       color: rgb(23, 43, 77);
-
     }
   }
   .add-attach-btn {
