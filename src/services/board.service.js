@@ -64,10 +64,6 @@ async function save(board) {
   }
 }
 
-async function getEmptyBoard() {
-  return {}
-}
-
 function getEmptyGroup() {
   return {
     id: _makeId(),
@@ -112,6 +108,38 @@ async function remove(boardId) {
 
 function _createBoards() {
   return [_createBoard(), _createBoard(), _createBoard()]
+}
+function getEmptyBoard() {
+  return {
+    _id:_makeId(),
+    title: '',
+    createdAt: Date.now() - 100000,
+    labelsOpen:false,
+    bgCover:null,
+    createdBy: {},
+    labels:[],
+    members:[],
+    groups:[
+      {  id: _makeId(),
+        title: "To do",
+        cards:[]
+      },
+      {
+        id: _makeId(),
+        title: "Doing",
+        cards:[]
+      },
+      {
+        id: _makeId(),
+        title: "Done",
+        cards:[]
+      }
+
+
+    ]
+  }
+
+  
 }
 
 function _createBoard() {

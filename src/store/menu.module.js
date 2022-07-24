@@ -8,6 +8,7 @@ export const menuModule = {
       edit: false,
       cover: false,
       labels: false,
+      create:false
     },
     edit: {},
   },
