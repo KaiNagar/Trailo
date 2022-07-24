@@ -164,7 +164,7 @@
   color: #5e6c84;
   &::before {
     content: '\e952';
-  }
+}
 }
 .comment-icon {
   font-family: trellicons;
@@ -189,4 +189,14 @@
   &::before {
     content: '\e916';
   }
+}
+
+.star-icon{
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+    content: "\e966";
+}
+
 }

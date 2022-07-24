@@ -22,7 +22,7 @@
         ></textarea>
       </div>
       <div class="g-menu fa">
-        <img src="../assets/icons/icons-more.png" alt="" />
+        <span class="menu-icon"></span>
       </div>
     </div>
     <div>

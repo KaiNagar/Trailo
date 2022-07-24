@@ -1,5 +1,5 @@
 <template>
-  <section class="board-filter">
+  <section class="board-header-right-btns">
     <button @click="filterOpen = !filterOpen" class="filter-btn">
       <span><img src="../../assets/icons/icons-bars.png" alt="" /></span> Filter
     </button>
