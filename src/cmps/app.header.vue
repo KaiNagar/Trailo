@@ -76,15 +76,10 @@
           </template>
         </app-modal>
       </div>
-      <<<<<<< HEAD
-
-      <button class="create-btn"></button>
-      =======
       <div class="add">
         <button @click="openMenu('headerCreate')" class="create-btn"></button>
         <add-board v-if="menu.headerCreate"></add-board>
       </div>
-      >>>>>>> 8f7d9da9605ec2b1a565b7c3a6acee459029e9c8
     </div>
 
     <div class="search">
@@ -139,8 +134,6 @@ export default {
       console.log(boardId)
       this.$router.push(`/board/${boardId}`)
     },
-<<<<<<< HEAD
-=======
     openMenu(menuAction) {
       this.closeModal()
       this.$store.commit({ type: 'openMenu', menuAction })
@@ -148,7 +141,6 @@ export default {
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
->>>>>>> 8f7d9da9605ec2b1a565b7c3a6acee459029e9c8
   },
   computed: {
     // boards() {
@@ -162,18 +154,11 @@ export default {
       })
       return starred
     },
-<<<<<<< HEAD
-=======
     menu() {
       return this.$store.getters.menu
     },
-
   },
-  created() {
-
-
->>>>>>> 8f7d9da9605ec2b1a565b7c3a6acee459029e9c8
-  },
+  created() {},
   created() {},
 }
 </script>
