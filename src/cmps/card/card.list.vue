@@ -1,10 +1,7 @@
 <template>
   <section class="card-list">
     <div v-for="card in cards" :key="card.id">
-      <card-preview
-        :card="card"
-        @click="openCard(card.id)"
-      />
+      <card-preview :card="card" @click="openCard(card.id)" />
     </div>
     <router-view></router-view>
   </section>
@@ -16,7 +13,9 @@ export default {
   props: {
     cards: Object,
   },
-  components: { cardPreview },
+  components: {
+    cardPreview,
+  },
   data() {
     return {
       board: null,
