@@ -2,15 +2,6 @@
   <section v-if="group" class="group">
     <div @click="onTitleEditable" class="g-header">
       <div class="edit-group-title">
-        <!-- <div
-          class="contenteditable"
-          contenteditable
-          @keydown.enter.prevent="updateGroupTitle"
-          @input="group.title"
-        >
-          {{ group.title }}
-        </div> -->
-
         <span v-if="!isTitleEditable">{{ group.title }}</span>
         <textarea
           v-if="isTitleEditable"
@@ -34,12 +25,14 @@
         <div @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title-icon">
           <span class="add-icon"></span><span class="g-footer-title">Add a card</span>
         </div>
+        <div v-if="!isEditable" class="g-template-icon">
+          <span class="template-icon"></span>
+        </div>
         <div v-if="isEditable">
           <textarea
             class="g-footer-textarea"
             id="textarea"
             ref="textarea"
-            @blur="onCloseTextarea"
             cols="30"
             rows="30"
             placeholder="Enter a title for this card..."
@@ -75,6 +68,7 @@ export default {
   },
   methods: {
     updateGroup() {
+      console.log('hi')
       this.newCard.title = this.$refs.textarea.value
       if (this.newCard.title === '') return
       const updateGroup = {
