@@ -2,15 +2,6 @@
   <section v-if="group" class="group">
     <div @click="onTitleEditable" class="g-header">
       <div class="edit-group-title">
-        <!-- <div
-          class="contenteditable"
-          contenteditable
-          @keydown.enter.prevent="updateGroupTitle"
-          @input="group.title"
-        >
-          {{ group.title }}
-        </div> -->
-
         <span v-if="!isTitleEditable">{{ group.title }}</span>
         <textarea
           v-if="isTitleEditable"
@@ -26,13 +17,23 @@
       </div>
     </div>
     <div>
-      <card-list :cards="group.cards" :updateGroup="updateGroup" />
+      <card-list
+        :currGroup="group"
+        :cards="group.cards"
+        @groupsQ="$emit('onCardMove',$event)"
+        :updateGroup="updateGroup"
+      />
     </div>
 
     <div class="g-footer flex space-between">
       <div class="g-footer-add-area">
-        <div @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title-icon">
-          <span class="add-icon"></span><span class="g-footer-title">Add a card</span>
+        <div
+          @click="onOpenTextarea"
+          v-if="!isEditable"
+          class="g-footer-title-icon"
+        >
+          <span class="add-icon"></span
+          ><span class="g-footer-title">Add a card</span>
         </div>
         <div v-if="isEditable">
           <textarea
@@ -107,9 +108,7 @@ export default {
       this.$emit('updateGroupTitle', this.group)
     },
   },
-  computed: {},
   created() {
-    this.$store.commit({ type: 'setCurrGroup', groupId: this.group.id })
     this.newCard = this.$store.getters.emptyCard
     this.groupToEdit = this.$store.getters.emptyCard
   },

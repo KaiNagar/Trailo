@@ -10,8 +10,11 @@
     "moment": "^2.29.4",
     "sass": "^1.53.0",
     "vue": "^3.2.37",
+    "vue-draggable-next": "^2.1.1",
     "vue-icon": "^2.3.0",
     "vue-router": "^4.1.2",
+    "vue3-draggable": "^2.0.9",
+    "vue3-smooth-dnd": "^0.0.2",
     "vuedraggable": "^2.24.3",
     "vuex": "^4.0.2"
   },

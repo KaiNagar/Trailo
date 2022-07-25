@@ -1,5 +1,5 @@
 <template>
-  <section class="card-preview">
+  <section @click="setCurrGroup" class="card-preview">
     <div
       v-if="card.style.bgColor || card.style.bgImg"
       class="card-preview-cover"
@@ -62,7 +62,6 @@
     </div>
   </section>
 </template>
-
 <script>
 export default {
   name: 'cardPreview',
@@ -80,15 +79,14 @@ export default {
   },
   methods: {
     toggleLabels() {
-      const newBoard = { ...this.board }
+      const newBoard = { ...this.$store.getters.currBoard }
       this.isLabelsOpen = !this.isLabelsOpen
 
       this.$store.commit({
         type: 'setIsLabelsOpen',
         isLabelsOpen: this.isLabelsOpen,
       })
-
-      newBoard.labelsOpen = this.isLabelsOpen
+      newBoard.labelsOpen = this.$store.getters.isLabelsOpen
       this.$store.dispatch({ type: 'saveBoard', board: newBoard })
     },
     LightenDarkenColor(col, amt = -30) {
