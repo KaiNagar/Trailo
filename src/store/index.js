@@ -36,11 +36,13 @@ const store = createStore({
   mutations: {
     setBoards(state, { boards }) {
       state.boards = boards
+      console.log(boards);
     },
     setBoardId(state, { boardId }) {
       state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
+      
       state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
@@ -63,6 +65,15 @@ const store = createStore({
       // state.isLabelsOpen = isLabelsOpen
       state.currBoard.labelsOpen = isLabelsOpen
     },
+    starBoard(state,{boardId}){
+      const idx = state.boards.findIndex(board=>{
+        return board._id === boardId
+      })
+      const board = state.boards[idx]
+      board.isStarred = true
+      state.boards.splice(idx,1,board)
+
+    },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -77,6 +88,7 @@ const store = createStore({
     async saveBoard({ commit }, { board }) {
       const newBoard = await boardService.save(board)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
+
       return newBoard
     },
     async saveBoards({ commit }, { boards }) {

@@ -61,9 +61,10 @@
           </template>
         </app-modal>
       </div>
-
-
-      <button class="create-btn"></button>
+      <div class="add">
+        <button @click="openMenu('headerCreate')" class="create-btn"></button>
+        <add-board v-if="menu.headerCreate"></add-board>
+      </div>
     </div>
 
 
@@ -85,6 +86,7 @@
   </section>
 </template>
 <script>
+import addBoard from './board/add.board.vue'
 import appModal from '../cmps/app.modal.vue'
 export default {
   name: 'appHeader',
@@ -93,6 +95,7 @@ export default {
   },
   components: {
     appModal,
+    addBoard,
 
   },
   data() {
@@ -119,7 +122,14 @@ export default {
     openBoard(boardId) {
       console.log(boardId);
       this.$router.push(`/board/${boardId}`)
-    }
+    },
+    openMenu(menuAction) {
+      this.closeModal()
+      this.$store.commit({ type: 'openMenu', menuAction })
+    },
+    closeMenu() {
+      this.$store.commit({ type: 'closeMenu' })
+    },
   },
   computed: {
     // boards() {
@@ -132,7 +142,10 @@ export default {
         board.isStarred
       })
       return starred
-    }
+    },
+    menu() {
+      return this.$store.getters.menu
+    },
 
   },
   created() {
