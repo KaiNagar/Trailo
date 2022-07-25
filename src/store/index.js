@@ -19,7 +19,6 @@ const store = createStore({
       return starredBoard
     },
     boardsToDisplay({ boards }) {
-      // boards = boards.reverse()
       return boards
         .slice()
         .reverse()
@@ -102,16 +101,13 @@ const store = createStore({
       }
     },
     async saveBoard({ commit }, { board }) {
-      // const newBoard = await boardService.save(board);
-      console.log(board);
-      // commit({ type: "setCurrBoard", currBoard: newBoard });
-
-      // return newBoard;
+      const newBoard = await boardService.save(board);
+      console.log('save in store',board);
+      commit({ type: "setCurrBoard", currBoard: newBoard });
     },
     async saveBoards({ commit }, { boards }) {
-      console.log(boards);
       // boards = boards.map((board) => boardService.save(board))
-      commit({ type: "setBoards", boards });
+      commit({ type: "setBoards", boards});
     },
     async updateGroup({ commit }, { board, group }) {
       const idx = board.groups.findIndex(

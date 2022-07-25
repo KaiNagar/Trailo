@@ -1,6 +1,6 @@
 .home-page {
   position: relative;
-  top: 25px;
+  top: 10px;
   //   background-color: green;
   //   height: 100vh;
   display: flex;
@@ -81,12 +81,11 @@
 }
 
 .board-list-container {
-  margin-top: 1em;
+  margin-top: .9em;
   width: 100%;
   display: flex;
   .icon {
     line-height: 1.5em;
-    margin-bottom: 5px;
     font-size: 25px;
   }
   .recently {
@@ -110,6 +109,7 @@
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+    gap: 5px;
     width: 100%;
     .item {
       overflow-x: hidden;
@@ -173,12 +173,13 @@
       background-size: cover;
       background-position: center center;
       border-radius: 3px;
-      color: #ffffff;
-      position: relative;
-      text-decoration: none;
-      flex: 1 0 22%;
-      margin-inline-end: 2%;
-      margin-bottom: 2%;
+      // color: #ffffff;
+      // position: relative;
+      // text-decoration: none;
+      // flex: 1 0 22%;
+      // margin-inline-end: 2%;
+      // margin-bottom: 2%;
+      gap: 5px;
       list-style: none;
       cursor: pointer;
 

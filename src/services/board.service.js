@@ -68,6 +68,7 @@ async function save(board) {
   }
 }
 
+
 function getEmptyGroup() {
   return {
     id: _makeId(),
