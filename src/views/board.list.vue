@@ -76,7 +76,9 @@ export default {
     }
   },
   methods: {
-
+    onSelectedBoard(boardId) {
+      this.$router.push('/board/' + boardId)
+    },
     openMenu(menuAction) {
       this.$store.commit({ type: 'openMenu', menuAction })
     },
@@ -84,11 +86,17 @@ export default {
       this.$store.commit({ type: 'closeMenu' })
     },
 
-    star(boardId) {
-      console.log('star', boardId);
-      const board = this.boards.find(board => board._id === boardId)
+    async star(boardId) {
       this.$store.commit({ type: 'starBoard', boardId })
-      console.log(board);
+      const board = this.$store.getters.starredBoard
+
+      const boards = JSON.parse(JSON.stringify(this.boards))
+      const idx = boards.findIndex((board) => {
+        return board._id === boardId;
+      });
+      boards.splice(idx, 1, board)
+      console.log(boards);
+      this.$store.dispatch({ type: 'saveBoards', boards })
     }
   },
   computed: {
@@ -104,10 +112,12 @@ export default {
       })
     },
     recently() {
-      let boards = JSON.parse(JSON.stringify(this.$store.getters.boards))
-      boards = boards.reverse()
-      const boardsToDisplay = [boards[0], boards[1], boards[2], boards[3]]
-      return boardsToDisplay
+      // this.$store.commit({ type: 'starBoard', boardId })
+      return this.boards.slice()
+        .reverse()
+        .filter((board) => {
+          return !board.isStarred
+        }).slice(0, 4)
     },
 
   },
