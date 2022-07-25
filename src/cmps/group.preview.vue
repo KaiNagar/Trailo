@@ -75,6 +75,7 @@ export default {
   },
   methods: {
     updateGroup() {
+      console.log(this.newCard);
       this.newCard.title = this.$refs.textarea.value
       if (this.newCard.title === '') return
       const updateGroup = {

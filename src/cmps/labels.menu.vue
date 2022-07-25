@@ -7,40 +7,67 @@
       </button>
     </div>
 
+    <!-- CREATE LABEL MODAL -->
+    <app-modal @closeModal="closeMenu" v-if="menu.createLabel">
+
+      <template #title> <span @click="openMenu('labels')" class="back icon"> </span> Create label</template>
+      <template #part-1>
+        <header>Name</header>
+        <input v-model="newLabel.title" type="text" class="input">
+      </template>
+
+      <template #part-2>
+        <header>Select a color</header>
+        <div class="colors-grid">
+          <div @click="setLabelColor(idx)" v-for="(color, idx) in colors" :key="idx" class="color " :style="{ backgroundColor: color }">
+            <span class="check-icon" v-if="idx === colorIdx" ></span>
+
+          </div>
+        </div>
+      </template>
+
+
+      <template #part-3>
+        <button @click="createLabel" class="create-btn">Create</button>
+      </template>
+    </app-modal>
+
     <app-modal v-if="menu.labels" @closeModal="closeMenu">
       <template #title>Labels</template>
       <template #part-1>
-        <input type="text" placeholder="Search labels..."
-      /></template>
+        <input class="input" type="text" placeholder="Search labels..." /></template>
 
       <template #part-2>
-        <h3>Labels</h3>
-        <div v-for="label in board.labels" :key="label.id" class="labels">
-          <div
-            class="label"
-            @click="setLabel(label, labelSelected(label.id))"
-            :style="{ 'background-color': label.color }"
-          >
-            {{ label.title }}
-            <!--  -->
-            <div class="icon edit"></div>
-            <span class="check-icon" v-if="labelSelected(label.id)"></span>
-            <div class="pad">
-              <div class="top"></div>
-              <div class="bottom"></div>
+        <div class="part">
+          <header>Labels</header>
+          <div class="labels">
+            <div v-for="label in board.labels" :key="label.id" class="label"
+              @click="setLabel(label, labelSelected(label.id))" :style="{ 'background-color': label.color }">
+              <div class="title">{{ label.title }}</div>
+              <!--  -->
+              <div class="icon edit"></div>
+              <span class="check-icon" v-if="labelSelected(label.id)"></span>
+
+              <div class="pad">
+                <div class="top"></div>
+                <div class="bottom"></div>
+              </div>
+
             </div>
           </div>
         </div>
       </template>
 
       <template #part-3>
-        <button @click="isCreateLabel = true" v-if="!isCreateLabel">
+        <button class="btn" @click="openMenu('createLabel')" v-if="!isCreateLabel">
           Create a new label
         </button>
-        <div v-if="isCreateLabel">
-          <input v-model="newLabel.title" type="text" />
-          <button @click="createLabel">Create</button>
-        </div>
+
+
+        <!-- <div v-if="isCreateLabel">
+          <input class="input" v-model="newLabel.title" type="text" />
+          <button class="create btn" @click="createLabel">Create</button>
+        </div> -->
       </template>
     </app-modal>
   </section>
@@ -90,9 +117,23 @@ export default {
   },
   data() {
     return {
+      colorIdx:0,
       board: null,
       isCreateLabel: false,
       newLabel: boardService.getEmptyLabel(),
+      colors: [
+        '#61bd4f',
+        '#f2d600',
+        '#ff9f1a',
+        '#eb5a46',
+        '#c377e0',
+        '#0079bf',
+        '#00c2e0',
+        '#51e898',
+        '#ff78cb',
+        '#344563',
+        // '#b3bac5',
+      ]
       // labels: [
       //   { title: '', id: this._makeId, hex: '#61bd4f' },
       //   { title: '', id: this._makeId, hex: '#ff9f1a' },
@@ -107,6 +148,10 @@ export default {
     }
   },
   methods: {
+    setLabelColor(idx){
+      this.colorIdx = idx
+
+    },
     labelColor(color) {
       return { backgroundColor: color }
     },
@@ -126,13 +171,19 @@ export default {
       this.$emit('setLabel', this.card)
     },
     createLabel() {
-      this.newLabel.color = '#055a8c'
-      this.isCreateLabel = false
-      this.board.labels.push(this.newLabel)
+      // this.closeMenu()
+      // this.openMenu('createLabel')
+      this.newLabel.color = this.colors[this.colorIdx]
+      // this.isCreateLabel = false
+
+      // this.board.labels.push(this.newLabel)
       this.$emit('createLabel', this.newLabel)
+      console.log(this.newLabel);
       this.newLabel = boardService.getEmptyLabel()
+      this.closeMenu()
     },
     openMenu(menuAction) {
+      this.colorIdx = 0
       this.$store.commit({ type: 'openMenu', menuAction })
     },
     closeMenu() {
@@ -156,8 +207,12 @@ export default {
   created() {
     this.board = this.$store.getters.currBoard
   },
-  unmounted() {},
+  selectedColor(){
+    return 
+  },
+  unmounted() { },
 }
 </script>
 
-<style></style>
+<style>
+</style>

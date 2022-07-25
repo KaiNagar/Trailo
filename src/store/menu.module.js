@@ -10,6 +10,7 @@ export const menuModule = {
       labels: false,
       create:false,
       headerCreate:false,
+      createLabel:false,
       
     },
     edit: {},

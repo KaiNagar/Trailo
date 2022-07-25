@@ -82,17 +82,32 @@
 }
 
 .modal {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  header {
+    font-weight: 500;
+    color: #5f6d85;
+    line-height: 1.5em;
+    margin-bottom: 5px;
+  }
   .labels {
     display: flex;
     flex-direction: column;
+    margin-bottom: 1em;
     .label {
+      color: white;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
       height: em(32px);
       border-radius: 3px;
-      margin-bottom: 5px;
+      margin-bottom: 3px;
       width: 90%;
       position: relative;
       transition: 0.2s;
+      .title {
+        margin-inline-start: 1em;
+      }
       &:hover {
         cursor: pointer;
         padding-left: 5px;
@@ -135,8 +150,84 @@
       }
       &:hover {
         cursor: pointer;
-        background-color: lightgray;
+        background-color: rgb(243, 243, 243);
       }
     }
+  }
+
+  .btn {
+    font-size: 14px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background-color: #f5f6f8;
+    padding: 0.5em 1em;
+    color: #40506c;
+    cursor: pointer;
+    transition: 0.2;
+    &:hover {
+      background-color: #eaecf0;
+    }
+    margin-bottom: 0.7em;
+  }
+  .create-btn {
+  }
+
+  .icon.back {
+    position: absolute;
+    left: 0.7em;
+    &:hover {
+      color: black;
+      cursor: pointer;
+    }
+    &::before {
+      font-size: 18px;
+      content: "\e90a";
+    }
+  }
+  .colors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+    gap: 3.8px;
+
+    .color {
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      span{
+        color: white;
+        font-size: 16px;
+      }
+      cursor: pointer;
+      min-height: 2.5em;
+      border-radius: 3px;
+      transition: 0.1s;
+      &:hover {
+        opacity: 80%;
+      }
+    }
+
+    margin-bottom: 1em;
+  }
+
+  .create-btn {
+    background-color: #0079bf;
+    color: white;
+    border: none;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 100;
+    border-radius: 3px;
+    padding: 0.5em 1em;
+    transition: .1s;
+    cursor: pointer;
+    &:hover{
+      background-color: #025d93;
+    }
+    margin-bottom: .7em;
+
+    
   }
 }
