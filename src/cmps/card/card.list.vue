@@ -5,6 +5,9 @@
       behaviour="move"
       group-name="group-1"
       @drop="onDrop(currGroup, $event)"
+      drag-class="card-ghost"
+      drop-class="card-ghost-drop"
+      :drop-placeholder="dropPlaceholderOptions"
       :get-child-payload="getChildPayload1"
     >
       <Draggable v-for="card in cards" :key="card.id">
@@ -15,6 +18,8 @@
     </Container>
     <router-view></router-view>
   </section>
+  
+
 </template>
 
 <script>
@@ -29,6 +34,11 @@ export default {
   components: { cardPreview, Draggable, Container },
   data() {
     return {
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
+        animationDuration: '150',
+        showOnTop: true,
+      },
     }
   },
   methods: {
@@ -39,11 +49,24 @@ export default {
       return this.cards[index]
     },
     onDrop(group, dropResult) {
-      const { removedIndex, addedIndex } = dropResult
+      const { removedIndex, addedIndex, payload } = dropResult
       if (removedIndex === null && addedIndex === null) return
       const newGroup = { ...group }
       newGroup.cards = this.applyDrag(newGroup.cards, dropResult)
-      this.$emit('groupsQ',newGroup)
+
+      console.log(dropResult)
+      if (false) {
+        console.log('in')
+        const board = this.board
+        const groupIdx = board.groups.findIndex(
+          (bGroup) => bGroup.id === group.id,
+        )
+        board.groups.splice(groupIdx, 1, newGroup)
+        this.$store.dispatch({ type: 'saveBoard', board })
+        return
+      } else {
+        this.$emit('groupsQ', newGroup)
+      }
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
@@ -72,6 +95,5 @@ export default {
       return this.board.groups.findIndex((group) => group.id === this.group.id)
     },
   },
-  
 }
 </script>
