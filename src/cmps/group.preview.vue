@@ -35,12 +35,14 @@
           <span class="add-icon"></span
           ><span class="g-footer-title">Add a card</span>
         </div>
+        <div v-if="!isEditable" class="g-template-icon">
+          <span class="template-icon"></span>
+        </div>
         <div v-if="isEditable">
           <textarea
             class="g-footer-textarea"
             id="textarea"
             ref="textarea"
-            @blur="onCloseTextarea"
             cols="30"
             rows="30"
             placeholder="Enter a title for this card..."

@@ -10,13 +10,18 @@ export default {
   components: { appHeader },
   data() {
     return {
-      boards: null,
+    
     }
   },
   methods: {},
-  computed: {},
+  computed: {
+    boards(){
+      return this.$store.getters.boards
+    }
+  },
   async created() {
-    this.boards = await this.$store.dispatch({ type: 'loadBoards' })
+    const boards = await this.$store.dispatch({ type: 'loadBoards' })
+    console.log(boards);
   },
 }
 </script>

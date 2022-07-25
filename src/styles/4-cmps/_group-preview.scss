@@ -9,9 +9,7 @@
   max-height: 100%;
   font-weight: 400;
   font-size: 14px;
-  // overflow: scroll;
   width: 272px;
-  // max-height: 90vh;
   .g-header {
     cursor: pointer;
     line-height: 20px;
@@ -22,11 +20,12 @@
     position: relative;
 
     .g-menu.fa{
-      width: 1rem;
-      height: 1rem;
       position: absolute;
-      top: 11px;
-      right: 9px;
+      top: 13px;
+      right: 7px;
+      .menu-icon{
+        font-size: 0.8rem;
+      }
 
       img {
         width: 16px;
@@ -59,66 +58,59 @@ textarea{
   color: #172b4d;
   &:focus{
     outline:none;
-
   }
 }
-
 }
-// .contenteditable{
-//   &:focus-within{
-//     font-family: Helvetica Neue,sans-serif;
-//     background-color: #fff;
-//     padding: 1px 7px;
-//     width: 99%;
-//     box-shadow: 0 0 0 2px #0079bfc2;
-//     font-weight: 600;
-//     overflow: hidden;
-//     border: 2px solid transparent;
-//     resize: none;
-//     overflow-wrap: break-word;
-//     color: #172b4d;
-//   }
-//     &:focus{
-//       outline:none;
-
-    // }
-
-  // }
-  
 }
-
-
 .g-footer {
   transition-duration: 85ms;
   line-height: 20px;
   min-height: 36px;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
   text-align: center;
   align-items: center;
+  position: relative;
   
   .g-footer-add-area{
-    position: relative;
     transition-duration: 85ms;
-    border-radius: 3px;
     margin: 1px 0 0px 10px;
     border-radius: 3px;
     .g-footer-title-icon{
       line-height: 20px;
       color: #6b778c;
-      padding-left: 9px;
+      padding-left: 7px;
+      display: flex;
+      width: 220px;
+      cursor: pointer;
+      border-radius: 3px;
+      align-items: center;
       .g-footer-title{
-        padding: 3px;
+        padding: 1px;
+        line-height: 20px;
       }
       &:hover{
         background-color: #091e4214;
       }
-      
+    
       img{
         margin-left: 10px;
         width: 12px;
         filter: invert(49%) sepia(10%) saturate(737%) hue-rotate(179deg) brightness(92%) contrast(90%);
       }
     }
+  }
+}
+.g-template-icon{
+  position: absolute;
+  right: 6px;
+  top: -4px;
+  margin-top: 4px;
+  padding: 5px 8px;
+  &:hover{
+    background-color: #091e4214;
+    border-radius: 3px;
+    color: #172b4d;
+    cursor: pointer;
   }
 }
   .g-footer-textarea{

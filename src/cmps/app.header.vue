@@ -1,23 +1,26 @@
 <template>
-  <section class="main-header ">
+  <section class="main-header">
     <div class="logo-container">
-      <button class="header-menu">---</button>
+      <button class="header-menu icon"></button>
       <router-link to="/">
         <div class="logo">
-          <img src="../../src/styles/cenzored-header-gif.gif" alt="">
+          <img src="../../src/styles/cenzored-header-gif.gif" alt="" />
           <span>ai</span>
         </div>
       </router-link>
     </div>
 
-
-
     <div class="actions">
-
       <div class="action">
-        <button @click="openModal('recent')" class="btn">Recent <img class="arrow" src="../styles/svgs/arrow.svg"
-            alt=""> </button>
-        <app-modal v-if="isModal.recent" :newItems="boards" @openBoard="openBoard" @closeModal="closeModal">
+        <button @click="openModal('recent')" class="btn">
+          Recent <img class="arrow" src="../styles/svgs/arrow.svg" alt="" />
+        </button>
+        <app-modal
+          v-if="isModal.recent"
+          :newItems="boards"
+          @openBoard="openBoard"
+          @closeModal="closeModal"
+        >
           <template #title>Recent</template>
           <template #content-1>
             <div class="img"></div>
@@ -31,9 +34,15 @@
       </div>
 
       <div class="action">
-        <button @click="openModal('starred')" class="btn">Starred <img class="arrow" src="../styles/svgs/arrow.svg"
-            alt=""> </button>
-        <app-modal v-if="isModal.starred" :newItems="boards" @openBoard="openBoard" @closeModal="closeModal">
+        <button @click="openModal('starred')" class="btn">
+          Starred <img class="arrow" src="../styles/svgs/arrow.svg" alt="" />
+        </button>
+        <app-modal
+          v-if="isModal.starred"
+          :newItems="boards"
+          @openBoard="openBoard"
+          @closeModal="closeModal"
+        >
           <template #title>Starred</template>
           <template #content-1>
             <div class="img"></div>
@@ -47,9 +56,15 @@
       </div>
 
       <div class="action">
-        <button @click="openModal('templates')" class="btn">Templates <img class="arrow" src="../styles/svgs/arrow.svg"
-            alt=""> </button>
-        <app-modal v-if="isModal.templates" :newItems="boards" @openBoard="openBoard" @closeModal="closeModal">
+        <button @click="openModal('templates')" class="btn">
+          Templates <img class="arrow" src="../styles/svgs/arrow.svg" alt="" />
+        </button>
+        <app-modal
+          v-if="isModal.templates"
+          :newItems="boards"
+          @openBoard="openBoard"
+          @closeModal="closeModal"
+        >
           <template #title>Templates</template>
           <template #content-1>
             <div class="img"></div>
@@ -61,44 +76,44 @@
           </template>
         </app-modal>
       </div>
-
-
-      <button class="create-btn"></button>
+      <div class="add">
+        <button @click="openMenu('headerCreate')" class="create-btn"></button>
+        <add-board v-if="menu.headerCreate"></add-board>
+      </div>
     </div>
 
-
     <div class="search">
-      <img src="../styles/svgs/search.svg">
+      <img src="../styles/svgs/search.svg" />
       <input class="search-board-input" type="text" placeholder="Search" />
     </div>
 
-
     <div class="right-header flex">
-      <router-link to="/about"><button>i</button></router-link>
-      <button class="notifications">🔔</button>
+      <!-- <router-link to="/about"></router-link> -->
+      <button class="notifications"><img src="../styles/svgs/notification.svg" alt="" /></button>
       <div class="profile">
         <button>KN</button>
       </div>
     </div>
-
-
   </section>
 </template>
 <script>
+import addBoard from './board/add.board.vue'
 import appModal from '../cmps/app.modal.vue'
 export default {
   name: 'appHeader',
   props: {
-    boards: Array
+    boards: Array,
   },
   components: {
     appModal,
-
+    addBoard,
   },
   data() {
     return {
       isModal: {
-        recent: false, starred: false, templates: false
+        recent: false,
+        starred: false,
+        templates: false,
       },
     }
   },
@@ -117,9 +132,16 @@ export default {
       }
     },
     openBoard(boardId) {
-      console.log(boardId);
+      console.log(boardId)
       this.$router.push(`/board/${boardId}`)
-    }
+    },
+    openMenu(menuAction) {
+      this.closeModal()
+      this.$store.commit({ type: 'openMenu', menuAction })
+    },
+    closeMenu() {
+      this.$store.commit({ type: 'closeMenu' })
+    },
   },
   computed: {
     // boards() {
@@ -132,12 +154,12 @@ export default {
         board.isStarred
       })
       return starred
-    }
-
+    },
+    menu() {
+      return this.$store.getters.menu
+    },
   },
-  created() {
-
-
-  },
+  created() {},
+  created() {},
 }
 </script>

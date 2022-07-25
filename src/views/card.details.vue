@@ -7,19 +7,10 @@
         </router-link>
       </div>
 
-      <div
-        v-if="isCoverOn"
-        :style="cardCoverStyle"
-        :class="cardCoverClass"
-        class="card-cover"
-      >
+      <div v-if="isCoverOn" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
         <div class="cover-menu-container">
-          <div
-            class="cover-menu-btn flex align-center"
-            @click="isCoverMenuOpen = !isCoverMenuOpen"
-          >
-            <span class="cover-icon"></span
-            ><span class="cover-btn-title">Cover</span>
+          <div class="cover-menu-btn flex align-center" @click="isCoverMenuOpen = !isCoverMenuOpen">
+            <span class="cover-icon"></span><span class="cover-btn-title">Cover</span>
           </div>
         </div>
       </div>
@@ -30,9 +21,7 @@
             <div class="in-list-txt">
               <h1>{{ card.title }}</h1>
               in list
-              <span class="group-title" @click="isMoveModalOpen = true">{{
-                group.title
-              }}</span>
+              <span class="group-title" @click="isMoveModalOpen = true">{{ group.title }}</span>
             </div>
             <!-- <move-card-modal
               :board="this.board"
@@ -52,17 +41,12 @@
                     :key="label.id"
                     @click="openLabelsMenu($event)"
                   >
-                    <span
-                      class="labels-title"
-                      :style="labelColor(label.color)"
-                      >{{ label.title }}</span
-                    >
+                    <span class="labels-title" :style="labelColor(label.color)">{{
+                      label.title
+                    }}</span>
                   </div>
 
-                  <button
-                    class="add-icon"
-                    @click="openLabelsMenu($event)"
-                  ></button>
+                  <button class="add-icon" @click="openLabelsMenu($event)"></button>
                 </div>
 
                 <labels-menu
@@ -115,10 +99,7 @@
               </div>
 
               <div class="checklist-container">
-                <article
-                  v-for="(checklist, idx) in card.checklists"
-                  :key="checklist.id"
-                >
+                <article v-for="(checklist, idx) in card.checklists" :key="checklist.id">
                   <action-checklist
                     @saveChecklist="saveChecklist"
                     @removeChecklist="removeChecklist"
@@ -293,8 +274,7 @@ export default {
       return this.board.labels
     },
     cardCoverStyle() {
-      if (this.card.style.bgImg)
-        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      if (this.card.style.bgImg) return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       else return { backgroundColor: this.card.style.bgColor }
     },
     cardCoverClass() {
@@ -303,15 +283,9 @@ export default {
     },
 
     getCurrPos() {
-      const boardIdx = this.boards.findIndex(
-        (board) => board._id === this.board._id,
-      )
-      const cardIdx = this.group.cards.findIndex(
-        (card) => card.id === this.card.id,
-      )
-      const groupIdx = this.board.groups.findIndex(
-        (group) => group.id === this.group.id,
-      )
+      const boardIdx = this.boards.findIndex((board) => board._id === this.board._id)
+      const cardIdx = this.group.cards.findIndex((card) => card.id === this.card.id)
+      const groupIdx = this.board.groups.findIndex((group) => group.id === this.group.id)
       return {
         cardIdx,
         groupIdx,
@@ -326,15 +300,11 @@ export default {
     },
     group() {
       const { groupId } = this.$route.params
-      return JSON.parse(
-        JSON.stringify(this.board.groups.find((group) => group.id === groupId)),
-      )
+      return JSON.parse(JSON.stringify(this.board.groups.find((group) => group.id === groupId)))
     },
     card() {
       const { cardId } = this.$route.params
-      return JSON.parse(
-        JSON.stringify(this.group.cards.find((card) => card.id === cardId)),
-      )
+      return JSON.parse(JSON.stringify(this.group.cards.find((card) => card.id === cardId)))
     },
     isCoverActive() {
       if (this.card.style.bgColor || this.card.style.bgImg) return true
@@ -342,6 +312,7 @@ export default {
     },
   },
   created() {
+    console.log('this.card', this.card)
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
     this.$store.commit({

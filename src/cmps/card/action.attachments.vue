@@ -25,7 +25,7 @@
                     <template #part-2>
                         <form @submit.prevent="readLink" class="link-box">
                             <span class="link">Attach a link</span>
-                            <input v-model="url" type="url">
+                            <input class="input" v-model="url" type="url">
                             <button>Attach</button>
                         </form>
                     </template>
