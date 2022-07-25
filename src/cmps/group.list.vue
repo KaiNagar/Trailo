@@ -6,6 +6,9 @@
       group-name="board-1"
       class="flex"
       @drop="onDrop"
+      drag-class="group-ghost"
+      drop-class="group-ghost-drop"
+      :drop-placeholder="upperDropPlaceholderOptions"
       :get-child-payload="getChildPayload1"
     >
       <Draggable v-for="group in groups" :key="group.id">
@@ -71,11 +74,18 @@ export default {
       newGroup: boardService.getEmptyGroup(),
       groupsCopy: [],
       groupsQ: [],
+      upperDropPlaceholderOptions: {
+        className: 'groups-drop-preview',
+        animationDuration: '150',
+        showOnTop: true,
+      },
     }
   },
   methods: {
     onCardMove(newGroup) {
       const board = this.board
+      // console.log(newGroup);
+      // const isIn = this.groupsQ.some(groups)
       this.groupsQ.push(newGroup)
       if (this.groupsQ.length === 2) {
         this.groupsQ.forEach((group) => {

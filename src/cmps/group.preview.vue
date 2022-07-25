@@ -30,14 +30,15 @@
           <template #part-4><header>Archive this list</header></template>
         </app-modal> -->
       </div>
-
-      <card-list
-        :currGroup="group"
-        :cards="group.cards"
-        @groupsQ="$emit('onCardMove', $event)"
-        @removeCard="$emit('removeCard', $event)"
-        :updateGroup="updateGroup"
-      />
+<div class="card-list-container flex">
+  <card-list
+    :currGroup="group"
+    :cards="group.cards"
+    @groupsQ="$emit('onCardMove', $event)"
+    @removeCard="$emit('removeCard', $event)"
+    :updateGroup="updateGroup"
+  />
+</div>
     </div>
 
     <div class="g-footer flex space-between">
@@ -48,24 +49,61 @@
         <div v-if="!isEditable" class="g-template-icon">
           <span class="template-icon"></span>
         </div>
-        <div v-if="isEditable">
+        <!-- <div v-if="isEditable">
           <textarea
-            class="g-footer-textarea"
-            id="textarea"
-            ref="textarea"
-            cols="30"
-            rows="30"
-            placeholder="Enter a title for this card..."
-            @keydown.enter.prevent="updateGroup"
+            v-if="isTitleEditable"
+            @keydown.enter.prevent="updateGroupTitle"
+            @blur="isTitleEditable = false"
+            v-model="group.title"
+            ref="contentTextArea"
+            id="contentTextArea"
           ></textarea>
-          <div class="add-card">
-            <button @click="updateGroup">Add card</button
-            ><span class="close-icon-span">
-              <span @click="onCloseTextarea" class="close-icon"></span>
-            </span>
+        </div> -->
+        <!-- <div class="g-menu fa">
+          <span class="menu-icon"></span>
+        </div>
+      </div> -->
+      <!-- <div class="card-list-container flex">
+        <card-list
+          :currGroup="group"
+          :cards="group.cards"
+          @groupsQ="$emit('onCardMove', $event)"
+          :updateGroup="updateGroup"
+        />
+      </div>
+
+      <div class="g-footer flex space-between">
+        <div class="g-footer-add-area">
+          <div
+            @click="onOpenTextarea"
+            v-if="!isEditable"
+            class="g-footer-title-icon"
+          >
+            <span class="add-icon"></span
+            ><span class="g-footer-title">Add a card</span>
+          </div>
+          <div v-if="!isEditable" class="g-template-icon">
+            <span class="template-icon"></span>
+          </div>
+          <div v-if="isEditable">
+            <textarea
+              class="g-footer-textarea"
+              id="textarea"
+              ref="textarea"
+              cols="30"
+              rows="30"
+              placeholder="Enter a title for this card..."
+              @keydown.enter.prevent="updateGroup"
+            ></textarea>
+            <div class="add-card">
+              <button @click="updateGroup">Add card</button
+              ><span class="close-icon-span">
+                <span @click="onCloseTextarea" class="close-icon"></span>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
