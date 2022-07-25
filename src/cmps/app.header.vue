@@ -1,7 +1,7 @@
 <template>
   <section class="main-header ">
     <div class="logo-container">
-      <button class="header-menu">---</button>
+      <button class="header-menu icon"></button>
       <router-link to="/">
         <div class="logo">
           <img src="../../src/styles/cenzored-header-gif.gif" alt="">
@@ -74,8 +74,8 @@
 
 
     <div class="right-header flex">
-      <router-link to="/about"><button>i</button></router-link>
-      <button class="notifications">🔔</button>
+      <!-- <router-link to="/about"></router-link> -->
+      <button class="notifications"><img src="../styles/svgs/notification.svg" alt=""></button>
       <div class="profile">
         <button>KN</button>
       </div>
