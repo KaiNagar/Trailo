@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
+  // background-attachment: fixed;
   height: 100vh;
   overflow-x: scroll;
   padding-bottom: 2em;
@@ -26,8 +26,10 @@
   }
   .group-list {
     display: flex;
+    flex-wrap: wrap;
     position: relative;
     margin-left: 12px;
+    position: relative;
 
     .new-group {
       background-color: rgb(103 103 103 / 30%);

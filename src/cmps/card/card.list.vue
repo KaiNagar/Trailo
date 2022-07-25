@@ -9,7 +9,7 @@
     >
       <Draggable v-for="card in cards" :key="card.id">
         <div>
-          <card-preview :card="card" @click="openCard(card.id)" />
+          <card-preview :card="card" @click="openCard(card.id)" @removeCard="removeCard" />
         </div>
       </Draggable>
     </Container>
@@ -29,11 +29,16 @@ export default {
   components: { cardPreview, Draggable, Container },
   data() {
     return {
+      showCardMenu: false,
     }
   },
   methods: {
     openCard(cardId) {
       this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
+    },
+    removeCard(cardId) {
+      console.log(cardId)
+      this.$emit('removeCard', cardId)
     },
     getChildPayload1(index) {
       return this.cards[index]
@@ -43,7 +48,7 @@ export default {
       if (removedIndex === null && addedIndex === null) return
       const newGroup = { ...group }
       newGroup.cards = this.applyDrag(newGroup.cards, dropResult)
-      this.$emit('groupsQ',newGroup)
+      this.$emit('groupsQ', newGroup)
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
@@ -72,6 +77,5 @@ export default {
       return this.board.groups.findIndex((group) => group.id === this.group.id)
     },
   },
-  
 }
 </script>

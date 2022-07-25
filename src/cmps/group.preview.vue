@@ -1,7 +1,7 @@
 <template>
   <section v-if="group" class="group">
-    <div @click="onTitleEditable" class="g-header">
-      <div class="edit-group-title">
+    <div class="g-header">
+      <div @click="onTitleEditable" class="edit-group-title">
         <span v-if="!isTitleEditable">{{ group.title }}</span>
         <textarea
           v-if="isTitleEditable"
@@ -13,27 +13,37 @@
         ></textarea>
       </div>
       <div class="g-menu fa">
-        <span class="menu-icon"></span>
+        <button class="g-menu-btn" @click="onOpenMenu = true">
+          <!-- <button class="g-menu-btn" @click="openMenu('groupMenu')"> -->
+          <span class="menu-icon"></span>
+        </button>
+        <button v-if="onOpenMenu" @click="removeGroup(group.id)">Archive list</button>
       </div>
     </div>
     <div>
+      <div>
+        <!-- <app-modal v-if="menu.create" @closeModal="closeMenu">
+          <template #title>List actions</template>
+          <template #part-1><header>Add card...</header></template>
+          <template #part-2><header>Copy list...</header></template>
+          <template #part-3><header>Move list...</header></template>
+          <template #part-4><header>Archive this list</header></template>
+        </app-modal> -->
+      </div>
+
       <card-list
         :currGroup="group"
         :cards="group.cards"
-        @groupsQ="$emit('onCardMove',$event)"
+        @groupsQ="$emit('onCardMove', $event)"
+        @removeCard="$emit('removeCard', $event)"
         :updateGroup="updateGroup"
       />
     </div>
 
     <div class="g-footer flex space-between">
       <div class="g-footer-add-area">
-        <div
-          @click="onOpenTextarea"
-          v-if="!isEditable"
-          class="g-footer-title-icon"
-        >
-          <span class="add-icon"></span
-          ><span class="g-footer-title">Add a card</span>
+        <div @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title-icon">
+          <span class="add-icon"></span><span class="g-footer-title">Add a card</span>
         </div>
         <div v-if="!isEditable" class="g-template-icon">
           <span class="template-icon"></span>
@@ -62,6 +72,7 @@
 
 <script>
 import cardList from '@/cmps/card/card.list.vue'
+// import appModal from '../cmps/app.modal.vue'
 export default {
   name: 'groupPreview',
   props: {
@@ -72,11 +83,15 @@ export default {
     return {
       isEditable: false,
       isTitleEditable: false,
+      onOpenMenu: false,
       newCard: {},
       groupToEdit: {},
     }
   },
   methods: {
+    removeGroup(groupId) {
+      this.$emit('removeGroup', groupId)
+    },
     updateGroup() {
       this.newCard.title = this.$refs.textarea.value
       if (this.newCard.title === '') return
@@ -108,6 +123,18 @@ export default {
       if (this.group.title === '') return
       this.group.title = this.$refs.contentTextArea.value
       this.$emit('updateGroupTitle', this.group)
+    },
+  },
+
+  // openMenu(menuAction) {
+  //   this.$store.commit({ type: 'openMenu', menuAction })
+  // },
+  closeMenu() {
+    this.$store.commit({ type: 'closeMenu' })
+  },
+  computed: {
+    menu() {
+      return this.$store.getters.menu
     },
   },
   created() {
