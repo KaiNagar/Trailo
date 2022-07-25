@@ -68,6 +68,7 @@ async function save(board) {
   }
 }
 
+
 function getEmptyGroup() {
   return {
     id: _makeId(),
@@ -124,6 +125,7 @@ function getEmptyBoard() {
   return {
     _id: "",
     title: "",
+    isStarred:false,
     createdAt: Date.now() - 100000,
     labelsOpen: false,
     bgCover:
@@ -151,6 +153,7 @@ function _createBoard() {
   const boardId = _makeId();
   return {
     _id: boardId,
+    isStarred:false,
     title: 'Sprint',
     createdAt: Date.now() - 100000,
     labelsOpen: false,

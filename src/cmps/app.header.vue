@@ -1,7 +1,7 @@
 <template>
   <section class="main-header">
     <div class="logo-container">
-      <button class="header-menu">---</button>
+      <button class="header-menu icon"></button>
       <router-link to="/">
         <div class="logo">
           <img src="../../src/styles/cenzored-header-gif.gif" alt="" />
@@ -76,8 +76,15 @@
           </template>
         </app-modal>
       </div>
+      <<<<<<< HEAD
 
       <button class="create-btn"></button>
+      =======
+      <div class="add">
+        <button @click="openMenu('headerCreate')" class="create-btn"></button>
+        <add-board v-if="menu.headerCreate"></add-board>
+      </div>
+      >>>>>>> 8f7d9da9605ec2b1a565b7c3a6acee459029e9c8
     </div>
 
     <div class="search">
@@ -86,8 +93,8 @@
     </div>
 
     <div class="right-header flex">
-      <router-link to="/about"><button>i</button></router-link>
-      <button class="notifications">🔔</button>
+      <!-- <router-link to="/about"></router-link> -->
+      <button class="notifications"><img src="../styles/svgs/notification.svg" alt="" /></button>
       <div class="profile">
         <button>KN</button>
       </div>
@@ -95,6 +102,7 @@
   </section>
 </template>
 <script>
+import addBoard from './board/add.board.vue'
 import appModal from '../cmps/app.modal.vue'
 export default {
   name: 'appHeader',
@@ -131,6 +139,16 @@ export default {
       console.log(boardId)
       this.$router.push(`/board/${boardId}`)
     },
+<<<<<<< HEAD
+=======
+    openMenu(menuAction) {
+      this.closeModal()
+      this.$store.commit({ type: 'openMenu', menuAction })
+    },
+    closeMenu() {
+      this.$store.commit({ type: 'closeMenu' })
+    },
+>>>>>>> 8f7d9da9605ec2b1a565b7c3a6acee459029e9c8
   },
   computed: {
     // boards() {
@@ -144,6 +162,17 @@ export default {
       })
       return starred
     },
+<<<<<<< HEAD
+=======
+    menu() {
+      return this.$store.getters.menu
+    },
+
+  },
+  created() {
+
+
+>>>>>>> 8f7d9da9605ec2b1a565b7c3a6acee459029e9c8
   },
   created() {},
 }
