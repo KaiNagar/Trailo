@@ -30,15 +30,15 @@
           <template #part-4><header>Archive this list</header></template>
         </app-modal> -->
       </div>
-<div class="card-list-container flex">
-  <card-list
-    :currGroup="group"
-    :cards="group.cards"
-    @groupsQ="$emit('onCardMove', $event)"
-    @removeCard="$emit('removeCard', $event)"
-    :updateGroup="updateGroup"
-  />
-</div>
+      <div class="card-list-container flex">
+        <card-list
+          :currGroup="group"
+          :cards="group.cards"
+          @groupsQ="$emit('onCardMove', $event)"
+          @removeCard="$emit('removeCard', $event)"
+          :updateGroup="updateGroup"
+        />
+      </div>
     </div>
 
     <div class="g-footer flex space-between">
@@ -63,7 +63,7 @@
           <span class="menu-icon"></span>
         </div>
       </div> -->
-      <!-- <div class="card-list-container flex">
+        <!-- <div class="card-list-container flex">
         <card-list
           :currGroup="group"
           :cards="group.cards"
@@ -104,6 +104,7 @@
           </div>
         </div>
       </div> -->
+      </div>
     </div>
   </section>
 </template>
