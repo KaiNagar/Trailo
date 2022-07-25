@@ -101,7 +101,6 @@ export default {
         },
         async createBoard() {
             await this.$store.dispatch({ type: 'loadBoards' })
-
             this.closeMenu()
             this.newBoard.bgCover = this.selectedBgImg
             this.saveBoard()

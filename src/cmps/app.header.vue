@@ -106,6 +106,7 @@ export default {
   },
   components: {
     appModal,
+    addBoard,
   },
   data() {
     return {
