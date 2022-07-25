@@ -24,7 +24,7 @@ const store = createStore({
         .reverse()
         .filter((board) => {
           return !board.isStarred;
-        });
+        }).slice(0,4)
     },
     boards({ boards }) {
       return boards;
@@ -48,7 +48,6 @@ const store = createStore({
   mutations: {
     setBoards(state, { boards }) {
       state.boards = boards;
-      console.log(boards);
     },
     setBoardId(state, { boardId }) {
       state.boardId = boardId;
@@ -102,8 +101,8 @@ const store = createStore({
     },
     async saveBoard({ commit }, { board }) {
       const newBoard = await boardService.save(board);
-      console.log('save in store',board);
       commit({ type: "setCurrBoard", currBoard: newBoard });
+      return newBoard
     },
     async saveBoards({ commit }, { boards }) {
       // boards = boards.map((board) => boardService.save(board))
