@@ -3,9 +3,10 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  // background-attachment: fixed;
-  height: 100vh;
-  overflow-x: scroll;
+  background-attachment: fixed;
+  height: 95.3vh;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding-bottom: 2em;
   border-bottom: 8px rgba(255, 0, 0, 0) solid;
   /* width */
@@ -29,7 +30,14 @@
     flex-wrap: wrap;
     position: relative;
     margin-left: 12px;
-    position: relative;
+    .group-ghost {
+      transition: transform 0.18s ease;
+      transform: rotateZ(5deg);
+     }
+     .group-ghost-drop {
+      transition: transform 0.18s ease-in-out;
+      transform: rotateZ(0deg);
+     }
 
     .new-group {
       background-color: rgb(103 103 103 / 30%);
@@ -74,6 +82,9 @@
     border-radius: 1px;
     &:focus{
       outline: 0 0 0 2px #0079bfc2;
+    }
+    &:focus-visible{
+      outline: none;
     }
   }
 }

@@ -1,3 +1,7 @@
+.group-container {
+  height: 87vh;
+
+}
 .group {
   color: #172b4d;
   margin: 0 4px;
@@ -10,6 +14,7 @@
   font-weight: 400;
   font-size: 14px;
   width: 272px;
+  
   .g-header {
     cursor: pointer;
     line-height: 20px;
@@ -19,7 +24,7 @@
     justify-content: space-between;
     position: relative;
 
-    .g-menu.fa{
+    .g-menu.fa {
       position: absolute;
       top: 4px;
       right: 5px;
@@ -42,11 +47,11 @@
       img {
         width: 16px;
         filter: invert(11%) sepia(82%) saturate(1065%) hue-rotate(194deg)
-        brightness(93%) contrast(91%);
+          brightness(93%) contrast(91%);
       }
     }
   }
-  
+}
   .edit-group-title{
     font-weight: 600;
     max-width: 214px;
@@ -70,8 +75,29 @@ textarea{
     outline:none;
   }
 }
-}
-}
+  }
+//   .edit-group-title {
+//     width: 90%;
+//     display: flex;
+
+//     textarea {
+//       font-family: Helvetica Neue, sans-serif;
+//       background-color: #fff;
+//       padding: 1px 7px;
+//       width: 99%;
+//       box-shadow: 0 0 0 2px #0079bfc2;
+//       font-weight: 600;
+//       overflow: hidden;
+//       border: 2px solid transparent;
+//       resize: none;
+//       overflow-wrap: break-word;
+//       color: #172b4d;
+//       &:focus {
+//         outline: none;
+//       }
+//     }
+//   }
+// }
 .g-footer {
   transition-duration: 85ms;
   line-height: 20px;
@@ -80,12 +106,12 @@ textarea{
   text-align: center;
   align-items: center;
   position: relative;
-  
-  .g-footer-add-area{
+
+  .g-footer-add-area {
     transition-duration: 85ms;
     margin: 1px 0 0px 10px;
     border-radius: 3px;
-    .g-footer-title-icon{
+    .g-footer-title-icon {
       line-height: 20px;
       color: #6b778c;
       padding-left: 7px;
@@ -95,80 +121,81 @@ textarea{
       cursor: pointer;
       border-radius: 3px;
       align-items: center;
-      .g-footer-title{
+      .g-footer-title {
         padding: 1px;
         line-height: 20px;
       }
-      &:hover{
+      &:hover {
         background-color: #091e4214;
       }
-    
-      img{
+
+      img {
         margin-left: 10px;
         width: 12px;
-        filter: invert(49%) sepia(10%) saturate(737%) hue-rotate(179deg) brightness(92%) contrast(90%);
+        filter: invert(49%) sepia(10%) saturate(737%) hue-rotate(179deg)
+          brightness(92%) contrast(90%);
       }
     }
   }
 }
-.g-template-icon{
+.g-template-icon {
   position: absolute;
   right: 6px;
   top: -3px;
   margin-top: 4px;
   padding: 5px 8px;
-  &:hover{
+  &:hover {
     background-color: #091e4214;
     border-radius: 3px;
     color: #172b4d;
     cursor: pointer;
   }
 }
-  .g-footer-textarea{
-    box-shadow: 0 1px 0 #091e4240;
-    color: #172b4d;
-    padding: 5px 8px 2px;
-    font-family: Helvetica Neue,sans-serif;
-    width: 98%;
-    border-radius: 3px;
-    resize: none;
-    font-weight: 400;
-    font-size: 14px;
-    overflow-wrap: break-word;
-    border: none;
-    overflow: hidden;
-    margin: 0px 6px 1px -7px;
-    max-height: 64px;
-    
-    &:focus-visible{
-        outline: none;
-      }
-    }
-    .add-card {
-      display: flex;
-      align-items: center;
-      float: left;
-      font-family: Helvetica Neue,sans-serif;
-      
-      button{
-        background-color: #0079bf;
-        padding: 8px 13px;
-        border-radius: 3px;
-        border: none;
-        box-shadow: none;
-        color: #fff;
-        cursor: pointer;
-        &:hover{
-          background-color: #0066a1;
-        }
-      }
-      .close-icon-span{
-      width: 12px;
-      margin: 3px 8px -3px;
-      cursor: pointer;
-      .close-icon{
-        font-size: 1.5rem;
-      }
+.g-footer-textarea {
+  box-shadow: 0 1px 0 #091e4240;
+  color: #172b4d;
+  padding: 5px 8px 2px;
+  font-family: Helvetica Neue, sans-serif;
+  width: 98%;
+  border-radius: 3px;
+  resize: none;
+  font-weight: 400;
+  font-size: 14px;
+  overflow-wrap: break-word;
+  border: none;
+  overflow: hidden;
+  margin: 0px 6px 1px -7px;
+  max-height: 64px;
 
-      }
+  &:focus-visible {
+    outline: none;
+  }
+}
+.add-card {
+  display: flex;
+  align-items: center;
+  float: left;
+  font-family: Helvetica Neue, sans-serif;
+
+  button {
+    background-color: #0079bf;
+    padding: 8px 13px;
+    border-radius: 3px;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+      background-color: #0066a1;
     }
+  }
+  .close-icon-span {
+    width: 12px;
+    margin: 3px 8px -3px;
+    cursor: pointer;
+    .close-icon {
+      font-size: 1.5rem;
+    }
+  }
+}
+  
