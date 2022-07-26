@@ -4,7 +4,7 @@
       orientation="horizontal"
       behaviour="move"
       group-name="board-1"
-      class="flex "
+      class="flex"
       @drop="onDrop"
       drag-class="group-ghost"
       drop-class="group-ghost-drop"
@@ -18,6 +18,7 @@
             @updateGroupTitle="updateGroup"
             @updateGroup="updateGroup"
             @onCardMove="onCardMove"
+            @dragLeave="dragLeave"
           />
         </article>
       </Draggable>
@@ -77,14 +78,16 @@ export default {
         className: 'groups-drop-preview',
         animationDuration: '150',
         showOnTop: true,
+        isLeaveGroup: null,
       },
     }
   },
   methods: {
+    dragLeave(leaveIdx) {
+      this.isLeaveGroup = leaveIdx
+    },
     onCardMove(newGroup) {
       const board = this.board
-      console.log(newGroup);
-      // const isIn = this.groupsQ.some(groups)
       this.groupsQ.push(newGroup)
       if (this.groupsQ.length === 2) {
         this.groupsQ.forEach((group) => {
@@ -94,7 +97,21 @@ export default {
           board.groups.splice(groupIdx, 1, group)
         })
         this.$store.dispatch({ type: 'saveBoard', board })
+        this.isLeaveGroup = null
         this.groupsQ = []
+        return
+      }
+      if (!this.isLeaveGroup) {
+        this.groupsQ.forEach((group) => {
+          const groupIdx = board.groups.findIndex(
+            (bGroup) => bGroup.id === group.id,
+          )
+          board.groups.splice(groupIdx, 1, group)
+        })
+        this.$store.dispatch({ type: 'saveBoard', board })
+        this.isLeaveGroup = null
+        this.groupsQ = []
+        return
       }
     },
     updateGroup(group) {

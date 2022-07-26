@@ -53,14 +53,11 @@
                   <div
                     class="label-btn"
                     v-for="label in labelsToShow"
+                    :style="labelColor(label.color)"
                     :key="label.id"
                     @click="openLabelsMenu($event)"
                   >
-                    <span
-                      class="labels-title"
-                      :style="labelColor(label.color)"
-                      >{{ label.title }}</span
-                    >
+                    <span class="labels-title">{{ label.title }}</span>
                   </div>
 
                   <button
@@ -135,23 +132,13 @@
                       @removeChecklist="removeChecklist"
                       @checklistQ="moveChecklistQ"
                       @sendToSave="sendToSave"
+                      @dragLeave="dragLeave"
                       :checklist="checklist"
                       :idx="idx"
                       :card="card"
                     />
                   </Draggable>
                 </Container>
-                <!-- <article
-                  v-for="(checklist, idx) in card.checklists"
-                  :key="checklist.id"
-                >
-                  <action-checklist
-                    @saveChecklist="saveChecklist"
-                    @removeChecklist="removeChecklist"
-                    :checklist="checklist"
-                    :idx="idx"
-                  />
-                </article> -->
               </div>
             </div>
 
@@ -222,6 +209,7 @@ export default {
         animationDuration: '150',
         showOnTop: true,
       },
+      leavingCIdx: null,
     }
   },
   methods: {
@@ -259,8 +247,25 @@ export default {
           card.checklists.splice(checklistIdx, 1, checklist)
         })
         this.sendToSave(card)
+        this.leavingCIdx = null
         this.checklistQ = []
+        return
       }
+      if (!this.leavingCIdx) {
+        this.checklistQ.forEach((checklist) => {
+          const checklistIdx = card.checklists.findIndex(
+            (c) => c.id === checklist.id,
+          )
+          card.checklists.splice(checklistIdx, 1, checklist)
+        })
+        this.sendToSave(card)
+        this.leavingCIdx = null
+        this.checklistQ = []
+        return
+      }
+    },
+    dragLeave(cIdx) {
+      this.leavingCIdx = cIdx
     },
     labelColor(color) {
       return { backgroundColor: color }

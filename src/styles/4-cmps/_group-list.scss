@@ -32,10 +32,12 @@
     .group-ghost {
       transition: transform 0.18s ease;
       transform: rotateZ(5deg);
-     }
-     .group-ghost-drop {
+      z-index: 10;
+    }
+    .group-ghost-drop {
       transition: transform 0.18s ease-in-out;
       transform: rotateZ(0deg);
+      z-index: 10;
      }
 
     .new-group {

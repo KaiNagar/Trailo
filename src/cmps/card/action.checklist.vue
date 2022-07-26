@@ -51,6 +51,7 @@
         :get-child-payload="getChildPayload1"
         :drop-placeholder="dropPlaceholderOptions"
         @drop="onDrop(checklist, $event)"
+        @drag-leave="dragLeave(idx)"
       >
         <Draggable
           class="todo-container"
@@ -112,66 +113,6 @@
           ></button>
         </Draggable>
       </Container>
-      <!-- <div
-        class="todo-container"
-        v-for="(todo, idx) in checklist.todos"
-        :key="idx"
-        @click="openEditTodo(todo, idx)"
-      > -->
-      <!-- <input
-          class="todo-checkbox"
-          :checked="todo.isDone"
-          @change="toggleIsDone(todo, idx)"
-          @click.stop
-          type="checkbox"
-        />
-        <span class="check-mark"></span>
-
-        <span
-          :class="todoClass(todo)"
-          class="todo-title"
-          v-if="!isEditingTodo(todo)"
-          >{{ todo.title }}</span
-        >
-        <div
-          @mouseenter="isEditHover = true"
-          @mouseleave="isEditHover = false"
-          class="edit-todo-container"
-          v-if="isEditingTodo(todo)"
-        >
-          <div v-if="isEditHover" class="screen-edit-todo"></div>
-          <textarea type="text" v-model="todo.title" />
-          <div class="flex align-center space-between">
-            <div class="flex align-center">
-              <button @click="saveTodo(todo, idx)" class="save-todo-btn">
-                Save
-              </button>
-              <div class="close-icon-container">
-                <span
-                  @click.stop="closeEditTodo(todo, idx)"
-                  class="close-icon"
-                ></span>
-              </div>
-            </div>
-            <div class="flex">
-              <todo-actionbar />
-              <button
-                class="remove-todo-edit menu-icon"
-                @click.stop="removeTodo(idx)"
-              >
-                <span class="close-icon"></span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <button
-          v-if="!todo.isEditing"
-          class="remove-todo close-icon"
-          @click.stop="removeTodo(idx)"
-        ></button> -->
-      <!-- </div> -->
-
       <form class="add-item-form">
         <button
           class="add-item-btn-toggle"
@@ -231,24 +172,11 @@ export default {
   },
   methods: {
     onDrop(checklist, dropResult) {
-      console.log(dropResult)
       const { removedIndex, addedIndex } = dropResult
       if (removedIndex === null && addedIndex === null) return
       const newChecklist = { ...checklist }
       newChecklist.todos = this.applyDrag(newChecklist.todos, dropResult)
       this.$emit('checklistQ', newChecklist)
-
-      if (false) {
-        const card = { ...this.card }
-        const checklistIdx = card.checklists.findIndex(
-          (c) => c.id === checklist.id,
-        )
-        card.checklists.splice(checklistIdx, 1, newChecklist)
-        this.$emit('sendToSave', card)
-        return
-      } else {
-        this.$emit('checklistQ', newChecklist)
-      }
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
@@ -264,6 +192,9 @@ export default {
         result.splice(addedIndex, 0, itemToAdd)
       }
       return result
+    },
+    dragLeave(cIdx) {
+      this.$emit('dragLeave',cIdx)
     },
     getChildPayload1(index) {
       return this.checklist.todos[index]

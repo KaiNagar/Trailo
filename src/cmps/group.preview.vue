@@ -22,6 +22,7 @@
           :currGroup="group"
           :cards="group.cards"
           @groupsQ="$emit('onCardMove', $event)"
+          @dragLeave="$emit('dragLeave',$event)"
           :updateGroup="updateGroup"
         />
       </div>

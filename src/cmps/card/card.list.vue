@@ -5,6 +5,7 @@
       behaviour="move"
       group-name="group-1"
       @drop="onDrop(currGroup, $event)"
+      @drag-leave="dragLeave(groupIdx)"
       drag-class="card-ghost"
       drop-class="card-ghost-drop"
       :drop-placeholder="dropPlaceholderOptions"
@@ -18,8 +19,6 @@
     </Container>
     <router-view></router-view>
   </section>
-  
-
 </template>
 
 <script>
@@ -45,6 +44,9 @@ export default {
     openCard(cardId) {
       this.$router.push(`/board/${this.board._id}/${this.group.id}/${cardId}`)
     },
+    dragLeave(leaving) {
+      this.$emit('dragLeave', leaving)
+    },
     getChildPayload1(index) {
       return this.cards[index]
     },
@@ -53,20 +55,7 @@ export default {
       if (removedIndex === null && addedIndex === null) return
       const newGroup = { ...group }
       newGroup.cards = this.applyDrag(newGroup.cards, dropResult)
-
-      console.log(dropResult)
-      if (false) {
-        console.log('in')
-        const board = this.board
-        const groupIdx = board.groups.findIndex(
-          (bGroup) => bGroup.id === group.id,
-        )
-        board.groups.splice(groupIdx, 1, newGroup)
-        this.$store.dispatch({ type: 'saveBoard', board })
-        return
-      } else {
-        this.$emit('groupsQ', newGroup)
-      }
+      this.$emit('groupsQ', newGroup)
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult

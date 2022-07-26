@@ -159,13 +159,14 @@
   .labels-preview {
     flex-wrap: wrap;
     span {
-      @include headers-btns;
       font-weight: 600;
       padding: 6.5px;
       color: white;
     }
     .label-btn {
-      margin: 0 0 4px 0;
+      @include headers-btns;
+      margin: 0 4px 4px 0;
+      min-width: 40px;
     }
     button {
       width: 32px;
