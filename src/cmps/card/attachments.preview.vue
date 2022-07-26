@@ -1,26 +1,30 @@
 <template>
   <section class="attachments-preview">
     <div class="attch-preview-body flex">
-      <div
-        :style="{
-          backgroundImage: 'url(' + file.url + ')',
-        }"
-        class="img"
-      ></div>
+      <div :style="{
+        backgroundImage: 'url(' + file.url + ')',
+      }" class="img"></div>
       <div>
         <div class="attach-title">
           {{ file.title }}.jpg <span class="arrow">↗</span>
         </div>
 
-        <div class="actions">
-          <span>Added {{ createdAtFormat }}</span> - 
+        <div class="actions preview">
+          <span>Added {{ createdAtFormat }}</span> -
           <span class="action">Comment</span> -
-          <span class="action" @click="$emit('removeAttachment', file.id)"
-            >Delete</span
-          >
+          <span class="action" @click="setFileToDelete(file)">Delete
+            <!-- DELETE MODAL -->
+            <app-modal v-if="menu.deleteAttachment" @closeModal="closeMenu">
+              <template #title> Delete attachment?</template>
+              <template #part-1>
+                <div class="warning">There is no undo. This will remove this label from all cards and destroy its
+                  history.</div>
+                <button @click="removeAttachment" class="delete wide btn">Delete</button>
+              </template>
+            </app-modal>
+          </span>
           -
-          <span @click="openMenu('edit')" class="action"
-            >Edit
+          <span @click="openMenu('edit')" class="action">Edit
             <app-modal @closeModal="closeMenu" v-if="menu.edit && file.isEdit">
               <template #title>Edit attachment</template>
               <template #part-1>
@@ -36,8 +40,7 @@
         <div class="toggle-cover flex align-center">
           <span class="cover-icon"></span>
           <span class="action" @click="makeOrRemove(file)">
-            {{ toggleCover }}</span
-          >
+            {{ toggleCover }}</span>
         </div>
       </div>
     </div>
@@ -58,13 +61,23 @@ export default {
     menuAttachments,
   },
   data() {
-    return {}
+    return {
+      fileToDelete: null
+
+    }
   },
   created() {
     this.file.isEdit = false
     this.file.createdAt = Date.now() - 1000 * 60 * 4
   },
   methods: {
+    setFileToDelete(file) {
+      this.fileToDelete = file
+      this.openMenu('deleteAttachment')
+    },
+    removeAttachment() {
+      this.$emit('removeAttachment', this.fileToDelete.id)
+    },
     openMenu(menuAction) {
       this.$emit('setEditMenu')
       this.file.isEdit = true
@@ -110,7 +123,8 @@ export default {
       return this.$store.getters.edit[editId]
     },
   },
-  unmounted() {},
+  unmounted() { },
 }
 </script>
-<style></style>
+<style>
+</style>

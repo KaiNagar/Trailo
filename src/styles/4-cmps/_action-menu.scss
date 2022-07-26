@@ -1,60 +1,69 @@
 .modal {
-  .m-actions {
+  font-size: 14px;
+ >*{
+  // border: 1px black solid;
+ }
+  ul {
+    position: relative;
+    bottom: 2em;
+    padding: 0;
+    margin: 0;
+    margin-top: 3em;
+    li {
+      list-style: none;
+      font-weight: 400;
+    }
+    border-bottom: 1px #dfe2e7 solid;
+  }
+  span {
+    font-weight: 500;
+  }
+
+  // COMPUTER
+  .computer{
+    width: 100%;
+    position: relative;
     
-    font-size: 14px;
-    ul {
-      padding: 0;
-      margin: 0;
-      margin-top: 3em;
-      li {
-        list-style: none;
-        font-weight: 400;
-      }
-      border-bottom: 1px #dfe2e7 solid;
-    }
-    span {
-      font-weight: 500;
-    }
-
-    // COMPUTER
-    .computer{
-      width: 100%;
+    li{
       position: relative;
-      
-      li{
-        position: relative;
-      }
-      input{
-        position: absolute;
-        width: 100%;
-        opacity: 0;
-        bottom: 0;
-      }
     }
-
-
-
-    // LINK BOX
-    .link-box {
-      border-bottom: 1px #dfe2e7 solid;
-      input {
-        -webkit-appearance: none;
-        background-color: #fafbfc;
-        border: none;
-        border-radius: 3px;
-        box-shadow: inset 0 0 0 2px #dfe1e6;
-        box-sizing: border-box;
-        display: block;
-        line-height: 20px;
-        margin-bottom: 12px;
-        outline: none;
-        padding: 8px 12px;
-        transition-duration: 85ms;
-        transition-property: background-color, border-color, box-shadow;
-        transition-timing-function: ease;
-      }
+    input{
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      bottom: 0;
     }
   }
+
+
+
+  // LINK BOX
+  .link-box {
+    position: relative;
+    bottom: 1em;
+    button.attach{
+      width: auto;
+    }
+    input {
+      -webkit-appearance: none;
+      background-color: #fafbfc;
+      border: none;
+      border-radius: 3px;
+      box-shadow: inset 0 0 0 2px #dfe1e6;
+      box-sizing: border-box;
+      display: block;
+      line-height: 20px;
+      margin-bottom: 12px;
+      outline: none;
+      padding: 8px 12px;
+      transition-duration: 85ms;
+      transition-property: background-color, border-color, box-shadow;
+      transition-timing-function: ease;
+    }
+
+   
+  }
+ 
   p {
     color: black;
     font-size: 12px;

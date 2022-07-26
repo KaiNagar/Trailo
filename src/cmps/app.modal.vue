@@ -9,15 +9,12 @@
             <section class="content" v-for="(item, idx) in items" :key="idx" @click="$emit('openBoard', item._id)">
                 <slot name="content-1"></slot>
             </section>
-
-            <section class="m-actions">
                 <slot name="part-1"></slot>
                 <slot name="part-2"></slot>
                 <slot name="part-3"></slot>
                 <slot name="part-4"></slot>
                 <slot name="part-5"></slot>
                 <slot name="part-6"></slot>
-            </section>
         </section>
 
 

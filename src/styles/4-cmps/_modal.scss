@@ -4,7 +4,7 @@
   //   grid-template-columns: repeat(5, 50px);
   //   column-gap: 3.8px;
   // }
-
+  
 
   .input {
     -webkit-appearance: none;
@@ -103,9 +103,20 @@
       background-color: yellow;
     }
   }
+
+  
 }
 
+.preview{
+  position: relative;
+  >*{
+    position: relative;
+  }
+}
+
+
 .card-attachments-container {
+
   position: relative;
   .attachments-btn {
     opacity: 0;
@@ -118,7 +129,6 @@
       cursor: pointer;
     }
     // display: none;
-    border: 1px red solid;
     top: 0;
     left: 0;
     // bottom: 0;
