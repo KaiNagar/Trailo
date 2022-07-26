@@ -43,7 +43,6 @@
       <Container
         orientation="vertical"
         behaviour="move"
-        class=""
         drag-class=""
         drop-class=""
         group-name="todo-1"
@@ -57,6 +56,7 @@
           class="todo-container"
           v-for="(todo, idx) in checklist.todos"
           :key="idx"
+          :style="{ overflow: 'unset' }"
           @click="openEditTodo(todo, idx)"
         >
           <input
@@ -194,7 +194,7 @@ export default {
       return result
     },
     dragLeave(cIdx) {
-      this.$emit('dragLeave',cIdx)
+      this.$emit('dragLeave', cIdx)
     },
     getChildPayload1(index) {
       return this.checklist.todos[index]

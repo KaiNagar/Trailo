@@ -1,12 +1,14 @@
 .card-list-container {
   overflow: auto;
 }
+.smooth-dnd-container.vertical > .smooth-dnd-draggable-wrapper{
+overflow: visible;
+}
 
 .card-list {
   margin: 0 4px;
   padding: 0px 4px;
   flex: 1 1 auto;
-  z-index: 1;
   overflow-x: hidden;
   overflow-y: auto;
   &::-webkit-scrollbar {
