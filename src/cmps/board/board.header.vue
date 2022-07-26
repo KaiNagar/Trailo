@@ -1,5 +1,5 @@
 <template>
-  <section class="board-header">
+  <section class="board-header full">
     <nav>
       <button>
         <span><img src="../../assets/icons/icons-bar-chart.png" alt="" /></span> Board

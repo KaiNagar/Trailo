@@ -7,10 +7,19 @@
         </router-link>
       </div>
 
-      <div v-if="isCoverOn" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
+      <div
+        v-if="isCoverActive"
+        :style="cardCoverStyle"
+        :class="cardCoverClass"
+        class="card-cover"
+      >
         <div class="cover-menu-container">
-          <div class="cover-menu-btn flex align-center" @click="isCoverMenuOpen = !isCoverMenuOpen">
-            <span class="cover-icon"></span><span class="cover-btn-title">Cover</span>
+          <div
+            class="cover-menu-btn flex align-center"
+            @click="isCoverMenuOpen = !isCoverMenuOpen"
+          >
+            <span class="cover-icon"></span
+            ><span class="cover-btn-title">Cover</span>
           </div>
         </div>
       </div>
@@ -19,16 +28,22 @@
           <div class="card-header flex">
             <div class="actionImg flex"><span class="tablet-icon"></span></div>
             <div class="in-list-txt">
-              <h1>{{ card.title }}</h1>
+              <h1 @click="openInputTitle" v-if="!cardTitleEdit">
+                {{ card.title }}
+              </h1>
+              <input
+                ref="inputTitle"
+                @blue="cardTitleEdit = false"
+                class="card-title-edit"
+                v-model="card.title"
+                type="text"
+                v-if="cardTitleEdit"
+              />
               in list
-              <span class="group-title" @click="isMoveModalOpen = true">{{ group.title }}</span>
+              <span class="group-title" @click="isMoveModalOpen = true">{{
+                group.title
+              }}</span>
             </div>
-            <!-- <move-card-modal
-              :board="this.board"
-              :group="this.group"
-              :card="this.card"
-              @moveCard="moveCard"
-            /> -->
           </div>
           <div class="flex space-between">
             <div class="details-column flex column">
@@ -38,15 +53,17 @@
                   <div
                     class="label-btn"
                     v-for="label in labelsToShow"
+                    :style="labelColor(label.color)"
                     :key="label.id"
                     @click="openLabelsMenu($event)"
                   >
-                    <span class="labels-title" :style="labelColor(label.color)">{{
-                      label.title
-                    }}</span>
+                    <span class="labels-title">{{ label.title }}</span>
                   </div>
 
-                  <button class="add-icon" @click="openLabelsMenu($event)"></button>
+                  <button
+                    class="add-icon"
+                    @click="openLabelsMenu($event)"
+                  ></button>
                 </div>
 
                 <labels-menu
@@ -56,8 +73,6 @@
                   @closeLabelsMenu="isLabelMenuOpen = false"
                   v-if="isLabelMenuOpen"
                 />
-
-                <!-- <button @click="onChecklist">+Checklist</button> -->
 
                 <checklist-menu
                   :getCurrPos="getCurrPos"
@@ -90,23 +105,40 @@
                     @removeAttachment="removeAttachment"
                   />
                 </div>
-                <!--  -->
                 <button @click="isMenu = false" class="add-attach-btn">
                   Add an attachment
                   <menu-attachments class="from-details" />
                 </button>
-                <!--  -->
               </div>
 
               <div class="checklist-container">
-                <article v-for="(checklist, idx) in card.checklists" :key="checklist.id">
-                  <action-checklist
-                    @saveChecklist="saveChecklist"
-                    @removeChecklist="removeChecklist"
-                    :checklist="checklist"
-                    :idx="idx"
-                  />
-                </article>
+                <Container
+                  orientation="vertical"
+                  behaviour="move"
+                  class=""
+                  drag-class=""
+                  drop-class=""
+                  group-name="checklist-1"
+                  lock-axis="y"
+                  :drop-placeholder="dropPlaceholderOptions"
+                  @drop="onDrop(card.checklists, $event)"
+                >
+                  <Draggable
+                    v-for="(checklist, idx) in card.checklists"
+                    :key="checklist.id"
+                  >
+                    <action-checklist
+                      @saveChecklist="saveChecklist"
+                      @removeChecklist="removeChecklist"
+                      @checklistQ="moveChecklistQ"
+                      @sendToSave="sendToSave"
+                      @dragLeave="dragLeave"
+                      :checklist="checklist"
+                      :idx="idx"
+                      :card="card"
+                    />
+                  </Draggable>
+                </Container>
               </div>
             </div>
 
@@ -144,6 +176,8 @@ import { boardService } from '../services/board.service'
 import attachmentsPreview from '../cmps/card/attachments.preview.vue'
 import menuAttachments from '../cmps/card/action.attachments.vue'
 import moveCardModal from '../cmps/move.card.modal.vue'
+import { Container, Draggable } from 'vue3-smooth-dnd'
+
 export default {
   name: 'cardDetails',
   components: {
@@ -155,6 +189,8 @@ export default {
     attachmentsPreview,
     menuAttachments,
     moveCardModal,
+    Container,
+    Draggable,
   },
   data() {
     return {
@@ -166,30 +202,71 @@ export default {
       isCoverOn: null,
       isAttached: false,
       isMoveModalOpen: false,
+      cardTitleEdit: false,
+      checklistQ: [],
+      dropPlaceholderOptions: {
+        className: 'checklist-drag-preview',
+        animationDuration: '150',
+        showOnTop: true,
+      },
+      leavingCIdx: null,
     }
   },
   methods: {
-    // moveCard(location) {
-    //   const currPos = this.getCurrPos
-    //   let boards = { ...this.boards }
-    //   const currCard = boards[currPos.boardIdx].groups[
-    //     currPos.groupIdx
-    //   ].cards.splice(currPos.cardIdx, 1)
-    //   this.boards[location.boardIdx].groups[location.groupIdx].cards.splice(
-    //     location.cardIdx,
-    //     1,
-    //     ...currCard,
-    //   )
-    //   boards[location.boardIdx].groups[location.groupIdx].cards.splice(
-    //     location.cardIdx,
-    //     0,
-    //     ...currCard,
-    //   )
-    //   this.$store.dispatch({
-    //     type: 'saveBoards',
-    //     boards: { ...boards },
-    //   })
-    // },
+    onDrop(cardChecklists, dropResult) {
+      const newChecklists = this.applyDrag(cardChecklists, dropResult)
+      console.log(newChecklists)
+      const newCard = { ...this.card, checklists: [...newChecklists] }
+      this.sendToSave(newCard)
+    },
+    applyDrag(arr, dragResult) {
+      const { removedIndex, addedIndex, payload } = dragResult
+
+      if (removedIndex === null && addedIndex === null) return arr
+      const result = [...arr]
+      let itemToAdd = payload
+
+      if (removedIndex !== null) {
+        itemToAdd = result.splice(removedIndex, 1)[0]
+      }
+      if (addedIndex !== null) {
+        result.splice(addedIndex, 0, itemToAdd)
+      }
+      return result
+    },
+    moveChecklistQ(newChecklist) {
+      const card = this.card
+      console.log(newChecklist)
+      this.checklistQ.push(newChecklist)
+      console.log(this.checklistQ)
+      if (this.checklistQ.length === 2) {
+        this.checklistQ.forEach((checklist) => {
+          const checklistIdx = card.checklists.findIndex(
+            (c) => c.id === checklist.id,
+          )
+          card.checklists.splice(checklistIdx, 1, checklist)
+        })
+        this.sendToSave(card)
+        this.leavingCIdx = null
+        this.checklistQ = []
+        return
+      }
+      if (!this.leavingCIdx) {
+        this.checklistQ.forEach((checklist) => {
+          const checklistIdx = card.checklists.findIndex(
+            (c) => c.id === checklist.id,
+          )
+          card.checklists.splice(checklistIdx, 1, checklist)
+        })
+        this.sendToSave(card)
+        this.leavingCIdx = null
+        this.checklistQ = []
+        return
+      }
+    },
+    dragLeave(cIdx) {
+      this.leavingCIdx = cIdx
+    },
     labelColor(color) {
       return { backgroundColor: color }
     },
@@ -199,6 +276,12 @@ export default {
         type: 'saveBoard',
         board: { ...this.board },
       })
+    },
+    openInputTitle() {
+      this.cardTitleEdit = true
+      setTimeout(() => {
+        this.$refs.inputTitle.focus()
+      }, 0)
     },
 
     sendToSave(newCard) {
@@ -237,6 +320,7 @@ export default {
     attachFile(file) {
       if (!this.card.attachments) this.card.attachments = []
       this.card.attachments.push(file)
+      this.card.style.bgImg = file.url
       console.log(this.card.attachments)
       this.sendToSave(this.card)
     },
@@ -274,7 +358,8 @@ export default {
       return this.board.labels
     },
     cardCoverStyle() {
-      if (this.card.style.bgImg) return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      if (this.card.style.bgImg)
+        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       else return { backgroundColor: this.card.style.bgColor }
     },
     cardCoverClass() {
@@ -283,9 +368,15 @@ export default {
     },
 
     getCurrPos() {
-      const boardIdx = this.boards.findIndex((board) => board._id === this.board._id)
-      const cardIdx = this.group.cards.findIndex((card) => card.id === this.card.id)
-      const groupIdx = this.board.groups.findIndex((group) => group.id === this.group.id)
+      const boardIdx = this.boards.findIndex(
+        (board) => board._id === this.board._id,
+      )
+      const cardIdx = this.group.cards.findIndex(
+        (card) => card.id === this.card.id,
+      )
+      const groupIdx = this.board.groups.findIndex(
+        (group) => group.id === this.group.id,
+      )
       return {
         cardIdx,
         groupIdx,
@@ -300,11 +391,15 @@ export default {
     },
     group() {
       const { groupId } = this.$route.params
-      return JSON.parse(JSON.stringify(this.board.groups.find((group) => group.id === groupId)))
+      return JSON.parse(
+        JSON.stringify(this.board.groups.find((group) => group.id === groupId)),
+      )
     },
     card() {
       const { cardId } = this.$route.params
-      return JSON.parse(JSON.stringify(this.group.cards.find((card) => card.id === cardId)))
+      return JSON.parse(
+        JSON.stringify(this.group.cards.find((card) => card.id === cardId)),
+      )
     },
     isCoverActive() {
       if (this.card.style.bgColor || this.card.style.bgImg) return true
@@ -312,21 +407,12 @@ export default {
     },
   },
   created() {
-
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
     this.$store.commit({
       type: 'setEditMenu',
       attachments: this.card.attachments,
     })
-
-    // this.card.attachments = [
-    //   {
-    //     id: 'a101',
-    //     title: 'blabla',
-    //     url: 'https://images.unsplash.com/photo-1603955389958-8ab4c2025b71?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    //   },
-    // ]
   },
 }
 </script>

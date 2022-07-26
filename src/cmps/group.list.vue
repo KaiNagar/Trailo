@@ -6,6 +6,9 @@
       group-name="board-1"
       class="flex"
       @drop="onDrop"
+      drag-class="group-ghost"
+      drop-class="group-ghost-drop"
+      :drop-placeholder="upperDropPlaceholderOptions"
       :get-child-payload="getChildPayload1"
     >
       <Draggable v-for="group in groups" :key="group.id">
@@ -15,6 +18,9 @@
             @updateGroupTitle="updateGroup"
             @updateGroup="updateGroup"
             @onCardMove="onCardMove"
+            @dragLeave="dragLeave"
+            @removeGroup="removeGroup"
+            @removeCard="$emit('removeCard', $event)"
           />
         </article>
       </Draggable>
@@ -30,8 +36,7 @@
     <article v-for="group in groups" :key="group.id"></article>
     <div>
       <div v-if="!showForm" class="new-group group" @click="showForm = true">
-        <span
-          ><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span
+        <span><img src="../styles/svgs/fa/solid/plus.svg" alt="plus-icon" /></span
         ><span class="g-list-title"> Add another list</span>
       </div>
 
@@ -70,13 +75,32 @@ export default {
       newGroup: boardService.getEmptyGroup(),
       groupsCopy: [],
       groupsQ: [],
+      upperDropPlaceholderOptions: {
+        className: 'groups-drop-preview',
+        animationDuration: '150',
+        showOnTop: true,
+        isLeaveGroup: null,
+      },
     }
   },
   methods: {
+    dragLeave(leaveIdx) {
+      this.isLeaveGroup = leaveIdx
+    },
     onCardMove(newGroup) {
       const board = this.board
       this.groupsQ.push(newGroup)
       if (this.groupsQ.length === 2) {
+        this.groupsQ.forEach((group) => {
+          const groupIdx = board.groups.findIndex((bGroup) => bGroup.id === group.id)
+          board.groups.splice(groupIdx, 1, group)
+        })
+        this.$store.dispatch({ type: 'saveBoard', board })
+        this.isLeaveGroup = null
+        this.groupsQ = []
+        return
+      }
+      if (!this.isLeaveGroup) {
         this.groupsQ.forEach((group) => {
           const groupIdx = board.groups.findIndex(
             (bGroup) => bGroup.id === group.id,
@@ -84,19 +108,24 @@ export default {
           board.groups.splice(groupIdx, 1, group)
         })
         this.$store.dispatch({ type: 'saveBoard', board })
+        this.isLeaveGroup = null
         this.groupsQ = []
+        return
       }
     },
     updateGroup(group) {
       this.$emit('updateGroup', group)
     },
+    removeGroup(groupId) {
+      this.$emit('removeGroup', groupId)
+    },
     addGroup() {
-      console.log('this.newGroup', this.newGroup)
       if (this.newGroup.title === '') return
       this.$emit('addGroup', this.newGroup)
       this.showForm = false
       this.newGroup = boardService.getEmptyGroup()
     },
+    removeCard(cardId) {},
     getChildPayload1(idx) {
       return idx
     },

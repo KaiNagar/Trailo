@@ -1,8 +1,36 @@
+.card-list-container {
+  overflow: auto;
+}
+
 .card-list {
   margin: 0 4px;
   padding: 0px 4px;
   flex: 1 1 auto;
   z-index: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #dadbe2;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #bfc4ce;
+    border-radius: 4px;
+  }
+
+  .card-ghost {
+    transition: transform 0.18s ease;
+    transform: rotateZ(5deg);
+    z-index: 10;
+  }
+  .card-ghost-drop {
+    transition: transform 0.18s ease-in-out;
+    transform: rotateZ(0deg);
+    z-index: 10;
+  }
 
   textarea,
   input {
@@ -63,6 +91,7 @@
 }
 .card-preview-details {
   padding: rem(6px);
+  position: relative;
   .all-todos-done {
     background-color: #61bd4f;
     border-radius: 3px;
@@ -81,6 +110,7 @@
       padding: 0 8px;
       margin: 0 4px 4px 0;
       border-radius: rem(4px);
+      // width: 150px;
     }
     .label-preview-hide {
       display: block;

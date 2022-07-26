@@ -5,6 +5,7 @@
       class="card-preview-cover"
     >
       <div :class="showCardCoverClass" :style="showCardCover"></div>
+      <button class="edit-icon-btn"><span class="edit-icon"></span></button>
     </div>
     <div class="card-preview-details">
       <div class="card-preview-labels">
@@ -43,6 +44,13 @@
       </div>
       <div class="card-title">
         <span>{{ card.title }}</span>
+        <button class="edit-icon-btn" @click.stop="showCardMenu = true">
+          <span class="edit-icon"></span>
+        </button>
+      </div>
+
+      <div v-if="showCardMenu">
+        <button @click.stop="removeCard(card.id)">Archive</button>
       </div>
 
       <div v-if="haveActions" class="flex align-center">
@@ -73,6 +81,7 @@ export default {
     return {
       board: null,
       group: null,
+      showCardMenu: false,
       isLabelsOpen: this.$store.getters.isLabelsOpen,
       isLabelHover: false,
     }
@@ -100,6 +109,10 @@ export default {
           (((col >> 16) + amt) << 16)
         ).toString(16)
       )
+    },
+    removeCard(cardId) {
+      console.log(cardId)
+      this.$emit('removeCard', cardId)
     },
   },
   computed: {

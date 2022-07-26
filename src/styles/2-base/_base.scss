@@ -22,7 +22,6 @@ body {
   overflow-x: hidden;
   line-height: 20px;
   font-size: 14px;
-  
 }
 
 .icon {
@@ -43,3 +42,30 @@ mark {
   color: $clr1;
   background-color: transparent;
 }
+
+.drop-preview {
+  border-radius: 3px;
+  background-color: rgba(150, 150, 200, 0.1);
+  margin: 5px;
+  z-index: 10;
+
+}
+.todo-drag-preview {
+  // border-radius: 3px;
+  background-color: rgba(150, 150, 200, 0.1);
+  z-index: 10;
+}
+.checklist-drag-preview {
+  // border-radius: 3px;
+  background-color: rgba(150, 150, 200, 0.1);
+  z-index: 10;
+}
+
+.groups-drop-preview {
+  border-radius: 3px;
+  background-color: rgba(75, 75, 90, 0.493);
+  margin: 5px;
+  z-index: 10;
+  
+}
+

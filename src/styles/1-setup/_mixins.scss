@@ -1,10 +1,10 @@
 /* Media queries Breakpoint mixins */
 
-// @mixin for-mobile-layout {
-//   @media (max-width: $break-narrow) {
-//     @content;
-//   }
-// }
+@mixin for-mobile-layout {
+  @media (max-width: $break-narrow) {
+    @content;
+  }
+}
 
 // @mixin for-narrow-layout {
 //   @media (min-width: $break-narrow) {
@@ -12,17 +12,17 @@
 //   }
 // }
 
-// @mixin for-normal-layout {
-//   @media (min-width: $break-normal) {
-//     @content;
-//   }
-// }
+@mixin for-normal-layout {
+  @media (min-width: $break-normal) {
+    @content;
+  }
+}
 
-// @mixin for-wide-layout {
-//   @media (min-width: $break-wide) {
-//     @content;
-//   }
-// }
+@mixin for-wide-layout {
+  @media (min-width: $break-wide) {
+    @content;
+  }
+}
 
 @mixin layoutGTC($max) {
   grid-template-columns:

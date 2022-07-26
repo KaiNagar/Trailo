@@ -4,8 +4,9 @@
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
-  height: 100vh;
-  overflow-x: scroll;
+  height: 95.3vh;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding-bottom: 2em;
   border-bottom: 8px rgba(255, 0, 0, 0) solid;
   /* width */
@@ -26,8 +27,19 @@
   }
   .group-list {
     display: flex;
+    flex-wrap: wrap;
     position: relative;
     margin-left: 12px;
+    .group-ghost {
+      transition: transform 0.18s ease;
+      transform: rotateZ(5deg);
+      z-index: 10;
+    }
+    .group-ghost-drop {
+      transition: transform 0.18s ease-in-out;
+      transform: rotateZ(0deg);
+      z-index: 10;
+     }
 
     .new-group {
       background-color: rgb(103 103 103 / 30%);
@@ -72,6 +84,9 @@
     border-radius: 1px;
     &:focus{
       outline: 0 0 0 2px #0079bfc2;
+    }
+    &:focus-visible{
+      outline: none;
     }
   }
 }

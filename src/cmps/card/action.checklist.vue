@@ -40,66 +40,79 @@
         </div>
       </div>
 
-      <div
-        class="todo-container"
-        v-for="(todo, idx) in checklist.todos"
-        :key="idx"
-        @click="openEditTodo(todo, idx)"
+      <Container
+        orientation="vertical"
+        behaviour="move"
+        class=""
+        drag-class=""
+        drop-class=""
+        group-name="todo-1"
+        lock-axis="y"
+        :get-child-payload="getChildPayload1"
+        :drop-placeholder="dropPlaceholderOptions"
+        @drop="onDrop(checklist, $event)"
+        @drag-leave="dragLeave(idx)"
       >
-        <input
-          class="todo-checkbox"
-          :checked="todo.isDone"
-          @change="toggleIsDone(todo, idx)"
-          @click.stop
-          type="checkbox"
-        />
-        <span class="check-mark"></span>
+        <Draggable
+          class="todo-container"
+          v-for="(todo, idx) in checklist.todos"
+          :key="idx"
+          @click="openEditTodo(todo, idx)"
+        >
+          <input
+            class="todo-checkbox"
+            :checked="todo.isDone"
+            @change="toggleIsDone(todo, idx)"
+            @click.stop
+            type="checkbox"
+          />
+          <span class="check-mark"></span>
 
-        <span
-          :class="todoClass(todo)"
-          class="todo-title"
-          v-if="!isEditingTodo(todo)"
-          >{{ todo.title }}</span
-        >
-        <div
-          @mouseenter="isEditHover = true"
-          @mouseleave="isEditHover = false"
-          class="edit-todo-container"
-          v-if="isEditingTodo(todo)"
-        >
-          <div v-if="isEditHover" class="screen-edit-todo"></div>
-          <textarea type="text" v-model="todo.title" />
-          <div class="flex align-center space-between">
-            <div class="flex align-center">
-              <button @click="saveTodo(todo, idx)" class="save-todo-btn">
-                Save
-              </button>
-              <div class="close-icon-container">
-                <span
-                  @click.stop="closeEditTodo(todo, idx)"
-                  class="close-icon"
-                ></span>
+          <span
+            :class="todoClass(todo)"
+            class="todo-title"
+            v-if="!isEditingTodo(todo)"
+            >{{ todo.title }}</span
+          >
+          <div
+            @mouseenter="isEditHover = true"
+            @mouseleave="isEditHover = false"
+            class="edit-todo-container"
+            v-if="isEditingTodo(todo)"
+          >
+            <div v-if="isEditHover" class="screen-edit-todo"></div>
+            <textarea type="text" v-model="todo.title" />
+            <div class="flex align-center space-between">
+              <div class="flex align-center">
+                <button @click="saveTodo(todo, idx)" class="save-todo-btn">
+                  Save
+                </button>
+                <div class="close-icon-container">
+                  <span
+                    @click.stop="closeEditTodo(todo, idx)"
+                    class="close-icon"
+                  ></span>
+                </div>
+              </div>
+              <div class="flex">
+                <todo-actionbar />
+                <button
+                  class="remove-todo-edit menu-icon"
+                  @click.stop="removeTodo(idx)"
+                >
+                  <span class="close-icon"></span>
+                </button>
               </div>
             </div>
-            <div class="flex">
-              <todo-actionbar />
-              <button
-                class="remove-todo-edit menu-icon"
-                @click.stop="removeTodo(idx)"
-              >
-                <span class="close-icon"></span>
-              </button>
-            </div>
           </div>
-        </div>
 
-        <button
-          v-if="!todo.isEditing"
-          class="remove-todo close-icon"
-          @click.stop="removeTodo(idx)"
-        ></button>
-      </div>
-
+          <button
+            v-if="!todo.isEditing"
+            class="remove-todo close-icon"
+            @click.stop="removeTodo(idx)"
+          ></button>
+        </Draggable>
+      </Container>
       <form class="add-item-form">
         <button
           class="add-item-btn-toggle"
@@ -133,13 +146,16 @@
 
 <script>
 import todoActionbar from '../todo.actionbar.vue'
+import { Container, Draggable } from 'vue3-smooth-dnd'
+
 export default {
   name: 'Checklist',
   props: {
     checklist: Object,
     idx: Number,
+    card: Object,
   },
-  components: { todoActionbar },
+  components: { todoActionbar, Container, Draggable },
   data() {
     return {
       newItem: this.$store.getters.emptyTodo,
@@ -147,9 +163,42 @@ export default {
       showTodoActions: false,
       isEditHover: false,
       isEditTitle: false,
+      dropPlaceholderOptions: {
+        className: 'todo-drag-preview',
+        animationDuration: '150',
+        showOnTop: true,
+      },
     }
   },
   methods: {
+    onDrop(checklist, dropResult) {
+      const { removedIndex, addedIndex } = dropResult
+      if (removedIndex === null && addedIndex === null) return
+      const newChecklist = { ...checklist }
+      newChecklist.todos = this.applyDrag(newChecklist.todos, dropResult)
+      this.$emit('checklistQ', newChecklist)
+    },
+    applyDrag(arr, dragResult) {
+      const { removedIndex, addedIndex, payload } = dragResult
+
+      if (removedIndex === null && addedIndex === null) return arr
+      const result = [...arr]
+      let itemToAdd = payload
+
+      if (removedIndex !== null) {
+        itemToAdd = result.splice(removedIndex, 1)[0]
+      }
+      if (addedIndex !== null) {
+        result.splice(addedIndex, 0, itemToAdd)
+      }
+      return result
+    },
+    dragLeave(cIdx) {
+      this.$emit('dragLeave',cIdx)
+    },
+    getChildPayload1(index) {
+      return this.checklist.todos[index]
+    },
     saveChecklist() {
       if (!this.$refs.newItemInput.value) return
       this.newItem.title = this.$refs.newItemInput.value
