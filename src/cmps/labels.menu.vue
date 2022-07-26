@@ -1,11 +1,6 @@
 <template>
   <section>
-    <div class="action-btn-container">
-      <button @click="openMenu('labels')">
-        <span class="label-icon"></span>
-        Labels
-      </button>
-    </div>
+    
 
     <!-- CREATE LABEL MODAL -->
     <app-modal @closeModal="closeMenu" v-if="menu.createLabel">
@@ -53,7 +48,7 @@
 
       <template #part-3>
         <div class="btns">
-          <button @click="editLabel" class="create-btn">Save</button>
+          <button @click="editLabel" class="create-btn btn-narrow">Save</button>
           <button @click="openMenu('deleteLabel')" class="create-btn delete">Delete</button>
         </div>
       </template>
@@ -70,7 +65,7 @@
     </app-modal>
 
     <!-- LABEL MODAL -->
-    <app-modal v-if="menu.labels" @closeModal="closeMenu">
+    <app-modal @closeModal="closeMenu" v-if="menu.labels ">
       <template #title>Labels</template>
       <template #part-1>
         <input class="input" type="text" placeholder="Search labels..." /></template>
@@ -98,7 +93,7 @@
       </template>
 
       <template #part-3>
-        <button class="btn" @click="openMenu('createLabel')" v-if="!isCreateLabel">
+        <button class="btn create" @click="openMenu('createLabel')" v-if="!isCreateLabel">
           Create a new label
         </button>
 
@@ -226,8 +221,10 @@ export default {
     },
 
     openMenu(menuAction) {
+
       this.colorIdx = 0
       this.$store.commit({ type: 'openMenu', menuAction })
+     
     },
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
@@ -248,6 +245,9 @@ export default {
     },
     board() {
       return this.$store.getters.currBoard
+    },
+    sideMenuOpen(){
+      return this.$store.getters.sideMenuStatus
     }
   },
   created() {

@@ -19,7 +19,17 @@
             @click="isCoverMenuOpen = !isCoverMenuOpen"
           >
             <span class="cover-icon"></span
-            ><span class="cover-btn-title">Cover</span>
+            ><span v-if="isCover" class="cover-btn-title"  @click="openMenu('cover')">Cover</span>
+            <menu-cover
+            v-if="previewMenuOpen"
+             @setCoverColor="$emit('setCoverColor', $event)"
+        @setFullCover="$emit('setFullCover', $event)"
+        @setCoverMode="$emit('setCoverMode', $event)"
+        @setCoverImg="$emit('setCoverImg', $event)"
+        @removeCover="$emit('removeCover', $event)"
+        @attachFile="$emit('attachFile', $event)"
+        :card="card"
+            ></menu-cover>
           </div>
         </div>
       </div>
@@ -62,17 +72,24 @@
 
                   <button
                     class="add-icon"
-                    @click="openLabelsMenu($event)"
+                    @click="openMenu('previewLabels')"
                   ></button>
-                </div>
 
-                <labels-menu
+                  <!-- <labels-menu></labels-menu> -->
+                  <div class="preview">
+
+                    <labels-menu  
+                  v-if="previewMenuOpen"
                   :labels="board.labels"
                   :card="card"
                   @setLabel="sendToSave"
                   @closeLabelsMenu="isLabelMenuOpen = false"
-                  v-if="isLabelMenuOpen"
+                  
                 />
+                  </div>
+                </div>
+
+          
 
                 <checklist-menu
                   :getCurrPos="getCurrPos"
@@ -177,6 +194,7 @@ import attachmentsPreview from '../cmps/card/attachments.preview.vue'
 import menuAttachments from '../cmps/card/action.attachments.vue'
 import moveCardModal from '../cmps/move.card.modal.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
+import menuCover from '../cmps/menu.cover.vue'
 
 export default {
   name: 'cardDetails',
@@ -191,6 +209,7 @@ export default {
     moveCardModal,
     Container,
     Draggable,
+    menuCover,
   },
   data() {
     return {
@@ -343,8 +362,23 @@ export default {
       this.card.attachments.splice(idx, 1)
       this.sendToSave(this.card)
     },
+       openMenu(menuAction) {
+        console.log(menuAction);
+      this.$store.commit({ type: 'openMenu', menuAction })
+      if(menuAction !== 'cover'){
+        this.$store.commit({ type: 'openMenu', menuAction:'labels' })
+      }
+       this.$store.commit({type:'setPreviewMenuStatus', status:true})
+    },
+    closeMenu() {
+      
+      this.$store.commit({ type: 'closeMenu' })
+    },
   },
   computed: {
+      previewMenuOpen(){
+      return this.$store.getters.previewMenuStatus
+    },
     labelsToShow() {
       let labelsToShow = []
       this.board.labels.filter((boardLabel) => {
@@ -405,10 +439,18 @@ export default {
       if (this.card.style.bgColor || this.card.style.bgImg) return true
       return false
     },
+     menu() {
+      return this.$store.getters.menu
+    },
+        isCover(){
+      return this.$store.getters.isCover
+    },
+   
   },
   created() {
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
+    this.$store.commit({type:'setIsCover', status:this.isCoverOn})
     this.$store.commit({
       type: 'setEditMenu',
       attachments: this.card.attachments,

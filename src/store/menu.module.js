@@ -8,16 +8,18 @@ export const menuModule = {
       edit: false,
       cover: false,
       labels: false,
-      create:false,
-      headerCreate:false,
-      createLabel:false,
-      editLabel:false,
-      deleteLabel:false,
-      previewLabels:false,
-      groupMenu:false
-      
+      create: false,
+      headerCreate: false,
+      createLabel: false,
+      editLabel: false,
+      deleteLabel: false,
+      previewLabels: false,
+      groupMenu: false,
+      deleteAttachment: false,
     },
     edit: {},
+
+    isPreviewMenusOpen: false,
   },
   getters: {
     menu({ menu }) {
@@ -25,6 +27,9 @@ export const menuModule = {
     },
     edit({ edit }) {
       return edit;
+    },
+    previewMenuStatus({ isPreviewMenusOpen }) {
+      return isPreviewMenusOpen;
     },
   },
   mutations: {
@@ -35,9 +40,13 @@ export const menuModule = {
           state.menu[action] = true;
         }
       }
+
+      if (menuAction === "labels") {
+        state.labelsOpen = true;
+      }
     },
     openEditMenu(state, { editId }) {
-      console.log(state.menu[editId ]);
+      console.log(state.menu[editId]);
       for (let e in state.menu) {
         state.menu[e] = false;
         // state.menu[editId ] = true;
@@ -64,6 +73,9 @@ export const menuModule = {
       //   edit[attachment.id] = false;
       // });
       // console.log(edit);
+    },
+    setPreviewMenuStatus(state, { status }) {
+      state.isPreviewMenusOpen = status
     },
   },
   actions: {},

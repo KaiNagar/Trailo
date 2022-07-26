@@ -1,9 +1,14 @@
-.labels-menu {
+// SET POSITION IN CARD PREVIEW
+.preview {
+  .modal {
+    position: absolute;
+    left: 0;
+  }
 }
-
 .modal {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+
   header {
     font-weight: 500;
     color: #5f6d85;
@@ -75,7 +80,7 @@
     }
   }
 
-  .btn {
+  .btn.create {
     font-size: 14px;
     width: 100%;
     border: none;
@@ -132,10 +137,13 @@
     margin-bottom: 2em;
   }
 
-  .create-btn {
+
+  
+  button.create-btn {
     background-color: #0079bf;
     color: white;
     border: none;
+    width: auto;
     font-size: 14px;
     text-align: center;
     font-weight: 100;
@@ -151,25 +159,25 @@
   }
 
   .delete {
-    transition: .1s;
+    transition: 0.1s;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     background-color: #b04632;
     color: white;
     font-weight: 100;
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     font-size: 16px;
     &:hover {
       background-color: #8b3827;
     }
   }
+
   .btns {
-   
+
     display: flex;
     justify-content: space-between;
 
     .delete {
-      
       background-color: #b04632;
 
       &:hover {
@@ -177,9 +185,8 @@
       }
     }
   }
-  div.warning{
+  div.warning {
     color: #172b4d;
     margin-bottom: 1em;
   }
-
 }

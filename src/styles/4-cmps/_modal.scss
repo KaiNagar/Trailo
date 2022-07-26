@@ -103,7 +103,17 @@
       background-color: yellow;
     }
   }
+
+  
 }
+
+.preview{
+  position: relative;
+  >*{
+    position: relative;
+  }
+}
+
 
 .card-attachments-container {
 
@@ -119,7 +129,6 @@
       cursor: pointer;
     }
     // display: none;
-    border: 1px red solid;
     top: 0;
     left: 0;
     // bottom: 0;

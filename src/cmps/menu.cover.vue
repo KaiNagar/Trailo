@@ -1,88 +1,89 @@
 <template>
-  <div class="action-btn-container">
-    <button @click="openMenu('cover')">
-      Cover
-      <div class="cover-menu">
-        <app-modal v-if="menu.cover" @closeModal="closeMenu">
-          <template #title>Cover</template>
-          <template #part-1>
-            <header>Size</header>
-            <div class="cover-image part">
 
-                <button :class="coverSize(false)" :style="setCoverSizeStyle" @click="setFullCover(false)">
-                  <div class="liner black ">
-                    <div class="first"></div>
-                    <div class="second"></div>
-                    <div class="circle"></div>
-                  </div>
-                </button>
+  <div class="cover-menu menu">
 
+    
+      <app-modal v-if="menu.cover" @closeModal="closeMenu">
+        <template #title>Cover</template>
+        <template #part-1>
+          <header>Size</header>
+          <div class="cover-image part">
 
-              <button :class="coverSize(true)" :style="setCoverSizeStyle" @click="setFullCover(true)">
-                <div class="liner">
-                  <div class="first white"></div>
-                  <div class="second white"></div>
-                  <div class="circle white"></div>
-                </div>
-              </button>
-            </div>
-
-            <button v-if="coverIsOpen" class="remove-cover-btn" @click="removeCover">
-              Remove cover
+            <button :class="coverSize(false)" :style="setCoverSizeStyle" @click="setFullCover(false)">
+              <div class="liner black ">
+                <div class="first"></div>
+                <div class="second"></div>
+                <div class="circle"></div>
+              </div>
             </button>
-          </template>
 
-          <template #part-2>
-            <!-- <div v-if="card.style.isFull && card.style.bgImg" class="cover-color"> -->
-            <header>Text-color</header>
-            <div class="text-color part">
-              <div class="light">
-                <button :style="setCoverSizeStyle" @click="setCoverMode(false)"></button>
-                <span>white</span>
-                <div></div>
+
+            <button :class="coverSize(true)" :style="setCoverSizeStyle" @click="setFullCover(true)">
+              <div class="liner">
+                <div class="first white"></div>
+                <div class="second white"></div>
+                <div class="circle white"></div>
               </div>
+            </button>
+          </div>
 
-              <div class="dark ">
-                <button :style="setCoverSizeStyle" @click="setCoverMode(true)"></button>
-                <span>black</span>
-                <div></div>
-              </div>
+          <button v-if="coverIsOpen" class="btn-wide" @click="removeCover">
+            Remove cover
+          </button>
+        </template>
+
+        <template #part-2>
+          <!-- <div v-if="card.style.isFull && card.style.bgImg" class="cover-color"> -->
+          <header>Text-color</header>
+          <div class="text-color part">
+            <div class="light">
+              <button :style="setCoverSizeStyle" @click="setCoverMode(false)"></button>
+              <span>white</span>
+              <div></div>
             </div>
-          </template>
 
-          <template #part-3>
-            <header>Colors</header>
-            <div class="colors part">
-              <button @click="setCoverColor(color)" :style="{ backgroundColor: color }" class="cover-btn-pick-color"
-                v-for="color in colors" :key="color"></button>
+            <div class="dark ">
+              <button :style="setCoverSizeStyle" @click="setCoverMode(true)"></button>
+              <span>black</span>
+              <div></div>
             </div>
-          </template>
+          </div>
+        </template>
 
-          <template #part-4>
-            <div class="attachments part">
-              <header>Attachments</header>
-              <div v-if="card.attachments" class="attachments-images">
-                <button :style="{ backgroundImage: 'url(' + attachment.url + ')' }" @click="setCoverImg(attachment.url)"
-                  v-for="attachment in card.attachments" :key="attachment.id" class="set-attachment-cover"></button>
-              </div>
+        <template #part-3>
+          <header>Colors</header>
+          <div class="colors part">
+            <button @click="setCoverColor(color)" :style="{ backgroundColor: color }" class="cover-btn-pick-color"
+              v-for="color in colors" :key="color"></button>
+          </div>
+        </template>
 
-              <div class="upload part">
-                <button>Upload a cover image</button>
-                <input @change="addFile" type="file" />
-              </div>
+        <template #part-4>
+          <div class="attachments part">
+            <header>Attachments</header>
+            <div v-if="card.attachments" class="attachments-images">
+              <button :style="{ backgroundImage: 'url(' + attachment.url + ')' }" @click="setCoverImg(attachment.url)"
+                v-for="attachment in card.attachments" :key="attachment.id" class="set-attachment-cover"></button>
             </div>
-          </template>
 
-          <template #part-5>
-            <header>Photos from unsplash</header>
-            <div class="unsplash part">
-              <img @click="setCoverImg(image)" v-for="(image, idx) in coverImgsUrls" :key="idx" :src="image" />
+            <div class="upload part">
+              <button class="btn-wide">Upload a cover image</button>
+              <input @change="addFile" type="file" />
             </div>
-          </template>
-        </app-modal>
-        <!-- 
-                <section v-if="card.color">
-                    <div class="menu-header">
+          </div>
+        </template>
+
+        <template #part-5>
+          <header>Photos from unsplash</header>
+          <div class="unsplash part">
+            <img @click="setCoverImg(image)" v-for="(image, idx) in coverImgsUrls" :key="idx" :src="image" />
+          </div>
+        </template>
+      </app-modal>
+    
+    <!-- 
+      <section v-if="card.color">
+        <div class="menu-header">
                         <h1>Cover</h1>
                         <button @click="this.$emit('closeCoverMenu')">X</button>
                     </div>
@@ -120,9 +121,9 @@
                         class="cover-btn-pick-img" v-for="url in coverImgsUrls" :key="url"></button>
 
                 </section> -->
-      </div>
-    </button>
   </div>
+
+
 </template>
 
 <script>
@@ -166,6 +167,7 @@ export default {
       this.card.style.bgColor = color
       this.isCoverOn = true
       this.$emit('setCoverColor', this.card)
+      this.$store.commit({type:'setIsCover', status:true})
     },
     setFullCover(isFull) {
       this.card.style.isFull = isFull
@@ -180,6 +182,7 @@ export default {
       this.card.style.bgImg = url
       this.isCoverOn = true
       this.$emit('setCoverImg', this.card)
+      this.$store.commit({type:'setIsCover', status:true})
     },
     removeCover() {
       this.card.style = { isFull: false, bgColor: null, bgImg: null }

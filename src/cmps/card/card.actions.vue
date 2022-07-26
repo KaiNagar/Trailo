@@ -29,15 +29,31 @@
         <button><span class="cover-icon"></span> Cover</button>
       </div>
 
-      <menu-labels
+
+
+<div class="action-btn-container">
+      <button @click="openMenu('labels')">
+        <span class="label-icon"></span>
+        Labels
+      </button>
+
+      <menu-labels 
+        v-if="!previewMenuOpen"
+        @closeMenu="closeMenu"
         @setLabel="$emit('setLabel', $event)"
         @createLabel="$emit('createLabel',$event)"
         :card="card"
       ></menu-labels>
+    </div>
+
+      
       
       <menu-attachments @attachFile="attachFile" />
-
+ <div class="action-btn-container">
+    <button @click="openMenu('cover')"  v-if="!isCover">
+      Cover
       <menu-cover
+       v-if="!previewMenuOpen"
         @setCoverColor="$emit('setCoverColor', $event)"
         @setFullCover="$emit('setFullCover', $event)"
         @setCoverMode="$emit('setCoverMode', $event)"
@@ -46,6 +62,8 @@
         @attachFile="$emit('attachFile', $event)"
         :card="card"
       />
+    </button>
+  </div>
 
       <div class="action-btn-container">
         <button disabled>
@@ -80,8 +98,27 @@ export default {
     attachFile(file) {
       this.$emit('attachFile', file)
     },
+      openMenu(menuAction) {
+      this.colorIdx = 0
+      this.$store.commit({ type: 'openMenu', menuAction })
+      // this.$store.commit({ type: 'openMenu', menuAction:'labels' })
+      this.$store.commit({type:'setPreviewMenuStatus', status:false})
+    },
+    closeMenu() {
+      this.$store.commit({ type: 'closeMenu' })
+    },
   },
-  computed: {},
+  computed: {
+       menu() {
+      return this.$store.getters.menu
+    },
+       previewMenuOpen(){
+      return this.$store.getters.previewMenuStatus
+    },
+    isCover(){
+      return this.$store.getters.isCover
+    },
+  },
   created() {},
 }
 </script>
