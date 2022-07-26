@@ -1,0 +1,67 @@
+.member-tab {
+  margin: 10px 0 0 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: #091e420a;
+  }
+}
+
+.members-input {
+  width: 100%;
+  padding: 5.5px 12px 7.5px 9px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  outline: none;
+  border-radius: 3px;
+  margin-bottom: -6px;
+  margin-inline-start: 1px;
+  border: 2px solid #0079bf;
+  
+}
+.formatted-name {
+  & > * {
+    font-weight: 400;
+    font-size: rem(14px);
+  }
+  .short-name {
+    margin-inline-start: 5px;
+  }
+}
+.more-members.btn {
+  margin-top: 11px;
+  margin-bottom: 20px;
+  font-size: rem(14px);
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    cursor: no-drop;
+}
+.check-icon{
+  margin-inline-end: 12px;
+}
+
+.header {
+  color: #5e6c84;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 1px;
+}
+
+.memeber-img {
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-inline-end: 7px;
+}
+.member-cred {
+  padding: 2px;
+  border-radius: 50%;
+  background-color: green;
+  width: 2rem;
+  height: 2rem;
+  justify-content: center;
+  color: white;
+  margin-inline-end: 7px;
+}
