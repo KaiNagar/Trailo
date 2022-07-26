@@ -13,7 +13,7 @@
     >
       <Draggable v-for="card in cards" :key="card.id">
         <div>
-          <card-preview :card="card" @click="openCard(card.id)" />
+          <card-preview :card="card" @click="openCard(card.id)" @removeCard="removeCard" />
         </div>
       </Draggable>
     </Container>
@@ -38,6 +38,7 @@ export default {
         animationDuration: '150',
         showOnTop: true,
       },
+      showCardMenu: false,
     }
   },
   methods: {
@@ -46,6 +47,10 @@ export default {
     },
     dragLeave(leaving) {
       this.$emit('dragLeave', leaving)
+    },
+    removeCard(cardId) {
+      console.log(cardId)
+      this.$emit('removeCard', cardId)
     },
     getChildPayload1(index) {
       return this.cards[index]

@@ -11,6 +11,7 @@ export const menuModule = {
       create:false,
       headerCreate:false,
       createLabel:false,
+      groupMenu:false
       
     },
     edit: {},

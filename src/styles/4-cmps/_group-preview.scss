@@ -26,10 +26,22 @@
 
     .g-menu.fa {
       position: absolute;
-      top: 13px;
-      right: 7px;
-      .menu-icon {
-        font-size: 0.8rem;
+      top: 4px;
+      right: 5px;
+      .g-menu-btn{
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        border-radius: 3px;
+        &:hover{
+          background-color: #091e4214;
+        }
+        .menu-icon{
+          font-size: 0.9rem;
+          line-height: 29px;
+          font-weight: 500;
+          padding: 2px;
+        }
       }
 
       img {
@@ -38,35 +50,54 @@
           brightness(93%) contrast(91%);
       }
     }
-    span {
-      font-weight: 600;
-      padding: 1px 7px;
-      max-width: 228px;
-    }
-  }
-
-  .edit-group-title {
-    width: 90%;
-    display: flex;
-
-    textarea {
-      font-family: Helvetica Neue, sans-serif;
-      background-color: #fff;
-      padding: 1px 7px;
-      width: 99%;
-      box-shadow: 0 0 0 2px #0079bfc2;
-      font-weight: 600;
-      overflow: hidden;
-      border: 2px solid transparent;
-      resize: none;
-      overflow-wrap: break-word;
-      color: #172b4d;
-      &:focus {
-        outline: none;
-      }
-    }
   }
 }
+  .edit-group-title{
+    font-weight: 600;
+    max-width: 214px;
+  padding: 1px 7px;
+  width: 90%;
+  display: flex;
+
+textarea{
+  font-family: Helvetica Neue,sans-serif;
+  background-color: #fff;
+  padding: 1px 7px;
+  width: 99%;
+  box-shadow: 0 0 0 2px #0079bfc2;
+  font-weight: 600;
+  overflow: hidden;
+  border: 2px solid transparent;
+  resize: none;
+  overflow-wrap: break-word;
+  color: #172b4d;
+  &:focus{
+    outline:none;
+  }
+}
+  }
+//   .edit-group-title {
+//     width: 90%;
+//     display: flex;
+
+//     textarea {
+//       font-family: Helvetica Neue, sans-serif;
+//       background-color: #fff;
+//       padding: 1px 7px;
+//       width: 99%;
+//       box-shadow: 0 0 0 2px #0079bfc2;
+//       font-weight: 600;
+//       overflow: hidden;
+//       border: 2px solid transparent;
+//       resize: none;
+//       overflow-wrap: break-word;
+//       color: #172b4d;
+//       &:focus {
+//         outline: none;
+//       }
+//     }
+//   }
+// }
 .g-footer {
   transition-duration: 85ms;
   line-height: 20px;
@@ -86,6 +117,7 @@
       padding-left: 7px;
       display: flex;
       width: 220px;
+      height: 30px;
       cursor: pointer;
       border-radius: 3px;
       align-items: center;
@@ -109,7 +141,7 @@
 .g-template-icon {
   position: absolute;
   right: 6px;
-  top: -4px;
+  top: -3px;
   margin-top: 4px;
   padding: 5px 8px;
   &:hover {
@@ -166,3 +198,4 @@
     }
   }
 }
+  

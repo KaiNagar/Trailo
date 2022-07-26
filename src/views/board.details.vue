@@ -2,11 +2,13 @@
   <section v-if="currBoard">
     <div class="group-page-container" :style="onBoardBgColor">
       <board-header />
-        <group-list
-          :groups="currBoard.groups"
-          @updateGroup="updateGroup"
-          @addGroup="addGroup"
-        />
+      <group-list
+        :groups="currBoard.groups"
+        @updateGroup="updateGroup"
+        @addGroup="addGroup"
+        @removeGroup="removeGroup"
+        @removeCard="removeCard"
+      />
     </div>
   </section>
 </template>
@@ -36,6 +38,19 @@ export default {
         board,
         group: { ...newGroup },
       })
+    },
+    removeGroup(groupId) {
+      const board = JSON.parse(JSON.stringify(this.currBoard))
+      const idx = board.groups.findIndex((group) => group.id === groupId)
+      board.groups.splice(idx, 1)
+      this.$store.dispatch({ type: 'saveBoard', board })
+    },
+    removeCard(cardId) {
+      console.log(cardId)
+      const board = JSON.parse(JSON.stringify(this.currBoard))
+      const idx = board.groups.cards.findIndex((card) => card.id === cardId)
+      board.groups.cards.splice(idx, 1)
+      this.$store.dispatch({ type: 'saveBoard', board })
     },
   },
   computed: {
