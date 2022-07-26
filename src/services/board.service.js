@@ -68,7 +68,6 @@ async function save(board) {
   }
 }
 
-
 function getEmptyGroup() {
   return {
     id: _makeId(),
@@ -125,14 +124,16 @@ function getEmptyBoard() {
   return {
     _id: "",
     title: "",
-    isStarred:false,
+    isStarred: false,
     createdAt: Date.now() - 100000,
     labelsOpen: false,
     bgCover:
       "https://images.unsplash.com/photo-1658279165324-454de0ee3da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80",
     createdBy: {},
     labels: [],
-    members: [],
+    members: [
+    
+    ],
     groups: [
       { id: _makeId(), title: "To do", cards: [] },
       {
@@ -153,12 +154,12 @@ function _createBoard() {
   const boardId = _makeId();
   return {
     _id: boardId,
-    isStarred:false,
-    title: 'Sprint',
+    isStarred: false,
+    title: "Sprint",
     createdAt: Date.now() - 100000,
     labelsOpen: false,
     bgCover:
-      'https://images.unsplash.com/photo-1421284621639-884f4129b61d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      "https://images.unsplash.com/photo-1421284621639-884f4129b61d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     createdBy: {
       _id: "u101",
       fullname: "s@r",
@@ -181,11 +182,30 @@ function _createBoard() {
         color: "#ff78cb",
       },
     ],
+    
+
+
     members: [
       {
         _id: _makeId(),
-        fullname: "r@sk",
+        username: "Rimonaldo",
+        email: "Rimons2804@gmail.com",
         imgUrl: "url",
+        color:'#EF7564',
+      },
+      {
+        _id: _makeId(),
+        username: "Kai nagar",
+        email: "KaiNagar8@gmail.com",
+        imgUrll: "url",
+        color:'#F5DD29',
+      },
+      {
+        _id: _makeId(),
+        username: "Stav Kotlovsky",
+        email: "StavKot@gmail.com",
+        imgUrl: "url",
+        color:'#FFAF3F',
       },
     ],
     groups: [
@@ -194,6 +214,7 @@ function _createBoard() {
         title: "This is stav's list",
         cards: [
           {
+            members:[],
             id: _makeId(),
             title: "WTF",
             labelIds: ["l101", "l102"],
@@ -231,6 +252,7 @@ function _createBoard() {
         title: "These shoes are meant for walking",
         cards: [
           {
+            members:[],
             id: _makeId(),
             title: "And thats what they do",
             labelIds: ["l101", "l102"],
@@ -242,6 +264,7 @@ function _createBoard() {
             },
           },
           {
+            members:[],
             id: _makeId(),
             title: "My Trailo",
             labelIds: ["l101", "l102"],
@@ -260,6 +283,7 @@ function _createBoard() {
         title: "This is stav's list",
         cards: [
           {
+            members:[],
             id: _makeId(),
             title: "WTF",
             labelIds: ["l101", "l102"],
@@ -271,6 +295,7 @@ function _createBoard() {
             },
           },
           {
+            members:[],
             id: _makeId(),
             title: "new card2",
             labelIds: ["l101", "l102"],

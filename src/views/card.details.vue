@@ -2,34 +2,25 @@
   <div v-if="card" class="card-details-container">
     <section class="card-details flex column">
       <div class="close-details-container flex">
-        <router-link class="close-details-btn flex" :to="'/board/' + board._id"
-          ><span class="close-icon"></span>
+        <router-link class="close-details-btn flex" :to="'/board/' + board._id"><span class="close-icon"></span>
         </router-link>
       </div>
 
-      <div
-        v-if="isCoverActive"
-        :style="cardCoverStyle"
-        :class="cardCoverClass"
-        class="card-cover"
-      >
+      <div v-if="isCoverActive" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
+        <!-- MEMBERS MENU -->
+        <menu-members @sendToSave="sendToSave" :card="card"></menu-members>
+
+
+        <div v-for="member in card.members" :key="member.id">
+        <div>{{member}}</div>
+        </div>
         <div class="cover-menu-container">
-          <div
-            class="cover-menu-btn flex align-center"
-            @click="isCoverMenuOpen = !isCoverMenuOpen"
-          >
-            <span class="cover-icon"></span
-            ><span v-if="isCover" class="cover-btn-title"  @click="openMenu('cover')">Cover</span>
-            <menu-cover
-            v-if="previewMenuOpen"
-                 @attachFile="attachFile"
-                @setCoverColor="sendToSave"
-                @setFullCover="sendToSave"
-                @setCoverMode="sendToSave"
-                @setCoverImg="sendToSave"
-                @removeCover="sendToSave"
-        :card="card"
-            ></menu-cover>
+          <div class="cover-menu-btn flex align-center" @click="isCoverMenuOpen = !isCoverMenuOpen">
+            <span class="cover-icon"></span><span v-if="isCover" class="cover-btn-title"
+              @click="openMenu('cover')">Cover</span>
+            <menu-cover v-if="previewMenuOpen" @attachFile="attachFile" @setCoverColor="sendToSave"
+              @setFullCover="sendToSave" @setCoverMode="sendToSave" @setCoverImg="sendToSave" @removeCover="sendToSave"
+              :card="card"></menu-cover>
           </div>
         </div>
       </div>
@@ -41,17 +32,11 @@
               <h1 @click="openInputTitle" v-if="!cardTitleEdit">
                 {{ card.title }}
               </h1>
-              <input
-                ref="inputTitle"
-                @blue="cardTitleEdit = false"
-                class="card-title-edit"
-                v-model="card.title"
-                type="text"
-                v-if="cardTitleEdit"
-              />
+              <input ref="inputTitle" @blue="cardTitleEdit = false" class="card-title-edit" v-model="card.title"
+                type="text" v-if="cardTitleEdit" />
               in list
               <span class="group-title" @click="isMoveModalOpen = true">{{
-                group.title
+                  group.title
               }}</span>
             </div>
           </div>
@@ -60,44 +45,24 @@
               <div class="labels-preview-container">
                 <h3 class="labels-header">Labels</h3>
                 <div class="labels-preview flex">
-                  <div
-                    class="label-btn"
-                    v-for="label in labelsToShow"
-                    :style="labelColor(label.color)"
-                    :key="label.id"
-                    @click="openLabelsMenu($event)"
-                  >
+                  <div class="label-btn" v-for="label in labelsToShow" :style="labelColor(label.color)" :key="label.id"
+                    @click="openLabelsMenu($event)">
+
+                    <!-- LABELS MENU -->
                     <span class="labels-title">{{ label.title }}</span>
                   </div>
 
-                  <button
-                    class="add-icon"
-                    @click="openMenu('previewLabels')"
-                  ></button>
-
-                  <!-- <labels-menu></labels-menu> -->
+                  <button class="add-icon" @click="openMenu('previewLabels')"></button>
                   <div class="preview">
-
-                    <labels-menu  
-                  v-if="previewMenuOpen"
-                  :labels="board.labels"
-                  :card="card"
-                  @setLabel="sendToSave"
-                  @closeLabelsMenu="isLabelMenuOpen = false"
-                  
-                />
+                    <labels-menu v-if="previewMenuOpen" :labels="board.labels" :card="card" @setLabel="sendToSave"
+                      @closeLabelsMenu="isLabelMenuOpen = false" />
                   </div>
                 </div>
 
-          
 
-                <checklist-menu
-                  :getCurrPos="getCurrPos"
-                  :newChecklist="newChecklist"
-                  @addChecklist="addChecklist"
-                  @closeChecklistMenu="isChecklistMenuOpen = false"
-                  v-if="isChecklistMenuOpen"
-                />
+
+                <checklist-menu :getCurrPos="getCurrPos" :newChecklist="newChecklist" @addChecklist="addChecklist"
+                  @closeChecklistMenu="isChecklistMenuOpen = false" v-if="isChecklistMenuOpen" />
               </div>
 
               <action-description />
@@ -108,19 +73,9 @@
                   <span class="attach-icon"></span>
                 </header>
 
-                <div
-                  class="card-attachment-preview"
-                  v-for="file in card.attachments"
-                  :key="file.id"
-                >
-                  <attachments-preview
-                    @makeOrRemove="sendToSave"
-                    :file="file"
-                    :card="card"
-                    @setEditMenu="setEditMenu"
-                    @updateAttachment="updateAttachment"
-                    @removeAttachment="removeAttachment"
-                  />
+                <div class="card-attachment-preview" v-for="file in card.attachments" :key="file.id">
+                  <attachments-preview @makeOrRemove="sendToSave" :file="file" :card="card" @setEditMenu="setEditMenu"
+                    @updateAttachment="updateAttachment" @removeAttachment="removeAttachment" />
                 </div>
                 <button @click="isMenu = false" class="add-attach-btn">
                   Add an attachment
@@ -129,52 +84,24 @@
               </div>
 
               <div class="checklist-container">
-                <Container
-                  orientation="vertical"
-                  behaviour="move"
-                  class=""
-                  drag-class=""
-                  drop-class=""
-                  group-name="checklist-1"
-                  lock-axis="y"
-                  :drop-placeholder="dropPlaceholderOptions"
-                  @drop="onDrop(card.checklists, $event)"
-                >
-                  <Draggable
-                    v-for="(checklist, idx) in card.checklists"
-                    :key="checklist.id"
-                  >
-                    <action-checklist
-                      @saveChecklist="saveChecklist"
-                      @removeChecklist="removeChecklist"
-                      @checklistQ="moveChecklistQ"
-                      @sendToSave="sendToSave"
-                      @dragLeave="dragLeave"
-                      :checklist="checklist"
-                      :idx="idx"
-                      :card="card"
-                    />
+                <Container orientation="vertical" behaviour="move" class="" drag-class="" drop-class=""
+                  group-name="checklist-1" lock-axis="y" :drop-placeholder="dropPlaceholderOptions"
+                  @drop="onDrop(card.checklists, $event)">
+                  <Draggable v-for="(checklist, idx) in card.checklists" :key="checklist.id">
+                    <action-checklist @saveChecklist="saveChecklist" @removeChecklist="removeChecklist"
+                      @checklistQ="moveChecklistQ" @sendToSave="sendToSave" @dragLeave="dragLeave"
+                      :checklist="checklist" :idx="idx" :card="card" />
                   </Draggable>
                 </Container>
               </div>
             </div>
 
             <div>
-              <card-actions
-                :isCoverOn="isCoverOn"
-                @openChecklistMenu="isChecklistMenuOpen = true"
-                @openLabelsMenu="isLabelMenuOpen = true"
-                @openCoverMenu="isCoverMenuOpen = true"
-                :card="card"
-                @attachFile="attachFile"
-                @setCoverColor="sendToSave"
-                @setFullCover="sendToSave"
-                @setCoverMode="sendToSave"
-                @setCoverImg="sendToSave"
-                @removeCover="sendToSave"
-                @setLabel="sendToSave"
-                @createLabel="createLabel"
-              />
+              <card-actions :isCoverOn="isCoverOn" @openChecklistMenu="isChecklistMenuOpen = true"
+                @openLabelsMenu="isLabelMenuOpen = true" @openCoverMenu="isCoverMenuOpen = true" :card="card"
+                @attachFile="attachFile" @setCoverColor="sendToSave" @setFullCover="sendToSave"
+                @setCoverMode="sendToSave" @setCoverImg="sendToSave" @removeCover="sendToSave" @setLabel="sendToSave"
+                @createLabel="createLabel" />
             </div>
           </div>
         </div>
@@ -195,7 +122,7 @@ import menuAttachments from '../cmps/card/action.attachments.vue'
 import moveCardModal from '../cmps/move.card.modal.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import menuCover from '../cmps/menu.cover.vue'
-
+import menuMembers from '../cmps/menu/menu.members.vue'
 export default {
   name: 'cardDetails',
   components: {
@@ -210,6 +137,7 @@ export default {
     Container,
     Draggable,
     menuCover,
+    menuMembers,
   },
   data() {
     return {
@@ -362,21 +290,21 @@ export default {
       this.card.attachments.splice(idx, 1)
       this.sendToSave(this.card)
     },
-       openMenu(menuAction) {
-        console.log(menuAction);
+    openMenu(menuAction) {
+      console.log(menuAction);
       this.$store.commit({ type: 'openMenu', menuAction })
-      if(menuAction !== 'cover'){
-        this.$store.commit({ type: 'openMenu', menuAction:'labels' })
+      if (menuAction !== 'cover') {
+        this.$store.commit({ type: 'openMenu', menuAction: 'labels' })
       }
-       this.$store.commit({type:'setPreviewMenuStatus', status:true})
+      this.$store.commit({ type: 'setPreviewMenuStatus', status: true })
     },
     closeMenu() {
-      
+
       this.$store.commit({ type: 'closeMenu' })
     },
   },
   computed: {
-      previewMenuOpen(){
+    previewMenuOpen() {
       return this.$store.getters.previewMenuStatus
     },
     labelsToShow() {
@@ -439,18 +367,19 @@ export default {
       if (this.card.style.bgColor || this.card.style.bgImg) return true
       return false
     },
-     menu() {
+    menu() {
       return this.$store.getters.menu
     },
-        isCover(){
+    isCover() {
       return this.$store.getters.isCover
     },
-   
+
   },
   created() {
+    this.$store.commit({type:'setCardMembersIds', card:this.card})
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
-    this.$store.commit({type:'setIsCover', status:this.isCoverOn})
+    this.$store.commit({ type: 'setIsCover', status: this.isCoverOn })
     this.$store.commit({
       type: 'setEditMenu',
       attachments: this.card.attachments,
