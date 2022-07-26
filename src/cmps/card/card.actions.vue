@@ -9,7 +9,15 @@
     <div class="add-card-tab">
       <h3>Add to card</h3>
       <div class="action-btn-container">
-        <button><span class="member-icon"></span> Members</button>
+        <button @click="openMenu('members')"><span class="member-icon"></span> Members</button>
+        <!-- MEMBERS MENU  -->
+        <menu-members
+          @sendToSave="$emit('sendToSave', $event)"
+          :card="card"
+          v-if="menu.members"
+          @closeMenu="closeMenu"
+        >
+        </menu-members>
       </div>
       <div @click="$emit('openChecklistMenu')" class="action-btn-container">
         <button><span class="checklist-icon"></span> Checklist</button>
@@ -24,6 +32,21 @@
       <div class="action-btn-container"></div>
       <div @click="$emit('openCoverMenu')" v-if="!isCoverOn" class="action-btn-container">
         <button><span class="cover-icon"></span> Cover</button>
+      </div>
+
+      <div class="action-btn-container">
+        <button @click="openMenu('labels')">
+          <span class="label-icon"></span>
+          Labels
+        </button>
+
+        <menu-labels
+          v-if="!previewMenuOpen"
+          @closeMenu="closeMenu"
+          @setLabel="$emit('setLabel', $event)"
+          @createLabel="$emit('createLabel', $event)"
+          :card="card"
+        ></menu-labels>
       </div>
 
       <div class="action-btn-container">
@@ -72,6 +95,7 @@ import menuCover from '../menu.cover.vue'
 import menuLabels from '../labels.menu.vue'
 import AppModal from '../app.modal.vue'
 import menuDate from './menu.date.vue'
+import menuMembers from '../menu/menu.members.vue'
 export default {
   name: 'cardActions',
   components: {
@@ -81,6 +105,7 @@ export default {
     menuLabels,
     menuDate,
     AppModal,
+    menuMembers,
   },
   props: {
     isCoverOn: Boolean,
@@ -97,7 +122,6 @@ export default {
     },
     openMenu(menuAction) {
       this.colorIdx = 0
-      console.log(menuAction)
       this.$store.commit({ type: 'openMenu', menuAction })
       // this.$store.commit({ type: 'openMenu', menuAction:'labels' })
       this.$store.commit({ type: 'setPreviewMenuStatus', status: false })

@@ -6,7 +6,7 @@ import { menuModule } from "./menu.module";
 const store = createStore({
   strict: true,
   starredBoard: {},
-  isCover:false,
+  isCover: false,
   state: {
     boardId: null,
     boards: [],
@@ -14,11 +14,11 @@ const store = createStore({
     currGroup: null,
     currCard: null,
     isLabelsOpen: null,
-   
+    cardMembersIds: [],
   },
   getters: {
-    isCover({isCover}){
-      return isCover
+    isCover({ isCover }) {
+      return isCover;
     },
     starredBoard({ starredBoard }) {
       return starredBoard;
@@ -50,10 +50,24 @@ const store = createStore({
     isLabelsOpen({ currBoard }) {
       return currBoard.labelsOpen;
     },
+    cardMemberIds({ cardMembersIds }) {
+      return cardMembersIds;
+    },
   },
   mutations: {
-    setIsCover(state, {status}){
-      state.isCover = status
+    setCardMembersIds(state, { card }) {
+      state.cardMembersIds = [];
+      card.members.forEach((member) => {
+        state.cardMembersIds.push(member._id);
+      });
+    },
+    toggleMember(state, { memberId }) {
+      const idx = state.card.findIndex((member) => {
+        member.id === memberId;
+      });
+    },
+    setIsCover(state, { status }) {
+      state.isCover = status;
     },
     editLabel(state, { editedLabel }) {
       const idx = state.currBoard.labels.findIndex((label) => {
