@@ -23,13 +23,13 @@
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       font-size: 1rem;
       font-weight: 700;
-      margin-bottom: rem(-3px)
+      margin-bottom: rem(-3px);
     }
-    .save-edit-title{
+    .save-edit-title {
       @include save-btns;
       margin-inline-start: 1px;
     }
-    .close-edit-title{
+    .close-edit-title {
       font-size: rem(24px);
       padding: 6px 4px;
     }
@@ -239,8 +239,9 @@
       overflow-wrap: break-word;
       margin-top: -8px;
       background-color: #091e420a;
-      // border-color: #091e4221;
+      border: 2px solid grey ;
       border-radius: rem(3px);
+      z-index: 10;
       &:focus {
         outline: none;
         box-shadow: none;
