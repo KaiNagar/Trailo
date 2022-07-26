@@ -9,6 +9,7 @@ export const menuModule = {
       cover: false,
       labels: false,
       create: false,
+      dates:false,
       headerCreate: false,
       createLabel: false,
       editLabel: false,

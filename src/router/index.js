@@ -6,6 +6,7 @@ import aboutPage from '../views/about.page.vue'
 
 import boardDetails from '../views/board.details.vue'
 import cardDetails from '../views/card.details.vue'
+import userDetails from '../views/user.details.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: aboutPage,
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: userDetails,
     },
   ],
 })

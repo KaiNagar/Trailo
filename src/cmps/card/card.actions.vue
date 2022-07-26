@@ -15,60 +15,51 @@
         <button><span class="checklist-icon"></span> Checklist</button>
       </div>
       <div class="action-btn-container">
-        <button>
+        <button @click="openMenu('dates')">
           <img src="../../assets/icons/icons-clock.png" alt="Date icon" />
           Dates
         </button>
+        <menu-date />
       </div>
       <div class="action-btn-container"></div>
-      <div
-        @click="$emit('openCoverMenu')"
-        v-if="!isCoverOn"
-        class="action-btn-container"
-      >
+      <div @click="$emit('openCoverMenu')" v-if="!isCoverOn" class="action-btn-container">
         <button><span class="cover-icon"></span> Cover</button>
       </div>
 
+      <div class="action-btn-container">
+        <button @click="openMenu('labels')">
+          <span class="label-icon"></span>
+          Labels
+        </button>
 
+        <menu-labels
+          v-if="!previewMenuOpen"
+          @closeMenu="closeMenu"
+          @setLabel="$emit('setLabel', $event)"
+          @createLabel="$emit('createLabel', $event)"
+          :card="card"
+        ></menu-labels>
+      </div>
 
-<div class="action-btn-container">
-      <button @click="openMenu('labels')">
-        <span class="label-icon"></span>
-        Labels
-      </button>
-
-      <menu-labels 
-        v-if="!previewMenuOpen"
-        @closeMenu="closeMenu"
-        @setLabel="$emit('setLabel', $event)"
-        @createLabel="$emit('createLabel',$event)"
-        :card="card"
-      ></menu-labels>
-    </div>
-
-      
-      
       <menu-attachments @attachFile="attachFile" />
- <div class="action-btn-container">
-    <button @click="openMenu('cover')"  v-if="!isCover">
-      Cover
-      <menu-cover
-       v-if="!previewMenuOpen"
-        @setCoverColor="$emit('setCoverColor', $event)"
-        @setFullCover="$emit('setFullCover', $event)"
-        @setCoverMode="$emit('setCoverMode', $event)"
-        @setCoverImg="$emit('setCoverImg', $event)"
-        @removeCover="$emit('removeCover', $event)"
-        @attachFile="$emit('attachFile', $event)"
-        :card="card"
-      />
-    </button>
-  </div>
+      <div class="action-btn-container">
+        <button @click="openMenu('cover')" v-if="!isCover">
+          Cover
+          <menu-cover
+            v-if="!previewMenuOpen"
+            @setCoverColor="$emit('setCoverColor', $event)"
+            @setFullCover="$emit('setFullCover', $event)"
+            @setCoverMode="$emit('setCoverMode', $event)"
+            @setCoverImg="$emit('setCoverImg', $event)"
+            @removeCover="$emit('removeCover', $event)"
+            @attachFile="$emit('attachFile', $event)"
+            :card="card"
+          />
+        </button>
+      </div>
 
       <div class="action-btn-container">
-        <button disabled>
-          <span class="custom-icon"></span> Custom Fields
-        </button>
+        <button disabled><span class="custom-icon"></span> Custom Fields</button>
       </div>
     </div>
   </section>
@@ -79,6 +70,8 @@ import appModal from '../app.modal.vue'
 import menuAttachments from './action.attachments.vue'
 import menuCover from '../menu.cover.vue'
 import menuLabels from '../labels.menu.vue'
+import AppModal from '../app.modal.vue'
+import menuDate from './menu.date.vue'
 export default {
   name: 'cardActions',
   components: {
@@ -86,36 +79,41 @@ export default {
     menuAttachments,
     menuCover,
     menuLabels,
+    menuDate,
+    AppModal,
   },
   props: {
     isCoverOn: Boolean,
     card: Object,
   },
   data() {
-    return {}
+    return {
+      openDateMenu: false,
+    }
   },
   methods: {
     attachFile(file) {
       this.$emit('attachFile', file)
     },
-      openMenu(menuAction) {
+    openMenu(menuAction) {
       this.colorIdx = 0
+      console.log(menuAction)
       this.$store.commit({ type: 'openMenu', menuAction })
       // this.$store.commit({ type: 'openMenu', menuAction:'labels' })
-      this.$store.commit({type:'setPreviewMenuStatus', status:false})
+      this.$store.commit({ type: 'setPreviewMenuStatus', status: false })
     },
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
   },
   computed: {
-       menu() {
+    menu() {
       return this.$store.getters.menu
     },
-       previewMenuOpen(){
+    previewMenuOpen() {
       return this.$store.getters.previewMenuStatus
     },
-    isCover(){
+    isCover() {
       return this.$store.getters.isCover
     },
   },
