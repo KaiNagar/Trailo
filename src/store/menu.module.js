@@ -9,6 +9,7 @@ export const menuModule = {
       cover: false,
       labels: false,
       create: false,
+      dates:false,
       headerCreate: false,
       createLabel: false,
       editLabel: false,
@@ -16,6 +17,7 @@ export const menuModule = {
       previewLabels: false,
       groupMenu: false,
       deleteAttachment: false,
+      members:false,
     },
     edit: {},
 

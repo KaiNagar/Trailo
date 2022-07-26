@@ -14,6 +14,7 @@
   font-weight: 400;
   font-size: 14px;
   width: 272px;
+  position: relative;
   
   .g-header {
     cursor: pointer;
@@ -76,28 +77,6 @@ textarea{
   }
 }
   }
-//   .edit-group-title {
-//     width: 90%;
-//     display: flex;
-
-//     textarea {
-//       font-family: Helvetica Neue, sans-serif;
-//       background-color: #fff;
-//       padding: 1px 7px;
-//       width: 99%;
-//       box-shadow: 0 0 0 2px #0079bfc2;
-//       font-weight: 600;
-//       overflow: hidden;
-//       border: 2px solid transparent;
-//       resize: none;
-//       overflow-wrap: break-word;
-//       color: #172b4d;
-//       &:focus {
-//         outline: none;
-//       }
-//     }
-//   }
-// }
 .g-footer {
   transition-duration: 85ms;
   line-height: 20px;
@@ -198,4 +177,23 @@ textarea{
     }
   }
 }
-  
+
+
+.g-modal{
+  left: 87%;
+  top: 43px;
+  .g-modal-header{
+    padding: 7px;
+    line-height: 23px;
+  }
+}
+.g-modal-list{
+  display: flex;
+  justify-content: center;
+  padding: 5px 0px 0px;
+  margin: 11px;
+  cursor: pointer;
+  &:hover{
+    background-color: #091e4214;
+  }
+}

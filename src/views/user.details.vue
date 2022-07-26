@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name:'userDetails',
+  name: 'userDetails',
   components: {},
   data() {
     return {}

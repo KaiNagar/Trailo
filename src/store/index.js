@@ -1,12 +1,12 @@
 // import { userStore } from './modules/user.store.js'
-import { createStore } from "vuex";
-import { boardService } from "@/services/board.service.js";
-import { menuModule } from "./menu.module";
+import { createStore } from 'vuex'
+import { boardService } from '@/services/board.service.js'
+import { menuModule } from './menu.module'
 
 const store = createStore({
   strict: true,
   starredBoard: {},
-  isCover:false,
+  isCover: false,
   state: {
     boardId: null,
     boards: [],
@@ -14,133 +14,159 @@ const store = createStore({
     currGroup: null,
     currCard: null,
     isLabelsOpen: null,
-   
+    cardMembersIds: [],
   },
   getters: {
-    isCover({isCover}){
+    isCover({ isCover }) {
       return isCover
     },
     starredBoard({ starredBoard }) {
-      return starredBoard;
+      return starredBoard
     },
     boardsToDisplay({ boards }) {
       return boards
         .slice()
         .reverse()
         .filter((board) => {
-          return !board.isStarred;
+          return !board.isStarred
         })
-        .slice(0, 4);
+        .slice(0, 4)
     },
     boards({ boards }) {
-      return boards;
+      return boards
     },
     currBoard({ currBoard }) {
-      return currBoard;
+      return currBoard
     },
     currGroup({ currGroup }) {
-      return currGroup;
+      return currGroup
     },
     emptyTodo() {
-      return boardService.getEmptyTodo();
+      return boardService.getEmptyTodo()
     },
     emptyCard() {
-      return boardService.getEmptyCard();
+      return boardService.getEmptyCard()
     },
     isLabelsOpen({ currBoard }) {
-      return currBoard.labelsOpen;
+      return currBoard.labelsOpen
+    },
+    cardMemberIds({ cardMembersIds }) {
+      return cardMembersIds
     },
   },
   mutations: {
-    setIsCover(state, {status}){
+    setCardMembersIds(state, { card }) {
+      state.cardMembersIds = []
+      card.members.forEach((member) => {
+        state.cardMembersIds.push(member._id)
+      })
+    },
+    toggleMember(state, { memberId }) {
+      const idx = state.card.findIndex((member) => {
+        member.id === memberId
+      })
+    },
+    setIsCover(state, { status }) {
       state.isCover = status
     },
     editLabel(state, { editedLabel }) {
       const idx = state.currBoard.labels.findIndex((label) => {
-        return label.id === editedLabel.id;
-      });
-      state.currBoard.labels.splice(idx, 1, editedLabel);
+        return label.id === editedLabel.id
+      })
+      state.currBoard.labels.splice(idx, 1, editedLabel)
     },
     removeLabel(state, { labelId }) {
       const idx = state.currBoard.labels.findIndex((label) => {
-        return label.id === labelId;
-      });
-      state.currBoard.labels.splice(idx, 1);
+        return label.id === labelId
+      })
+      state.currBoard.labels.splice(idx, 1)
     },
     setBoards(state, { boards }) {
-      state.boards = boards;
+      state.boards = boards
     },
     setBoardId(state, { boardId }) {
-      state.boardId = boardId;
+      state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
-      state.currBoard = currBoard;
+      state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
       state.currGroup = state.currBoard.groups.find(
-        (group) => group.id === groupId
-      );
+        (group) => group.id === groupId,
+      )
     },
-    addGroup(state, { group }) {
-      state.currBoard.groups.push(group);
-      boardService.save(state.currBoard);
-    },
-    addCard(state, { card }) {
-      const group = state.currBoard.groups.find((group) => {
-        return group.id === card.groupId;
-      });
-      group.cards.push(card);
-      boardService.save(state.currBoard);
-    },
+    // addGroup(state, { group }) {
+    //   state.currBoard.groups.push(group)
+    // },
+    // addCard(state, { card }) {
+    //   const group = state.currBoard.groups.find((group) => {
+    //     return group.id === card.groupId
+    //   })
+    //   group.cards.push(card)
+    //   // boardService.save(state.currBoard)
+    // },
     setIsLabelsOpen(state, { isLabelsOpen }) {
       // state.isLabelsOpen = isLabelsOpen
-      state.currBoard.labelsOpen = isLabelsOpen;
+      state.currBoard.labelsOpen = isLabelsOpen
     },
     starBoard(state, { boardId }) {
       const idx = state.boards.findIndex((board) => {
-        return board._id === boardId;
-      });
-      const board = state.boards[idx];
+        return board._id === boardId
+      })
+      const board = state.boards[idx]
       if (board.isStarred) {
-        board.isStarred = false;
+        board.isStarred = false
       } else {
-        board.isStarred = true;
-        state.boards.splice(idx, 1, board);
+        board.isStarred = true
+        state.boards.splice(idx, 1, board)
       }
-      state.starredBoard = board;
+      state.starredBoard = board
     },
   },
   actions: {
+    // async addGroup({ commit, state }, { group }) {
+    //   state.currBoard.groups.push(group)
+    //   await boardService.save(state.currBoard)
+    //   commit({ type: 'addGroup', group })
+    // },
+    // async addCard({ commit, state }, { card }) {
+    //   const group = state.currBoard.groups.find((group) => {
+    //     return group.id === card.groupId
+    //   })
+    //   group.cards.push(card)
+    //   await boardService.save(state.currBoard)
+    //   commit({ type: 'addCard', card })
+    // },
     async loadBoards({ commit }) {
       try {
-        const boards = await boardService.query();
-        commit({ type: "setBoards", boards });
-        return boards;
+        const boards = await boardService.query()
+        commit({ type: 'setBoards', boards })
+        return boards
       } catch (err) {
-        console.error("cannot get boards:", err);
+        console.error('cannot get boards:', err)
       }
     },
     async saveBoard({ commit }, { board }) {
-      const newBoard = await boardService.save(board);
-      commit({ type: "setCurrBoard", currBoard: newBoard });
-      return newBoard;
+      const newBoard = await boardService.save(board)
+      commit({ type: 'setCurrBoard', currBoard: newBoard })
+      return newBoard
     },
     async saveBoards({ commit }, { boards }) {
       // boards = boards.map((board) => boardService.save(board))
-      commit({ type: "setBoards", boards });
+      commit({ type: 'setBoards', boards })
     },
     async updateGroup({ commit }, { board, group }) {
       const idx = board.groups.findIndex(
-        (currGroup) => currGroup.id === group.id
-      );
-      board.groups.splice(idx, 1, group);
-      const newBoard = await boardService.save(board);
-      commit({ type: "setCurrBoard", currBoard: newBoard });
+        (currGroup) => currGroup.id === group.id,
+      )
+      board.groups.splice(idx, 1, group)
+      const newBoard = await boardService.save(board)
+      commit({ type: 'setCurrBoard', currBoard: newBoard })
     },
   },
   modules: {
     menuModule,
   },
-});
+})
 
-export default store;
+export default store

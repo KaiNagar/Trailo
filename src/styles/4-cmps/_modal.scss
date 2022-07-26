@@ -5,7 +5,9 @@
   //   column-gap: 3.8px;
   // }
   
-
+    header{
+      font-size: 12px;
+    }
   .input {
     -webkit-appearance: none;
     background-color: #fafbfc;
@@ -43,11 +45,11 @@
   border-radius: 3px;
   z-index: 10;
   background-color: white;
-  width: 304px;
+  width: 305px;
   right: 0;
   top: 0;
   border: 1px #dfe2e7 solid;
-  padding: 0 0.8em;
+  padding: 0 1em;
   // z-index: 100;
   color: #6b778c;
 
