@@ -22,12 +22,12 @@
             ><span v-if="isCover" class="cover-btn-title"  @click="openMenu('cover')">Cover</span>
             <menu-cover
             v-if="previewMenuOpen"
-             @setCoverColor="$emit('setCoverColor', $event)"
-        @setFullCover="$emit('setFullCover', $event)"
-        @setCoverMode="$emit('setCoverMode', $event)"
-        @setCoverImg="$emit('setCoverImg', $event)"
-        @removeCover="$emit('removeCover', $event)"
-        @attachFile="$emit('attachFile', $event)"
+                 @attachFile="attachFile"
+                @setCoverColor="sendToSave"
+                @setFullCover="sendToSave"
+                @setCoverMode="sendToSave"
+                @setCoverImg="sendToSave"
+                @removeCover="sendToSave"
         :card="card"
             ></menu-cover>
           </div>
@@ -165,8 +165,8 @@
                 @openChecklistMenu="isChecklistMenuOpen = true"
                 @openLabelsMenu="isLabelMenuOpen = true"
                 @openCoverMenu="isCoverMenuOpen = true"
-                @attachFile="attachFile"
                 :card="card"
+                @attachFile="attachFile"
                 @setCoverColor="sendToSave"
                 @setFullCover="sendToSave"
                 @setCoverMode="sendToSave"
