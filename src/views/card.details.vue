@@ -8,7 +8,7 @@
 
       <div v-if="isCoverActive" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
         <!-- MEMBERS MENU -->
-        <menu-members @sendToSave="sendToSave" :card="card"></menu-members>
+        
 
 
         <div v-for="member in card.members" :key="member.id">
@@ -59,7 +59,7 @@
                   </div>
                 </div>
 
-
+      
 
                 <checklist-menu :getCurrPos="getCurrPos" :newChecklist="newChecklist" @addChecklist="addChecklist"
                   @closeChecklistMenu="isChecklistMenuOpen = false" v-if="isChecklistMenuOpen" />
@@ -101,7 +101,8 @@
                 @openLabelsMenu="isLabelMenuOpen = true" @openCoverMenu="isCoverMenuOpen = true" :card="card"
                 @attachFile="attachFile" @setCoverColor="sendToSave" @setFullCover="sendToSave"
                 @setCoverMode="sendToSave" @setCoverImg="sendToSave" @removeCover="sendToSave" @setLabel="sendToSave"
-                @createLabel="createLabel" />
+                @createLabel="createLabel" 
+                @sendToSave="sendToSave" />
             </div>
           </div>
         </div>

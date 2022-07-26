@@ -60,8 +60,6 @@ const store = createStore({
       card.members.forEach((member) => {
         state.cardMembersIds.push(member._id);
       });
-
-      console.log("member ids in store", state.cardMembersIds);
     },
     toggleMember(state, { memberId }) {
       const idx = state.card.findIndex((member) => {

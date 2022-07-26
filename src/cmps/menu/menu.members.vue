@@ -1,5 +1,6 @@
 <template>
-  <app-modal class="members-modal">
+
+  <app-modal class="members-modal" @closeModal="$emit('closeMenu')">
     <!-- HEADER -->
     <template #title>Members</template>
     <!-- SEARCH -->
@@ -11,12 +12,11 @@
       <ul class="members">
         <header>Board members</header>
         <li class="member-container" v-for="member, in boardMembers " :key="member._id">
+        <!-- MEMBER PREVIEW -->
           <member-preview :member="member" :card="card" @togglemember="toggleMember" />
         </li>
       </ul>
     </template>
-
-
   </app-modal>
 
 </template>
@@ -32,7 +32,6 @@ export default {
   components: {
     appModal,
     memberPreview,
-
   },
   data() {
     return {
@@ -56,7 +55,6 @@ export default {
       }
       this.$emit('sendToSave', this.card)
     },
-
   },
   created() {
   },
@@ -67,7 +65,6 @@ export default {
     boardMembers() {
       return this.board.members || []
     },
-
     avatarStr() {
       let avatarStr = ''
       this.members.forEach(member => {
@@ -75,10 +72,8 @@ export default {
           avatarStr += memberName.charAt(0)
         })
       })
-
       return avatarStr
     },
-
   },
   unmounted() { },
 };
