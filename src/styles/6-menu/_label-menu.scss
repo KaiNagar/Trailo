@@ -1,84 +1,4 @@
 .labels-menu {
-  // z-index: 10;
-  // background-color: white;
-  // position: absolute;
-  // top: 0;
-  // right: 0;
-  // z-index: 1;
-  // border-radius: rem(3px);
-  // .menu-header {
-  //   position: relative;
-  //   justify-content: center;
-  //   margin-bottom: 11px;
-
-  //   .close-label-menu {
-  //     color: #6b778c;
-  //     position: absolute;
-  //     padding: 0;
-  //     margin: 4px;
-  //     border: 0;
-  //     background-color: transparent;
-  //     font-size: rem(14px);
-  //     top: 0px;
-  //     right: 2px;
-  //     &:hover {
-  //       cursor: pointer;
-  //       color: #172b4d;
-  //       background-color: transparent;
-  //     }
-  //   }
-  //   span {
-  //     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-  //       Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-  //     padding: 0 120.7px;
-  //     margin: 0px 12px;
-  //     line-height: 2.85714286;
-  //     font-weight: 400;
-  //     color: #5e6c84;
-  //     text-overflow: ellipsis;
-  //     white-space: nowrap;
-  //     border-bottom: 1px solid #091e4221;
-  //     &:hover {
-  //       background-color: transparent;
-  //       cursor: default;
-  //     }
-  //   }
-  // }
-  // .main-labels-content {
-  //   padding: 0 rem(12px);
-  //   .search-labels {
-  //     background-color: white;
-  //     padding: 8px;
-  //     border-radius: rem(3px);
-  //     margin-bottom: 13px;
-  //     box-shadow: inset 0 0 0 2px #dfe1e6;
-  //     &:focus {
-  //       outline: none;
-  //       box-shadow: inset 0 0 0 1px #0079bf;
-  //       border: 1px solid #0079bf;
-  //       border-radius: rem(3px);
-  //       overflow: hidden;
-  //       overflow-wrap: break-word;
-  //     }
-  //   }
-  //   h3{
-  //       margin-bottom: 8px;
-  //   }
-  //   .label-picker{
-  //       padding: 0;
-  //       margin: 4px 0;
-  //       height:32px ;
-  //       border-radius: rem(4px);
-
-  //   }
-  // }
-
-  // .create-label,
-  // .color-blind-btn {
-  // }
-  // .color-blind-btn {
-  //   cursor: no-drop;
-  // }
 }
 
 .modal {
@@ -99,12 +19,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: em(32px);
       border-radius: 3px;
       margin-bottom: 3px;
       width: 90%;
       position: relative;
       transition: 0.2s;
+      height: 32px;
       .title {
         margin-inline-start: 1em;
       }
@@ -161,7 +81,8 @@
     border: none;
     border-radius: 5px;
     background-color: #f5f6f8;
-    padding: 0.5em 1em;
+    padding: 0 1em;
+    line-height: 2rem;
     color: #40506c;
     cursor: pointer;
     transition: 0.2;
@@ -187,16 +108,15 @@
   }
   .colors-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
     gap: 3.8px;
 
     .color {
-
       display: flex;
       align-items: center;
       justify-content: center;
 
-      span{
+      span {
         color: white;
         font-size: 16px;
       }
@@ -209,7 +129,7 @@
       }
     }
 
-    margin-bottom: 1em;
+    margin-bottom: 2em;
   }
 
   .create-btn {
@@ -220,14 +140,46 @@
     text-align: center;
     font-weight: 100;
     border-radius: 3px;
-    padding: 0.5em 1em;
-    transition: .1s;
+    padding: 0 1.5em;
+    line-height: 32px;
+    transition: 0.1s;
     cursor: pointer;
-    &:hover{
+    &:hover {
       background-color: #025d93;
     }
-    margin-bottom: .7em;
-
-    
+    margin-bottom: 0.7em;
   }
+
+  .delete {
+    transition: .1s;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: #b04632;
+    color: white;
+    font-weight: 100;
+    letter-spacing: .5px;
+    font-size: 16px;
+    &:hover {
+      background-color: #8b3827;
+    }
+  }
+  .btns {
+   
+    display: flex;
+    justify-content: space-between;
+
+    .delete {
+      
+      background-color: #b04632;
+
+      &:hover {
+        background-color: #8b3827;
+      }
+    }
+  }
+  div.warning{
+    color: #172b4d;
+    margin-bottom: 1em;
+  }
+
 }

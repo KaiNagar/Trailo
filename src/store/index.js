@@ -5,7 +5,7 @@ import { menuModule } from "./menu.module";
 
 const store = createStore({
   strict: true,
-  starredBoard:{},
+  starredBoard: {},
   state: {
     boardId: null,
     boards: [],
@@ -15,8 +15,8 @@ const store = createStore({
     isLabelsOpen: null,
   },
   getters: {
-    starredBoard({starredBoard}){
-      return starredBoard
+    starredBoard({ starredBoard }) {
+      return starredBoard;
     },
     boardsToDisplay({ boards }) {
       return boards
@@ -24,7 +24,8 @@ const store = createStore({
         .reverse()
         .filter((board) => {
           return !board.isStarred;
-        }).slice(0,4)
+        })
+        .slice(0, 4);
     },
     boards({ boards }) {
       return boards;
@@ -46,6 +47,18 @@ const store = createStore({
     },
   },
   mutations: {
+    editLabel(state, { editedLabel }) {
+      const idx = state.currBoard.labels.findIndex((label) => {
+        return label.id === editedLabel.id;
+      });
+      state.currBoard.labels.splice(idx, 1, editedLabel);
+    },
+    removeLabel(state, { labelId }) {
+      const idx = state.currBoard.labels.findIndex((label) => {
+        return label.id === labelId;
+      });
+      state.currBoard.labels.splice(idx, 1);
+    },
     setBoards(state, { boards }) {
       state.boards = boards;
     },
@@ -86,7 +99,7 @@ const store = createStore({
         board.isStarred = true;
         state.boards.splice(idx, 1, board);
       }
-      state.starredBoard = board
+      state.starredBoard = board;
     },
   },
   actions: {
@@ -102,11 +115,11 @@ const store = createStore({
     async saveBoard({ commit }, { board }) {
       const newBoard = await boardService.save(board);
       commit({ type: "setCurrBoard", currBoard: newBoard });
-      return newBoard
+      return newBoard;
     },
     async saveBoards({ commit }, { boards }) {
       // boards = boards.map((board) => boardService.save(board))
-      commit({ type: "setBoards", boards});
+      commit({ type: "setBoards", boards });
     },
     async updateGroup({ commit }, { board, group }) {
       const idx = board.groups.findIndex(

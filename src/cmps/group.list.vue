@@ -75,11 +75,6 @@ export default {
   methods: {
     onCardMove(newGroup) {
       const board = this.board
-      if (this.groupsQ.length === 1) {
-        this.$store.dispatch({ type: 'saveBoard', board })
-        this.groupsQ = []
-        return
-      }
       this.groupsQ.push(newGroup)
       if (this.groupsQ.length === 2) {
         this.groupsQ.forEach((group) => {

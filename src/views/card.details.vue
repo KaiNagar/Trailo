@@ -312,7 +312,7 @@ export default {
     },
   },
   created() {
-    console.log('this.card', this.card)
+
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
     this.$store.commit({

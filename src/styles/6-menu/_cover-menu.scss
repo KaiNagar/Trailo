@@ -172,6 +172,7 @@
 
   // COLORS
   .colors {
+    min-height: 5.5rem;
     display: grid;
     grid-template-columns: repeat(5, 50px);
     column-gap: 3.8px;

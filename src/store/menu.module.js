@@ -11,6 +11,9 @@ export const menuModule = {
       create:false,
       headerCreate:false,
       createLabel:false,
+      editLabel:false,
+      deleteLabel:false,
+      previewLabels:false,
       
     },
     edit: {},

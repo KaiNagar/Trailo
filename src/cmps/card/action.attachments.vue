@@ -26,13 +26,11 @@
                         <form @submit.prevent="readLink" class="link-box">
                             <span class="link">Attach a link</span>
                             <input class="input" v-model="url" type="url">
-                            <button>Attach</button>
+                            <button class="attach">Attach</button>
                         </form>
                     </template>
 
-                    <template #part-3>
-                        <p>Tip: You can drag and drop files and links onto cards to upload them.</p>
-                    </template>
+                  
                 </app-modal>
             </button>
         </div>

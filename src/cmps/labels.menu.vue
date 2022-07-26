@@ -19,8 +19,9 @@
       <template #part-2>
         <header>Select a color</header>
         <div class="colors-grid">
-          <div @click="setLabelColor(idx)" v-for="(color, idx) in colors" :key="idx" class="color " :style="{ backgroundColor: color }">
-            <span class="check-icon" v-if="idx === colorIdx" ></span>
+          <div @click="setLabelColor(idx)" v-for="(color, idx) in colors" :key="idx" class="color "
+            :style="{ backgroundColor: color }">
+            <span class="check-icon" v-if="idx === colorIdx"></span>
 
           </div>
         </div>
@@ -32,6 +33,43 @@
       </template>
     </app-modal>
 
+
+    <!-- EDIT MODAL -->
+    <app-modal v-if="menu.editLabel" @closeModal="closeMenu">
+      <template #title> <span @click="openMenu('labels')" class="back icon"> </span> Change label</template>
+      <template #part-1>
+        <header>Name</header>
+        <input type="text" class="input" v-model="labelToEdit.title">
+      </template>
+      <template #part-2>
+        <header>Select a color</header>
+        <div class="colors-grid">
+          <div @click="setLabelColor(idx)" v-for="(color, idx) in colors" :key="idx" class="color "
+            :style="{ backgroundColor: color }">
+            <span class="check-icon" v-if="idx === colorIdx"></span>
+          </div>
+        </div>
+      </template>
+
+      <template #part-3>
+        <div class="btns">
+          <button @click="editLabel" class="create-btn">Save</button>
+          <button @click="openMenu('deleteLabel')" class="create-btn delete">Delete</button>
+        </div>
+      </template>
+    </app-modal>
+
+
+    <!-- DELETE MODAL -->
+    <app-modal v-if="menu.deleteLabel" @closeModal="closeMenu">
+      <template #title> <span @click="openMenu('labels')" class="back icon"> </span> Delete label?</template>
+      <template #part-1>
+        <div class="warning">There is no undo. This will remove this label from all cards and destroy its history.</div>
+        <button @click="removeLabel" class="delete wide btn">Delete</button>
+      </template>
+    </app-modal>
+
+    <!-- LABEL MODAL -->
     <app-modal v-if="menu.labels" @closeModal="closeMenu">
       <template #title>Labels</template>
       <template #part-1>
@@ -45,7 +83,8 @@
               @click="setLabel(label, labelSelected(label.id))" :style="{ 'background-color': label.color }">
               <div class="title">{{ label.title }}</div>
               <!--  -->
-              <div class="icon edit"></div>
+              <div @click.stop="openMenu('editLabel')" @click="setLabelToEdit(label.id)" class="icon edit"></div>
+
               <span class="check-icon" v-if="labelSelected(label.id)"></span>
 
               <div class="pad">
@@ -117,8 +156,8 @@ export default {
   },
   data() {
     return {
-      colorIdx:0,
-      board: null,
+      colorIdx: 0,
+      labelToEdit: {},
       isCreateLabel: false,
       newLabel: boardService.getEmptyLabel(),
       colors: [
@@ -134,23 +173,38 @@ export default {
         '#344563',
         // '#b3bac5',
       ]
-      // labels: [
-      //   { title: '', id: this._makeId, hex: '#61bd4f' },
-      //   { title: '', id: this._makeId, hex: '#ff9f1a' },
-      //   { title: '', id: this._makeId, hex: '#eb5a46' },
-      //   { title: '', id: this._makeId, hex: '#c377e0' },
-      //   { title: '', id: this._makeId, hex: '#c377e0' },
-      //   { title: '', id: this._makeId, hex: '#0079bf' },
-      //   { title: '', id: this._makeId, hex: '#0079bf' },
-      //   { title: '', id: this._makeId, hex: '#0079bf' },
-      //   { title: '', id: this._makeId, hex: '#ff78cb' },
-      // ],
     }
   },
   methods: {
-    setLabelColor(idx){
-      this.colorIdx = idx
+    createLabel() {
+      this.newLabel.color = this.colors[this.colorIdx]
+      this.$emit('createLabel', this.newLabel)
+      this.setLabel(this.newLabel, false)
+      this.newLabel = boardService.getEmptyLabel()
+      this.openMenu('labels')
+    },
+    editLabel() {
+      this.labelToEdit.color = this.colors[this.colorIdx]
+      this.$store.commit({ type: 'editLabel', editedLabel: this.labelToEdit })
+      this.$store.dispatch({ type: 'saveBoard', board: this.board })
+      this.openMenu('labels')
+    },
+    removeLabel() {
+      const labelId = this.labelToEdit.id
+      this.$store.commit({ type: 'removeLabel', labelId })
+      this.$store.dispatch({ type: 'saveBoard', board: this.board })
+      this.openMenu('labels')
+    },
+    setLabelToEdit(labelId) {
+      this.board.labels.forEach(label => {
+        if (label.id === labelId) {
+          this.labelToEdit = JSON.parse(JSON.stringify(label))
+        }
+      })
 
+    },
+    setLabelColor(idx) {
+      this.colorIdx = idx
     },
     labelColor(color) {
       return { backgroundColor: color }
@@ -170,18 +224,7 @@ export default {
       }
       this.$emit('setLabel', this.card)
     },
-    createLabel() {
-      // this.closeMenu()
-      // this.openMenu('createLabel')
-      this.newLabel.color = this.colors[this.colorIdx]
-      // this.isCreateLabel = false
 
-      // this.board.labels.push(this.newLabel)
-      this.$emit('createLabel', this.newLabel)
-      console.log(this.newLabel);
-      this.newLabel = boardService.getEmptyLabel()
-      this.closeMenu()
-    },
     openMenu(menuAction) {
       this.colorIdx = 0
       this.$store.commit({ type: 'openMenu', menuAction })
@@ -203,12 +246,15 @@ export default {
     menu() {
       return this.$store.getters.menu
     },
+    board() {
+      return this.$store.getters.currBoard
+    }
   },
   created() {
-    this.board = this.$store.getters.currBoard
+
   },
-  selectedColor(){
-    return 
+  selectedColor() {
+    return
   },
   unmounted() { },
 }
