@@ -186,6 +186,7 @@ export default {
     },
     removeCover() {
       this.card.style = { isFull: false, bgColor: null, bgImg: null }
+      this.$store.commit({type:'setIsCover', status:false})
       this.$emit('removeCover', this.card)
     },
     coverSize(isFull) {

@@ -4,21 +4,21 @@
         <div v-for="member in members" :key="member._id" class="avatar" :style="{ backgroundColor: member.color }">
             {{ member.username.charAt(0) }}</div>
         <button class="add avatar add-icon" @click="openMenu('previewMembers')"></button>
+    </div>
         <!-- MEMBERS MENU -->
         <menu-members 
         class="preview" v-if="menu.previewMembers" 
         :card="card"
-        @closeModal="closeMenu"
-        @sendToSave="$emit('sendToSave', $event)"
+        @sendToSave="$emit('sendtosave', $event)"
         @closeMenu="closeMenu"
         ></menu-members>
-    </div>
 
 </template>
  <script>
 import menuMembers from './menu/menu.members.vue';
 export default {
     name: 'ProjectApp',
+    emits:['sendtosave','closemenu'],
     components: {
         menuMembers,
     },
@@ -28,7 +28,10 @@ export default {
     data() {
         return {};
     },
-    created() { },
+    created() {
+
+        console.log('this card in members list');
+     },
     methods: {
         openMenu(menuAction) {
             this.$store.commit({ type: 'openMenu', menuAction })

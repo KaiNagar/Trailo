@@ -3,15 +3,12 @@
     <app-modal v-if="menu.dates" @closeModal="closeMenu">
       <template #title>Dates</template>
       <template #part-1>
-        <thead class="date-calender-container">
-          <tr>
-            <th>
-              <v-calendar class="date-calender" :attributes="attributes" @dayclick="onDayClick" />
-            </th>
-          </tr>
-          <!-- <div class="date-calender-container">
-          <v-calendar class="date-calender" :attributes="attributes" @dayclick="onDayClick" /> -->
-        </thead>
+        <form>
+          <div class="date-calender-container">
+            <v-date-picker v-model="date" @click="onDayClick" />
+          </div>
+          <input :value="date" />
+        </form>
       </template>
     </app-modal>
   </section>
@@ -30,27 +27,20 @@ export default {
   data() {
     return {
       date: new Date(),
-      days: [],
+      selectedDate: null,
     }
   },
   methods: {
     openMenu(menuAction) {
-      console.log(menuAction)
       this.$store.commit({ type: 'openMenu', menuAction })
     },
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
-    onDayClick(day) {
-      const idx = this.days.findIndex((d) => d.id === day.id)
-      if (idx >= 0) {
-        this.days.splice(idx, 1)
-      } else {
-        this.days.push({
-          id: day.id,
-          date: day.date,
-        })
-      }
+    onDayClick(event) {
+      console.log(event)
+
+      // this.date = event.date
     },
   },
   computed: {

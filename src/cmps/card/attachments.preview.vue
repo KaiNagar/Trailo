@@ -49,7 +49,7 @@
 <script>
 import moment from 'moment'
 import appModal from '../app.modal.vue'
-import menuAttachments from '../card/action.attachments.vue'
+import menuAttachments from './menu.attachments.vue'
 export default {
   name: 'ProjectApp',
   props: {

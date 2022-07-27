@@ -1,9 +1,6 @@
 <template>
   <section @click="setCurrGroup" class="card-preview">
-    <div
-      v-if="card.style.bgColor || card.style.bgImg"
-      class="card-preview-cover"
-    >
+    <div v-if="card.style.bgColor || card.style.bgImg" class="card-preview-cover">
       <div :class="showCardCoverClass" :style="showCardCover"></div>
       <button class="edit-icon-btn"><span class="edit-icon"></span></button>
     </div>
@@ -17,9 +14,7 @@
             @click.stop="toggleLabels"
             v-for="label in cardLabels"
             :style="{
-              backgroundColor: isLabelHover
-                ? LightenDarkenColor(label.color)
-                : label.color,
+              backgroundColor: isLabelHover ? LightenDarkenColor(label.color) : label.color,
             }"
             :key="label.id"
             >{{ label.title }}</span
@@ -34,9 +29,7 @@
             @click.stop="toggleLabels"
             v-for="label in cardLabels"
             :style="{
-              backgroundColor: isLabelHover
-                ? LightenDarkenColor(label.color)
-                : label.color,
+              backgroundColor: isLabelHover ? LightenDarkenColor(label.color) : label.color,
             }"
             :key="label.id"
           ></span>
@@ -58,11 +51,7 @@
           <span class="attach-icon"></span>
           <span class="count">{{ attachmentCount }}</span>
         </div>
-        <div
-          :class="isTodosDone"
-          v-if="isHavingTodos"
-          class="card-checklist-count flex align-center"
-        >
+        <div :class="isTodosDone" v-if="isHavingTodos" class="card-checklist-count flex align-center">
           <span class="checklist-icon"></span>
           <span class="count" :class="isTodosDone">{{ checklistCount }}</span>
         </div>
@@ -70,21 +59,24 @@
     </div>
 
     <!-- MEMBERS LIST -->
-    <div class="members-list">
-
-            <!-- <members-list :card="card" /> -->
-          </div>
+    <div class="members-list card-preview">
+      <avatar-list :card="card"></avatar-list>
+    </div>
   </section>
 </template>
 <script>
 import membersList from '../members.list.vue'
+import avatarList from './avatar.list.vue'
 export default {
   name: 'cardPreview',
   props: {
     card: Object,
-    membersList,
+
   },
-  components: {},
+  components: {
+    membersList,
+    avatarList,
+  },
   data() {
     return {
       board: null,
@@ -119,14 +111,13 @@ export default {
       )
     },
     removeCard(cardId) {
-      console.log(cardId)
+      // console.log(cardId)
       this.$emit('removeCard', cardId)
     },
   },
   computed: {
     showCardCover() {
-      if (this.card.style.bgImg)
-        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      if (this.card.style.bgImg) return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       return { backgroundColor: this.card.style.bgColor }
     },
     showCardCoverClass() {
@@ -167,9 +158,7 @@ export default {
     },
     cardLabels() {
       const labels = this.board.labels
-      const labelsToShow = labels.filter((label) =>
-        this.card.labelIds.includes(label.id),
-      )
+      const labelsToShow = labels.filter((label) => this.card.labelIds.includes(label.id))
       return labelsToShow
     },
     labelsStatus() {
@@ -185,6 +174,7 @@ export default {
     },
   },
   created() {
+    // console.log(this.card);
     this.board = this.$store.getters.currBoard
     this.group = this.$store.getters.currGroup
     this.isLabelsOpen = this.board.labelsOpen
@@ -192,4 +182,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>
