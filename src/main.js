@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import { focusDirective, clickOutside } from './directives'
 import VCalendar from 'v-calendar';
+import 'v-calendar/dist/style.css';
 
 
 import './styles/main.scss'

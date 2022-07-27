@@ -193,7 +193,6 @@ export default {
     },
 
     openMenu(menuAction) {
-      console.log()
       this.$store.commit({ type: 'openMenu', menuAction })
     },
     closeMenu() {

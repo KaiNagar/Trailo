@@ -57,6 +57,7 @@ export default {
     },
   },
   created() {
+    console.log(this.card);
   },
   computed: {
     board() {

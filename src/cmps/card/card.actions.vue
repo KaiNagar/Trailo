@@ -12,9 +12,9 @@
         <button @click="openMenu('members')"><span class="member-icon"></span> Members</button>
         <!-- MEMBERS MENU  -->
         <menu-members
-          @sendToSave="$emit('sendToSave', $event)"
-          :card="card"
           v-if="menu.members"
+          :card="card"
+          @sendToSave="$emit('sendToSave', $event)"
           @closeMenu="closeMenu"
         >
         </menu-members>
