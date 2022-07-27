@@ -131,11 +131,8 @@ export default {
   created() {
     this.newBoard.labels = [
       { id: 'l101', color: '#61bd4f', title: '' },
-      { id: 'l102', color: '#f2d600', title: '' },
-      { id: 'l103', color: '#ff9f1a', title: '' },
       { id: 'l104', color: '#eb5a46', title: '' },
       { id: 'l105', color: '#c377e0', title: '' },
-      { id: 'l106', color: '#0079bf', title: '' },
     ]
   },
   unmounted() {},

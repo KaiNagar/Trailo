@@ -10,7 +10,22 @@
           ><img src="../../assets/icons/icons-down.png" alt=""
         /></span>
       </button>
-      <h1 class="board-header-title">{{ currBoard.title }}</h1>
+      <h1
+        v-if="!editBoardTitle"
+        class="board-header-title"
+        @click="openEditTitle"
+      >
+        {{ currBoard.title }}
+      </h1>
+      <input
+        ref="editBoardRef"
+        @blur="saveBoardTitle"
+        v-else
+        type="text"
+       
+        v-model="currBoard.title"
+        class="edit-board-title"
+      />
 
       <button @click="toggleStarBoard" class="board-header-star">
         <span :style="isStarred" class="star-icon"></span>
@@ -50,17 +65,27 @@ export default {
     return {
       // currBoard: {},
       filterMenu: false,
+      editBoardTitle: false,
+      currBoard: {},
     }
   },
   methods: {
+    openEditTitle() {
+      this.editBoardTitle = true
+      setTimeout(() => {
+        this.$refs.editBoardRef.focus()
+      }, 0)
+    },
+    saveBoardTitle() {
+      this.editBoardTitle = false
+      this.$store.dispatch({ type: 'saveBoard', board: this.currBoard })
+    },
     toggleStarBoard() {
+      this.currBoard.isStarred = !this.currBoard.isStarred
       const updatedBoard = { ...this.currBoard }
       updatedBoard.isStarred = !updatedBoard.isStarred
       this.$store.dispatch({ type: 'saveBoard', board: updatedBoard })
     },
-    showMenu(){
-      console.log('fdsfsd');
-    }
   },
   computed: {
     isStarred() {
@@ -68,11 +93,13 @@ export default {
         return { color: '#f2d600' }
       }
     },
-    currBoard() {
+    stateBoard() {
       return this.$store.getters.currBoard
     },
   },
-  created() {},
+  created() {
+    this.currBoard = JSON.parse(JSON.stringify(this.stateBoard))
+  },
 }
 </script>
 

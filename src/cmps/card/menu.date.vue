@@ -3,11 +3,24 @@
     <app-modal v-if="menu.dates" @closeModal="closeMenu">
       <template #title>Dates</template>
       <template #part-1>
-        <form>
-          <div class="date-calender-container">
-            <v-date-picker v-model="date" @click="onDayClick" />
+        <form class="date-form" @submit="setDate">
+          <div class="date-calender-container"></div>
+          <Datepicker
+            placeholder="Select Date"
+            modelType="timestamp"
+            :modelValue="date"
+            @update:modelValue="updateDate"
+            inline
+            :dayNames="dayNames"
+            inlineWithInput
+            textInput
+            autoApply
+          />
+          <div class="date-txt">
+            Reminders will be sent to all members and watchers of this card.
           </div>
-          <input :value="date" />
+          <button id="save-date-btn">Save</button>
+          <button id="remove-date-btn" @click.stop="removeDate">Remove</button>
         </form>
       </template>
     </app-modal>
@@ -15,19 +28,31 @@
 </template>
 
 <script>
+import { getDate, getHours, getMinutes, getMonth } from 'date-fns'
 import appModal from '../app.modal.vue'
-import { Calendar, DatePicker } from 'v-calendar'
 export default {
   name: 'dateMenu',
   components: {
     appModal,
-    Calendar,
-    DatePicker,
   },
   data() {
     return {
-      date: new Date(),
-      selectedDate: null,
+      date: null,
+      dayNames: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+      months: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ],
     }
   },
   methods: {
@@ -37,10 +62,30 @@ export default {
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
-    onDayClick(event) {
-      console.log(event)
-
-      // this.date = event.date
+    setDate() {
+      if (!this.date) return
+      const date = getDate(this.date)
+      const month = this.months[getMonth(this.date)]
+      const hours = ('00' + getHours(this.date)).slice(-2)
+      const minutes = ('00' + getMinutes(this.date)).slice(-2)
+      const dueDate = {
+        txt: `${date} ${month} at ${hours}:${minutes}`,
+        timestamp: this.date,
+        date,
+        month,
+        hours,
+        minutes,
+        isDone: false,
+      }
+      this.$emit('setDate', dueDate)
+      this.date = new Date()
+      this.closeMenu()
+    },
+    updateDate(time) {
+      this.date = time
+    },
+    removeDate() {
+      this.date = new Date()
     },
   },
   computed: {
@@ -62,5 +107,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

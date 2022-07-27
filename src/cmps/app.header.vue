@@ -12,7 +12,7 @@
 
     <div class="actions">
       <div class="action">
-        <button @click="openModal('recent')" class="btn">
+        <button @click="openModal('recent')" :class="setClassBtn">
           Recent <img class="arrow" src="../styles/svgs/arrow.svg" alt="" />
         </button>
         <app-modal
@@ -34,7 +34,7 @@
       </div>
 
       <div class="action">
-        <button @click="openModal('starred')" class="btn">
+        <button @click="openModal('starred')" :class="setClassBtn">
           Starred <img class="arrow" src="../styles/svgs/arrow.svg" alt="" />
         </button>
         <app-modal
@@ -56,7 +56,7 @@
       </div>
 
       <div class="action">
-        <button @click="openModal('templates')" class="btn">
+        <button @click="openModal('templates')" :class="setClassBtn">
           Templates <img class="arrow" src="../styles/svgs/arrow.svg" alt="" />
         </button>
         <app-modal
@@ -88,7 +88,6 @@
     </div>
 
     <div class="right-header flex">
-      <!-- <router-link to="/about"></router-link> -->
       <button class="notifications"><img src="../styles/svgs/notification.svg" alt="" /></button>
       <div class="profile">
         <button>KN</button>
@@ -144,7 +143,8 @@ export default {
     },
     resetCurrBoard(){
       this.$store.commit({type:'setCurrBoard',board:null})
-    }
+    },
+    
   },
   computed: {
     starredBoards() {
@@ -170,6 +170,11 @@ export default {
       if(this.board){
         return 'in-board'
       }else return 'out-board'
+    },
+    setClassBtn(){
+      if(this.board){
+        return 'dark-header'
+      }else return 'btn'
     },
     board(){
       return this.$store.getters.currBoard

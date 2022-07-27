@@ -1,6 +1,9 @@
 <template>
   <div v-if="card" class="card-details-container">
-    <section class="card-details flex column">
+    <section
+      v-click-outside="() => backToBoard()"
+      class="card-details flex column"
+    >
       <div class="close-details-container flex">
         <router-link class="close-details-btn flex" :to="'/board/' + board._id"
           ><span class="close-icon"></span>
@@ -16,15 +19,10 @@
         <div class="cover-menu-container">
           <div
             class="cover-menu-btn flex align-center"
-            @click="isCoverMenuOpen = !isCoverMenuOpen"
+            @click="openMenu('cover')"
           >
             <span class="cover-icon"></span
-            ><span
-              v-if="isCover"
-              class="cover-btn-title"
-              @click="openMenu('cover')"
-              >Cover</span
-            >
+            ><span v-if="isCover" class="cover-btn-title">Cover</span>
             <menu-cover
               v-if="previewMenuOpen"
               @attachFile="attachFile"
@@ -60,7 +58,7 @@
               }}</span>
             </div>
           </div>
-
+            <div></div>
           <!-- MEMBERS LIST PREVIEW -->
           <div class="members-list">
             <header>Members</header>
@@ -100,6 +98,23 @@
                       @closeLabelsMenu="isLabelMenuOpen = false"
                     />
                   </div>
+                </div>
+
+                <!-- DUE DATE -->
+                <div v-if="card.dueDate" class="card-due-date">
+                  <input
+                  :checked="card.dueDate.isDone"
+                    class="due-date-check"
+                    type="checkbox"
+                    @change="toggleDueDate"
+                  />
+                  <button class="due-date-container">
+                    <span class="due-date-txt">{{ dueDateTxt }}</span>
+                    <span :style="dateLabelStyle" class="due-date-label">{{
+                      dateLabel
+                    }}</span>
+                    <span class="due-date-arrow"><img src="/src/styles/svgs/arrow.svg"></span>
+                  </button>
                 </div>
 
                 <checklist-menu
@@ -186,6 +201,7 @@
                 @setLabel="sendToSave"
                 @createLabel="createLabel"
                 @sendToSave="sendToSave"
+                @setDate="setDate"
               />
             </div>
           </div>
@@ -247,6 +263,13 @@ export default {
     }
   },
   methods: {
+    setDate(dueDate) {
+      this.card.dueDate = dueDate
+      this.sendToSave(this.card)
+    },
+    backToBoard() {
+      this.$router.push(`/board/${this.board._id}`)
+    },
     onDrop(cardChecklists, dropResult) {
       const newChecklists = this.applyDrag(cardChecklists, dropResult)
       console.log(newChecklists)
@@ -390,6 +413,39 @@ export default {
     },
   },
   computed: {
+    toggleDueDate() {
+      this.card.dueDate.isDone = !this.card.dueDate.isDone
+      this.sendToSave(this.card)
+    },
+    dateLabelStyle() {
+      const now = new Date()
+      const dueDate = this.card.dueDate
+      if (dueDate.isDone) return { backgroundColor: '#61BD4F', color: '#fff' }
+      else if (dueDate.timestamp < now)
+        return { backgroundColor: '#EB5A46', color: '#fff' }
+      else if (dueDate.timestamp - now < 86000000)
+        return { backgroundColor: '#F2D600', color: '#000' }
+    },
+    dateLabel() {
+      const now = new Date()
+      const dueDate = this.card.dueDate
+      if (dueDate.isDone) return 'complete'
+      else if (dueDate.timestamp < now) return 'overdue'
+      else if (dueDate.timestamp - now < 86000000) return 'due soon'
+    },
+    dueDateTxt() {
+      const now = new Date()
+      const dueDate = this.card.dueDate
+      if (dueDate.timestamp - now < -86000000) {
+        return dueDate.txt
+      } else if (dueDate.timestamp - now < 0) {
+        return `yesterday at ${dueDate.hours}:${dueDate.minutes}`
+      } else if (dueDate.timestamp - now < 86000000) {
+        return `today at ${dueDate.hours}:${dueDate.minutes}`
+      } else if (dueDate.timestamp - now < 86000000 * 2) {
+        return `tomorrow at ${dueDate.hours}:${dueDate.minutes}`
+      } else return dueDate.txt
+    },
     previewMenuOpen() {
       return this.$store.getters.previewMenuStatus
     },

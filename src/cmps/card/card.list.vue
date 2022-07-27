@@ -13,11 +13,10 @@
     >
       <Draggable v-for="card in cards" :key="card.id">
         <div>
-          <card-preview :card="card" @click="openCard(card.id)" @removeCard="removeCard" />
+          <card-preview @click="openCard(card.id)" :card="card"  @removeCard="removeCard" />
         </div>
       </Draggable>
     </Container>
-    <router-view></router-view>
   </section>
 </template>
 

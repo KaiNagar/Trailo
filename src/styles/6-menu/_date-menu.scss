@@ -1,0 +1,84 @@
+//LIB CONTAINER
+.dp__flex_display_with_input {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  .dp__relative {
+    border: 0;
+  }
+
+  //CALENDER CONTAINER
+  .dp__calendar_wrap {
+    margin-bottom: 1rem;
+    font-size: 14px;
+  }
+  //DAYS OF THE WEEK
+  .dp__calendar_header {
+    justify-content: space-between;
+    width: 100%;
+    font-size: rem(11px);
+    color: #6b778c;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+      'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  //MONTH AND YEAR TITLES
+  .dp__month_year_select {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+      'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      font-weight: 700;
+  }
+  .dp__month_year_select:nth-child(2) {
+    font-size: rem(14px);
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+.dp__month_year_select:nth-child(3) {
+      margin-left: 10px;
+    font-size: rem(14px);
+    justify-content: flex-start;
+  }
+  //CLOCK BTN
+  .dp__button_bottom {
+    display: none;
+  }
+}
+#save-date-btn {
+  justify-content: center;
+  background-color: #0079bf;
+  box-shadow: none;
+  border: none;
+  border-radius: 2px;
+  color: #ffffff;
+  &:hover {
+    background-color: #026aa7;
+    outline: 0;
+  }
+  &:active {
+    background-color: #055a8c;
+  }
+}
+#remove-date-btn {
+  justify-content: center;
+  background-color: rgba(9, 30, 66, 0.08);
+  box-shadow: none;
+  border: none;
+  border-radius: 2px;
+  &:hover {
+    background-color: rgba(9, 30, 66, 0.08);
+  }
+  &:active {
+    background-color: #e4f0f6;
+    color: #0079bf;
+    outline: 0;
+  }
+}
+.date-form {
+  padding: 0 12px 12px;
+}
+.date-txt {
+  margin: 8px 0 12px;
+}

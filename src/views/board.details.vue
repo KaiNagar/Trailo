@@ -10,6 +10,7 @@
         @removeCard="removeCard"
       />
     </div>
+    <router-view></router-view>
   </section>
 </template>
 <script>
@@ -61,10 +62,28 @@ export default {
       return { backgroundImage: 'url(' + this.currBoard.bgCover + ')' }
     },
   },
-  async created() {
-    const { boardId } = this.$route.params
-    const board = await boardService.getById(boardId)
-    this.$store.commit({ type: 'setCurrBoard', currBoard: board })
+  watch: {
+    '$route.params.boardId': {
+      async handler() {
+        const { boardId } = this.$route.params
+        const board = await boardService.getById(boardId)
+        this.$store.commit({ type: 'setCurrBoard', currBoard: board })
+      },
+      immediate: true,
+    },
+    // '$route.params': {
+    //   async handler() {
+    //     const { cardId, groupId, boardId } = this.$route
+    //     if (!cardId) return
+    //     this.$router.push(`/board/${boardId}/${groupId}/${cardId}`)
+    //   },
+    //   immediate: true,
+    // },
   },
+  // async created() {
+  //   const { boardId } = this.$route.params
+  //   const board = await boardService.getById(boardId)
+  //   this.$store.commit({ type: 'setCurrBoard', currBoard: board })
+  // },
 }
 </script>

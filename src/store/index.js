@@ -149,8 +149,8 @@ const store = createStore({
       }
     },
     async saveBoard({ commit }, { board }) {
+      commit({ type: 'setCurrBoard', currBoard: board })
       const newBoard = await boardService.save(board)
-      commit({ type: 'setCurrBoard', currBoard: newBoard })
       return newBoard
     },
     async saveBoards({ commit }, { boards }) {

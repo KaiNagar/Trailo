@@ -102,6 +102,13 @@ overflow: visible;
     }
   }
   .card-preview-labels {
+    .show-labels-container{
+      display: flex;
+      flex-wrap: wrap;
+      height: 20px;
+    }
+    
+    
     .label-preview-show {
       z-index: 20;
       color: white;
@@ -112,7 +119,11 @@ overflow: visible;
       padding: 0 8px;
       margin: 0 4px 4px 0;
       border-radius: rem(4px);
-      // width: 150px;
+      min-width: 56px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      transition: all 0.5s;
     }
     .label-preview-hide {
       display: block;
@@ -121,6 +132,7 @@ overflow: visible;
       width: 40px;
       margin: 0 4px 4px 0;
       border-radius: rem(4px);
+      transition: all 0.5s;
     }
     .close-labels {
       height: 8px;

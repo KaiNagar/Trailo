@@ -137,7 +137,7 @@ function _createBoards() {
 }
 function getEmptyBoard() {
   return {
-    _id: _makeId(),
+    // _id: _makeId(),
     title: '',
     isStarred: false,
     createdAt: Date.now() - 100000,

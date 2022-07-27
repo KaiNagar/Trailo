@@ -5,8 +5,8 @@
       <button class="edit-icon-btn"><span class="edit-icon"></span></button>
     </div>
     <div class="card-preview-details">
-      <div class="card-preview-labels">
-        <div v-if="this.$store.getters.isLabelsOpen">
+      <div v-if="isCardLabels" class="card-preview-labels">
+        <div class="show-labels-container" v-if="this.$store.getters.isLabelsOpen">
           <span
             @mouseenter="isLabelHover = true"
             @mouseleave="isLabelHover = false"
@@ -20,12 +20,11 @@
             >{{ label.title }}</span
           >
         </div>
-
         <div v-else class="flex">
           <span
             @mouseenter="isLabelHover = true"
             @mouseleave="isLabelHover = false"
-            class="label-preview-hide"
+            class="label-preview-show label-preview-hide"
             @click.stop="toggleLabels"
             v-for="label in cardLabels"
             :style="{
@@ -157,7 +156,7 @@ export default {
       return this.isLabelsOpen
     },
     cardLabels() {
-      const labels = this.board.labels
+      const labels = this.$store.getters.currBoard.labels
       const labelsToShow = labels.filter((label) => this.card.labelIds.includes(label.id))
       return labelsToShow
     },
@@ -172,6 +171,10 @@ export default {
       if (card.checklists || this.isHavingAttachments) return true
       return false
     },
+    isCardLabels(){
+      if(this.card.labelIds.length)return true
+      return false
+    }
   },
   created() {
     // console.log(this.card);
