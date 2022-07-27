@@ -30,7 +30,7 @@
         <menu-date />
       </div>
       <div class="action-btn-container"></div>
-      <div @click="$emit('openCoverMenu')" v-if="!isCoverOn" class="action-btn-container">
+      <div @click="openMenu('cover')" v-if="!isCover" class="action-btn-container">
         <button><span class="cover-icon"></span> Cover</button>
       </div>
 
@@ -49,20 +49,7 @@
         ></menu-labels>
       </div>
 
-      <div class="action-btn-container">
-        <button @click="openMenu('labels')">
-          <span class="label-icon"></span>
-          Labels
-        </button>
-
-        <menu-labels
-          v-if="!previewMenuOpen"
-          @closeMenu="closeMenu"
-          @setLabel="$emit('setLabel', $event)"
-          @createLabel="$emit('createLabel', $event)"
-          :card="card"
-        ></menu-labels>
-      </div>
+  
 
       <menu-attachments @attachFile="attachFile" />
       <div class="action-btn-container">
@@ -90,7 +77,7 @@
 
 <script>
 import appModal from '../app.modal.vue'
-import menuAttachments from './action.attachments.vue'
+import menuAttachments from './menu.attachments.vue'
 import menuCover from '../menu.cover.vue'
 import menuLabels from '../labels.menu.vue'
 import AppModal from '../app.modal.vue'

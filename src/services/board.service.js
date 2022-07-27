@@ -120,6 +120,7 @@ function getEmptyChecklist() {
 
 async function remove(boardId) {
   return await httpService.delete(`board/${boardId}`)
+
   // const res = await axios.delete(_getUrl(boardId))
   // return res.data
 

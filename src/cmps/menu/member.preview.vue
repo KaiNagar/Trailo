@@ -19,12 +19,11 @@ export default {
     components: {},
     data() {
         return {
-
             lookedMemberId: null,
         };
     },
     created() {
-
+        console.log(this.ids)
     },
     methods: {
         toggleMember(member) {

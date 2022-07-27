@@ -66,8 +66,8 @@
             <header>Members</header>
             <members-list
               :card="card"
-              @sendToSave="sendToSave"
-              @closeMenu="closeMenu"
+              @sendtosave="sendToSave"
+              @closemenu="closeMenu"
             />
           </div>
 
@@ -159,7 +159,7 @@
                       @saveChecklist="saveChecklist"
                       @removeChecklist="removeChecklist"
                       @checklistQ="moveChecklistQ"
-                      @sendToSave="sendToSave"
+                      @sendtosave="sendToSave"
                       @dragLeave="dragLeave"
                       :checklist="checklist"
                       :idx="idx"
@@ -203,7 +203,7 @@ import labelsMenu from '../cmps/labels.menu.vue'
 import checklistMenu from '../cmps/checklist.menu.vue'
 import { boardService } from '../services/board.service'
 import attachmentsPreview from '../cmps/card/attachments.preview.vue'
-import menuAttachments from '../cmps/card/action.attachments.vue'
+import menuAttachments from '../cmps/card/menu.attachments.vue'
 import moveCardModal from '../cmps/move.card.modal.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import menuCover from '../cmps/menu.cover.vue'

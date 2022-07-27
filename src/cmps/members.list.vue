@@ -5,20 +5,20 @@
             {{ member.username.charAt(0) }}</div>
         <button class="add avatar add-icon" @click="openMenu('previewMembers')"></button>
         <!-- MEMBERS MENU -->
+    </div>
         <menu-members 
         class="preview" v-if="menu.previewMembers" 
         :card="card"
-        @closeModal="closeMenu"
-        @sendToSave="$emit('sendToSave', $event)"
+        @sendToSave="$emit('sendtosave', $event)"
         @closeMenu="closeMenu"
         ></menu-members>
-    </div>
 
 </template>
  <script>
 import menuMembers from './menu/menu.members.vue';
 export default {
     name: 'ProjectApp',
+    emits:['sendtosave','closemenu'],
     components: {
         menuMembers,
     },
