@@ -40,8 +40,8 @@
           <div class="members-list">
             <header>Members</header>
             <members-list :card="card" 
-            @sendToSave="sendToSave"
-            @closeMenu="closeMenu"
+            @sendtosave="sendToSave"
+            @closemenu="closeMenu"
             />
           </div>
 
