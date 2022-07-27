@@ -18,6 +18,7 @@ export const menuModule = {
       groupMenu: false,
       deleteAttachment: false,
       members:false,
+      previewMembers:false,
     },
     edit: {},
 

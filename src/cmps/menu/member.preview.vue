@@ -1,5 +1,5 @@
-<template>
-    <div @click="toggleMember(member)" class="member">
+<template  >
+    <div @click="toggleMember(member)" class="member" >
         <div class="avatar" :style="{ backgroundColor: member.color }">{{ member.username.charAt(0) }}</div>
         <div class="member-name">
             <span>{{ member.username }}</span>

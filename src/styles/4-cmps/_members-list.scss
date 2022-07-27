@@ -1,0 +1,24 @@
+.members-list {
+  color: #172b4d;
+  header {
+    font-size: 12px;
+    font-weight: 600;
+    margin-block-end: 3px;
+  }
+  // POSITION SETTINGS
+  margin-inline-start: 3.8em;
+  .avatars {
+    display: flex;
+    .avatar {
+      margin-inline-end: 4px;
+      cursor: pointer;
+      &.add{
+        border: none;
+        color: #56647d;
+        background-color: #eaecf0;
+      }
+    }
+
+
+  }
+}

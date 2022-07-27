@@ -7,13 +7,8 @@
       </div>
 
       <div v-if="isCoverActive" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
-        <!-- MEMBERS MENU -->
-        
 
 
-        <div v-for="member in card.members" :key="member.id">
-        <div>{{member}}</div>
-        </div>
         <div class="cover-menu-container">
           <div class="cover-menu-btn flex align-center" @click="isCoverMenuOpen = !isCoverMenuOpen">
             <span class="cover-icon"></span><span v-if="isCover" class="cover-btn-title"
@@ -40,6 +35,16 @@
               }}</span>
             </div>
           </div>
+
+          <!-- MEMBERS LIST PREVIEW -->
+          <div class="members-list">
+            <header>Members</header>
+            <members-list :card="card" 
+            @sendToSave="sendToSave"
+            @closeMenu="closeMenu"
+            />
+          </div>
+
           <div class="flex space-between">
             <div class="details-column flex column">
               <div class="labels-preview-container">
@@ -59,7 +64,7 @@
                   </div>
                 </div>
 
-      
+
 
                 <checklist-menu :getCurrPos="getCurrPos" :newChecklist="newChecklist" @addChecklist="addChecklist"
                   @closeChecklistMenu="isChecklistMenuOpen = false" v-if="isChecklistMenuOpen" />
@@ -101,8 +106,7 @@
                 @openLabelsMenu="isLabelMenuOpen = true" @openCoverMenu="isCoverMenuOpen = true" :card="card"
                 @attachFile="attachFile" @setCoverColor="sendToSave" @setFullCover="sendToSave"
                 @setCoverMode="sendToSave" @setCoverImg="sendToSave" @removeCover="sendToSave" @setLabel="sendToSave"
-                @createLabel="createLabel" 
-                @sendToSave="sendToSave" />
+                @createLabel="createLabel" @sendToSave="sendToSave" />
             </div>
           </div>
         </div>
@@ -124,6 +128,7 @@ import moveCardModal from '../cmps/move.card.modal.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import menuCover from '../cmps/menu.cover.vue'
 import menuMembers from '../cmps/menu/menu.members.vue'
+import membersList from '../cmps/members.list.vue'
 export default {
   name: 'cardDetails',
   components: {
@@ -139,6 +144,7 @@ export default {
     Draggable,
     menuCover,
     menuMembers,
+    membersList,
   },
   data() {
     return {
@@ -377,7 +383,7 @@ export default {
 
   },
   created() {
-    this.$store.commit({type:'setCardMembersIds', card:this.card})
+    this.$store.commit({ type: 'setCardMembersIds', card: this.card })
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
     this.$store.commit({ type: 'setIsCover', status: this.isCoverOn })

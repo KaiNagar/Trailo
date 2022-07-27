@@ -68,13 +68,21 @@
         </div>
       </div>
     </div>
+
+    <!-- MEMBERS LIST -->
+    <div class="members-list">
+
+            <!-- <members-list :card="card" /> -->
+          </div>
   </section>
 </template>
 <script>
+import membersList from '../members.list.vue'
 export default {
   name: 'cardPreview',
   props: {
     card: Object,
+    membersList,
   },
   components: {},
   data() {
@@ -180,6 +188,7 @@ export default {
     },
   },
   created() {
+    console.log(this.card);
     this.board = this.$store.getters.currBoard
     this.group = this.$store.getters.currGroup
     this.isLabelsOpen = this.board.labelsOpen
