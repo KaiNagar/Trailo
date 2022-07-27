@@ -6,9 +6,9 @@
     <div class="galleries">
 
 
-      <section class="board-list-container" v-if="boards">
+      <section class="board-list-container" v-if="starred.length">
         <div class="board-list">
-          <div class="star-icon section icon"></div>
+          <header class="star-icon section icon list-header"><span class="list-header">Starred boards</span></header>
           <div class="board-preview">
             <!-- <img src="../assets/icons/icons-clock.png" alt="" /> -->
             <div class="gallery">
@@ -16,7 +16,7 @@
                 <img :src="board.bgCover" alt="">
                 <h1>{{ board.title }}</h1>
                 <div class="star">
-                  <div class="star-icon " @click.stop="star(board._id)" :class="{ starred: board.isStarred }"></div>
+                  <div class="star-icon " @click.stop="star(board._id)" board></div>
                   <!-- <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div> -->
                 </div>
               </div>
@@ -32,7 +32,7 @@
 
       <section class="board-list-container" v-if="boards">
         <div class="board-list">
-          <div class="recently icon section"></div>
+          <header class="recently icon section list-header"><span>Your boards</span></header>
           <div class="board-preview">
             <!-- <img src="../assets/icons/icons-clock.png" alt="" /> -->
             <div class="gallery">
@@ -51,11 +51,11 @@
         </div>
       </section>
 
-      <div class="board-list-new-board" @click="openMenu('create')">
+      <!-- <div class="board-list-new-board" @click="openMenu('create')">
         <p>Create new board</p>
 
       </div>
-      <add-board v-if="menu.create" @closeModal="closeMenu"></add-board>
+      <add-board v-if="menu.create" @closeModal="closeMenu"></add-board> -->
     </div>
   </section>
 </template>

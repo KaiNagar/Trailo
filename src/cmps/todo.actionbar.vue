@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-action-bar flex">
+  <div class="todo-action-bar flex align-center">
     <button disabled class="assign-item-btn">
       <span class="assign-icon"></span><a href=""> Assign</a>
     </button>

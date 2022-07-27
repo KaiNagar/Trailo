@@ -30,7 +30,7 @@ const store = createStore({
         .filter((board) => {
           return !board.isStarred
         })
-        .slice(0, 4)
+       
     },
     boards({ boards }) {
       return boards
@@ -57,6 +57,7 @@ const store = createStore({
   mutations: {
     setCardMembersIds(state, { card }) {
       state.cardMembersIds = []
+      card.members = card.members|| []
       card.members.forEach((member) => {
         state.cardMembersIds.push(member._id)
       })
@@ -68,6 +69,7 @@ const store = createStore({
     },
     setIsCover(state, { status }) {
       state.isCover = status
+      console.log(status);
     },
     editLabel(state, { editedLabel }) {
       const idx = state.currBoard.labels.findIndex((label) => {

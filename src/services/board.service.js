@@ -1,6 +1,8 @@
 import { storageService } from '@/services/storage.service.js'
 // import Axios from 'axios'
 // const axios = Axios.create({ withCredentials: true })
+import { httpService } from './http.service'
+
 
 export const boardService = {
   query,
@@ -22,6 +24,7 @@ export const boardService = {
 //       : '//localhost:5173/api/board'
 //   return `${BASE_URL}/${id}`
 // }
+
 const STORAGE_KEY = "boardDB";
 _setBoards();
 
@@ -32,18 +35,20 @@ function _setBoards() {
 }
 
 async function query(filterBy = null) {
+  // return await httpService.get(`board`,filterBy)
   try {
     const res = await storageService.query(STORAGE_KEY)
     return res
     // const res = await axios.get(_getUrl(), { params: filterBy })
-    // console.log(res.data);
-    // return res.data
+    // console.log(res.data)
+    return res.data
   } catch (err) {
     console.error('cannot get board :', err)
   }
 }
 
 async function getById(boardId) {
+  // return await httpService.get(`board/${boardId}`)
   try {
     const res = await storageService.get(STORAGE_KEY, boardId);
     return res
@@ -56,18 +61,21 @@ async function getById(boardId) {
 
 async function save(board) {
   if (board._id) {
+    // return await httpService.put(`board/${board._id}`,board)
     const res = await storageService.put(STORAGE_KEY, board);
     return res
     // const res = await axios.put(_getUrl(board._id, board))
     // return res.data
   } else {
-    console.log("no id");
+    // return await httpService.post(`board`,board)
+    // console.log("no id");
     board._id = _makeId();
     const res = await storageService.post(STORAGE_KEY, board);
     return res
-    // console.log(board);
+
+    // console.log(board)
     // const res = await axios.post(_getUrl(), board)
-    // console.log(res.data);
+    // console.log(res.data)
     // return res.data
   }
 }
@@ -113,8 +121,11 @@ function getEmptyChecklist() {
 }
 
 async function remove(boardId) {
+  // return await httpService.delete(`board/${boardId}`)
+
   // const res = await axios.delete(_getUrl(boardId))
   // return res.data
+
   try {
     const res = await storageService.remove(STORAGE_KEY, boardId);
     return res;
@@ -128,8 +139,8 @@ function _createBoards() {
 }
 function getEmptyBoard() {
   return {
-    _id: "",
-    title: "",
+    // _id: "",
+    title: '',
     isStarred: false,
     createdAt: Date.now() - 100000,
     labelsOpen: false,
@@ -137,9 +148,7 @@ function getEmptyBoard() {
       'https://images.unsplash.com/photo-1658279165324-454de0ee3da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
     createdBy: {},
     labels: [],
-    members: [
-    
-    ],
+    members: [],
     groups: [
       { id: _makeId(), title: 'To do', cards: [] },
       {
@@ -188,8 +197,6 @@ function _createBoard() {
         color: "#ff78cb",
       },
     ],
-    
-
 
     members: [
       {

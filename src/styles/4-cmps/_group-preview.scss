@@ -1,7 +1,7 @@
 .group-container {
   height: 87vh;
-
 }
+
 .group {
   color: #172b4d;
   margin: 0 4px;
@@ -15,7 +15,7 @@
   font-size: 14px;
   width: 272px;
   position: relative;
-  
+
   .g-header {
     cursor: pointer;
     line-height: 20px;
@@ -29,15 +29,15 @@
       position: absolute;
       top: 4px;
       right: 5px;
-      .g-menu-btn{
+      .g-menu-btn {
         border: 0;
         background: transparent;
         cursor: pointer;
         border-radius: 3px;
-        &:hover{
+        &:hover {
           background-color: #091e4214;
         }
-        .menu-icon{
+        .menu-icon {
           font-size: 0.9rem;
           line-height: 29px;
           font-weight: 500;
@@ -53,30 +53,30 @@
     }
   }
 }
-  .edit-group-title{
-    font-weight: 600;
-    max-width: 214px;
+.edit-group-title {
+  font-weight: 600;
+  max-width: 214px;
   padding: 1px 7px;
   width: 90%;
   display: flex;
 
-textarea{
-  font-family: Helvetica Neue,sans-serif;
-  background-color: #fff;
-  padding: 1px 7px;
-  width: 99%;
-  box-shadow: 0 0 0 2px #0079bfc2;
-  font-weight: 600;
-  overflow: hidden;
-  border: 2px solid transparent;
-  resize: none;
-  overflow-wrap: break-word;
-  color: #172b4d;
-  &:focus{
-    outline:none;
+  textarea {
+    font-family: Helvetica Neue, sans-serif;
+    background-color: #fff;
+    padding: 1px 7px;
+    width: 99%;
+    box-shadow: 0 0 0 2px #0079bfc2;
+    font-weight: 600;
+    overflow: hidden;
+    border: 2px solid transparent;
+    resize: none;
+    overflow-wrap: break-word;
+    color: #172b4d;
+    &:focus {
+      outline: none;
+    }
   }
 }
-  }
 .g-footer {
   transition-duration: 85ms;
   line-height: 20px;
@@ -178,22 +178,21 @@ textarea{
   }
 }
 
-
-.g-modal{
+.g-modal {
   left: 87%;
   top: 43px;
-  .g-modal-header{
+  .g-modal-header {
     padding: 7px;
     line-height: 23px;
   }
 }
-.g-modal-list{
+.g-modal-list {
   display: flex;
   justify-content: center;
   padding: 5px 0px 0px;
   margin: 11px;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: #091e4214;
   }
 }

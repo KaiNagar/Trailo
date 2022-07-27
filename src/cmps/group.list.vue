@@ -12,7 +12,6 @@
       :get-child-payload="getChildPayload1"
     >
       <Draggable v-for="group in groups" :key="group.id">
-        <article>
           <group-preview
             :group="group"
             @updateGroupTitle="updateGroup"
@@ -22,7 +21,6 @@
             @removeGroup="removeGroup"
             @removeCard="$emit('removeCard', $event)"
           />
-        </article>
       </Draggable>
     </Container>
     <!-- <article v-for="group in groups" :key="group.id">

@@ -1,10 +1,11 @@
 .home-page {
   position: relative;
-  top: 10px;
+  top: 26px;
+  // left: 4px;
   //   background-color: green;
   //   height: 100vh;
   display: flex;
-  width: 95%;
+  width: 95.5%;
   max-width: 1120px;
   margin: 0 auto;
   color: #172b4d;
@@ -18,11 +19,17 @@
 
 // SIDE MENU
 .side-menu {
+  .icon {
+    font-size: 16px;
+    // padding-right: px;
+    margin-inline-start: 2px;
+  }
   ul {
     list-style: none;
     padding: 0;
 
     li {
+      margin-inline-start: 7px;
       cursor: no-drop;
       border-radius: 3px;
       font-weight: 700;
@@ -31,7 +38,7 @@
       display: flex;
       margin-block-end: 3px;
       // border: 1px black solid;
-      width: 90%;
+      width: 85%;
       line-height: 32px;
       transition: 0.1s;
       &.active {
@@ -62,17 +69,59 @@
     }
   }
 
+  // WORKSPACES
   .workspaces {
     width: 90%;
+    button {
+      border: none;
+    }
+    li {
+      position: relative;
+      bottom: 15px;
+      display: flex;
+      align-items: center;
+      .workspace-avatar {
+        position: relative;
+        // right: 10px;
+        margin-inline-end: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 1.5em;
+        width: 1.5em;
+        color: white;
+        font-size: 14px;
+        &.one {
+          background: linear-gradient(#403294, #0747a6);
+        }
+        &.two {
+          background: linear-gradient(#b22865, #cd5a91);
+        }
+        &.three {
+          background: linear-gradient(#006644, #00875a);
+        }
+        border-radius: 2px;
+      }
+
+      line-height: 2.7rem;
+      margin-bottom: 5px;
+    }
     .header {
       display: flex;
       font-size: 12px;
       justify-content: space-between;
+      margin-inline-start: 10px;
       button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        position: relative;
+        right: 7px;
         cursor: pointer;
         background-color: rgba(255, 255, 255, 0);
         font-size: 14px;
-        border: none;
+        // border: none;
       }
       //   border: 1px black solid;
       color: #5e6c84;
@@ -81,12 +130,36 @@
 }
 
 .board-list-container {
-  margin-top: .9em;
-  width: 100%;
+  margin-bottom: 47px;
+  .section.icon{
+    color: #646e80;
+  }
+  header {
+    
+    span {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        margin-inline-start: 10px;
+        color: #172b4d;
+        position: relative;
+        bottom: 2px;
+    }
+  }
+
+  margin-top: 0.8em;
+  width: 99%;
   display: flex;
   .icon {
     line-height: 1.5em;
     font-size: 25px;
+    margin-bottom: 5px;
+    margin-inline-start: 10px;
+    font-size: 24px;
+    
   }
   .recently {
     &::before {
@@ -105,18 +178,25 @@
     color: #172b4d;
   }
   .board-preview .gallery {
-    // border: 1px black solid;
-    padding: 0;
+    position: relative;
+    left: 6px;
+    // padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
-    gap: 5px;
-    width: 100%;
+    gap: 10px;
+    row-gap: 30px;
+    // column-gap: 5px;
+    // width: 100%;
     .item {
+      // max-width: 194px;
       overflow-x: hidden;
+      // min-height: 150px;
+      // margin-inline-end: 1em;
       .star {
         transition: 0.2s;
         width: 150%;
         height: 100%;
+
         position: absolute;
         bottom: 0;
         right: -5em;
@@ -163,7 +243,7 @@
       img {
         width: 100%;
         // max-height: ;
-        object-fit: cover;
+        object-fit: contain;
         overflow-y: hidden;
         position: relative;
         bottom: 2.5em;

@@ -1,6 +1,6 @@
 <template>
   <section v-if="group" class="group-container">
-    <div class="group">
+    <div v-if="group" class="group">
       <div class="g-header">
         <div @click="onTitleEditable" class="edit-group-title">
           <span v-if="!isTitleEditable">{{ group.title }}</span>
@@ -29,7 +29,9 @@
 
         <div class="g-modal-list">
           <div>
-            <div class="g-modal-content content" @click="removeGroup(group.id)">Archive list</div>
+            <div class="g-modal-content content" @click="removeGroup(group.id)">
+              Archive list
+            </div>
           </div>
         </div>
       </div>
@@ -47,8 +49,13 @@
 
       <div class="g-footer flex space-between">
         <div class="g-footer-add-area">
-          <div @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title-icon">
-            <span class="add-icon"></span><span class="g-footer-title">Add a card</span>
+          <div
+            @click="onOpenTextarea"
+            v-if="!isEditable"
+            class="g-footer-title-icon"
+          >
+            <span class="add-icon"></span
+            ><span class="g-footer-title">Add a card</span>
           </div>
           <div v-if="!isEditable" class="g-template-icon">
             <span class="template-icon"></span>

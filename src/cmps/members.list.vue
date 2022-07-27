@@ -9,7 +9,6 @@
         <menu-members 
         class="preview" v-if="menu.previewMembers" 
         :card="card"
-        @closeModal="closemenu"
         @sendToSave="$emit('sendtosave', $event)"
         @closeMenu="closeMenu"
         ></menu-members>

@@ -1,0 +1,20 @@
+[
+  {
+    "username": "Rimonaldo",
+    "email": "Rimons2804@gmail.com",
+    "avatar":{"imgUrl":"url","color":"#EF7564"}
+},
+{
+    "username": "Kai nagar",
+    "email": "KaiNagar8@gmail.com",
+    "imgUrll": "url",
+    "avatar":{"imgUrl":"url","color":"#F5DD29"}
+},
+{
+    "username": "Stav Kotlovsky",
+    "email": "StavKot@gmail.com",
+    "imgUrl": "url",
+    "avatar":{"imgUrl":"url","color":"#FFAF3F"}
+  }
+]
+

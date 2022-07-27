@@ -11,7 +11,7 @@
     <template #part-2>
       <ul class="members">
         <header>Board members</header>
-        <li class="member-container" v-for="member, in boardMembers " :key="member._id">
+        <li class="member-container" v-for="member in boardMembers " :key="member._id">
         <!-- MEMBER PREVIEW -->
           <member-preview :member="member" :card="card" @togglemember="toggleMember" />
         </li>
@@ -26,6 +26,7 @@ import memberPreview from './member.preview.vue';
 import appModal from '../app.modal.vue';
 export default {
   name: 'ProjectApp',
+  emits:['closeMenu','sendToSave'],
   props: {
     card: Object
   },
@@ -57,7 +58,7 @@ export default {
     },
   },
   created() {
-    console.log(this.card);
+    console.log(this.card.members);
   },
   computed: {
     board() {
@@ -68,7 +69,7 @@ export default {
     },
     avatarStr() {
       let avatarStr = ''
-      this.members.forEach(member => {
+      this.card.members.forEach(member => {
         member.username.split(' ').forEach(memberName => {
           avatarStr += memberName.charAt(0)
         })
