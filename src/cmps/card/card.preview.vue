@@ -7,21 +7,32 @@
     <div class="card-preview-details">
       <div class="card-preview-labels">
         <div v-if="this.$store.getters.isLabelsOpen">
-          <span @mouseenter="isLabelHover = true" @mouseleave="isLabelHover = false" class="label-preview-show"
-            @click.stop="toggleLabels" v-for="label in cardLabels" :style="{
-              backgroundColor: isLabelHover
-                ? LightenDarkenColor(label.color)
-                : label.color,
-            }" :key="label.id">{{ label.title }}</span>
+          <span
+            @mouseenter="isLabelHover = true"
+            @mouseleave="isLabelHover = false"
+            class="label-preview-show"
+            @click.stop="toggleLabels"
+            v-for="label in cardLabels"
+            :style="{
+              backgroundColor: isLabelHover ? LightenDarkenColor(label.color) : label.color,
+            }"
+            :key="label.id"
+            >{{ label.title }}</span
+          >
         </div>
 
         <div v-else class="flex">
-          <span @mouseenter="isLabelHover = true" @mouseleave="isLabelHover = false" class="label-preview-hide"
-            @click.stop="toggleLabels" v-for="label in cardLabels" :style="{
-              backgroundColor: isLabelHover
-                ? LightenDarkenColor(label.color)
-                : label.color,
-            }" :key="label.id"></span>
+          <span
+            @mouseenter="isLabelHover = true"
+            @mouseleave="isLabelHover = false"
+            class="label-preview-hide"
+            @click.stop="toggleLabels"
+            v-for="label in cardLabels"
+            :style="{
+              backgroundColor: isLabelHover ? LightenDarkenColor(label.color) : label.color,
+            }"
+            :key="label.id"
+          ></span>
         </div>
       </div>
       <div class="card-title">
@@ -100,14 +111,13 @@ export default {
       )
     },
     removeCard(cardId) {
-      console.log(cardId)
+      // console.log(cardId)
       this.$emit('removeCard', cardId)
     },
   },
   computed: {
     showCardCover() {
-      if (this.card.style.bgImg)
-        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      if (this.card.style.bgImg) return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       return { backgroundColor: this.card.style.bgColor }
     },
     showCardCoverClass() {
@@ -148,9 +158,7 @@ export default {
     },
     cardLabels() {
       const labels = this.board.labels
-      const labelsToShow = labels.filter((label) =>
-        this.card.labelIds.includes(label.id),
-      )
+      const labelsToShow = labels.filter((label) => this.card.labelIds.includes(label.id))
       return labelsToShow
     },
     labelsStatus() {
@@ -169,7 +177,7 @@ export default {
     },
   },
   created() {
-    console.log(this.card);
+    // console.log(this.card);
     this.board = this.$store.getters.currBoard
     this.group = this.$store.getters.currGroup
     this.isLabelsOpen = this.board.labelsOpen

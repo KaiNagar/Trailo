@@ -50,13 +50,8 @@ export const menuModule = {
       }
     },
     openEditMenu(state, { editId }) {
-      console.log(state.menu[editId]);
       for (let e in state.menu) {
         state.menu[e] = false;
-        // state.menu[editId ] = true;
-        // if (e === editId) {
-        //   console.log(e);
-        // }
       }
       console.log(state.edit);
     },
@@ -71,12 +66,7 @@ export const menuModule = {
       }
     },
     setEditMenu(state, { attachments }) {
-      // console.log(attachments);
       const edit = state.edit;
-      // attachments.forEach((attachment) => {
-      //   edit[attachment.id] = false;
-      // });
-      // console.log(edit);
     },
     setPreviewMenuStatus(state, { status }) {
       state.isPreviewMenusOpen = status
