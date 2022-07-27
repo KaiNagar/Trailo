@@ -17,6 +17,7 @@
 import boardHeader from '@/cmps/board/board.header.vue'
 import groupList from '@/cmps/group.list.vue'
 import { boardService } from '../services/board.service'
+import { socketService } from '../services/socket.service'
 
 export default {
   name: 'boardApp',
@@ -68,22 +69,18 @@ export default {
         const { boardId } = this.$route.params
         const board = await boardService.getById(boardId)
         this.$store.commit({ type: 'setCurrBoard', currBoard: board })
+        socketService.emit('connectin-board', boardId)
       },
       immediate: true,
     },
-    // '$route.params': {
-    //   async handler() {
-    //     const { cardId, groupId, boardId } = this.$route
-    //     if (!cardId) return
-    //     this.$router.push(`/board/${boardId}/${groupId}/${cardId}`)
-    //   },
-    //   immediate: true,
-    // },
   },
-  // async created() {
-  //   const { boardId } = this.$route.params
-  //   const board = await boardService.getById(boardId)
-  //   this.$store.commit({ type: 'setCurrBoard', currBoard: board })
-  // },
+  mounted() {
+    console.log(this.currBoard)
+    //  socketService.emit('chat topic', this.currBoard)
+    //   const { boardId } = this.$route.params
+    //   const board = await boardService.getById(boardId)
+    //   console.log(board);
+    //   this.$store.commit({ type: 'setCurrBoard', currBoard: board })
+  },
 }
 </script>

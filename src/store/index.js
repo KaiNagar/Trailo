@@ -2,6 +2,7 @@
 import { createStore } from 'vuex'
 import { boardService } from '@/services/board.service.js'
 import { menuModule } from './menu.module'
+import {socketService} from '../services/socket.service.js'
 
 const store = createStore({
   strict: true,

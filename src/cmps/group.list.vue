@@ -60,6 +60,7 @@
 import groupPreview from './group.preview.vue'
 import { boardService } from '../services/board.service'
 import { Container, Draggable } from 'vue3-smooth-dnd'
+import {socketService} from '../services/socket.service'
 
 export default {
   name: 'groupList',
@@ -158,6 +159,8 @@ export default {
   },
   created() {
     this.groupsCopy = this.groupsCopyC
+   
+    console.log('hi?');
   },
 }
 </script>
