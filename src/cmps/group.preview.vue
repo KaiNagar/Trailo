@@ -116,6 +116,7 @@ export default {
       this.$emit('updateGroup', updateGroup)
       this.$refs.textarea.value = ''
       this.newCard = this.$store.getters.emptyCard
+      socketService.emit('updateGroup',updateGroup)
     },
     updateGroupTitle() {
       this.isTitleEditable = false
@@ -148,6 +149,7 @@ export default {
     },
   },
   created() {
+    
     this.newCard = this.$store.getters.emptyCard
     this.groupToEdit = this.$store.getters.emptyCard
   },

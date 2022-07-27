@@ -1,4 +1,5 @@
 import { storageService } from '@/services/storage.service.js'
+import {socketService} from '@/services/socket.service.js'
 // import Axios from 'axios'
 // const axios = Axios.create({ withCredentials: true })
 import { httpService } from './http.service'
@@ -60,8 +61,11 @@ async function getById(boardId) {
 }
 
 async function save(board) {
+  console.log(board);
   if (board._id) {
     return await httpService.put(`board/${board._id}`,board)
+    
+    
     // const res = await storageService.put(STORAGE_KEY, board);
     // return res
     // const res = await axios.put(_getUrl(board._id, board))
@@ -76,6 +80,22 @@ async function save(board) {
     // console.log(res.data)
     // return res.data
   }
+  socketService.on('board', save)
+  socketService.emit('board', save)
+}
+
+async function remove(boardId) {
+  return await httpService.delete(`board/${boardId}`)
+
+  // const res = await axios.delete(_getUrl(boardId))
+  // return res.data
+
+  // try {
+  //   const res = await storageService.remove(STORAGE_KEY, boardId);
+  //   return res;
+  // } catch (err) {
+  //   console.error("cannot remove board", err);
+  // }
 }
 
 function getEmptyGroup() {
@@ -118,26 +138,12 @@ function getEmptyChecklist() {
   }
 }
 
-async function remove(boardId) {
-  return await httpService.delete(`board/${boardId}`)
-
-  // const res = await axios.delete(_getUrl(boardId))
-  // return res.data
-
-  // try {
-  //   const res = await storageService.remove(STORAGE_KEY, boardId);
-  //   return res;
-  // } catch (err) {
-  //   console.error("cannot remove board", err);
-  // }
-}
 
 function _createBoards() {
   return [_createBoard(), _createBoard(), _createBoard()];
 }
 function getEmptyBoard() {
   return {
-    _id: _makeId(),
     title: '',
     isStarred: false,
     createdAt: Date.now() - 100000,

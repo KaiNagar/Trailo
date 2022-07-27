@@ -16,6 +16,7 @@
 import boardHeader from '@/cmps/board/board.header.vue'
 import groupList from '@/cmps/group.list.vue'
 import { boardService } from '../services/board.service'
+import {socketService} from '../services/socket.service'
 
 export default {
   name: 'boardApp',
@@ -30,6 +31,7 @@ export default {
       const board = JSON.parse(JSON.stringify(this.currBoard))
       board.groups.push(newGroup)
       this.$store.dispatch({ type: 'saveBoard', board })
+
     },
     updateGroup(newGroup) {
       const board = JSON.parse(JSON.stringify(this.currBoard))
@@ -61,11 +63,26 @@ export default {
       return { backgroundImage: 'url(' + this.currBoard.bgCover + ')' }
     },
   },
-  async created() {
-    const { boardId } = this.$route.params
-    const board = await boardService.getById(boardId)
-    console.log(board);
-    this.$store.commit({ type: 'setCurrBoard', currBoard: board })
+  watch: {
+    '$route.params.boardId': {
+      async handler() {
+        const { boardId } = this.$route.params
+        const board = await boardService.getById(boardId)
+        this.$store.commit({ type: 'setCurrBoard', currBoard: board })
+    socketService.emit('connectin-board',boardId)
+
+
+      },
+    immediate:true
+    },
   },
-}
+  mounted() {
+    console.log(this.currBoard);
+    //  socketService.emit('chat topic', this.currBoard)
+  //   const { boardId } = this.$route.params
+  //   const board = await boardService.getById(boardId)
+  //   console.log(board);
+  //   this.$store.commit({ type: 'setCurrBoard', currBoard: board })
+  },
+  }
 </script>
