@@ -1,5 +1,4 @@
 .card-checklist {
-  
   position: relative;
   .checklist-icon-container {
     .checklist-icon {
@@ -55,6 +54,9 @@
       right: rem(2px);
       &:hover {
         background-color: #091e4214;
+      }
+      &:active {
+        @include active;
       }
     }
   }
@@ -229,6 +231,9 @@
     margin-inline-start: 2px;
     .cancel-item-btn {
       @include cancel-btns;
+      &:active {
+        @include active;
+      }
     }
     .add-item-btn {
       @include save-btns;
@@ -243,7 +248,7 @@
       overflow-wrap: break-word;
       margin-top: -8px;
       background-color: #091e420a;
-      border: 2px solid grey;
+      border: 2px solid #091e4221;
       border-radius: rem(3px);
       z-index: 10;
       &:focus {
@@ -257,6 +262,7 @@
       z-index: 10;
     }
     .remove-todo-edit {
+      position: relative;
       background-color: transparent;
       border: 0;
       font-family: trellicons;
@@ -268,6 +274,28 @@
       &:hover {
         background-color: #091e4214;
         color: #172b4d;
+      }
+      .delete-menu {
+        position: absolute;
+        top: 30px;
+        right: 0;
+        .modal {
+          button.remove-todo-btn {
+            background-color: transparent;
+            border: 0;
+            width: 100%;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            text-align: left;
+            cursor: pointer;
+            color: rgb(23, 43, 77);
+            &:hover {
+              background-color: rgba(9, 30, 66, 0.08);
+              box-shadow: none;
+              border: none;
+            }
+          }
+        }
       }
     }
     .close-icon-btn {

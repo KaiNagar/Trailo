@@ -84,7 +84,7 @@
             <textarea type="text" v-model="todo.title" />
             <div class="flex align-center space-between">
               <div class="flex align-center">
-                <button @click="saveTodo(todo, idx)" class="save-todo-btn">
+                <button @click.stop="saveTodo(todo, idx)" class="save-todo-btn">
                   Save
                 </button>
                 <div class="close-icon-container">
@@ -98,9 +98,23 @@
                 <todo-actionbar />
                 <button
                   class="remove-todo-edit menu-icon"
-                  @click.stop="removeTodo(idx)"
+                  @click="openMenu('deleteTodo')"
                 >
-                  <span class="close-icon"></span>
+                  <app-modal
+                    @closeModal="closeMenu"
+                    v-if="menu.deleteTodo"
+                    class="delete-menu"
+                  >
+                    <template #title>Item actions</template>
+                    <template #part-1
+                      ><button
+                        class="btn remove-todo-btn"
+                        @click="removeTodo(idx)"
+                      >
+                        Delete
+                      </button>
+                    </template>
+                  </app-modal>
                 </button>
               </div>
             </div>
@@ -135,7 +149,6 @@
                 >Cancel</span
               >
             </div>
-
             <todo-actionbar />
           </div>
         </div>
@@ -147,6 +160,7 @@
 <script>
 import todoActionbar from '../todo.actionbar.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
+import appModal from '../app.modal.vue'
 
 export default {
   name: 'Checklist',
@@ -155,7 +169,7 @@ export default {
     idx: Number,
     card: Object,
   },
-  components: { todoActionbar, Container, Draggable },
+  components: { todoActionbar, Container, Draggable, appModal },
   data() {
     return {
       newItem: this.$store.getters.emptyTodo,
@@ -226,6 +240,8 @@ export default {
       this.$emit('saveChecklist', {
         info: { checklist: this.checklist, idx: this.idx },
       })
+      this.checklist.todos.map((todo) => todo.isEditing === false)
+      this.closeMenu('deleteTodo')
     },
     saveTodo(todo, idx) {
       todo.isEditing = false
@@ -236,6 +252,7 @@ export default {
       })
     },
     openEditTodo(todo, idx) {
+      if (todo.Editing === null) return
       todo.isEditing = true
       this.checklist.todos.forEach((todo) => (todo.isEditing = false))
       this.checklist.todos[idx].isEditing = true
@@ -244,6 +261,7 @@ export default {
       })
     },
     closeEditTodo(todo, idx) {
+      if (todo.Editing === null) return
       todo.isEditing = false
       this.checklist.todos[idx].isEditing = false
       this.$emit('saveChecklist', {
@@ -263,6 +281,12 @@ export default {
     },
     isEditingTodo(todo) {
       return todo.isEditing
+    },
+    openMenu(menuAction) {
+      this.$store.commit({ type: 'openMenu', menuAction })
+    },
+    closeMenu() {
+      this.$store.commit({ type: 'closeMenu' })
     },
   },
   computed: {
@@ -287,6 +311,9 @@ export default {
     },
     todosDoneCount() {
       return Math.floor(this.getTodosStats * 100) + '%'
+    },
+    menu() {
+      return this.$store.getters.menu
     },
   },
   created() {

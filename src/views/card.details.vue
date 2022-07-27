@@ -377,8 +377,8 @@ export default {
 
   },
   created() {
-    this.$store.commit({type:'setCardMembersIds', card:this.card})
     this.newChecklist = boardService.getEmptyChecklist()
+    this.$store.commit({type:'setCardMembersIds', card:this.card})
     this.isCoverOn = this.isCoverActive
     this.$store.commit({ type: 'setIsCover', status: this.isCoverOn })
     this.$store.commit({

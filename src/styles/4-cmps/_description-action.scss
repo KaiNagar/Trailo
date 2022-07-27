@@ -21,6 +21,13 @@
     &:hover {
       background-color: #e2e4e9;
     }
+    &:active{
+      background-color: #e4f0f6;
+      border: none;
+      box-shadow: none;
+      color: #0079bf;
+      outline: 0;
+    }
   }
   .desc-textarea {
     position: relative;
@@ -47,6 +54,7 @@
     font-size: rem(14px);
     font-weight: 400;
     line-height: 1.42857143;
+    
   }
   .edit-desc {
     padding-top: 4px;
