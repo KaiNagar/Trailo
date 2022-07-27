@@ -1,45 +1,27 @@
 <template>
   <section @click="setCurrGroup" class="card-preview">
-    <div
-      v-if="card.style.bgColor || card.style.bgImg"
-      class="card-preview-cover"
-    >
+    <div v-if="card.style.bgColor || card.style.bgImg" class="card-preview-cover">
       <div :class="showCardCoverClass" :style="showCardCover"></div>
       <button class="edit-icon-btn"><span class="edit-icon"></span></button>
     </div>
     <div class="card-preview-details">
       <div class="card-preview-labels">
         <div v-if="this.$store.getters.isLabelsOpen">
-          <span
-            @mouseenter="isLabelHover = true"
-            @mouseleave="isLabelHover = false"
-            class="label-preview-show"
-            @click.stop="toggleLabels"
-            v-for="label in cardLabels"
-            :style="{
+          <span @mouseenter="isLabelHover = true" @mouseleave="isLabelHover = false" class="label-preview-show"
+            @click.stop="toggleLabels" v-for="label in cardLabels" :style="{
               backgroundColor: isLabelHover
                 ? LightenDarkenColor(label.color)
                 : label.color,
-            }"
-            :key="label.id"
-            >{{ label.title }}</span
-          >
+            }" :key="label.id">{{ label.title }}</span>
         </div>
 
         <div v-else class="flex">
-          <span
-            @mouseenter="isLabelHover = true"
-            @mouseleave="isLabelHover = false"
-            class="label-preview-hide"
-            @click.stop="toggleLabels"
-            v-for="label in cardLabels"
-            :style="{
+          <span @mouseenter="isLabelHover = true" @mouseleave="isLabelHover = false" class="label-preview-hide"
+            @click.stop="toggleLabels" v-for="label in cardLabels" :style="{
               backgroundColor: isLabelHover
                 ? LightenDarkenColor(label.color)
                 : label.color,
-            }"
-            :key="label.id"
-          ></span>
+            }" :key="label.id"></span>
         </div>
       </div>
       <div class="card-title">
@@ -58,11 +40,7 @@
           <span class="attach-icon"></span>
           <span class="count">{{ attachmentCount }}</span>
         </div>
-        <div
-          :class="isTodosDone"
-          v-if="isHavingTodos"
-          class="card-checklist-count flex align-center"
-        >
+        <div :class="isTodosDone" v-if="isHavingTodos" class="card-checklist-count flex align-center">
           <span class="checklist-icon"></span>
           <span class="count" :class="isTodosDone">{{ checklistCount }}</span>
         </div>
@@ -70,21 +48,24 @@
     </div>
 
     <!-- MEMBERS LIST -->
-    <div class="members-list">
-
-            <!-- <members-list :card="card" /> -->
-          </div>
+    <div class="members-list card-preview">
+      <avatar-list :card="card"></avatar-list>
+    </div>
   </section>
 </template>
 <script>
 import membersList from '../members.list.vue'
+import avatarList from './avatar.list.vue'
 export default {
   name: 'cardPreview',
   props: {
     card: Object,
-    membersList,
+
   },
-  components: {},
+  components: {
+    membersList,
+    avatarList,
+  },
   data() {
     return {
       board: null,
@@ -196,4 +177,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>

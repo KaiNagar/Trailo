@@ -8,3 +8,14 @@
     justify-content: center;
     color: white;
   }
+
+  .members-list.card-preview{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 9px;
+    margin-inline-end: 5px;
+    background-color: inherit;
+    &:hover{
+      background-color: inherit;
+    }
+  }

@@ -4,8 +4,8 @@
         <div v-for="member in members" :key="member._id" class="avatar" :style="{ backgroundColor: member.color }">
             {{ member.username.charAt(0) }}</div>
         <button class="add avatar add-icon" @click="openMenu('previewMembers')"></button>
-        <!-- MEMBERS MENU -->
     </div>
+        <!-- MEMBERS MENU -->
         <menu-members 
         class="preview" v-if="menu.previewMembers" 
         :card="card"
@@ -28,7 +28,10 @@ export default {
     data() {
         return {};
     },
-    created() { },
+    created() {
+
+        console.log('this card in members list');
+     },
     methods: {
         openMenu(menuAction) {
             this.$store.commit({ type: 'openMenu', menuAction })

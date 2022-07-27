@@ -23,7 +23,6 @@ export default {
         };
     },
     created() {
-        console.log(this.ids)
     },
     methods: {
         toggleMember(member) {
