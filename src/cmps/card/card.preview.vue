@@ -183,12 +183,8 @@ export default {
       if (card.checklists || this.isHavingAttachments) return true
       return false
     },
-    isBoardLabelsOpen() {
-      return this.isLabelsOpen
-    },
   },
   created() {
-    console.log(this.card);
     this.board = this.$store.getters.currBoard
     this.group = this.$store.getters.currGroup
     this.isLabelsOpen = this.board.labelsOpen

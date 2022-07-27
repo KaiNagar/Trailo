@@ -64,7 +64,6 @@ export default {
   async created() {
     const { boardId } = this.$route.params
     const board = await boardService.getById(boardId)
-    console.log(board);
     this.$store.commit({ type: 'setCurrBoard', currBoard: board })
   },
 }

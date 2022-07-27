@@ -1,9 +1,6 @@
 <template>
   <section class="board-header-right-btns">
-    <button @click="filterOpen = !filterOpen" class="filter-btn">
-      <span><img src="../../assets/icons/icons-bars.png" alt="" /></span> Filter
-    </button>
-    <div class="filter-menu" v-if="filterOpen">
+    <div class="filter-menu" >
       <div class="filter-menu-header flex">
         <span class="filter-title">Filter</span>
         <span class="close-menu">X</span>

@@ -1,11 +1,11 @@
 <template>
-  <section class="main-header">
+  <section :style="headerStyle" class="main-header">
     <div class="logo-container">
       <button class="header-menu icon"></button>
-      <router-link to="/">
+      <router-link @click="resetCurrBoard" to="/">
         <div class="logo">
           <img src="../../src/styles/cenzored-header-gif.gif" alt="" />
-          <span>ai</span>
+          <span :style="headerStyle">ai</span>
         </div>
       </router-link>
     </div>
@@ -77,14 +77,14 @@
         </app-modal>
       </div>
       <div class="add">
-        <button @click="openMenu('headerCreate')" class="create-btn"></button>
+        <button :class="createClass" @click="openMenu('headerCreate')" class="create-board-btn">Create</button>
         <add-board v-if="menu.headerCreate"></add-board>
       </div>
     </div>
 
     <div class="search">
       <img src="../styles/svgs/search.svg" />
-      <input class="search-board-input" type="text" placeholder="Search" />
+      <input :style="inputStyle" class="search-board-input" type="text" placeholder="Search" />
     </div>
 
     <div class="right-header flex">
@@ -142,13 +142,11 @@ export default {
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
+    resetCurrBoard(){
+      this.$store.commit({type:'setCurrBoard',board:null})
+    }
   },
   computed: {
-    // boards() {
-    //   return this.$store.getters.boards
-
-    // },
-
     starredBoards() {
       const starred = this.boards.filter((board) => {
         board.isStarred
@@ -158,8 +156,27 @@ export default {
     menu() {
       return this.$store.getters.menu
     },
+    headerStyle(){
+      if(this.board){
+        return {backgroundColor: '#5e6263'}
+      }else return ''
+    },
+    inputStyle(){
+      if(this.board){
+        return {backgroundColor: 'rgba(255, 255, 255, 0.2)'}
+      }else return ''
+    },
+    createClass(){
+      if(this.board){
+        return 'in-board'
+      }else return 'out-board'
+    },
+    board(){
+      return this.$store.getters.currBoard
+    }
   },
-  created() {},
-  created() {},
+  created() {
+
+  },
 }
 </script>
