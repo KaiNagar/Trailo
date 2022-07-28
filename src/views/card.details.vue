@@ -548,6 +548,9 @@ export default {
       type: 'setEditMenu',
       attachments: this.card.attachments,
     })
+    this.card.members = [
+      
+    ]
   },
 }
 </script>
