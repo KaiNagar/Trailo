@@ -34,7 +34,9 @@
         </button>
       </div>
       <div class="progress-bar-preview">
-        <span class="progress-count">{{ todosDoneCount }}</span>
+        <span :style="ifDoneTodos" class="progress-count">{{
+          todosDoneCount
+        }}</span>
         <div class="progress-bar-container">
           <div :style="todosDone" class="progress-bar"></div>
         </div>
@@ -308,6 +310,11 @@ export default {
           borderTopRightRadius: 0.25 + 'rem',
         }
       return { width: (this.getTodosStats * 100).toFixed(2) + '%' }
+    },
+    ifDoneTodos() {
+      const stats = this.getTodosStats
+      if (stats === 1) return { left:-2.2375 + 'rem'}
+      return ''
     },
     todosDoneCount() {
       return Math.floor(this.getTodosStats * 100) + '%'

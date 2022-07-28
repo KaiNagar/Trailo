@@ -170,7 +170,7 @@
   color: #5e6c84;
   &::before {
     content: '\e952';
-}
+  }
 }
 .comment-icon {
   font-family: trellicons;
@@ -197,16 +197,31 @@
   }
 }
 
-.star-icon{
+.star-icon {
   font-family: trellicons;
   font-size: 1rem;
   color: #5e6c84;
   &::before {
-    content: "\e966";
+    content: '\e966';
+  }
 }
-
+.clock-icon {
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+    content: '\e91b';
+  }
 }
-.edit-icon-btn{
+.unchecked-icon{
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+    content: '\e919';
+  }
+}
+.edit-icon-btn {
   display: none;
   background: transparent;
   border: 0;
@@ -214,16 +229,15 @@
   right: 0;
   top: 0;
   cursor: pointer;
-  .edit-icon{
+  .edit-icon {
     font-family: trellicons;
     font-size: 0.8rem;
     color: #5e6c84;
     &::before {
-      content: "\e928";
+      content: '\e928';
+    }
   }
-  }
-  &:hover{
+  &:hover {
     background-color: #091e4214;
   }
-
 }

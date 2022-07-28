@@ -15,9 +15,9 @@ export default {
     }
   },
   methods: {
-  alertSomethingChanged() {
-        alert('Admin has updated the store...')
-      },
+  // alertSomethingChanged() {
+  //       alert('Admin has updated the store...')
+  //     },
       },
   computed: {
     boards(){
@@ -26,7 +26,7 @@ export default {
   },
   async created() {
     const boards = await this.$store.dispatch({ type: 'loadBoards' })
-    socketService.on('something-changed', this.alertSomethingChanged)
+    // socketService.on('something-changed', this.alertSomethingChanged)
     
   },
 }

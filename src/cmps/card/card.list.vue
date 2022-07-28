@@ -11,9 +11,15 @@
       :drop-placeholder="dropPlaceholderOptions"
       :get-child-payload="getChildPayload1"
     >
-      <Draggable v-for="card in cards" :key="card.id">
+      <Draggable v-for="(card,idx) in cards" :key="card.id">
         <div>
-          <card-preview @click="openCard(card.id)" :card="card"  @removeCard="removeCard" />
+          <card-preview
+            @click="openCard(card.id)"
+            :card="card"
+            :idx="idx"
+            @saveCard="saveCard"
+            @removeCard="removeCard"
+          />
         </div>
       </Draggable>
     </Container>
@@ -48,8 +54,11 @@ export default {
       this.$emit('dragLeave', leaving)
     },
     removeCard(cardId) {
-      console.log(cardId)
       this.$emit('removeCard', cardId)
+    },
+    saveCard({ card, cardIdx }) {
+      const newBoard = (this.board.groups[this.groupIdx].cards[cardIdx] = card)
+      this.$store.dispatch({ type: 'saveBoard', board: newBoard })
     },
     getChildPayload1(index) {
       return this.cards[index]
