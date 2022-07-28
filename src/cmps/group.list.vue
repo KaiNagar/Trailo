@@ -12,15 +12,15 @@
       :get-child-payload="getChildPayload1"
     >
       <Draggable v-for="group in groups" :key="group.id">
-          <group-preview
-            :group="group"
-            @updateGroupTitle="updateGroup"
-            @updateGroup="updateGroup"
-            @onCardMove="onCardMove"
-            @dragLeave="dragLeave"
-            @removeGroup="removeGroup"
-            @removeCard="$emit('removeCard', $event)"
-          />
+        <group-preview
+          :group="group"
+          @updateGroupTitle="updateGroup"
+          @updateGroup="updateGroup"
+          @onCardMove="onCardMove"
+          @dragLeave="dragLeave"
+          @removeGroup="removeGroup"
+          @removeCard="removeCard"
+        />
       </Draggable>
     </Container>
     <!-- <article v-for="group in groups" :key="group.id">
@@ -60,7 +60,7 @@
 import groupPreview from './group.preview.vue'
 import { boardService } from '../services/board.service'
 import { Container, Draggable } from 'vue3-smooth-dnd'
-import {socketService} from '../services/socket.service'
+import { socketService } from '../services/socket.service'
 
 export default {
   name: 'groupList',
@@ -101,9 +101,7 @@ export default {
       }
       if (!this.isLeaveGroup) {
         this.groupsQ.forEach((group) => {
-          const groupIdx = board.groups.findIndex(
-            (bGroup) => bGroup.id === group.id,
-          )
+          const groupIdx = board.groups.findIndex((bGroup) => bGroup.id === group.id)
           board.groups.splice(groupIdx, 1, group)
         })
         this.$store.dispatch({ type: 'saveBoard', board })
@@ -124,7 +122,13 @@ export default {
       this.showForm = false
       this.newGroup = boardService.getEmptyGroup()
     },
-    removeCard(cardId) {},
+    removeCard(cardId) {
+      console.log(cardId)
+      this.$emit('removeCard', cardId)
+      // const group = { ...this.groups }
+      // const groupIdx = this.groups.cards.findIndex((card) => card.id === cardId)
+      // console.log(groupIdx)
+    },
     getChildPayload1(idx) {
       return idx
     },
@@ -159,8 +163,6 @@ export default {
   },
   created() {
     this.groupsCopy = this.groupsCopyC
-   
-    console.log('hi?');
   },
 }
 </script>

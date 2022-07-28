@@ -29,9 +29,7 @@
 
         <div class="g-modal-list">
           <div>
-            <div class="g-modal-content content" @click="removeGroup(group.id)">
-              Archive list
-            </div>
+            <div class="g-modal-content content" @click="removeGroup(group.id)">Archive list</div>
           </div>
         </div>
       </div>
@@ -49,13 +47,8 @@
 
       <div class="g-footer flex space-between">
         <div class="g-footer-add-area">
-          <div
-            @click="onOpenTextarea"
-            v-if="!isEditable"
-            class="g-footer-title-icon"
-          >
-            <span class="add-icon"></span
-            ><span class="g-footer-title">Add a card</span>
+          <div @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title-icon">
+            <span class="add-icon"></span><span class="g-footer-title">Add a card</span>
           </div>
           <div v-if="!isEditable" class="g-template-icon">
             <span class="template-icon"></span>
@@ -116,7 +109,7 @@ export default {
       this.$emit('updateGroup', updateGroup)
       this.$refs.textarea.value = ''
       this.newCard = this.$store.getters.emptyCard
-      socketService.emit('updateGroup',updateGroup)
+      // socketService.emit('updateGroup',updateGroup)
     },
     updateGroupTitle() {
       this.isTitleEditable = false
@@ -149,7 +142,6 @@ export default {
     },
   },
   created() {
-    
     this.newCard = this.$store.getters.emptyCard
     this.groupToEdit = this.$store.getters.emptyCard
   },

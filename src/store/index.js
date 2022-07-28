@@ -166,6 +166,7 @@ const store = createStore({
       const newBoard = await boardService.save(board)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
     },
+
   },
   modules: {
     menuModule,

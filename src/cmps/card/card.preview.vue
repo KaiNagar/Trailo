@@ -50,7 +50,11 @@
           <span class="attach-icon"></span>
           <span class="count">{{ attachmentCount }}</span>
         </div>
-        <div :class="isTodosDone" v-if="isHavingTodos" class="card-checklist-count flex align-center">
+        <div
+          :class="isTodosDone"
+          v-if="isHavingTodos"
+          class="card-checklist-count flex align-center"
+        >
           <span class="checklist-icon"></span>
           <span class="count" :class="isTodosDone">{{ checklistCount }}</span>
         </div>
@@ -70,7 +74,6 @@ export default {
   name: 'cardPreview',
   props: {
     card: Object,
-
   },
   components: {
     membersList,
@@ -110,7 +113,7 @@ export default {
       )
     },
     removeCard(cardId) {
-      // console.log(cardId)
+      console.log(cardId)
       this.$emit('removeCard', cardId)
     },
   },
@@ -171,10 +174,10 @@ export default {
       if (card.checklists || this.isHavingAttachments) return true
       return false
     },
-    isCardLabels(){
-      if(this.card.labelIds.length)return true
+    isCardLabels() {
+      if (this.card.labelIds.length) return true
       return false
-    }
+    },
   },
   created() {
     // console.log(this.card);
