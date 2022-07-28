@@ -20,6 +20,7 @@ export const menuModule = {
       members:false,
       deleteTodo:false,
       previewMembers:false,
+      account:false,
     },
     edit: {},
 

@@ -3,7 +3,7 @@ import Axios from 'axios'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
-    : '//localhost:5173/api/'
+    : '//127.0.0.1:5173/api/'
 
 
 const axios = Axios.create({
@@ -39,7 +39,7 @@ async function ajax(endpoint, method = 'GET', data = null) {
         console.dir(err)
         if (err.response && err.response.status === 401) {
             // Depends on routing startegy - hash or history
-            window.location.assign('/#/login')
+            // window.location.assign('/#/login')
             // window.location.assign('/login')
             // router.push('/login')
         }

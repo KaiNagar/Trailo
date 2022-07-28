@@ -22,12 +22,8 @@
                 <img :src="board.bgCover" alt="" />
                 <h1>{{ board.title }}</h1>
                 <div class="star">
-                  <div
-                    class="star-icon"
-                    :class="{ starred: board.isStarred }"
-                    @click.stop="star(board._id)"
-                    board
-                  ></div>
+                  <div class="star-icon " :class="{ starred: board.isStarred }" @click.stop="star(board._id)" board>
+                  </div>
                   <!-- <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div> -->
                 </div>
 
@@ -123,6 +119,10 @@ export default {
     recently() {
       return this.$store.getters.boardsToDisplay
     },
+    loggedUser() {
+      return this.$store.getters.loggedUser
+    },
+
   },
   created() {},
 }
