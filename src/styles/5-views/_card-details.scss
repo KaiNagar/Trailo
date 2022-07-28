@@ -109,6 +109,10 @@
           background-color: #fff;
           box-shadow: inset 0 0 0 2px #0079bf;
         }
+        &:focus-visible {
+          outline: none;
+          border: 0;
+        }
       }
       h1 {
         font-size: rem(20px);
@@ -154,9 +158,12 @@
       color: rgb(94, 108, 132);
       line-height: 1.666666667;
     }
+    .sub-header-details{
+      flex-wrap: wrap;
+    }
   }
   .labels-preview-container {
-    margin-inline-start: 1px;
+    margin: 0 8px 8px 0;
   }
 
   .labels-preview {
@@ -177,6 +184,7 @@
       font-size: 1rem;
       border: 0;
       border-radius: rem(3px);
+      margin: 0 8px 8px 0;
       cursor: pointer;
       background-color: rgba(0, 0, 0, 0.1);
       &:hover {
@@ -186,8 +194,13 @@
   }
   .card-due-date {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    .duedate-header{
+      // display: flex;
+    }
     .due-date-check {
+      margin-inline-start: 0;
+      margin-inline-end: 0;
     }
     .due-date-container {
       background-color: rgba(9, 30, 66, 0.04);

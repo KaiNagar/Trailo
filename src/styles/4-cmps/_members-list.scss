@@ -1,12 +1,11 @@
 .members-list {
   color: #172b4d;
+  margin: 0 8px 8px 0;
   header {
     font-size: 12px;
     font-weight: 600;
-    margin-block-end: 3px;
-  }
+    margin: -1px 8px 4px 0;  }
   // POSITION SETTINGS
-  margin-inline-start: 3.8em;
   .avatars {
     display: flex;
     .avatar {

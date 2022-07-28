@@ -1,9 +1,6 @@
 <template>
   <div v-if="card" class="card-details-container">
-    <section
-      v-click-outside="() => backToBoard()"
-      class="card-details flex column"
-    >
+    <section class="card-details flex column">
       <div class="close-details-container flex">
         <router-link class="close-details-btn flex" :to="'/board/' + board._id"
           ><span class="close-icon"></span>
@@ -58,73 +55,80 @@
               }}</span>
             </div>
           </div>
-            <div></div>
-          <!-- MEMBERS LIST PREVIEW -->
-          <div class="members-list">
-            <header>Members</header>
-            <members-list
-              :card="card"
-              @sendtosave="sendToSave"
-              @closemenu="closeMenu"
-            />
-          </div>
 
           <div class="flex space-between">
             <div class="details-column flex column">
-              <div class="labels-preview-container">
-                <h3 class="labels-header">Labels</h3>
-                <div class="labels-preview flex">
-                  <div
-                    class="label-btn"
-                    v-for="label in labelsToShow"
-                    :style="labelColor(label.color)"
-                    :key="label.id"
-                    @click="openLabelsMenu($event)"
-                  >
-                    <!-- LABELS MENU -->
-                    <span class="labels-title">{{ label.title }}</span>
-                  </div>
+              <div class="sub-header-details flex">
+                <!-- MEMBERS LIST PREVIEW -->
+                <div v-if="isMembers" class="members-list">
+                  <header>Members</header>
+                  <members-list
+                    :card="card"
+                    @sendtosave="sendToSave"
+                    @closemenu="closeMenu"
+                  />
+                </div>
 
-                  <button
-                    class="add-icon"
-                    @click="openMenu('previewLabels')"
-                  ></button>
-                  <div class="preview">
-                    <labels-menu
-                      v-if="previewMenuOpen"
-                      :labels="board.labels"
-                      :card="card"
-                      @setLabel="sendToSave"
-                      @closeLabelsMenu="isLabelMenuOpen = false"
-                    />
+                <div v-if="isLabels" class="labels-preview-container">
+                  <h3 class="labels-header">Labels</h3>
+                  <div class="labels-preview flex">
+                    <div
+                      class="label-btn"
+                      v-for="label in labelsToShow"
+                      :style="labelColor(label.color)"
+                      :key="label.id"
+                      @click="openLabelsMenu($event)"
+                    >
+                      <!-- LABELS MENU -->
+                      <span class="labels-title">{{ label.title }}</span>
+                    </div>
+
+                    <button
+                      class="add-icon"
+                      @click="openMenu('previewLabels')"
+                    ></button>
+                    <div class="preview">
+                      <labels-menu
+                        v-if="previewMenuOpen"
+                        :labels="board.labels"
+                        :card="card"
+                        @setLabel="sendToSave"
+                        @closeLabelsMenu="isLabelMenuOpen = false"
+                      />
+                    </div>
                   </div>
                 </div>
 
                 <!-- DUE DATE -->
-                <div v-if="card.dueDate" class="card-due-date">
-                  <input
-                  :checked="card.dueDate.isDone"
-                    class="due-date-check"
-                    type="checkbox"
-                    @change="toggleDueDate"
-                  />
-                  <button class="due-date-container">
-                    <span class="due-date-txt">{{ dueDateTxt }}</span>
-                    <span :style="dateLabelStyle" class="due-date-label">{{
-                      dateLabel
-                    }}</span>
-                    <span class="due-date-arrow"><img src="/src/styles/svgs/arrow.svg"></span>
-                  </button>
+                <div v-if="isDueDate" class="card-due-date flex column">
+                  <h3 class="duedate-header">Due date</h3>
+                  <div class="flex">
+                    <input
+                      :checked="card.dueDate.isDone"
+                      class="due-date-check"
+                      type="checkbox"
+                      @change="toggleDueDate(card.dueDate)"
+                    />
+                    <button class="due-date-container">
+                      <span class="due-date-txt">{{ dueDateTxt }}</span>
+                      <span :style="dateLabelStyle" class="due-date-label">{{
+                        dateLabel
+                      }}</span>
+                      <span class="due-date-arrow"
+                        ><img src="/src/styles/svgs/arrow.svg"
+                      /></span>
+                    </button>
+                  </div>
                 </div>
-
-                <checklist-menu
-                  :getCurrPos="getCurrPos"
-                  :newChecklist="newChecklist"
-                  @addChecklist="addChecklist"
-                  @closeChecklistMenu="isChecklistMenuOpen = false"
-                  v-if="isChecklistMenuOpen"
-                />
               </div>
+
+              <checklist-menu
+                :getCurrPos="getCurrPos"
+                :newChecklist="newChecklist"
+                @addChecklist="addChecklist"
+                @closeChecklistMenu="isChecklistMenuOpen = false"
+                v-if="isChecklistMenuOpen"
+              />
 
               <action-description />
 
@@ -202,6 +206,7 @@
                 @createLabel="createLabel"
                 @sendToSave="sendToSave"
                 @setDate="setDate"
+                @removeDate="removeDate"
               />
             </div>
           </div>
@@ -263,8 +268,18 @@ export default {
     }
   },
   methods: {
+    toggleDueDate() {
+      this.card.dueDate.isDone = !this.card.dueDate.isDone
+      this.sendToSave(this.card)
+    },
     setDate(dueDate) {
+      if (!dueDate) return
       this.card.dueDate = dueDate
+      this.sendToSave(this.card)
+    },
+    removeDate() {
+      this.card.dueDate = null
+      console.log(this.card)
       this.sendToSave(this.card)
     },
     backToBoard() {
@@ -413,9 +428,17 @@ export default {
     },
   },
   computed: {
-    toggleDueDate() {
-      this.card.dueDate.isDone = !this.card.dueDate.isDone
-      this.sendToSave(this.card)
+    isLabels() {
+      if (this.card.labelIds.length) return true
+      return false
+    },
+    isDueDate() {
+      if (this.card.dueDate) return true
+      return false
+    },
+    isMembers() {
+      if (this.card.members.length) return true
+      return false
     },
     dateLabelStyle() {
       const now = new Date()

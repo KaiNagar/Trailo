@@ -27,7 +27,7 @@
           <img src="../../assets/icons/icons-clock.png" alt="Date icon" />
           Dates
         </button>
-        <menu-date @setDate="$emit('setDate',$event)"/>
+        <menu-date @removeDate="$emit('removeDate')" @setDate="$emit('setDate',$event)"/>
       </div>
       <div class="action-btn-container"></div>
       <div @click="openMenu('cover')" v-if="!isCover" class="action-btn-container">

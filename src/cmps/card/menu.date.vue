@@ -3,7 +3,7 @@
     <app-modal v-if="menu.dates" @closeModal="closeMenu">
       <template #title>Dates</template>
       <template #part-1>
-        <form class="date-form" @submit="setDate">
+        <form class="date-form" >
           <div class="date-calender-container"></div>
           <Datepicker
             placeholder="Select Date"
@@ -19,8 +19,8 @@
           <div class="date-txt">
             Reminders will be sent to all members and watchers of this card.
           </div>
-          <button id="save-date-btn">Save</button>
-          <button id="remove-date-btn" @click.stop="removeDate">Remove</button>
+          <button @click="setDate" id="save-date-btn">Save</button>
+          <button id="remove-date-btn" @click="removeDate">Remove</button>
         </form>
       </template>
     </app-modal>
@@ -86,6 +86,7 @@ export default {
     },
     removeDate() {
       this.date = new Date()
+      this.$emit('removeDate')
     },
   },
   computed: {
