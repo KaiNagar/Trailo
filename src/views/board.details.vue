@@ -49,10 +49,6 @@ export default {
     },
     removeCard(cardId) {
       console.log(cardId)
-      const board = JSON.parse(JSON.stringify(this.currBoard))
-      const idx = board.groups.cards.findIndex((card) => card.id === cardId)
-      board.groups.cards.splice(idx, 1)
-      this.$store.dispatch({ type: 'saveBoard', board })
     },
   },
   computed: {
