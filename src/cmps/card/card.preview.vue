@@ -7,31 +7,16 @@
     <div class="card-preview-details">
       <div v-if="isCardLabels" class="card-preview-labels">
         <div class="show-labels-container" v-if="this.$store.getters.isLabelsOpen">
-          <span
-            @mouseenter="isLabelHover = true"
-            @mouseleave="isLabelHover = false"
-            class="label-preview-show"
-            @click.stop="toggleLabels"
-            v-for="label in cardLabels"
-            :style="{
+          <span @mouseenter="isLabelHover = true" @mouseleave="isLabelHover = false" class="label-preview-show"
+            @click.stop="toggleLabels" v-for="label in cardLabels" :style="{
               backgroundColor: isLabelHover ? LightenDarkenColor(label.color) : label.color,
-            }"
-            :key="label.id"
-            >{{ label.title }}</span
-          >
+            }" :key="label.id">{{ label.title }}</span>
         </div>
         <div v-else class="flex">
-          <span
-            @mouseenter="isLabelHover = true"
-            @mouseleave="isLabelHover = false"
-            class="label-preview-show label-preview-hide"
-            @click.stop="toggleLabels"
-            v-for="label in cardLabels"
-            :style="{
+          <span @mouseenter="isLabelHover = true" @mouseleave="isLabelHover = false"
+            class="label-preview-show label-preview-hide" @click.stop="toggleLabels" v-for="label in cardLabels" :style="{
               backgroundColor: isLabelHover ? LightenDarkenColor(label.color) : label.color,
-            }"
-            :key="label.id"
-          ></span>
+            }" :key="label.id"></span>
         </div>
       </div>
       <div class="card-title">
@@ -62,9 +47,9 @@
     </div>
 
     <!-- MEMBERS LIST -->
-    <div class="members-list card-preview">
+    <!-- <div class="members-list card-preview">
       <avatar-list :card="card"></avatar-list>
-    </div>
+    </div> -->
   </section>
 </template>
 <script>

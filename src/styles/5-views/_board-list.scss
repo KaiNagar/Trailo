@@ -131,22 +131,21 @@
 
 .board-list-container {
   margin-bottom: 47px;
-  .section.icon{
+  .section.icon {
     color: #646e80;
   }
   header {
-    
     span {
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
 
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 24px;
-        margin-inline-start: 10px;
-        color: #172b4d;
-        position: relative;
-        bottom: 2px;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      margin-inline-start: 10px;
+      color: #172b4d;
+      position: relative;
+      bottom: 2px;
     }
   }
 
@@ -159,7 +158,6 @@
     margin-bottom: 5px;
     margin-inline-start: 10px;
     font-size: 24px;
-    
   }
   .recently {
     &::before {
@@ -188,6 +186,11 @@
     // column-gap: 5px;
     // width: 100%;
     .item {
+      .starred-board {
+        border: 1px black solid;
+        width: 50px;
+        height: 100px;
+      }
       // max-width: 194px;
       overflow-x: hidden;
       // min-height: 150px;

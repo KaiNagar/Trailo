@@ -14,10 +14,25 @@
       &.add{
         border: none;
         color: #56647d;
-        background-color: #eaecf0;
+        background-color: #eaecf000;
       }
     }
 
 
+  }
+}
+
+
+.members-list.card-preview{
+  // border: 1px black solid;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  // padding-bottom: 9px;
+  // width: min-content;
+  margin-inline-end: 5px;
+  background-color: transparent;
+  &:hover{
+    background-color: transparent;
   }
 }

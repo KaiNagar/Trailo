@@ -9,14 +9,3 @@
     color: white;
   }
 
-  .members-list.card-preview{
-    // display: flex;
-    display: none;
-    justify-content: flex-end;
-    padding-bottom: 9px;
-    margin-inline-end: 5px;
-    background-color: inherit;
-    &:hover{
-      background-color: inherit;
-    }
-  }
