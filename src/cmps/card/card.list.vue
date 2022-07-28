@@ -11,7 +11,7 @@
       :drop-placeholder="dropPlaceholderOptions"
       :get-child-payload="getChildPayload1"
     >
-      <Draggable v-for="(card,idx) in cards" :key="card.id">
+      <Draggable v-for="(card, idx) in cards" :key="card.id">
         <div>
           <card-preview
             @click="openCard(card.id)"

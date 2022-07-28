@@ -1,5 +1,5 @@
 // import { storageService } from '@/services/storage.service.js'
-// import {socketService} from '@/services/socket.service.js'
+import {socketService} from '@/services/socket.service.js'
 // import Axios from 'axios'
 // const axios = Axios.create({ withCredentials: true })
 import { httpService } from './http.service'
@@ -62,14 +62,18 @@ async function getById(boardId) {
 
 async function save(board) {
   if (board._id) {
-    return await httpService.put(`board/${board._id}`, board)
-
+    socketService.emit('board updated', board)
+    console.log('servise', board);
+    return await httpService.put(`board/${board._id}`,board)
+    
+    
     // const res = await storageService.put(STORAGE_KEY, board);
     // return res
     // const res = await axios.put(_getUrl(board._id, board))
     // return res.data
   } else {
-    return await httpService.post(`board`, board)
+    // socketService.on(SOCKET_EVENT_USER_UPDATED, board)
+    return await httpService.post(`board`,board)
     // // console.log("no id");
     // board._id = _makeId();
     // const res = await storageService.post(STORAGE_KEY, board);

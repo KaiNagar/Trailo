@@ -1,4 +1,4 @@
-<template>
+z<template>
   <section v-if="currBoard">
     <div class="group-page-container" :style="onBoardBgColor">
       <board-header />
@@ -48,7 +48,11 @@ export default {
       this.$store.dispatch({ type: 'saveBoard', board })
     },
     removeCard(cardId) {
-      console.log(cardId)
+      // console.log(cardId)
+    },
+    pushedBoard(board) {
+      // console.log('push bord', board)
+      this.$store.dispatch({ type: 'pushedBoard', board })
     },
   },
   computed: {
@@ -67,15 +71,16 @@ export default {
       async handler() {
         const { boardId } = this.$route.params
         const board = await boardService.getById(boardId)
+        socketService.emit('board new-enter', boardId)
+        // console.log('board', board)
         this.$store.commit({ type: 'setCurrBoard', currBoard: board })
-        // socketService.emit('connectin-board', boardId)
       },
       immediate: true,
     },
   },
-  mounted() {
-    console.log(this.currBoard)
-    //  socketService.emit('chat topic', this.currBoard)
+  created() {
+    socketService.on('board pushed', this.pushedBoard)
+    // console.log(this.currBoard)
     //   const { boardId } = this.$route.params
     //   const board = await boardService.getById(boardId)
     //   console.log(board);

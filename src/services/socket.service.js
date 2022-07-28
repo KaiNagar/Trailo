@@ -3,7 +3,8 @@ import io from 'socket.io-client'
 // export const SOCKET_EMIT_USER_WATCH = 'user-watch';
 // export const SOCKET_EVENT_USER_UPDATED = 'user-updated';
 // export const SOCKET_EMIT_SET_TOPIC = 'board-set-topic'
-// export const SOCKET_EVENT_REVIEW_ADDED = 'review-added';
+// export const SOCKET_EVENT_UPDATE_BOARD = 'update-board'
+// export const SOCKET_EVENT_UPDATE = 'update'
 // export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you';
 
 const baseUrl = (process.env.NODE_ENV === 'production')? '' : '//127.0.0.1:5173'
@@ -20,7 +21,7 @@ socketService.setup()
 function createSocketService() {
   var socket = null
   const socketService = {
-    setup() {
+   async setup() {
       socket = io(baseUrl)
     },
     on(eventName, cb) {
