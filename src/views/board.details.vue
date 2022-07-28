@@ -50,6 +50,10 @@ export default {
     removeCard(cardId) {
       console.log(cardId)
     },
+    pushedBoard(board) {
+      console.log('push bord', board)
+      this.$store.dispatch({ type: 'pushedBoard', board })
+    },
   },
   computed: {
     currBoard() {
@@ -64,15 +68,16 @@ export default {
       async handler() {
         const { boardId } = this.$route.params
         const board = await boardService.getById(boardId)
+        socketService.emit('board new-enter', boardId)
+        console.log('board', board)
         this.$store.commit({ type: 'setCurrBoard', currBoard: board })
-        socketService.emit('connectin-board', boardId)
       },
       immediate: true,
     },
   },
-  mounted() {
-    console.log(this.currBoard)
-    //  socketService.emit('chat topic', this.currBoard)
+  created() {
+    socketService.on('board pushed', this.pushedBoard)
+    // console.log(this.currBoard)
     //   const { boardId } = this.$route.params
     //   const board = await boardService.getById(boardId)
     //   console.log(board);
