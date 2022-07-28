@@ -1,6 +1,6 @@
 <template>
   <section class="home-page">
-    <!-- <div class="side-menu"></div> -->
+    <!-- SIDE MENU -->
     <side-menu></side-menu>
 
     <div class="galleries">
@@ -15,10 +15,16 @@
               <div class="item" @click="onSelectedBoard(board._id)" v-for="board in starred" :key="board._id">
                 <img :src="board.bgCover" alt="">
                 <h1>{{ board.title }}</h1>
-                <div class="star">
-                  <div class="star-icon " @click.stop="star(board._id)" board></div>
+                <div class="star" v-if="!board">
+                  <!-- <div class="star-icon " @click.stop="star(board._id)" board></div> -->
+                  <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div>
+                </div>
+
+                <div v-else class="starred-board">
                   <!-- <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div> -->
                 </div>
+
+
               </div>
 
 

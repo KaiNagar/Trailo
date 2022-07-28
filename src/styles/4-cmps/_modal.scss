@@ -73,6 +73,9 @@
     margin-bottom: 0.5em;
 
     .img {
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
       cursor: pointer;
       width: 40px;
       height: 32px;
@@ -99,11 +102,21 @@
       }
     }
 
-    .star {
+    .star-icon {
       align-self: center;
       width: 1em;
       height: 1em;
-      background-color: yellow;
+      cursor: pointer;
+      
+      &.starred{
+        align-self: center;
+        // color: yellow;
+        &::before{
+          -webkit-text-stroke: .1px rgb(187, 187, 187);
+          content: "\e967";
+          color: #f2d600;
+        }
+      }
     }
   }
 

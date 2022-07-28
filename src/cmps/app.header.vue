@@ -56,7 +56,7 @@
     <div class="actions">
       <div class="action">
         <button @click="openModal('recent')" :class="setClassBtn">
-          Recent <img class="arrow" src="../styles/svgs/arrow.svg" alt="" />
+          Boards <img class="arrow" src="../styles/svgs/arrow.svg" alt="" />
         </button>
         <app-modal
           v-if="isModal.recent"
@@ -64,14 +64,9 @@
           @openBoard="openBoard"
           @closeModal="closeModal"
         >
-          <template #title>Recent</template>
+          <template #title>Boards</template>
           <template #content-1>
-            <div class="img"></div>
-            <div class="titles">
-              <div class="b-title">sprint</div>
-              <div class="w-title">sprint 4</div>
-            </div>
-            <div class="star"></div>
+           
           </template>
         </app-modal>
       </div>
@@ -82,43 +77,23 @@
         </button>
         <app-modal
           v-if="isModal.starred"
-          :newItems="boards"
+          :newItems="starred"
           @openBoard="openBoard"
           @closeModal="closeModal"
         >
           <template #title>Starred</template>
           <template #content-1>
-            <div class="img"></div>
+            <!-- <div class="img"></div>
             <div class="titles">
               <div class="b-title">sprint</div>
               <div class="w-title">sprint 4</div>
             </div>
-            <div class="star"></div>
+            <div class="star"></div> -->
           </template>
         </app-modal>
       </div>
 
-      <div class="action">
-        <button @click="openModal('templates')" :class="setClassBtn">
-          Templates <img class="arrow" src="../styles/svgs/arrow.svg" alt="" />
-        </button>
-        <app-modal
-          v-if="isModal.templates"
-          :newItems="boards"
-          @openBoard="openBoard"
-          @closeModal="closeModal"
-        >
-          <template #title>Templates</template>
-          <template #content-1>
-            <div class="img"></div>
-            <div class="titles">
-              <div class="b-title">sprint</div>
-              <div class="w-title">sprint 4</div>
-            </div>
-            <div class="star"></div>
-          </template>
-        </app-modal>
-      </div>
+      
       <div class="add">
         <button :class="createClass" @click="openMenu('headerCreate')" class="create-board-btn">
           Create
@@ -191,11 +166,8 @@ export default {
     },
   },
   computed: {
-    starredBoards() {
-      const starred = this.boards.filter((board) => {
-        board.isStarred
-      })
-      return starred
+    starred() {
+      return this.boards.filter(board => board.isStarred)
     },
     menu() {
       return this.$store.getters.menu
