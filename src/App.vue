@@ -1,5 +1,5 @@
 <template>
-    <!-- <app-header :boards="boards" /> -->
+    <app-header :boards="boards" />
     <router-view />
 </template>
 
