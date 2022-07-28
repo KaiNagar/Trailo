@@ -132,7 +132,7 @@
                 v-if="isChecklistMenuOpen"
               />
 
-              <action-description />
+              <action-description :card="card" @saveCard="sendToSave" />
 
               <div v-if="card.attachments" class="card-attachments-container">
                 <header class="attch-preview-header">
@@ -270,6 +270,10 @@ export default {
     }
   },
   methods: {
+    saveDesc(desc) {
+      this.card.description = desc
+      this.sendToSave(this.card)
+    },
     toggleDueDate() {
       this.card.dueDate.isDone = !this.card.dueDate.isDone
       this.sendToSave(this.card)
@@ -446,6 +450,8 @@ export default {
       const now = new Date()
       const dueDate = this.card.dueDate
       if (dueDate.isDone) return { backgroundColor: '#61BD4F', color: '#fff' }
+      else if (dueDate.timestamp - now < -86000000)
+        return { backgroundColor: '#ec9488', color: '#fff' }
       else if (dueDate.timestamp < now)
         return { backgroundColor: '#EB5A46', color: '#fff' }
       else if (dueDate.timestamp - now < 86000000)
@@ -550,9 +556,7 @@ export default {
       type: 'setEditMenu',
       attachments: this.card.attachments,
     })
-    this.card.members = [
-      
-    ]
+    this.card.members = []
   },
 }
 </script>

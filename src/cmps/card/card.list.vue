@@ -57,8 +57,8 @@ export default {
       this.$emit('removeCard', cardId)
     },
     saveCard({ card, cardIdx }) {
-      const newBoard = (this.board.groups[this.groupIdx].cards[cardIdx] = card)
-      this.$store.dispatch({ type: 'saveBoard', board: newBoard })
+      this.board.groups[this.groupIdx].cards[cardIdx] = card
+      this.$store.dispatch({ type: 'saveBoard', board: this.board })
     },
     getChildPayload1(index) {
       return this.cards[index]

@@ -1,5 +1,5 @@
 <template>
-    <section class="home">
+    <section class="home-page-view">
 
         <header>
             <div class="logo">Trailo</div>

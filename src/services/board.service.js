@@ -4,7 +4,6 @@
 // const axios = Axios.create({ withCredentials: true })
 import { httpService } from './http.service'
 
-
 export const boardService = {
   query,
   getById,
@@ -36,8 +35,7 @@ export const boardService = {
 // }
 
 async function query(filterBy = null) {
-  return await httpService.get(`board`,filterBy)
-
+  return await httpService.get(`board`, filterBy)
 
   try {
     const res = await storageService.query(STORAGE_KEY)
@@ -63,17 +61,15 @@ async function getById(boardId) {
 }
 
 async function save(board) {
-  console.log(board);
   if (board._id) {
-    return await httpService.put(`board/${board._id}`,board)
-    
-    
-    const res = await storageService.put(STORAGE_KEY, board);
-    return res
+    return await httpService.put(`board/${board._id}`, board)
+
+    // const res = await storageService.put(STORAGE_KEY, board);
+    // return res
     // const res = await axios.put(_getUrl(board._id, board))
     // return res.data
   } else {
-    return await httpService.post(`board`,board)
+    return await httpService.post(`board`, board)
     // // console.log("no id");
     // board._id = _makeId();
     // const res = await storageService.post(STORAGE_KEY, board);
@@ -82,8 +78,6 @@ async function save(board) {
     // console.log(res.data)
     // return res.data
   }
-  socketService.on('board', save)
-  socketService.emit('board', save)
 }
 
 async function remove(boardId) {
@@ -92,12 +86,12 @@ async function remove(boardId) {
   // const res = await axios.delete(_getUrl(boardId))
   // return res.data
 
-  try {
-    const res = await storageService.remove(STORAGE_KEY, boardId);
-    return res;
-  } catch (err) {
-    console.error("cannot remove board", err);
-  }
+  // try {
+  //   const res = await storageService.remove(STORAGE_KEY, boardId);
+  //   return res;
+  // } catch (err) {
+  //   console.error("cannot remove board", err);
+  // }
 }
 
 function getEmptyGroup() {
@@ -140,7 +134,6 @@ function getEmptyChecklist() {
   }
 }
 
-
 // function _createBoards() {
 //   return [_createBoard(), _createBoard(), _createBoard()];
 // }
@@ -150,8 +143,11 @@ function getEmptyBoard() {
     isStarred: false,
     createdAt: Date.now() - 100000,
     labelsOpen: false,
-    bgCover:
-      'https://images.unsplash.com/photo-1658279165324-454de0ee3da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+    style: {
+      bgImg:
+        'https://images.unsplash.com/photo-1658279165324-454de0ee3da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+      bgColor: null,
+    },
     createdBy: {},
     labels: [],
     members: [],

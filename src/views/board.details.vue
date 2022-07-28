@@ -56,8 +56,11 @@ export default {
       return this.$store.getters.currBoard
     },
     onBoardBgColor() {
-      return { backgroundImage: 'url(' + this.currBoard.bgCover + ')' }
+      if (this.currBoard.style.bgColor) {
+        return { backgroundColor: this.currBoard.style.bgColor }
+      } else return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
     },
+    getRelativeColor() {},
   },
   watch: {
     '$route.params.boardId': {
@@ -65,7 +68,7 @@ export default {
         const { boardId } = this.$route.params
         const board = await boardService.getById(boardId)
         this.$store.commit({ type: 'setCurrBoard', currBoard: board })
-        socketService.emit('connectin-board', boardId)
+        // socketService.emit('connectin-board', boardId)
       },
       immediate: true,
     },

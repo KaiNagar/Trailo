@@ -55,6 +55,7 @@
       </div>
 
       <div v-if="haveActions" class="flex align-center">
+        <!-- DATES -->
         <div
           @mouseenter="hoverDue = true"
           @mouseleave="hoverDue = false"
@@ -62,20 +63,35 @@
           class="duedate-preview"
           :style="dueDateStyle"
         >
-          <span v-if="!hoverDue" class="clock-icon"></span>
           <span
-            v-if="hoverDue"
+            :style="dueDateStyle"
+            v-if="!hoverDue"
+            class="clock-icon"
+          ></span>
+          <span
+            v-if="hoverDue && !isDueDateDone"
             @click.stop="toggleDueDate"
             class="unchecked-icon"
-            ><span v-if="isDueDateDone" class="check-icon"></span
+            :style="dueDateStyle"
+          ></span>
+          <span
+            v-if="isDueDateDone && hoverDue"
+            @click.stop="toggleDueDate"
+            class="checklist-icon"
+            :style="dueDateStyle"
           ></span>
           <span class="duedate-txt">{{ dueDateTxt }}</span>
         </div>
-
+        <!-- DESCRIPTION -->
+        <div v-if="isHavingDesc" class="description-preview">
+          <span class="description-icon"></span>
+        </div>
+          <!-- ATTACHMENTS -->
         <div class="card-attachment-count flex" v-if="isHavingAttachments">
           <span class="attach-icon"></span>
           <span class="count">{{ attachmentCount }}</span>
         </div>
+        <!-- TODOS/CHECKLISTS -->
         <div
           :class="isTodosDone"
           v-if="isHavingTodos"
@@ -155,15 +171,30 @@ export default {
     },
   },
   computed: {
-    dueDateStyle(){
-      
+    isHavingDesc(){
+      if(this.card.description) return true
+      return false
+    },
+    dueDateStyle() {
       const now = new Date()
       const dueDate = this.card.dueDate
-      if (dueDate.isDone) return { backgroundColor: '#61BD4F', color: '#fff' }
-      else if (dueDate.timestamp < now)
-        return { backgroundColor: '#EB5A46', color: '#fff' }
-      else if (dueDate.timestamp - now < 86000000)
-        return { backgroundColor: '#F2D600', color: '#000' }
+      if (!this.hoverDue) {
+        if (dueDate.isDone) return { backgroundColor: '#61BD4F', color: '#fff' }
+        else if (dueDate.timestamp - now < -86000000)
+          return { backgroundColor: '#ec9488', color: '#fff' }
+        else if (dueDate.timestamp < now)
+          return { backgroundColor: '#eb5a46', color: '#fff' }
+        else if (dueDate.timestamp - now < 86000000)
+          return { backgroundColor: '#f2d600', color: '#fff' }
+      } else {
+        if (dueDate.isDone) return { backgroundColor: '#519839', color: '#fff' }
+        else if (dueDate.timestamp - now < -86000000)
+          return { backgroundColor: '#eb5a46', color: '#fff' }
+        else if (dueDate.timestamp -now < 0)
+          return { backgroundColor: '#b04632', color: '#fff' }
+        else if (dueDate.timestamp - now < 86000000)
+          return { backgroundColor: '#d9b51c', color: '#fff' }
+      }
     },
     isDueDateDone() {
       return this.card.dueDate.isDone
@@ -241,7 +272,6 @@ export default {
     },
   },
   created() {
-    // console.log(this.card);
     this.board = this.$store.getters.currBoard
     this.group = this.$store.getters.currGroup
     this.isLabelsOpen = this.board.labelsOpen

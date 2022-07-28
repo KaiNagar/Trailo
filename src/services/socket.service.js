@@ -2,13 +2,14 @@ import io from 'socket.io-client'
 
 // export const SOCKET_EMIT_USER_WATCH = 'user-watch';
 // export const SOCKET_EVENT_USER_UPDATED = 'user-updated';
+// export const SOCKET_EMIT_SET_TOPIC = 'board-set-topic'
 // export const SOCKET_EVENT_REVIEW_ADDED = 'review-added';
 // export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you';
 
 const baseUrl = (process.env.NODE_ENV === 'production')? '' : '//127.0.0.1:5173'
 
-export const socketService = createSocketService()
-// export const socketService = createDummySocketService()
+// export const socketService = createSocketService()
+export const socketService = createDummySocketService()
 
 // For DEBUG:
 window.socketService = socketService
@@ -17,7 +18,7 @@ socketService.setup()
 
 
 function createSocketService() {
-  var socket = null;
+  var socket = null
   const socketService = {
     setup() {
       socket = io(baseUrl)
@@ -31,6 +32,7 @@ function createSocketService() {
       else socket.off(eventName, cb)
     },
     emit(eventName, data) {
+      data = JSON.parse(JSON.stringify(data))
       socket.emit(eventName, data)
     },
     terminate() {
