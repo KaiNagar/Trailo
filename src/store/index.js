@@ -91,7 +91,7 @@ const store = createStore({
       state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
-      console.log('store motacion:',currBoard )
+      console.log('store mutation:',currBoard )
       state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
