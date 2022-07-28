@@ -29,12 +29,14 @@
 
         <div class="g-modal-list">
           <div>
-            <div class="g-modal-content content" @click="removeGroup(group.id)">Archive list</div>
+            <div class="g-modal-content content" @click="removeGroup(group.id)">
+              Archive list
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="card-list-container flex">
+      <div class="card-list-container flex column">
         <card-list
           :currGroup="group"
           :cards="group.cards"
@@ -47,28 +49,33 @@
 
       <div class="g-footer flex space-between">
         <div class="g-footer-add-area">
-          <div @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title-icon">
-            <span class="add-icon"></span><span class="g-footer-title">Add a card</span>
+          <div
+            @click="onOpenTextarea"
+            v-if="!isEditable"
+            class="g-footer-title-icon"
+          >
+            <span class="add-icon"></span
+            ><span class="g-footer-title">Add a card</span>
           </div>
           <div v-if="!isEditable" class="g-template-icon">
             <span class="template-icon"></span>
           </div>
-          <div v-if="isEditable">
-            <textarea
-              class="g-footer-textarea"
-              id="textarea"
-              ref="textarea"
-              cols="30"
-              rows="30"
-              placeholder="Enter a title for this card..."
-              @keydown.enter.prevent="updateGroup"
-            ></textarea>
-            <div class="add-card">
-              <button @click.stop="updateGroup">Add card</button
-              ><span class="close-icon-span">
-                <span @click="onCloseTextarea" class="close-icon"></span>
-              </span>
-            </div>
+        </div>
+        <div v-if="isEditable">
+          <textarea
+            class="g-footer-textarea"
+            id="textarea"
+            ref="textarea"
+            cols="30"
+            rows="30"
+            placeholder="Enter a title for this card..."
+            @keydown.enter.prevent="updateGroup"
+          ></textarea>
+          <div class="add-card">
+            <button @click.stop="updateGroup">Add card</button
+            ><span class="close-icon-span">
+              <span @click="onCloseTextarea" class="close-icon"></span>
+            </span>
           </div>
         </div>
       </div>

@@ -111,7 +111,8 @@ export default {
     async createBoard() {
       await this.$store.dispatch({ type: 'loadBoards' })
       this.closeMenu()
-      this.newBoard.bgCover = this.selectedBgImg
+      this.newBoard.style.bgImg = this.selectedBgImg
+      this.newBoard.style.bgColor = this.selectedBgColor
       this.saveBoard()
       const boards = JSON.parse(JSON.stringify(this.boards))
       boards.push(this.newBoard)

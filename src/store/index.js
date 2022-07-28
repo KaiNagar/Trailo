@@ -92,6 +92,7 @@ const store = createStore({
       state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
+      console.log('store motacion:',currBoard )
       state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
@@ -152,21 +153,25 @@ const store = createStore({
     },
     async saveBoard({ commit }, { board }) {
       commit({ type: 'setCurrBoard', currBoard: board })
+      
       const newBoard = await boardService.save(board)
+     
       return newBoard
     },
-    async saveBoards({ commit }, { boards }) {
-      // boards = boards.map((board) => boardService.save(board))
-      commit({ type: 'setBoards', boards })
+    pushedBoard({ commit }, { board }) {
+      console.log('pushedBoard',board);
+      commit({ type: 'setCurrBoard',currBoard:board })
+      // socketService.emit( , board)
     },
+
     async updateGroup({ commit }, { board, group }) {
       const idx = board.groups.findIndex(
         (currGroup) => currGroup.id === group.id,
-      )
+        )
       board.groups.splice(idx, 1, group)
       const newBoard = await boardService.save(board)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
-    },
+    }
 
   },
   modules: {

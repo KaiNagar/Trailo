@@ -13,8 +13,6 @@
 // // LAYOUTS
 @import '3-layout/main-layout';
 
-
-
 // VIEWS
 // @import '4-cmps/footer';
 @import '5-views/home-page';
@@ -42,9 +40,9 @@
 @import '4-cmps/description-action';
 @import '4-cmps/todo-actionbar';
 
-
 @import '6-menu/checklist-menu';
 @import '6-menu/label-menu';
 @import '6-menu/cover-menu';
 @import '6-menu/members-menu';
-@import '6-menu/date-menu'
+@import '6-menu/date-menu';
+@import '6-menu/show-more-menu';

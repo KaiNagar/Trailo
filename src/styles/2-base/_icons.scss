@@ -213,12 +213,20 @@
     content: '\e91b';
   }
 }
-.unchecked-icon{
+.unchecked-icon {
   font-family: trellicons;
   font-size: 1rem;
   color: #5e6c84;
   &::before {
     content: '\e919';
+  }
+}
+.activity-icon {
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+    content: '\e900';
   }
 }
 .edit-icon-btn {

@@ -1,12 +1,12 @@
 <template>
-  <section class="card-description">
+  <section v-if="currCard" class="card-description">
     <div>
       <span class="description-icon"></span>
     </div>
     <div class="desc-textarea">
       <h2>Description</h2>
       <button
-        v-if="description && !editing"
+        v-if="isHavingDesc && !editing"
         @click="openEditDesc"
         class="edit-desc-btn"
       >
@@ -26,7 +26,7 @@
       <div v-else class="edit-desc">
         <textarea
           autofocus
-          v-model="description"
+          v-model="currCard.description"
           placeholder="Add a more detailed description..."
         ></textarea>
         <div class="text-area-actions flex space-between">
@@ -44,17 +44,22 @@
 </template>
 
 <script>
+
 export default {
   name: 'description',
   components: {},
+  props:{
+    card:Object,
+  },
   data() {
     return {
       editing: false,
-      description: '',
+      currCard:{},
     }
   },
   methods: {
     saveDesc() {
+      this.$emit('saveCard' ,this.currCard)
       this.editing = false
     },
     openEditDesc() {
@@ -65,13 +70,17 @@ export default {
     },
   },
   computed: {
+    isHavingDesc(){
+      if(this.currCard.description ) return true
+      return false
+    },
     descValue() {
-      return this.description.length
-        ? this.description
+      return this.currCard.description 
+        ? this.currCard.description
         : 'Add a more detailed description...'
     },
     descBodyStyle() {
-      return this.description.length
+      return this.currCard.description 
         ? {
             backgroundColor: 'transparent',
             padding: 0,
@@ -79,6 +88,10 @@ export default {
         : ''
     },
   },
-  created() {},
+  created() {
+    // this.currCard = JSON.parse(JSON.stringify(this.card))
+    this.currCard ={...this.card}
+    console.log(this.currCard);
+  },
 }
 </script>

@@ -94,6 +94,7 @@
       line-height: 20px;
       color: #6b778c;
       padding-left: 7px;
+      padding-top: 2px;
       display: flex;
       width: 220px;
       height: 30px;
@@ -103,6 +104,9 @@
       .g-footer-title {
         padding: 1px;
         line-height: 20px;
+      }
+      .add-icon{
+        padding-right: 2px;
       }
       &:hover {
         background-color: #091e4214;
@@ -123,6 +127,7 @@
   top: -3px;
   margin-top: 4px;
   padding: 5px 8px;
+  padding-top: 6px;
   &:hover {
     background-color: #091e4214;
     border-radius: 3px;

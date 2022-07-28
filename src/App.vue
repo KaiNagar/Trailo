@@ -1,11 +1,11 @@
 <template>
-  <app-header :boards="boards" />
-  <router-view />
+    <app-header :boards="boards" />
+    <router-view />
 </template>
 
 <script>
 import appHeader from '@/cmps/app.header.vue'
-import { socketService } from './services/socket.service.js'
+// import { socketService } from './services/socket.service.js'
 
 export default {
   components: { appHeader },

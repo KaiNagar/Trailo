@@ -1,9 +1,8 @@
 // import { storageService } from '@/services/storage.service.js'
-// import {socketService} from '@/services/socket.service.js'
+import {socketService} from '@/services/socket.service.js'
 // import Axios from 'axios'
 // const axios = Axios.create({ withCredentials: true })
 import { httpService } from './http.service'
-
 
 export const boardService = {
   query,
@@ -36,8 +35,7 @@ export const boardService = {
 // }
 
 async function query(filterBy = null) {
-  return await httpService.get(`board`,filterBy)
-
+  return await httpService.get(`board`, filterBy)
 
   try {
     const res = await storageService.query(STORAGE_KEY)
@@ -64,6 +62,8 @@ async function getById(boardId) {
 
 async function save(board) {
   if (board._id) {
+    socketService.emit('board updated', board)
+    console.log('servise', board);
     return await httpService.put(`board/${board._id}`,board)
     
     
@@ -72,6 +72,7 @@ async function save(board) {
     // const res = await axios.put(_getUrl(board._id, board))
     // return res.data
   } else {
+    // socketService.on(SOCKET_EVENT_USER_UPDATED, board)
     return await httpService.post(`board`,board)
     // // console.log("no id");
     // board._id = _makeId();
@@ -137,7 +138,6 @@ function getEmptyChecklist() {
   }
 }
 
-
 // function _createBoards() {
 //   return [_createBoard(), _createBoard(), _createBoard()];
 // }
@@ -147,8 +147,11 @@ function getEmptyBoard() {
     isStarred: false,
     createdAt: Date.now() - 100000,
     labelsOpen: false,
-    bgCover:
-      'https://images.unsplash.com/photo-1658279165324-454de0ee3da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+    style: {
+      bgImg:
+        'https://images.unsplash.com/photo-1658279165324-454de0ee3da6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
+      bgColor: null,
+    },
     createdBy: {},
     labels: [],
     members: [],

@@ -4,16 +4,22 @@
     <side-menu></side-menu>
 
     <div class="galleries">
-
-
       <section class="board-list-container" v-if="starred.length">
         <div class="board-list">
-          <header class="star-icon section icon list-header"><span class="list-header">Starred boards</span></header>
+          <header class="star-icon section icon list-header">
+            <span class="list-header">Starred boards</span>
+          </header>
           <div class="board-preview">
             <!-- <img src="../assets/icons/icons-clock.png" alt="" /> -->
             <div class="gallery">
-              <div class="item" @click="onSelectedBoard(board._id)" v-for="board in starred" :key="board._id">
-                <img :src="board.bgCover" alt="">
+              <div
+                class="item"
+                @click="onSelectedBoard(board._id)"
+                v-for="board in starred"
+                :key="board._id"
+              >
+                <!-- <div :style="boardCover(board)" class="img"></div> -->
+                <img :src="board.bgCover" alt="" />
                 <h1>{{ board.title }}</h1>
                 <div class="star">
                   <div class="star-icon " :class="{ starred: board.isStarred }" @click.stop="star(board._id)" board>
@@ -24,35 +30,39 @@
                 <!-- <div v-else class="starred-board">
                   <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div>
                 </div> -->
-
-
               </div>
-
-
-
             </div>
           </div>
         </div>
       </section>
 
-
-
       <section class="board-list-container" v-if="boards">
         <div class="board-list">
-          <header class="recently icon section list-header"><span>Your boards</span></header>
+          <header class="recently icon section list-header">
+            <span>Your boards</span>
+          </header>
           <div class="board-preview">
             <!-- <img src="../assets/icons/icons-clock.png" alt="" /> -->
             <div class="gallery">
-              <div class="item" @click="onSelectedBoard(board._id)" v-for="board in recently" :key="board._id">
-                <img :src="board.bgCover" alt="">
+              <div
+                class="item"
+                @click="onSelectedBoard(board._id)"
+                v-for="board in recently"
+                :key="board._id"
+              >
+                <!-- <div :style="boardCover(board)" class="img"></div> -->
+
+                <img :src="board.bgCover" alt="" />
                 <h1>{{ board.title }}</h1>
                 <div class="star">
-                  <div class="star-icon " @click.stop="star(board._id)" :class="{ starred: board.isStarred }"></div>
+                  <div
+                    class="star-icon"
+                    @click.stop="star(board._id)"
+                    :class="{ starred: board.isStarred }"
+                  ></div>
                   <!-- <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div> -->
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
@@ -78,9 +88,7 @@ export default {
     addBoard,
   },
   data() {
-    return {
-
-    }
+    return {}
   },
   methods: {
     onSelectedBoard(boardId) {
@@ -96,7 +104,7 @@ export default {
       this.$store.commit({ type: 'starBoard', boardId })
       const board = this.$store.getters.starredBoard
       this.$store.dispatch({ type: 'saveBoard', board })
-    }
+    },
   },
   computed: {
     boards() {
@@ -106,7 +114,7 @@ export default {
       return this.$store.getters.menu
     },
     starred() {
-      return this.boards.filter(board => board.isStarred)
+      return this.boards.filter((board) => board.isStarred)
     },
     recently() {
       return this.$store.getters.boardsToDisplay
@@ -116,9 +124,6 @@ export default {
     },
 
   },
-  created() {
-  },
-
-
+  created() {},
 }
 </script>

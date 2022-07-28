@@ -1,8 +1,16 @@
 <template>
   <section class="card-list">
-    <Container orientation="vertical" behaviour="move" group-name="group-1" @drop="onDrop(currGroup, $event)"
-      @drag-leave="dragLeave(groupIdx)" drag-class="card-ghost" drop-class="card-ghost-drop"
-      :drop-placeholder="dropPlaceholderOptions" :get-child-payload="getChildPayload1">
+    <Container
+      orientation="vertical"
+      behaviour="move"
+      group-name="group-1"
+      @drop="onDrop(currGroup, $event)"
+      @drag-leave="dragLeave(groupIdx)"
+      drag-class="card-ghost"
+      drop-class="card-ghost-drop"
+      :drop-placeholder="dropPlaceholderOptions"
+      :get-child-payload="getChildPayload1"
+    >
       <Draggable v-for="(card, idx) in cards" :key="card.id">
         <div>
           <card-preview @click="openCard(card.id)" :card="card" :idx="idx" @saveCard="saveCard"
@@ -44,7 +52,7 @@ export default {
       this.$emit('removeCard', cardId)
     },
     saveCard({ card, cardIdx }) {
-      this.board.groups[this.groupIdx].cards[cardIdx]
+      this.board.groups[this.groupIdx].cards[cardIdx] = card
       this.$store.dispatch({ type: 'saveBoard', board: this.board })
     },
     getChildPayload1(index) {
