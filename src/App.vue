@@ -21,6 +21,7 @@ export default {
     boards() {
       return this.$store.getters.boards
     },
+   
   },
   async created() {
     const boards = await this.$store.dispatch({ type: 'loadBoards' })

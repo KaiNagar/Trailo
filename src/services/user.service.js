@@ -31,7 +31,7 @@ async function login(credential) {
 }
 
 async function signup(signupInfo) {
-  signupInfo.score = 10000
+  console.log('signupInfo',signupInfo);
   const user = await httpService.post('auth/signup', signupInfo)
   return _saveLocalUser(user)
 }
