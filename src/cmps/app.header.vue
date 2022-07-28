@@ -2,7 +2,7 @@
   <section :style="headerStyle" class="main-header">
     <div class="logo-container">
       <button class="header-menu icon"></button>
-      <router-link @click="resetCurrBoard" to="/">
+      <router-link @click="resetCurrBoard" to="/board">
         <div class="logo">
           <svg
             aria-label="Trailo"

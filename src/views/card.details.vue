@@ -34,12 +34,13 @@
                 {{ card.title }}
               </h1>
               <input
+                v-if="cardTitleEdit"
                 ref="inputTitle"
                 @blur="cardTitleEdit = false"
                 class="card-title-edit"
                 v-model="card.title"
+                @change="sendToSave(card)"
                 type="text"
-                v-if="cardTitleEdit"
               />
               in list
               <span class="group-title" @click="isMoveModalOpen = true">{{ group.title }}</span>
@@ -92,6 +93,7 @@
                       type="checkbox"
                       @change="toggleDueDate(card.dueDate)"
                     />
+                    <span class="check-mark"></span>
                     <button class="due-date-container">
                       <span class="due-date-txt">{{ dueDateTxt }}</span>
                       <span :style="dateLabelStyle" class="due-date-label">{{ dateLabel }}</span>
@@ -508,6 +510,9 @@ export default {
       type: 'setEditMenu',
       attachments: this.card.attachments,
     })
+    this.card.members = [
+      
+    ]
   },
 }
 </script>

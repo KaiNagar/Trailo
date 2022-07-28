@@ -7,12 +7,18 @@ import aboutPage from '../views/about.page.vue'
 import boardDetails from '../views/board.details.vue'
 import cardDetails from '../views/card.details.vue'
 import userDetails from '../views/user.details.vue'
+import homePage from '../views/home.page.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
+      name: 'homePage',
+      component: homePage,
+    },
+    {
+      path: '/board',
       name: 'boardList',
       component: boardList,
     },
