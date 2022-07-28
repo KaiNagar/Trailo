@@ -1,5 +1,5 @@
-import { storageService } from '@/services/storage.service.js'
-import {socketService} from '@/services/socket.service.js'
+// import { storageService } from '@/services/storage.service.js'
+// import {socketService} from '@/services/socket.service.js'
 // import Axios from 'axios'
 // const axios = Axios.create({ withCredentials: true })
 import { httpService } from './http.service'
@@ -63,13 +63,12 @@ async function getById(boardId) {
 }
 
 async function save(board) {
-  console.log(board);
   if (board._id) {
     return await httpService.put(`board/${board._id}`,board)
     
     
-    const res = await storageService.put(STORAGE_KEY, board);
-    return res
+    // const res = await storageService.put(STORAGE_KEY, board);
+    // return res
     // const res = await axios.put(_getUrl(board._id, board))
     // return res.data
   } else {
@@ -82,8 +81,6 @@ async function save(board) {
     // console.log(res.data)
     // return res.data
   }
-  socketService.on('board', save)
-  socketService.emit('board', save)
 }
 
 async function remove(boardId) {
@@ -92,12 +89,12 @@ async function remove(boardId) {
   // const res = await axios.delete(_getUrl(boardId))
   // return res.data
 
-  try {
-    const res = await storageService.remove(STORAGE_KEY, boardId);
-    return res;
-  } catch (err) {
-    console.error("cannot remove board", err);
-  }
+  // try {
+  //   const res = await storageService.remove(STORAGE_KEY, boardId);
+  //   return res;
+  // } catch (err) {
+  //   console.error("cannot remove board", err);
+  // }
 }
 
 function getEmptyGroup() {

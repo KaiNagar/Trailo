@@ -1,15 +1,17 @@
 <template>
   <section class="card-actions flex column">
     <div class="suggested-tab">
-      <h3>Suggested <span class="settings-icon"></span></h3>
+      <h3>Suggested</h3>
       <div class="action-btn-container">
-        <button><span class="member-icon"></span> Join</button>
+        <button><span class="member-icon"></span><span class="txt">Join</span></button>
       </div>
     </div>
     <div class="add-card-tab">
-      <h3>Add to card</h3>
+      <h3 class="add-to-card">Add to card</h3>
       <div class="action-btn-container">
-        <button @click="openMenu('members')"><span class="member-icon"></span> Members</button>
+        <button @click="openMenu('members')">
+          <span class="member-icon"></span> <span class="txt">Members</span>
+        </button>
         <!-- MEMBERS MENU  -->
         <menu-members
           v-if="menu.members"
@@ -19,25 +21,10 @@
         >
         </menu-members>
       </div>
-      <div @click="$emit('openChecklistMenu')" class="action-btn-container">
-        <button><span class="checklist-icon"></span> Checklist</button>
-      </div>
-      <div class="action-btn-container">
-        <button @click="openMenu('dates')">
-          <img src="../../assets/icons/icons-clock.png" alt="Date icon" />
-          Dates
-        </button>
-        <menu-date @removeDate="$emit('removeDate')" @setDate="$emit('setDate',$event)"/>
-      </div>
-      <div class="action-btn-container"></div>
-      <div @click="openMenu('cover')" v-if="!isCover" class="action-btn-container">
-        <button><span class="cover-icon"></span> Cover</button>
-      </div>
-
       <div class="action-btn-container">
         <button @click="openMenu('labels')">
           <span class="label-icon"></span>
-          Labels
+          <span class="txt">Labels</span>
         </button>
 
         <menu-labels
@@ -48,13 +35,34 @@
           :card="card"
         ></menu-labels>
       </div>
+      <div @click="$emit('openChecklistMenu')" class="action-btn-container">
+        <button><span class="checklist-icon"></span><span class="txt">Checklist</span></button>
+      </div>
+      <div class="action-btn-container">
+        <button @click="openMenu('dates')">
+          <img src="../../assets/icons/icons-clock.png" alt="Date icon" />
+          <span class="txt">Dates</span>
+        </button>
+        <menu-date
+          @removeDate="$emit('removeDate')"
+          @setDate="$emit('setDate', $event)"
+        />
+      </div>
+      <div class="action-btn-container"></div>
+      <!-- <div
+        @click="openMenu('cover')"
+        v-if="!isCover"
+        class="action-btn-container"
+      >
+        <button><span class="cover-icon"></span> Cover</button>
+      </div> -->
 
-  
 
       <menu-attachments @attachFile="attachFile" />
+      
       <div class="action-btn-container">
         <button @click="openMenu('cover')" v-if="!isCover">
-          Cover
+          <span class="cover-icon"></span><span class="txt">Cover</span> 
           <menu-cover
             v-if="!previewMenuOpen"
             @setCoverColor="$emit('setCoverColor', $event)"
@@ -68,9 +76,11 @@
         </button>
       </div>
 
-      <div class="action-btn-container">
-        <button disabled><span class="custom-icon"></span> Custom Fields</button>
-      </div>
+      <!-- <div class="action-btn-container">
+        <button disabled>
+          <span class="custom-icon"></span> Custom Fields
+        </button>
+      </div> -->
     </div>
   </section>
 </template>

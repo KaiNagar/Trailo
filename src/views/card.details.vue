@@ -7,17 +7,9 @@
         </router-link>
       </div>
 
-      <div
-        v-if="isCoverActive"
-        :style="cardCoverStyle"
-        :class="cardCoverClass"
-        class="card-cover"
-      >
+      <div v-if="isCoverActive" :style="cardCoverStyle" :class="cardCoverClass" class="card-cover">
         <div class="cover-menu-container">
-          <div
-            class="cover-menu-btn flex align-center"
-            @click="openMenu('cover')"
-          >
+          <div class="cover-menu-btn flex align-center" @click="openMenu('cover')">
             <span class="cover-icon"></span
             ><span v-if="isCover" class="cover-btn-title">Cover</span>
             <menu-cover
@@ -42,17 +34,16 @@
                 {{ card.title }}
               </h1>
               <input
+                v-if="cardTitleEdit"
                 ref="inputTitle"
-                @blue="cardTitleEdit = false"
+                @blur="cardTitleEdit = false"
                 class="card-title-edit"
                 v-model="card.title"
+                @change="sendToSave(card)"
                 type="text"
-                v-if="cardTitleEdit"
               />
               in list
-              <span class="group-title" @click="isMoveModalOpen = true">{{
-                group.title
-              }}</span>
+              <span class="group-title" @click="isMoveModalOpen = true">{{ group.title }}</span>
             </div>
           </div>
 
@@ -62,11 +53,7 @@
                 <!-- MEMBERS LIST PREVIEW -->
                 <div v-if="isMembers" class="members-list">
                   <header>Members</header>
-                  <members-list
-                    :card="card"
-                    @sendtosave="sendToSave"
-                    @closemenu="closeMenu"
-                  />
+                  <members-list :card="card" @sendtosave="sendToSave" @closemenu="closeMenu" />
                 </div>
 
                 <div v-if="isLabels" class="labels-preview-container">
@@ -83,10 +70,7 @@
                       <span class="labels-title">{{ label.title }}</span>
                     </div>
 
-                    <button
-                      class="add-icon"
-                      @click="openMenu('previewLabels')"
-                    ></button>
+                    <button class="add-icon" @click="openMenu('previewLabels')"></button>
                     <div class="preview">
                       <labels-menu
                         v-if="previewMenuOpen"
@@ -109,14 +93,11 @@
                       type="checkbox"
                       @change="toggleDueDate(card.dueDate)"
                     />
+                    <span class="check-mark"></span>
                     <button class="due-date-container">
                       <span class="due-date-txt">{{ dueDateTxt }}</span>
-                      <span :style="dateLabelStyle" class="due-date-label">{{
-                        dateLabel
-                      }}</span>
-                      <span class="due-date-arrow"
-                        ><img src="/src/styles/svgs/arrow.svg"
-                      /></span>
+                      <span :style="dateLabelStyle" class="due-date-label">{{ dateLabel }}</span>
+                      <span class="due-date-arrow"><img src="/src/styles/svgs/arrow.svg" /></span>
                     </button>
                   </div>
                 </div>
@@ -170,10 +151,7 @@
                   :drop-placeholder="dropPlaceholderOptions"
                   @drop="onDrop(card.checklists, $event)"
                 >
-                  <Draggable
-                    v-for="(checklist, idx) in card.checklists"
-                    :key="checklist.id"
-                  >
+                  <Draggable v-for="(checklist, idx) in card.checklists" :key="checklist.id">
                     <action-checklist
                       @saveChecklist="saveChecklist"
                       @removeChecklist="removeChecklist"
@@ -313,9 +291,7 @@ export default {
       console.log(this.checklistQ)
       if (this.checklistQ.length === 2) {
         this.checklistQ.forEach((checklist) => {
-          const checklistIdx = card.checklists.findIndex(
-            (c) => c.id === checklist.id,
-          )
+          const checklistIdx = card.checklists.findIndex((c) => c.id === checklist.id)
           card.checklists.splice(checklistIdx, 1, checklist)
         })
         this.sendToSave(card)
@@ -325,9 +301,7 @@ export default {
       }
       if (!this.leavingCIdx) {
         this.checklistQ.forEach((checklist) => {
-          const checklistIdx = card.checklists.findIndex(
-            (c) => c.id === checklist.id,
-          )
+          const checklistIdx = card.checklists.findIndex((c) => c.id === checklist.id)
           card.checklists.splice(checklistIdx, 1, checklist)
         })
         this.sendToSave(card)
@@ -444,8 +418,7 @@ export default {
       const now = new Date()
       const dueDate = this.card.dueDate
       if (dueDate.isDone) return { backgroundColor: '#61BD4F', color: '#fff' }
-      else if (dueDate.timestamp < now)
-        return { backgroundColor: '#EB5A46', color: '#fff' }
+      else if (dueDate.timestamp < now) return { backgroundColor: '#EB5A46', color: '#fff' }
       else if (dueDate.timestamp - now < 86000000)
         return { backgroundColor: '#F2D600', color: '#000' }
     },
@@ -485,8 +458,7 @@ export default {
       return this.board.labels
     },
     cardCoverStyle() {
-      if (this.card.style.bgImg)
-        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      if (this.card.style.bgImg) return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       else return { backgroundColor: this.card.style.bgColor }
     },
     cardCoverClass() {
@@ -495,15 +467,9 @@ export default {
     },
 
     getCurrPos() {
-      const boardIdx = this.boards.findIndex(
-        (board) => board._id === this.board._id,
-      )
-      const cardIdx = this.group.cards.findIndex(
-        (card) => card.id === this.card.id,
-      )
-      const groupIdx = this.board.groups.findIndex(
-        (group) => group.id === this.group.id,
-      )
+      const boardIdx = this.boards.findIndex((board) => board._id === this.board._id)
+      const cardIdx = this.group.cards.findIndex((card) => card.id === this.card.id)
+      const groupIdx = this.board.groups.findIndex((group) => group.id === this.group.id)
       return {
         cardIdx,
         groupIdx,
@@ -518,15 +484,11 @@ export default {
     },
     group() {
       const { groupId } = this.$route.params
-      return JSON.parse(
-        JSON.stringify(this.board.groups.find((group) => group.id === groupId)),
-      )
+      return JSON.parse(JSON.stringify(this.board.groups.find((group) => group.id === groupId)))
     },
     card() {
       const { cardId } = this.$route.params
-      return JSON.parse(
-        JSON.stringify(this.group.cards.find((card) => card.id === cardId)),
-      )
+      return JSON.parse(JSON.stringify(this.group.cards.find((card) => card.id === cardId)))
     },
     isCoverActive() {
       if (this.card.style.bgColor || this.card.style.bgImg) return true

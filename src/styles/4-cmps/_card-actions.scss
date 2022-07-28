@@ -12,12 +12,12 @@
     font-weight: 600;
   }
   .suggested-tab {
-    margin: 0 0 8px;
+    margin: 0 0 16px;
     h3 {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      margin-bottom: -3px;
+      margin-bottom: -4px;
     }
     .settings-icon {
       padding: 0 2px;
@@ -28,11 +28,14 @@
       }
     }
   }
+  .add-to-card{
+    margin-bottom: -4px;
+  }
   .action-btn-container {
     width: 168px;
     img {
-      margin: 0 9px 0 -3px;
-      width: rem(13px);
+      margin: 0 7px 0 -4px;
+      width: rem(15px);
     }
     span {
       margin-inline-start: -4px;
@@ -40,6 +43,9 @@
       &:active {
         @include active;
       }
+    }
+    span.txt{
+      margin-left: 1px;
     }
     button {
       display: flex;
@@ -49,7 +55,7 @@
       width: 100%;
       @include headers-btns;
       margin: 8px 0px 0px;
-      padding: 0 12px;
+      padding: 6px 12px;
       text-align: left;
       background-color: #091e420a;
       &:hover {
