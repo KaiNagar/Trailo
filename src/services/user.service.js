@@ -15,8 +15,9 @@ export const userService = {
 
 const STORAGE_KEY = 'user'
 
-function getUsers() {
-  return httpService.get('user')
+async function getUsers() {
+  console.log('getting users');
+  return await httpService.get('user')
 }
 
 async function getById(userId) {
@@ -36,6 +37,7 @@ async function signup(signupInfo) {
   return _saveLocalUser(user)
 }
 async function logout() {
+  console.log('login out');
   sessionStorage.removeItem(STORAGE_KEY)
   return await httpService.post('auth/logout')
 }

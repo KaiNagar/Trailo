@@ -20,13 +20,18 @@
     line-height: 20px;
     margin-bottom: 12px;
     outline: none;
-    padding: 8px 12px;
+    padding: 5px 7px;
     transition-duration: 85ms;
     transition-property: background-color, border-color, box-shadow;
     transition-timing-function: ease;
 
     &:hover{
       background-color: #ebecf0;
+    }
+
+    &::placeholder{
+      font-size: 14px;
+      padding-inline-start: 10px;
     }
   }
   .icon.close {

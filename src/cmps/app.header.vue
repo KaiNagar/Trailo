@@ -81,11 +81,12 @@
 
     <div class="right-header flex">
       <button class="notifications"><img src="../styles/svgs/notification.svg" alt="" /></button>
-      <div class="profile">
+      <div class="profile" @click="openMenu('account')">
         <button>{{ loggedUser.username.slice(0, 1).toUpperCase() }}</button>
       </div>
-      <menu-account></menu-account>
+      <!-- ACCOUNT MENU -->
     </div>
+      <menu-account v-if="menu.account"></menu-account>
   </section>
 </template>
 <script>
@@ -139,6 +140,9 @@ export default {
     },
     resetCurrBoard() {
       this.$store.commit({ type: 'setCurrBoard', board: null })
+    },
+    openMenu(menuAction) {
+      this.$store.commit({ type: 'openMenu', menuAction })
     },
   },
   computed: {

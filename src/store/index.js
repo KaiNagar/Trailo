@@ -137,9 +137,9 @@ const store = createStore({
         console.error('cannot get boards:', err)
       }
     },
-    async saveBoard({ commit }, { board }) {
+    async saveBoard({ commit }, { board}) {
       commit({ type: 'setCurrBoard', currBoard: board })
-      
+      console.log('created by', board.loggedUser);
       const newBoard = await boardService.save(board)
      
       return newBoard

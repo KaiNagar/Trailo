@@ -3,7 +3,7 @@
         <div class="avatar" :style="{ backgroundColor: member.color }">{{ member.username.charAt(0) }}</div>
         <div class="member-name">
             <span>{{ member.username }}</span>
-            <span>({{ member.username.split(' ').join('').slice(0, 15) }})</span>
+            <span> ({{ member.username.split(' ').join('').slice(0, 15) }})</span>
         </div>
     </div>
     <div :class="{ 'check-icon': ids.includes(member._id) }"></div>

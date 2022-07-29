@@ -63,11 +63,7 @@
                 <!-- <img :src="board.bgCover" alt="" /> -->
                 <h1>{{ board.title }}</h1>
                 <div class="star">
-                  <div
-                    class="star-icon"
-                    @click.stop="star(board._id)"
-                    :class="{ starred: board.isStarred }"
-                  ></div>
+                  <div class="star-icon" @click.stop="star(board._id)" :class="{ starred: board.isStarred }"></div>
                   <!-- <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div> -->
                 </div>
               </div>
@@ -105,6 +101,8 @@ export default {
         return { backgroundImage: 'url(' + board.style.bgImg + ')' }
     },
     onSelectedBoard(boardId) {
+      this.closeMenu()
+      
       this.$router.push('/board/' + boardId)
     },
     openMenu(menuAction) {
@@ -136,6 +134,9 @@ export default {
       return this.$store.getters.loggedUser
     },
   },
-  created() {},
+  created() {
+    this.$store.dispatch({ type: 'setUsers' })
+
+  },
 }
 </script>
