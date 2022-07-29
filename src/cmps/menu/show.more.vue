@@ -12,7 +12,12 @@
         <div :style="bgMini" class="mini-img"></div>
         <span class="cover-txt">Change background</span>
       </div>
+      <div class="dashboard" @click="$emit('openDashboard')">
+        <span class="dash-icon"></span>
+        <span class="cover-txt">Dashboard</span>
+      </div>
     </div>
+    
     <hr />
     <div class="board-activity">
       <div class="activity-header">

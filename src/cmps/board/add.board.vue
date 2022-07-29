@@ -51,7 +51,8 @@
     <template #part-4>
       <div class="title">
         <header>Board title <span>*</span></header>
-        <input type="text" v-model="newBoard.title" />
+        <input required type="text" v-model="newBoard.title" />
+        <br>
         <span>👋 Board title is required</span>
       </div>
     </template>
@@ -109,6 +110,7 @@ export default {
       this.$store.commit({ type: 'closeMenu' })
     },
     async createBoard() {
+      if(!this.newBoard.title) return
       await this.$store.dispatch({ type: 'loadBoards' })
       this.closeMenu()
       this.newBoard.style.bgImg = this.selectedBgImg

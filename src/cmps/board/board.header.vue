@@ -53,6 +53,7 @@
         </button>
         <show-more
           @openStyleMenu="openStyleMenu"
+          @openDashboard="openDashboard"
           @closeMoreMenu="hideMenu"
           :style="setMenuMore"
         />
@@ -117,6 +118,10 @@ export default {
     backToStyleFromImgs() {
       this.isStyleMenu = true
       this.isPhotosMenu = false
+    },
+    openDashboard(){
+      this.hideMenu()
+      console.log('hfdsgdfsgd');
     },
     openImgsMenu() {
       this.isStyleMenu = false

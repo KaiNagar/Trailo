@@ -9,6 +9,7 @@
 
       <div
         v-if="isCoverActive"
+        ref="imgEl"
         :style="cardCoverStyle"
         :class="cardCoverClass"
         class="card-cover"
@@ -434,6 +435,19 @@ export default {
     },
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
+    },
+    getRelativeColor(ratio) {
+      if (!this.card.style.bgImg) return
+      const imgEl = this.$refs.imgEl
+      const canvas = document.createElement('canvas')
+      const width = imgEl.style.width
+      const height = imgEl.style.height
+      canvas.width = width
+      canvas.height = height
+
+      const context = canvas.getContext('2d')
+      context.drawImage(imgEl,0,0)
+      
     },
   },
   computed: {
