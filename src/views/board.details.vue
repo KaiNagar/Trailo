@@ -55,11 +55,7 @@ export default {
       // console.log(cardId)
     },
     pushedBoard(board) {
-<<<<<<< HEAD
-      console.log('push bord', board)
-=======
       console.log('push board', board)
->>>>>>> 064371001ad9372ae22b7678300364e9e8cbf9be
       this.$store.dispatch({ type: 'pushedBoard', board })
     },
   },
@@ -70,8 +66,7 @@ export default {
     onBoardBgColor() {
       if (this.currBoard.style.bgColor) {
         return { backgroundColor: this.currBoard.style.bgColor }
-      } else
-        return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
+      } else return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
     },
     getRelativeColor() {},
   },
