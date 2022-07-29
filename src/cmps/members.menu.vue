@@ -6,37 +6,22 @@
     </template>
     <template #part-2>
       <h1 class="header">Board members</h1>
-      <div
-        class="member-tab flex align-center space-between"
-        v-for="member in members"
-        :key="member.id"
-      >
+      <div class="member-tab flex align-center space-between" v-for="member in members" :key="member.id">
         <div class="flex align-center ">
-          <div
-            class="member-img"
-            v-if="member.imgUrl"
-            :style="memberImg(member)"
-          ></div>
-          <div
-            :style="{ backgroundColor: member.color }"
-            class="member-cred flex align-center"
-            v-else
-          >
+          <div class="member-img" v-if="member.imgUrl" :style="memberImg(member)"></div>
+          <div :style="{ backgroundColor: member.color }" class="member-cred flex align-center" v-else>
             {{ memberCred(member) }}
           </div>
-          <span class="formatted-name"
-            >{{ formatedName(member.fullname)
-            }}<span class="short-name">({{ member.fullname }})</span>
+          <span class="formatted-name">{{ formatedName(member.fullname)
+          }}<span class="short-name">({{ member.fullname }})</span>
           </span>
         </div>
         <span v-if="member?.isSelected" class="check-icon"></span>
       </div>
     </template>
-    <template #part-3
-      ><button class="more-members btn">
+    <template #part-3><button class="more-members btn">
         Show other Workspace members
-      </button></template
-    >
+      </button></template>
   </app-modal>
 </template>
 
@@ -70,8 +55,11 @@ export default {
     },
   },
   computed: {},
-  created() {},
+  created() {
+
+  },
 }
 </script>
 
-<style></style>
+<style>
+</style>

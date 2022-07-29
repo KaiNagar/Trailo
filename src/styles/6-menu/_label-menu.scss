@@ -137,8 +137,6 @@
     margin-bottom: 2em;
   }
 
-
-  
   button.create-btn {
     background-color: #0079bf;
     color: white;
@@ -173,7 +171,6 @@
   }
 
   .btns {
-
     display: flex;
     justify-content: space-between;
 
@@ -188,5 +185,27 @@
   div.warning {
     color: #172b4d;
     margin-bottom: 1em;
+  }
+
+ 
+}
+
+.delete-labels-menu{
+  .modal{
+    button.delete.wide.btn {
+      width: 100%;
+      border: none;
+      border-radius: 3px;
+      margin-bottom: 9px;
+      line-height: 32px;
+      text-align: center;
+      background-color: #b04632;
+      color: white;
+      display: flex;
+      justify-content: center;
+      &:hover{
+        background-color: #8b3827;
+      }
+    }
   }
 }

@@ -113,6 +113,7 @@ export default {
       this.closeMenu()
       this.newBoard.style.bgImg = this.selectedBgImg
       this.newBoard.style.bgColor = this.selectedBgColor
+      this.newBoard.createdBy = this.loggedUser
       this.saveBoard()
       const boards = JSON.parse(JSON.stringify(this.boards))
       boards.push(this.newBoard)
@@ -124,12 +125,16 @@ export default {
     boards() {
       return this.$store.getters.boards
     },
+    loggedUser(){
+      return this.$store.getters.loggedUser
+    },
 
     menu() {
       return this.$store.getters.menu
     },
   },
   created() {
+    console.log('user is ' , this.loggedUser);
     this.newBoard.labels = [
       { id: 'l101', color: '#61bd4f', title: '' },
       { id: 'l104', color: '#eb5a46', title: '' },

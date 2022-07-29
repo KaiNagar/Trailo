@@ -30,7 +30,7 @@
               <template #part-1>
                 <div class="edit-menu">
                   <header>Link name</header>
-                  <input class="name" type="text" v-model="file.title" />
+                  <input class="input" type="text" v-model="file.title" />
                   <button @click="update">Update</button>
                 </div>
               </template>

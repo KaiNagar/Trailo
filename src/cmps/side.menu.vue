@@ -7,7 +7,7 @@
 
         <div class="workspaces">
             <div class="header">
-                <header>workspaces</header>
+                <header>Workspaces</header>
                 <button class="add-icon"></button>
             </div>
 

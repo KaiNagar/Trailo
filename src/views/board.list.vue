@@ -12,12 +12,7 @@
           <div class="board-preview">
             <!-- <img src="../assets/icons/icons-clock.png" alt="" /> -->
             <div class="gallery">
-              <div
-                class="item"
-                @click="onSelectedBoard(board._id)"
-                v-for="board in starred"
-                :key="board._id"
-              >
+              <div class="item" @click="onSelectedBoard(board._id)" v-for="board in starred" :key="board._id">
                 <!-- <div :style="boardCover(board)" class="img"></div> -->
                 <img :src="board.bgCover" alt="" />
                 <h1>{{ board.title }}</h1>
@@ -44,22 +39,14 @@
           <div class="board-preview">
             <!-- <img src="../assets/icons/icons-clock.png" alt="" /> -->
             <div class="gallery">
-              <div
-                class="item"
-                @click="onSelectedBoard(board._id)"
-                v-for="board in recently"
-                :key="board._id"
-              >
+              <div class="item" @click="onSelectedBoard(board._id)" v-for="board in recently" :key="board._id"
+                :style="[{ background: 'url(' + board.style.bgImg + ')' }, { backgroundColor: board.style.color }]">
                 <!-- <div :style="boardCover(board)" class="img"></div> -->
 
-                <img :src="board.bgCover" alt="" />
+                <!-- <img :src="board.style.bgImg" alt="" /> -->
                 <h1>{{ board.title }}</h1>
                 <div class="star">
-                  <div
-                    class="star-icon"
-                    @click.stop="star(board._id)"
-                    :class="{ starred: board.isStarred }"
-                  ></div>
+                  <div class="star-icon" @click.stop="star(board._id)" :class="{ starred: board.isStarred }"></div>
                   <!-- <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div> -->
                 </div>
               </div>
@@ -92,6 +79,8 @@ export default {
   },
   methods: {
     onSelectedBoard(boardId) {
+      this.closeMenu()
+      
       this.$router.push('/board/' + boardId)
     },
     openMenu(menuAction) {
@@ -124,6 +113,9 @@ export default {
     },
 
   },
-  created() {},
+  created() {
+    this.$store.dispatch({ type: 'setUsers' })
+
+  },
 }
 </script>

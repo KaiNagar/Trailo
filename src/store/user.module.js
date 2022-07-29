@@ -3,6 +3,7 @@ export const userModule = {
   // STATE
   state: {
     user: JSON.parse(sessionStorage.getItem("user")) || null,
+    users: [],
   },
   // MUTATIONS
   mutations: {
@@ -12,6 +13,9 @@ export const userModule = {
     },
     logout(state) {
       state.user = null;
+    },
+    setUsers(state, {users}){
+      state.users = users
     },
   },
   // ACTIONS
@@ -24,7 +28,8 @@ export const userModule = {
         console.log(err);
       }
     },
-    logout({ commit }, payload) {
+    async logout({ commit }, payload) {
+      userService.logout();
       commit(payload);
     },
     async signup({ commit }, { credentials }) {
@@ -35,11 +40,26 @@ export const userModule = {
         console.log(err);
       }
     },
+    async setUsers({commit}) {
+      try {
+        const users = await userService.getUsers()
+        console.log('users is store:',users);
+        if(users){
+          commit({type:'setUsers', users})
+        }
+      } catch (err) {
+        console.error(err);
+        throw err;
+      }
+    },
   },
   // GETTERS
   getters: {
     loggedUser(state) {
-      return state.user;
+      return state.user
+    },
+    users({ users }) {
+      return users
     },
   },
 };

@@ -4,11 +4,15 @@
         <template #part-1>
             <div class="user">
                 <div class="avatar">{{ user.username.slice(0, 1).toUpperCase() }}</div>
+                <div class="info">
+                    <header>{{ user.username }}</header>
+                    <span>{{ user.email }}</span>
+                </div>
 
 
             </div>
 
-            <div @click="signout">Logout</div>
+            <div class="logout" @click="signout">Logout</div>
         </template>
     </app-modal>
 </template>

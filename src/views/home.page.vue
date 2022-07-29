@@ -4,7 +4,7 @@
         <header>
             <div class="logo">Trailo</div>
             <div @click="loginModal" class="login-btn">
-                <span >Log in</span>
+                <span>Log in</span>
                 <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 <a href="#" onclick="signOut();">Sign out</a> -->
             </div>
@@ -46,7 +46,7 @@ export default {
             credentials: {},
         };
     },
-    created() { 
+    created() {
         this.signout()
     },
     methods: {
@@ -54,8 +54,8 @@ export default {
             try {
                 this.$swal.fire({
                     title: 'Login Form',
-                    html: `<input type="text" id="login" class="swal2-input" placeholder="admin">
-                            <input type="password" id="password" class="swal2-input" placeholder="123">`,
+                    html: `<input type="text" id="login" value="admin"  class="swal2-input" placeholder="admin">
+                            <input type="password" id="password"  value="123" class="swal2-input" placeholder="123">`,
                     confirmButtonText: 'Sign in',
                     focusConfirm: false,
                     preConfirm: () => {
@@ -82,7 +82,8 @@ export default {
             try {
                 this.$swal.fire({
                     title: 'Signup Form',
-                    html: `<input type="text" id="login" class="swal2-input" placeholder="Enter username">
+                    html: ` 
+                            <input type="text" id="login" class="swal2-input"  placeholder="Enter username">
                             <input type="text" id="email" class="swal2-input" placeholder="Enter email">
                             <input type="password" id="password" class="swal2-input" placeholder="Enter password">`,
                     confirmButtonText: 'Sign in',
@@ -94,7 +95,7 @@ export default {
                         if (!username || !password) {
                             this.$swal.showValidationMessage(`Please enter login and password`)
                         }
-                        return { username, password,email }
+                        return { username, password, email }
                     }
                 }).then((result) => {
                     this.credentials.username = result.value.username
@@ -118,6 +119,7 @@ export default {
                 throw err
             } finally {
                 if (this.user) {
+                    this.closeMenu()
                     this.$swal.fire(
                         `Welcome back ${this.user.username}!`,
                         'we missed you',
@@ -149,6 +151,7 @@ export default {
                 throw err
             } finally {
                 if (this.user) {
+                    this.closeMenu()
                     const msg = 'Welcome'
                     this.$swal.fire(
                         `Welcome ${this.user.username}!`,
@@ -156,7 +159,6 @@ export default {
                         'success'
                     ).then(() => {
                         this.$router.push(`/board/`)
-
                     })
 
                 } else {
@@ -173,8 +175,11 @@ export default {
 
         },
         signout() {
-            this.$store.commit({type:'logout'})
-        }
+            this.$store.dispatch({ type: 'logout' })
+        },
+        closeMenu() {
+            this.$store.commit({ type: 'closeMenu' })
+        },
     },
     computed: {
         user() {

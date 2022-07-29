@@ -11,8 +11,8 @@
     <template #part-2>
       <ul class="members">
         <header>Board members</header>
-        <li class="member-container" v-for="member in boardMembers " :key="member._id">
-        <!-- MEMBER PREVIEW -->
+        <li class="member-container" v-for="member in users " :key="member._id">
+          <!-- MEMBER PREVIEW -->
           <member-preview :member="member" :card="card" @togglemember="toggleMember" />
         </li>
       </ul>
@@ -26,7 +26,7 @@ import memberPreview from './member.preview.vue';
 import appModal from '../app.modal.vue';
 export default {
   name: 'ProjectApp',
-  emits:['closeMenu','sendToSave'],
+  emits: ['closeMenu', 'sendToSave'],
   props: {
     card: Object
   },
@@ -58,7 +58,9 @@ export default {
     },
   },
   created() {
-    console.log(this.card.members);
+    // console.log(this.card.members);
+    console.log('members menu', this.users);
+
   },
   computed: {
     board() {
@@ -75,6 +77,9 @@ export default {
         })
       })
       return avatarStr
+    },
+    users(){
+      return this.$store.getters.users
     },
   },
   unmounted() { },
