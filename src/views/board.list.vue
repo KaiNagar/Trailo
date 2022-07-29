@@ -12,13 +12,24 @@
           <div class="board-preview">
             <!-- <img src="../assets/icons/icons-clock.png" alt="" /> -->
             <div class="gallery">
-              <div class="item" @click="onSelectedBoard(board._id)" v-for="board in starred" :key="board._id">
-                <!-- <div :style="boardCover(board)" class="img"></div> -->
-                <img :src="board.bgCover" alt="" />
+              <div
+                class="item"
+                @click="onSelectedBoard(board._id)"
+                v-for="board in starred"
+                :key="board._id"
+              >
+                <div :style="boardCover(board)" class="img">
+                  <span class="board-fade"></span>
+                </div>
+                <!-- <img :src="board.bgCover" alt="" /> -->
                 <h1>{{ board.title }}</h1>
                 <div class="star">
-                  <div class="star-icon " :class="{ starred: board.isStarred }" @click.stop="star(board._id)" board>
-                  </div>
+                  <div
+                    class="star-icon"
+                    :class="{ starred: board.isStarred }"
+                    @click.stop="star(board._id)"
+                    board
+                  ></div>
                   <!-- <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div> -->
                 </div>
 
@@ -39,11 +50,17 @@
           <div class="board-preview">
             <!-- <img src="../assets/icons/icons-clock.png" alt="" /> -->
             <div class="gallery">
-              <div class="item" @click="onSelectedBoard(board._id)" v-for="board in recently" :key="board._id"
-                :style="[{ background: 'url(' + board.style.bgImg + ')' }, { backgroundColor: board.style.color }]">
-                <!-- <div :style="boardCover(board)" class="img"></div> -->
+              <div
+                class="item"
+                @click="onSelectedBoard(board._id)"
+                v-for="board in recently"
+                :key="board._id"
+              >
+                <div :style="boardCover(board)" class="img">
+                  <span class="board-fade"></span>
+                </div>
 
-                <!-- <img :src="board.style.bgImg" alt="" /> -->
+                <!-- <img :src="board.bgCover" alt="" /> -->
                 <h1>{{ board.title }}</h1>
                 <div class="star">
                   <div class="star-icon" @click.stop="star(board._id)" :class="{ starred: board.isStarred }"></div>
@@ -78,6 +95,11 @@ export default {
     return {}
   },
   methods: {
+    boardCover(board) {
+      if (board.style.bgColor) return { backgroundColor: board.style.bgColor }
+      else if (board.style.bgImg)
+        return { backgroundImage: 'url(' + board.style.bgImg + ')' }
+    },
     onSelectedBoard(boardId) {
       this.closeMenu()
       
@@ -111,7 +133,6 @@ export default {
     loggedUser() {
       return this.$store.getters.loggedUser
     },
-
   },
   created() {
     this.$store.dispatch({ type: 'setUsers' })

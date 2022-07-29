@@ -13,7 +13,7 @@
 
             <ul>
                 <li> <div class="workspace-avatar one">W</div>  Work-1 <span class="open-icon"></span></li>
-                <li> <div class="workspace-avatar two">S</div> sprint 4 <span class="open-icon"></span></li>
+                <li> <div class="workspace-avatar two">S</div> Sprint 4 <span class="open-icon"></span></li>
                 <li> <div class="workspace-avatar three">D</div> Diet <span class="open-icon"></span></li>
             </ul>
         </div>

@@ -178,7 +178,6 @@ export default {
     loggedUser() {
       return this.$store.getters.loggedUser
     },
-
   },
   created() {
   },
