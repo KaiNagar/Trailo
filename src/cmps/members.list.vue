@@ -29,8 +29,9 @@ export default {
         return {};
     },
     created() {
-
+        
         console.log('this card in members list');
+
      },
     methods: {
         openMenu(menuAction) {
@@ -56,6 +57,9 @@ export default {
         menu() {
             return this.$store.getters.menu
         },
+        users(){
+            return this.$store.getters.users
+        }
 
     },
     unmounted() { },

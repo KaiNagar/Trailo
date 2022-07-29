@@ -1,7 +1,7 @@
 <template>
   <section>
     <!-- CREATE LABEL MODAL -->
-    <app-modal @closeModal="closeMenu" v-if="menu.createLabel">
+    <app-modal @closeModal="closeMenu" v-if="menu.createLabel" >
       <template #title>
         <span @click="openMenu('labels')" class="back icon"> </span> Create label</template
       >
@@ -31,7 +31,7 @@
     </app-modal>
 
     <!-- EDIT MODAL -->
-    <app-modal v-if="menu.editLabel" @closeModal="closeMenu">
+    <app-modal v-if="menu.editLabel" @closeModal="closeMenu" >
       <template #title>
         <span @click="openMenu('labels')" class="back icon"> </span> Change label</template
       >
@@ -63,7 +63,7 @@
     </app-modal>
 
     <!-- DELETE MODAL -->
-    <app-modal v-if="menu.deleteLabel" @closeModal="closeMenu">
+    <app-modal v-if="menu.deleteLabel" @closeModal="closeMenu" class="delete-labels-menu">
       <template #title>
         <span @click="openMenu('labels')" class="back icon"> </span> Delete label?</template
       >

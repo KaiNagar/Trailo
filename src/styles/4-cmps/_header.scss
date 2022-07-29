@@ -1,5 +1,7 @@
 .main-header {
+ 
   // MODAL POSITION
+  position: relative;
   .main-menu {
     .modal {
       top: 40px;
@@ -117,8 +119,6 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    left: 10px;
-    // left: 9.5px;
     padding: 1px 0;
     img {
       position: absolute;
@@ -137,7 +137,8 @@
       color: white;
       font-size: 14px;
       height: 30px;
-      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       // display: flex;
       &::placeholder {
         color: white;
@@ -160,6 +161,8 @@
     border-radius: 3px;
     font-weight: 400;
     line-height: 32px;
+
+    
     // font-family: fa;
     // &::before {
     //   content: '\2b';
@@ -195,15 +198,15 @@
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    
   }
 
   .right-header {
     position: relative;
-    left: 23px;
+    // left: 23px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 3px;
     > * {
       width: 32px;
       height: 32px;
@@ -211,7 +214,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 1.5px;
+      margin: 0 3px;
     }
 
     .notifications {
@@ -219,18 +222,21 @@
         filter: invert(100%) sepia(0%) saturate(7431%) hue-rotate(138deg)
           brightness(95%) contrast(114%);
       }
-
+      &:hover {
+        background-color: #3588b9;
+      }
       &.active {
         background-color: #eb5a46;
       }
     }
     .profile {
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
       background-color: royalblue;
-
     }
   }
+  
 }
