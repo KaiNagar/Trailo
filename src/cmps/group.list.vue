@@ -42,13 +42,14 @@
         <form @submit.prevent="addGroup">
           <input
             type="text"
+            v-focus
             v-model="newGroup.title"
             ref="input"
             placeholder="Enter list title..."
           />
           <div class="g-add-list">
             <button>Add list</button>
-            <span class="close-icon" @click="showForm = false"></span>
+            <span class="close-icon" @click="onCloseForm"></span>
           </div>
         </form>
       </div>
@@ -60,7 +61,6 @@
 import groupPreview from './group.preview.vue'
 import { boardService } from '../services/board.service'
 import { Container, Draggable } from 'vue3-smooth-dnd'
-import { socketService } from '../services/socket.service'
 
 export default {
   name: 'groupList',
@@ -117,10 +117,17 @@ export default {
       this.$emit('removeGroup', groupId)
     },
     addGroup() {
-      if (this.newGroup.title === '') return
+      if (this.newGroup.title === '') {
+        this.showForm = false
+        return
+      }
       this.$emit('addGroup', this.newGroup)
-      this.showForm = false
       this.newGroup = boardService.getEmptyGroup()
+      this.showForm = false
+    },
+    onCloseForm() {
+      this.newGroup.title = ''
+      this.showForm = false
     },
     removeCard(cardId) {
       console.log(cardId)

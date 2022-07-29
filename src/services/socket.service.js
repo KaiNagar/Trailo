@@ -7,7 +7,7 @@ import io from 'socket.io-client'
 // export const SOCKET_EVENT_UPDATE = 'update'
 // export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you';
 
-const baseUrl = (process.env.NODE_ENV === 'production')? '' : '//localhost:5173'
+const baseUrl = (process.env.NODE_ENV === 'production')? '' : '//127.0.0.1:5173'
 
 export const socketService = createSocketService()
 // export const socketService = createDummySocketService()
