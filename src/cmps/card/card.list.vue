@@ -97,6 +97,7 @@ export default {
     groupIdx() {
       return this.board.groups.findIndex((group) => group.id === this.group.id)
     },
+    
   },
 }
 </script>

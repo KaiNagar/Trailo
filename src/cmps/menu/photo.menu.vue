@@ -13,7 +13,8 @@
         </h3>
         <span @click="$emit('closeMoreMenu')" class="close-icon"></span>
       </div>
-      <div class="input">
+      <hr />
+      <div class="input-photos">
         <span class="search-icon"></span>
         <input class="search-photos" type="text" placeholder="Photos" />
       </div>
@@ -112,9 +113,9 @@ export default {
     photoStyle(photo) {
       return { backgroundImage: 'url(' + photo.url + ')' }
     },
-    setBgImg(photo){
-      this.$emit('setBgImg',photo)
-    }
+    setBgImg(photo) {
+      this.$emit('setBgImg', photo)
+    },
   },
 }
 </script>

@@ -14,7 +14,7 @@
             <div class="gallery">
               <div
                 class="item"
-                @click="onSelectedBoard(board._id)"
+                @click="onSelectedBoard(board._id, board)"
                 v-for="board in starred"
                 :key="board._id"
               >
@@ -52,7 +52,7 @@
             <div class="gallery">
               <div
                 class="item"
-                @click="onSelectedBoard(board._id)"
+                @click="onSelectedBoard(board._id, board)"
                 v-for="board in recently"
                 :key="board._id"
               >
@@ -63,7 +63,11 @@
                 <!-- <img :src="board.bgCover" alt="" /> -->
                 <h1>{{ board.title }}</h1>
                 <div class="star">
-                  <div class="star-icon" @click.stop="star(board._id)" :class="{ starred: board.isStarred }"></div>
+                  <div
+                    class="star-icon"
+                    @click.stop="star(board._id)"
+                    :class="{ starred: board.isStarred }"
+                  ></div>
                   <!-- <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div> -->
                 </div>
               </div>
@@ -100,9 +104,9 @@ export default {
       else if (board.style.bgImg)
         return { backgroundImage: 'url(' + board.style.bgImg + ')' }
     },
-    onSelectedBoard(boardId) {
+    onSelectedBoard(boardId, board) {
       this.closeMenu()
-      
+      this.$store.commit({ type: 'setCurrBoard', currBoard: board })
       this.$router.push('/board/' + boardId)
     },
     openMenu(menuAction) {
@@ -136,7 +140,6 @@ export default {
   },
   created() {
     this.$store.dispatch({ type: 'setUsers' })
-
   },
 }
 </script>

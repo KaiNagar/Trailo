@@ -1,6 +1,6 @@
 <template>
-    <app-header :boards="boards" />
-    <router-view />
+  <app-header :boards="boards"/>
+  <router-view />
 </template>
 
 <script>
@@ -21,7 +21,10 @@ export default {
     boards() {
       return this.$store.getters.boards
     },
-   
+    board() {
+      return this.$store.getters.currBoard
+    },
+    
   },
   async created() {
     const boards = await this.$store.dispatch({ type: 'loadBoards' })
