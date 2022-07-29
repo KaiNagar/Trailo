@@ -174,9 +174,6 @@ export default {
     loggedUser() {
       return this.$store.getters.loggedUser
     },
-    openMenu(menuAction) {
-      this.$store.commit({ type: 'openMenu', menuAction })
-    },
   },
   created() {
   },

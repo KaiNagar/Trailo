@@ -18,12 +18,18 @@
                 v-for="board in starred"
                 :key="board._id"
               >
-                <!-- <div :style="boardCover(board)" class="img"></div> -->
-                <img :src="board.bgCover" alt="" />
+                <div :style="boardCover(board)" class="img">
+                  <span class="board-fade"></span>
+                </div>
+                <!-- <img :src="board.bgCover" alt="" /> -->
                 <h1>{{ board.title }}</h1>
                 <div class="star">
-                  <div class="star-icon " :class="{ starred: board.isStarred }" @click.stop="star(board._id)" board>
-                  </div>
+                  <div
+                    class="star-icon"
+                    :class="{ starred: board.isStarred }"
+                    @click.stop="star(board._id)"
+                    board
+                  ></div>
                   <!-- <div class="star-icon bottom" :class="{ starred: board.isStarred }"></div> -->
                 </div>
 
@@ -50,9 +56,11 @@
                 v-for="board in recently"
                 :key="board._id"
               >
-                <!-- <div :style="boardCover(board)" class="img"></div> -->
+                <div :style="boardCover(board)" class="img">
+                  <span class="board-fade"></span>
+                </div>
 
-                <img :src="board.bgCover" alt="" />
+                <!-- <img :src="board.bgCover" alt="" /> -->
                 <h1>{{ board.title }}</h1>
                 <div class="star">
                   <div
@@ -91,6 +99,11 @@ export default {
     return {}
   },
   methods: {
+    boardCover(board) {
+      if (board.style.bgColor) return { backgroundColor: board.style.bgColor }
+      else if (board.style.bgImg)
+        return { backgroundImage: 'url(' + board.style.bgImg + ')' }
+    },
     onSelectedBoard(boardId) {
       this.$router.push('/board/' + boardId)
     },
@@ -122,7 +135,6 @@ export default {
     loggedUser() {
       return this.$store.getters.loggedUser
     },
-
   },
   created() {},
 }

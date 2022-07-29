@@ -15,6 +15,9 @@
     // border: 1px black solid;
     // padding-bottom: 200px;
   }
+  .galleries {
+    width: 100%;
+  }
 }
 
 // SIDE MENU
@@ -56,13 +59,13 @@
 
         &.boards {
           &::before {
-            content: "\e90b";
+            content: '\e90b';
           }
         }
 
         &.home {
           &::before {
-            content: "\e938";
+            content: '\e938';
           }
         }
       }
@@ -155,13 +158,13 @@
   .icon {
     line-height: 1.5em;
     font-size: 25px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
     margin-inline-start: 10px;
     font-size: 24px;
   }
   .recently {
     &::before {
-      content: "\e91b";
+      content: '\e91b';
     }
   }
   .star-icon {
@@ -180,12 +183,14 @@
     left: 6px;
     // padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
-    gap: 10px;
+    // width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(193.8px, 1fr));
+    gap: 5px;
     row-gap: 30px;
     // column-gap: 5px;
     // width: 100%;
     .item {
+      max-width: 193.8px;
       .starred-board {
         border: 1px black solid;
         width: 50px;
@@ -197,7 +202,7 @@
       // margin-inline-end: 1em;
       .star {
         transition: 0.2s;
-        width: 150%;
+        width: 100%;
         height: 100%;
 
         position: absolute;
@@ -243,26 +248,28 @@
     .board-list-new-board {
       position: relative;
       overflow-y: hidden;
-      
-      img {
+      .img {
         width: 100%;
-        // max-height: ;
-        object-fit: contain;
+        max-width: 194px;
+        height: 96px;
+        background-position: center;
+        background-size: cover;
+        object-fit: cover;
         overflow-y: hidden;
         position: relative;
-        bottom: 2.5em;
+        .board-fade {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          background-color: #00000026;
+        }
       }
       max-height: 95px;
       background: #091e420a;
       background-size: cover;
       background-position: center center;
       border-radius: 3px;
-      // color: #ffffff;
-      // position: relative;
-      // text-decoration: none;
-      // flex: 1 0 22%;
-      // margin-inline-end: 2%;
-      // margin-bottom: 2%;
       gap: 5px;
       list-style: none;
       cursor: pointer;
@@ -271,10 +278,10 @@
         position: absolute;
         font-size: 16px;
         font-weight: 700;
-        margin-left: 4%;
         color: #ffffff;
-        top: 0;
-        left: 1em;
+        top: -8px;
+        left: 0;
+        z-index: 2;
       }
     }
   }

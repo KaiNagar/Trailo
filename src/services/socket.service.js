@@ -19,7 +19,7 @@ socketService.setup()
 
 
 function createSocketService() {
-  var socket = null
+  let socket = null
   const socketService = {
    async setup() {
       socket = io(baseUrl)

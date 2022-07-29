@@ -3,7 +3,7 @@
     <section class="card-details flex column">
       <div class="close-details-container flex">
         <router-link class="close-details-btn flex" :to="'/board/' + board._id"
-          ><span class="close-icon"></span>
+          ><span @click="closeMenu" class="close-icon"></span>
         </router-link>
       </div>
 
@@ -270,6 +270,9 @@ export default {
     }
   },
   methods: {
+    closeMenu() {
+      this.$store.commit({ type: 'closeMenu' })
+    },
     saveDesc(desc) {
       this.card.description = desc
       this.sendToSave(this.card)
