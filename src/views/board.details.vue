@@ -51,7 +51,7 @@ export default {
       // console.log(cardId)
     },
     pushedBoard(board) {
-      // console.log('push bord', board)
+      console.log('push bord', board)
       this.$store.dispatch({ type: 'pushedBoard', board })
     },
   },
@@ -72,7 +72,7 @@ export default {
         const { boardId } = this.$route.params
         const board = await boardService.getById(boardId)
         socketService.emit('board new-enter', boardId)
-        // console.log('board', board)
+        console.log('board', board)
         this.$store.commit({ type: 'setCurrBoard', currBoard: board })
       },
       immediate: true,
@@ -80,7 +80,6 @@ export default {
   },
   created() {
     socketService.on('board pushed', this.pushedBoard)
-    // console.log(this.currBoard)
     //   const { boardId } = this.$route.params
     //   const board = await boardService.getById(boardId)
     //   console.log(board);

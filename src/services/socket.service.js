@@ -9,8 +9,8 @@ import io from 'socket.io-client'
 
 const baseUrl = (process.env.NODE_ENV === 'production')? '' : '//127.0.0.1:5173'
 
-// export const socketService = createSocketService()
-export const socketService = createDummySocketService()
+export const socketService = createSocketService()
+// export const socketService = createDummySocketService()
 
 // For DEBUG:
 window.socketService = socketService

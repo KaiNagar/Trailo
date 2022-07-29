@@ -70,7 +70,6 @@ const store = createStore({
     },
     setIsCover(state, { status }) {
       state.isCover = status
-      console.log(status);
     },
     editLabel(state, { editedLabel }) {
       const idx = state.currBoard.labels.findIndex((label) => {
@@ -128,19 +127,6 @@ const store = createStore({
     },
   },
   actions: {
-    // async addGroup({ commit, state }, { group }) {
-    //   state.currBoard.groups.push(group)
-    //   await boardService.save(state.currBoard)
-    //   commit({ type: 'addGroup', group })
-    // },
-    // async addCard({ commit, state }, { card }) {
-    //   const group = state.currBoard.groups.find((group) => {
-    //     return group.id === card.groupId
-    //   })
-    //   group.cards.push(card)
-    //   await boardService.save(state.currBoard)
-    //   commit({ type: 'addCard', card })
-    // },
     async loadBoards({ commit }) {
       try {
         const boards = await boardService.query()
@@ -160,7 +146,7 @@ const store = createStore({
     pushedBoard({ commit }, { board }) {
       console.log('pushedBoard',board);
       commit({ type: 'setCurrBoard',currBoard:board })
-      // socketService.emit( , board)
+
     },
 
     async updateGroup({ commit }, { board, group }) {
