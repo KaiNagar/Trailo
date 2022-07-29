@@ -2,6 +2,7 @@
 import { createStore } from 'vuex'
 import { boardService } from '@/services/board.service.js'
 import { menuModule } from './menu.module'
+import { userModule } from './user.module'
 import {socketService} from '../services/socket.service.js'
 
 const store = createStore({
@@ -90,7 +91,7 @@ const store = createStore({
       state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
-      console.log('store motacion:',currBoard )
+      console.log('store mutation:',currBoard )
       state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
@@ -161,6 +162,7 @@ const store = createStore({
   },
   modules: {
     menuModule,
+    userModule
   },
 })
 

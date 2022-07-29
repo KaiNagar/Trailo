@@ -1,4 +1,5 @@
-z<template>
+z
+<template>
   <section v-if="currBoard">
     <div class="group-page-container" :style="onBoardBgColor">
       <board-header />
@@ -28,6 +29,9 @@ export default {
     }
   },
   methods: {
+    closeMenu() {
+      this.$store.commit({ type: 'closeMenu' })
+    },
     addGroup(newGroup) {
       const board = JSON.parse(JSON.stringify(this.currBoard))
       board.groups.push(newGroup)
@@ -51,7 +55,11 @@ export default {
       // console.log(cardId)
     },
     pushedBoard(board) {
+<<<<<<< HEAD
       console.log('push bord', board)
+=======
+      console.log('push board', board)
+>>>>>>> 064371001ad9372ae22b7678300364e9e8cbf9be
       this.$store.dispatch({ type: 'pushedBoard', board })
     },
   },
@@ -62,7 +70,8 @@ export default {
     onBoardBgColor() {
       if (this.currBoard.style.bgColor) {
         return { backgroundColor: this.currBoard.style.bgColor }
-      } else return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
+      } else
+        return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
     },
     getRelativeColor() {},
   },

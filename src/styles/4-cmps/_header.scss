@@ -1,10 +1,13 @@
 .main-header {
   // MODAL POSITION
-  .modal {
-    top: 40px;
-    left: 1em;
-    z-index: 1000;
+  .main-menu {
+    .modal {
+      top: 40px;
+      left: 1em;
+      // z-index: 1000;
+    }
   }
+
   // CREATE MODAL POSITION
   .add {
     position: relative;
@@ -22,8 +25,8 @@
   padding: 6px 4px;
   align-items: center;
   font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
 
   button {
     background-color: none;
@@ -114,6 +117,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    left: 10px;
     // left: 9.5px;
     padding: 1px 0;
     img {
@@ -144,15 +148,14 @@
     @media only screen and (max-width: 770px) {
       display: none;
     }
-    margin-inline-end: 1em;
   }
 
   .create-board-btn {
     display: flex;
     align-items: center;
     padding: 0 12px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-      'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 14px;
     border-radius: 3px;
     font-weight: 400;
@@ -183,8 +186,8 @@
   }
 
   button,
-  input[type='submit'],
-  input[type='reset'] {
+  input[type="submit"],
+  input[type="reset"] {
     background: none;
     color: inherit;
     border: none;
@@ -192,13 +195,15 @@
     font: inherit;
     cursor: pointer;
     outline: inherit;
+    
   }
 
   .right-header {
+    position: relative;
+    left: 23px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     > * {
       width: 32px;
       height: 32px;
@@ -225,6 +230,7 @@
       justify-content: center;
       border-radius: 50%;
       background-color: royalblue;
+
     }
   }
 }
