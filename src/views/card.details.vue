@@ -14,6 +14,10 @@
         :class="cardCoverClass"
         class="card-cover"
       >
+        <div
+          :style="{ backgroundColor: coverColorComputed }"
+          class="cover-screen"
+        ></div>
         <div class="cover-menu-container">
           <div
             class="cover-menu-btn flex align-center"
@@ -233,6 +237,8 @@ import { Container, Draggable } from 'vue3-smooth-dnd'
 import menuCover from '../cmps/menu.cover.vue'
 import menuMembers from '../cmps/menu/menu.members.vue'
 import membersList from '../cmps/members.list.vue'
+import { FastAverageColor } from 'fast-average-color'
+
 export default {
   name: 'cardDetails',
   components: {
@@ -268,6 +274,7 @@ export default {
         showOnTop: true,
       },
       leavingCIdx: null,
+      coverColor:''
     }
   },
   methods: {
@@ -367,6 +374,7 @@ export default {
     },
 
     sendToSave(newCard) {
+      this.coverColor = this.coverRelativeColor
       const pos = this.getCurrPos
       this.board.groups[pos.groupIdx].cards[pos.cardIdx] = newCard
       this.$store.dispatch({
@@ -436,19 +444,7 @@ export default {
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
-    getRelativeColor(ratio) {
-      if (!this.card.style.bgImg) return
-      const imgEl = this.$refs.imgEl
-      const canvas = document.createElement('canvas')
-      const width = imgEl.style.width
-      const height = imgEl.style.height
-      canvas.width = width
-      canvas.height = height
-
-      const context = canvas.getContext('2d')
-      context.drawImage(imgEl,0,0)
-      
-    },
+    
   },
   computed: {
     isLabels() {
@@ -563,8 +559,28 @@ export default {
     isCover() {
       return this.$store.getters.isCover
     },
+    coverRelativeColor() {
+      if (!this.card.style.bgImg) {
+        return
+      }
+      if (!this.card.style || !this.card.style.bgImg) return
+      const imgUrl = this.card.style.bgImg
+      const fac = new FastAverageColor()
+      fac
+        .getColorAsync(imgUrl)
+        .then((color) => {
+          return this.coverColor =  color.hexa
+        })
+        .catch((e) => {
+          return
+        })
+    },
+    coverColorComputed(){
+      return this.coverColor
+    }
   },
   created() {
+    this.coverColor = this.coverRelativeColor
     this.newChecklist = boardService.getEmptyChecklist()
     this.$store.commit({ type: 'setCardMembersIds', card: this.card })
     this.isCoverOn = this.isCoverActive
