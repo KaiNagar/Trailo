@@ -4,6 +4,7 @@ export const userModule = {
   state: {
     user: JSON.parse(sessionStorage.getItem("user")) || null,
     users: [],
+    filteredUsers:[],
   },
   // MUTATIONS
   mutations: {
@@ -16,6 +17,9 @@ export const userModule = {
     },
     setUsers(state, {users}){
       state.users = users
+    },
+    setFilteredUsers(state ,{filteredUsers}){
+      state.filteredUsers = filteredUsers
     },
   },
   // ACTIONS
@@ -61,5 +65,8 @@ export const userModule = {
     users({ users }) {
       return users
     },
+    filteredUsers({filteredUsers}){
+      return filteredUsers
+    }
   },
 };

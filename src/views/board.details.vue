@@ -86,6 +86,7 @@ export default {
   created() {
     socketService.on('board pushed', this.pushedBoard)
     this.closeMenu()
+    this.$store.dispatch({ type: 'setUsers' })
     // console.log(this.currBoard)
     //   const { boardId } = this.$route.params
     //   const board = await boardService.getById(boardId)

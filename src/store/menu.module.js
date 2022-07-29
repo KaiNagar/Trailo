@@ -21,7 +21,11 @@ export const menuModule = {
       deleteTodo:false,
       previewMembers:false,
       account:false,
+      searchUser:false,
+      shareBoard:false,
+
     },
+    
     edit: {},
 
     isPreviewMenusOpen: false,

@@ -13,21 +13,12 @@
           ><img src="../../assets/icons/icons-down.png" alt=""
         /></span>
       </button>
-      <h1
-        v-if="!editBoardTitle"
-        class="board-header-title"
-        @click="openEditTitle"
-      >
+
+      <h1 v-if="!editBoardTitle" class="board-header-title" @click="openEditTitle">
         {{ currBoard.title }}
       </h1>
-      <input
-        ref="editBoardRef"
-        @blur="saveBoardTitle"
-        v-else
-        type="text"
-        v-model="currBoard.title"
-        class="edit-board-title"
-      />
+      <input ref="editBoardRef" @blur="saveBoardTitle" v-else type="text" v-model="currBoard.title"
+        class="edit-board-title" />
 
       <button @click="toggleStarBoard" class="board-header-star">
         <span :style="isStarred" class="star-icon"></span>
@@ -37,20 +28,22 @@
         <span class="privet-icon"></span> Private
       </button>
     </nav>
+
+    <!-- MEMBERS -->
+    <avatar-list @users="users"></avatar-list>
+    <button @click="isShareBoard = true">share</button>
+    <share-board v-if="isShareBoard" @close="isShareBoard = false"></share-board>
+
+
     <div class="board-header-right-btns">
       <button class="filter-btn">
-        <span class="img"
-          ><img src="../../assets/icons/icons-bars.png" alt=""
-        /></span>
+        <span class="img"><img src="../../assets/icons/icons-bars.png" alt="" /></span>
         <span class="txt">Filter</span>
       </button>
       <board-filter v-if="filterMenu" />
+
       <div>
-        <button
-          v-if="!isMoreMenu"
-          @click="showMenu"
-          class="show-menu-btn flex align-center"
-        >
+        <button v-if="!isMoreMenu" @click="showMenu" class="show-menu-btn flex align-center">
           <span class="menu-icon"></span>
           <span class="txt">Show menu</span>
         </button>
@@ -91,10 +84,15 @@ import styleMenu from '../menu/style.menu.vue'
 import colorMenu from '../menu/color.menu.vue'
 import photoMenu from '../menu/photo.menu.vue'
 import { FastAverageColor } from 'fast-average-color'
+import membersList from '../members.list.vue'
+import avatarList from '../card/avatar.list.vue'
+import menuMembers from '../menu/menu.members.vue'
+import shareBoard from '../user/share.board.vue'
+
 
 export default {
   name: 'boardHeader',
-  components: { boardFilter, showMore, styleMenu, photoMenu, colorMenu },
+  components: { boardFilter, shareBoard, menuMembers, avatarList, showMore, styleMenu, photoMenu, colorMenu, membersList },
   data() {
     return {
       filterMenu: false,
@@ -105,6 +103,7 @@ export default {
       isPhotosMenu: true,
       isColorsMenu: false,
       headerColor: '',
+      isShareBoard:false,
     }
   },
   methods: {
@@ -173,6 +172,9 @@ export default {
       updatedBoard.isStarred = !updatedBoard.isStarred
       this.$store.dispatch({ type: 'saveBoard', board: updatedBoard })
     },
+    openMenu(menuAction) {
+      this.$store.commit({ type: 'openMenu', menuAction })
+    },
   },
   computed: {
     setMenuPhotos() {
@@ -216,6 +218,10 @@ export default {
           return '#ffffff82'
         })
     },
+    menu() {
+      return this.$store.getters.menu
+    },
+
   },
   created() {
     this.headerStyle
@@ -225,4 +231,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>

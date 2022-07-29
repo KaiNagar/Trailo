@@ -7,5 +7,35 @@
     align-items: center;
     justify-content: center;
     color: white;
+    background-color: blueviolet;
+    border: 1px rgba(211, 211, 211, 0.301) solid;
   }
 
+.avatars{
+  display: flex;
+  align-items: center;
+}
+
+.board-header{
+
+
+  .avatars{
+    .avatar{
+      position: relative;
+      margin-inline-start: -5px;
+      .admin{
+        background-image: url('https://a.trellocdn.com/prgb/dist/images/chevron.88a4454280d68a816b89.png');
+        width: 9px;
+        position: absolute;
+        height: 9px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        bottom: -3px;
+        right: 0;
+
+
+      }
+    }
+  }
+}

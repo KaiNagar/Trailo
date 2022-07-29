@@ -1,6 +1,6 @@
 <template>
 
-  <div class="cover-menu menu">
+  <div class="cover-menu menu" >
 
     
       <app-modal v-if="menu.cover" @closeModal="closeMenu">
