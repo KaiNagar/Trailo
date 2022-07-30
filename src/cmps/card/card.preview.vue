@@ -47,60 +47,64 @@
         <button @click.stop="removeCard(card.id)">Archive</button>
       </div>
 
-      <div v-if="haveActions" class="flex align-center">
-        <!-- DATES -->
-        <div
-          @mouseenter="hoverDue = true"
-          @mouseleave="hoverDue = false"
-          v-if="isHavingDueDate"
-          class="duedate-preview"
-          :style="dueDateStyle"
-        >
-          <span
+      <div v-if="haveActions" class="actions-container flex align-center space-between">
+        <div class="flex space-between">
+          <!-- DATES -->
+          <div
+            @mouseenter="hoverDue = true"
+            @mouseleave="hoverDue = false"
+            v-if="isHavingDueDate"
+            class="duedate-preview"
             :style="dueDateStyle"
-            v-if="!hoverDue"
-            class="clock-icon"
-          ></span>
-          <span
-            v-if="hoverDue && !isDueDateDone"
-            @click.stop="toggleDueDate"
-            class="unchecked-icon"
-            :style="dueDateStyle"
-          ></span>
-          <span
-            v-if="isDueDateDone && hoverDue"
-            @click.stop="toggleDueDate"
-            class="checklist-icon"
-            :style="dueDateStyle"
-          ></span>
-          <span class="duedate-txt">{{ dueDateTxt }}</span>
+          >
+            <span
+              :style="dueDateStyle"
+              v-if="!hoverDue"
+              class="clock-icon"
+            ></span>
+            <span
+              v-if="hoverDue && !isDueDateDone"
+              @click.stop="toggleDueDate"
+              class="unchecked-icon"
+              :style="dueDateStyle"
+            ></span>
+            <span
+              v-if="isDueDateDone && hoverDue"
+              @click.stop="toggleDueDate"
+              class="checklist-icon"
+              :style="dueDateStyle"
+            ></span>
+            <span class="duedate-txt">{{ dueDateTxt }}</span>
+          </div>
+          <!-- DESCRIPTION -->
+          <div v-if="isHavingDesc" class="description-preview">
+            <span class="description-icon"></span>
+          </div>
+          <!-- ATTACHMENTS -->
+          <div class="card-attachment-count flex" v-if="isHavingAttachments">
+            <span class="attach-icon"></span>
+            <span class="count">{{ attachmentCount }}</span>
+          </div>
+          <!-- TODOS/CHECKLISTS -->
+          <div
+            :class="isTodosDone"
+            v-if="isHavingTodos"
+            class="card-checklist-count flex align-center"
+          >
+            <span class="checklist-icon"></span>
+            <span class="count" :class="isTodosDone">{{ checklistCount }}</span>
+          </div>
         </div>
-        <!-- DESCRIPTION -->
-        <div v-if="isHavingDesc" class="description-preview">
-          <span class="description-icon"></span>
-        </div>
-        <!-- ATTACHMENTS -->
-        <div class="card-attachment-count flex" v-if="isHavingAttachments">
-          <span class="attach-icon"></span>
-          <span class="count">{{ attachmentCount }}</span>
-        </div>
-        <!-- TODOS/CHECKLISTS -->
-        <div
-          :class="isTodosDone"
-          v-if="isHavingTodos"
-          class="card-checklist-count flex align-center"
-        >
-          <span class="checklist-icon"></span>
-          <span class="count" :class="isTodosDone">{{ checklistCount }}</span>
-        </div>
+        <!-- MEMBERS LIST -->
+        <!-- <div class="members-list card-preview">
+          </div> -->
+        <avatar-list
+          class="avatar-list-card-preview"
+          :members="cardMembers"
+        ></avatar-list>
+          <!-- <card-members :card="card"></card-members> -->
       </div>
     </div>
-
-    <!-- MEMBERS LIST -->
-    <!-- <div class="members-list card-preview">
-      </div> -->
-      <avatar-list  :members="cardMembers"></avatar-list>
-      <!-- <card-members :card="card"></card-members> -->
   </section>
 </template>
 <script>
@@ -265,8 +269,8 @@ export default {
       if (this.card.labelIds.length) return true
       return false
     },
-    cardMembers(){
-      return  this.card.members
+    cardMembers() {
+      return this.card.members
     },
   },
   created() {

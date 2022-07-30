@@ -52,9 +52,6 @@ export default {
       board.groups.splice(idx, 1)
       this.$store.dispatch({ type: 'saveBoard', board })
     },
-    removeCard(cardId) {
-      // console.log(cardId)
-    },
     pushedBoard(board) {
       console.log('push board', board)
       this.$store.dispatch({ type: 'pushedBoard', board })
