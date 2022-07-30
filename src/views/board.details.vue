@@ -3,13 +3,8 @@ z
   <section v-if="currBoard">
     <div class="group-page-container" :style="onBoardBgColor">
       <board-header />
-      <group-list
-        :groups="currBoard.groups"
-        @updateGroup="updateGroup"
-        @addGroup="addGroup"
-        @removeGroup="removeGroup"
-        @removeCard="removeCard"
-      />
+      <group-list :groups="currBoard.groups" @updateGroup="updateGroup" @addGroup="addGroup" @removeGroup="removeGroup"
+        @removeCard="removeCard" />
     </div>
     <router-view></router-view>
   </section>
@@ -69,7 +64,7 @@ export default {
       } else
         return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
     },
-    getRelativeColor() {},
+    getRelativeColor() { },
   },
   watch: {
     '$route.params.boardId': {
@@ -87,11 +82,20 @@ export default {
     socketService.on('board pushed', this.pushedBoard)
     this.closeMenu()
     this.$store.dispatch({ type: 'setUsers' })
+
     // console.log(this.currBoard)
     //   const { boardId } = this.$route.params
     //   const board = await boardService.getById(boardId)
     //   console.log(board);
     //   this.$store.commit({ type: 'setCurrBoard', currBoard: board })
+  },
+  async mounted(){
+    const { boardId } = this.$route.params
+    const boards = await this.$store.dispatch({type:'loadBoards'})
+    const board = boards.find(board => board._id === boardId)
+    const loggedUser = this.$store.getters.loggedUser
+    this.$store.commit({ type: 'setBoardMembersIds', board , loggedUser })
+    console.log(loggedUser);
   },
 }
 </script>

@@ -32,7 +32,13 @@
                     <div class="middle">{{ member.email }}</div>
                     <div class="bottom">Workspace {{ member.status || 'Admin' }}</div>
                 </div>
-                <div class="select-menu">Member <span class="fa"></span></div>
+                <div class="select-menu">Member <span class="fa"></span>
+                <select>
+                    <option value="member">Member</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <!-- <member-status></member-status> -->
+                </div>
 
             </li>
         </ul>
@@ -41,6 +47,7 @@
 </template>
  <script>
 import searchUser from './search.user.vue';
+import memberStatus from './member.status.vue'
 export default {
     name: 'ProjectApp',
     props: {
@@ -48,6 +55,7 @@ export default {
     },
     components: {
         searchUser,
+        memberStatus,
     },
     data() {
         return {
@@ -59,9 +67,9 @@ export default {
         addMember(memberId){
             console.log(memberId);
         },
-        filterUsers() {
+        filterUsers(ev) {
             this.filteredUsers = []
-            const regex = new RegExp(this.userSearch, 'i')
+            const regex = new RegExp(ev.target.value, 'i')
             let filteredUsers = this.users.filter((user) => regex.test(user.username))
             this.$store.commit({ type: 'setFilteredUsers', filteredUsers })
         },

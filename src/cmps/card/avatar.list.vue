@@ -3,7 +3,7 @@
     <div class="avatars">
         <div v-for="member in members" :key="member._id" class="avatar" :style="{ backgroundColor: member.color }">
             {{ member.username.charAt(0).toUpperCase() }}
-            <div :class="{ admin: createdBy === member._id }"></div>
+            <div :class="{ admin: member.isAdmin}"></div>
         </div>
 
     </div>
@@ -14,25 +14,16 @@ export default {
     components: {},
     props: {
         card: Object,
+        // members:Array
     },
     data() {
         return {};
     },
     created() {
-        console.log(this.users);
+        console.log(this.members);
     },
     methods: {},
     computed: {
-
-        // avatarStr() {
-        //     let avatarStr = ''
-        //     this.members.forEach(member => {
-        //         member.username.split(' ').forEach(memberName => {
-        //             avatarStr += memberName.charAt(0)
-        //         })
-        //     })
-        //     return avatarStr
-        // },
         users() {
             return this.$store.getters.users
         },
@@ -43,7 +34,16 @@ export default {
             return this.board.createdBy._id
         },
         members() {
-            const members = [this.board.createdBy]
+            const memeberIds = this.$store.getters.boardMemberIds 
+            const members = [] 
+            this.users.filter(user =>{
+               return memeberIds.forEach(memberId =>{
+                    if (memberId === user._id){
+                        members.push(user)
+                    }
+                })
+            })
+            
             return members
         },
     },

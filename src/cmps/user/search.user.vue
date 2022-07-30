@@ -37,6 +37,7 @@ export default {
             updatedUser.isAdmin = false
             if (!newBoard.members.length || !newBoard.members) newBoard.members = []
             newBoard.members.push(updatedUser)
+            this.$store.commit({ type: 'setBoardMembersIds', board : newBoard , loggedUser :updatedUser })
             this.$store.dispatch({ type: 'saveBoard', board: newBoard })
         },
     },

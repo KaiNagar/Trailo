@@ -551,8 +551,8 @@ export default {
     },
   },
   created() {
+
     this.newChecklist = boardService.getEmptyChecklist()
-    this.$store.commit({ type: 'setCardMembersIds', card: this.card })
     this.isCoverOn = this.isCoverActive
     this.$store.commit({ type: 'setIsCover', status: this.isCoverOn })
     this.$store.commit({
@@ -560,6 +560,12 @@ export default {
       attachments: this.card.attachments,
     })
     this.card.members = []
+  },
+  mounted(){
+    const { cardId } = this.$route.params
+    const card = this.group.cards.find((card) => card.id === cardId)
+    console.log(card);
+    this.$store.commit({ type: 'setCardMembersIds', card })
   },
 }
 </script>

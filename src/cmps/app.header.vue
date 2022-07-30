@@ -67,9 +67,9 @@
 
 
       <div class="add">
-        <button :class="createClass" @click="openMenu('headerCreate')" class="create-board-btn">
-          Create
-        </button>
+        <button :class="createClass" @click="openMenu('headerCreate')" class="create-board-btn"></button>
+
+
         <add-board v-if="menu.headerCreate"></add-board>
       </div>
     </div>
@@ -86,7 +86,7 @@
       </div>
       <!-- ACCOUNT MENU -->
     </div>
-      <menu-account v-if="menu.account"></menu-account>
+    <menu-account v-if="menu.account"></menu-account>
   </section>
 </template>
 <script>

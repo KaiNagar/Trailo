@@ -50,14 +50,14 @@
 
     <template #part-4>
       <div class="title">
-        <header>Board title <span>*</span></header>
+        <header>Board title <span class="req" :class="{red:isRequired}">*</span></header>
         <input type="text" v-model="newBoard.title" />
-        <span>👋 Board title is required</span>
+        <span >👋 Board title is required</span>
       </div>
     </template>
 
     <template #part-5>
-      <button @click="createBoard" class="create">Create</button>
+      <button @click="createBoard" class="create" >Create</button>
     </template>
   </app-modal>
 </template>
@@ -71,6 +71,7 @@ export default {
   },
   data() {
     return {
+      isRequired:false,
       selectedBgImg:
         'https://images.unsplash.com/photo-1568043210943-0e8aac4b9734?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
       selectedBgColor: '#0079bf',
@@ -84,7 +85,9 @@ export default {
       ],
     }
   },
-  created() {},
+  created() {
+    this.isRequired = true
+  },
   methods: {
     selectBgImg(url) {
       this.selectedBgColor = null
@@ -109,6 +112,7 @@ export default {
       this.$store.commit({ type: 'closeMenu' })
     },
     async createBoard() {
+      if(!this.newBoard.title) return this.isRequired = true
       await this.$store.dispatch({ type: 'loadBoards' })
       this.closeMenu()
       this.newBoard.style.bgImg = this.selectedBgImg
