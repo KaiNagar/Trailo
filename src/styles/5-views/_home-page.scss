@@ -27,6 +27,27 @@ button.swal2-confirm.swal2-styled {
   height: 100vh;
   background: linear-gradient(rgb(234, 230, 255), rgb(255, 255, 255));
   header {
+    .logo-home-page{
+      position: relative;
+      display: flex;
+      align-items: center;
+      
+      line-height: 20px;
+      img{
+        margin-top: 3px;
+        width: 21px;
+        border-radius: 3px;
+        
+      }
+      .logo-title{
+        font-size: 2em;
+        font-weight: 700;
+        // font-family:SourceSansPro-Bold;
+        margin-left: 8px;
+        color: rgb(9 30 66);;
+      }
+
+    }
     .login-btn{
       cursor: pointer;
       color: white;
@@ -41,13 +62,13 @@ button.swal2-confirm.swal2-styled {
       }
     }
     transition: all 250ms ease-out 0s;
-    background-color: white;
     -webkit-box-align: center;
     align-items: center;
     display: flex;
-    height: 70px;
+    height: 68px;
     -webkit-box-pack: justify;
     justify-content: space-between;
+    background-color: rgb(244 244 244);
     z-index: 100;
     padding: 0 1em;
     &:hover {

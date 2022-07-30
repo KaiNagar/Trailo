@@ -58,11 +58,11 @@ const store = createStore({
   },
   mutations: {
     setCardMembersIds(state, { card }) {
-      state.cardMembersIds = []
-      card.members = card.members|| []
-      card.members.forEach((member) => {
-        state.cardMembersIds.push(member._id)
-      })
+      // state.cardMembersIds = []
+      // card.members = card.members|| []
+      // card.members.forEach((member) => {
+      //   state.cardMembersIds.push(member._id)
+      // })
     },
     toggleMember(state, { memberId }) {
       const idx = state.card.findIndex((member) => {

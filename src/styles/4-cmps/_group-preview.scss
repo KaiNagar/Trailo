@@ -202,5 +202,12 @@
   }
 }
 
+.v-enter-active{
+  transition: opacity 0.3s ease;
+}
 
+.v-enter-from
+ {
+  opacity: 0;
+}
 

@@ -4,15 +4,17 @@
       <div class="g-header">
         <div @click="onTitleEditable" class="edit-group-title">
           <span v-if="!isTitleEditable">{{ group.title }}</span>
-          <textarea
-            v-if="isTitleEditable"
-            @keydown.enter.prevent="updateGroupTitle"
-            v-model="group.title"
-            v-focus
-            @blur="isTitleEditable = false"
-            ref="contentTextArea"
-            id="contentTextArea"
-          ></textarea>
+          <Transition>
+            <textarea
+              v-if="isTitleEditable"
+              @keydown.enter.prevent="updateGroupTitle"
+              v-model="group.title"
+              v-focus
+              @blur="isTitleEditable = false"
+              ref="contentTextArea"
+              id="contentTextArea"
+            ></textarea>
+          </Transition>
         </div>
 
         <div class="g-menu fa">

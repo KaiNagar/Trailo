@@ -1,10 +1,7 @@
 <template>
-  <section
-    :style="{ backgroundColor: headerColor }"
-    class="board-header full flex space-between"
-  >
+  <section :style="{ backgroundColor: headerColor }" class="board-header full flex space-between">
     <nav>
-      <button class="board-btn">
+      <!-- <button class="board-btn">
         <span class="bars"
           ><img src="../../assets/icons/icons-bar-chart.png" alt=""
         /></span>
@@ -12,28 +9,33 @@
         <span  class="img"
           ><img src="../../assets/icons/icons-down.png" alt=""
         /></span>
-      </button>
+      </button> -->
 
       <h1 v-if="!editBoardTitle" class="board-header-title" @click="openEditTitle">
         {{ currBoard.title }}
       </h1>
-      <input ref="editBoardRef" @blur="saveBoardTitle" v-else type="text" v-model="currBoard.title"
-        class="edit-board-title" />
+      <input
+        ref="editBoardRef"
+        @blur="saveBoardTitle"
+        v-else
+        type="text"
+        v-model="currBoard.title"
+        class="edit-board-title"
+      />
 
       <button @click="toggleStarBoard" class="board-header-star">
         <span :style="isStarred" class="star-icon"></span>
       </button>
-      <span class="divider"></span>
+      <!-- <span class="divider"></span>
       <button class="board-header-privet">
         <span class="privet-icon"></span> Private
-      </button>
+      </button> -->
     </nav>
 
     <!-- MEMBERS -->
     <avatar-list @users="users"></avatar-list>
     <button @click="isShareBoard = true">share</button>
     <share-board v-if="isShareBoard" @close="isShareBoard = false"></share-board>
-
 
     <div class="board-header-right-btns">
       <button class="filter-btn">
@@ -89,10 +91,19 @@ import avatarList from '../card/avatar.list.vue'
 import menuMembers from '../menu/menu.members.vue'
 import shareBoard from '../user/share.board.vue'
 
-
 export default {
   name: 'boardHeader',
-  components: { boardFilter, shareBoard, menuMembers, avatarList, showMore, styleMenu, photoMenu, colorMenu, membersList },
+  components: {
+    boardFilter,
+    shareBoard,
+    menuMembers,
+    avatarList,
+    showMore,
+    styleMenu,
+    photoMenu,
+    colorMenu,
+    membersList,
+  },
   data() {
     return {
       filterMenu: false,
@@ -103,7 +114,7 @@ export default {
       isPhotosMenu: true,
       isColorsMenu: false,
       headerColor: '',
-      isShareBoard:false,
+      isShareBoard: false,
     }
   },
   methods: {
@@ -221,7 +232,6 @@ export default {
     menu() {
       return this.$store.getters.menu
     },
-
   },
   created() {
     this.headerStyle
