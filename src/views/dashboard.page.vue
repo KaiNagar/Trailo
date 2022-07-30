@@ -2,6 +2,7 @@
   <section class="dashboard-page">
     <div class="dashboard-screen" @click="closeDashboard"></div>
     <div class="dashboard-info">
+      <h1 class="back" @click="closeDashboard">Back to board</h1>
       <div class="cards-general-info">
         <div class="dashboard-tab cards-count flex">
           <div class="flex column">
@@ -55,14 +56,25 @@
         </div>
       </div>
       <div id="dashboard-bars">
-        <div class="cards-per-label">
+        <div class="bar">
           <BarChart :height="220" :chartData="cardsData" />
         </div>
-        <div class="cards-per-member">
+        <div class="bar">
+          <BarChart :height="220" :chartData="cardsLabelData" />
+        </div>
+        <div class="bar">
+          <BarChart :height="220" :chartData="cardsPerGroup" />
+        </div>
+      </div>
+      <div id="dashboard-bars">
+        <div class="bar">
+          <BarChart :height="220" :chartData="cardsPerMember" />
+        </div>
+        <div class="bar">
           <BarChart :height="220" :chartData="cardsData" />
         </div>
-        <div class="cards-per-group">
-          <BarChart :height="220" cssClasses="groups-bar" :chartData="cardsPerGroup" />
+        <div class="bar">
+          <PolarAreaChart :height="220" :chartData="todosLeft" />
         </div>
       </div>
     </div>
@@ -70,7 +82,7 @@
 </template>
 
 <script>
-import { DoughnutChart, BarChart } from 'vue-chart-3'
+import { DoughnutChart, BarChart, PolarAreaChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
 
 import 'vue3-circle-progress/dist/circle-progress.css'
@@ -79,37 +91,79 @@ import CircleProgress from 'vue3-circle-progress'
 Chart.register(...registerables)
 export default {
   name: 'Dashboard',
-  components: { DoughnutChart, CircleProgress, BarChart },
+  components: { DoughnutChart, CircleProgress, BarChart, PolarAreaChart },
   data() {
     return {
       allCards: [],
+      options: {
+        plugins: {
+          title: {
+            color: '#fff',
+            display: false,
+          },
+        },
+      },
     }
   },
   methods: {
     closeDashboard() {
       this.$router.push(`/board/${this.board._id}`)
     },
-    // cardsLabelsSetup() {
-    //   const labels = this.board.labels.map(label=>{
-    //     return label.title
-    //   })
-    //   let labelsInfo = {}
-    //   this.allCards.forEach((card) => {
-    //     card.labelIds.forEach((id) => {
-    //       if (!labelsInfo[id]) labelsInfo[id] = 0
-    //       labelsInfo[id]++
-    //     })
-    //   })
-    //   console.log(labelsInfo)
-    // },
   },
-
   computed: {
+    todosLeft() {
+      let allTodos = []
+      this.allCards.forEach((card) =>
+        card.checklists.forEach((checklist) =>
+          allTodos.push(...checklist.todos),
+        ),
+      )
+      const done = allTodos.filter((t) => t.isDone)
+      const undone = allTodos.filter((t) => t.isDone === false)
+      return {
+        labels: ['Todos checked', 'Todos unchecked'],
+        datasets: [
+          {
+            label: 'Todos Left',
+            data: [done.length, undone.length],
+            backgroundColor: ['#61BD4F', '#eb5a46'],
+          },
+        ],
+      }
+    },
+    cardsPerMember() {
+      // const labels = this.board.members.map((m) => m.username)
+      // let membersCount = {}
+      // this.board.members.forEach((m) => {
+      //   if (!membersCount[m._id]) membersCount[m._id] = 0
+      // })
+      // this.allCards.forEach((card) => {
+      //   card.members.forEach((m) => {
+      //     membersCount[m._id]++
+      //   })
+      // })
+      // let data = []
+      // for (var key in membersCount) {
+      //   data.push(membersCount[key])
+      // }
+      // return {
+      //   labels,
+      //   datasets: [
+      //     {
+      //       label: 'Cards per member',
+      //       data,
+      //       backgroundColor: ['#55b2f6'],
+      //       barThickness: 35,
+      //     },
+      //   ],
+      // }
+    },
     cardsData() {
       return {
         labels: ['Completed', 'Due soon', 'Over due'],
         datasets: [
           {
+            label: 'Cards per due date',
             data: [this.completedCards, this.dueSoonCards, this.overDueCards],
             backgroundColor: ['#61BD4F', '#f2d600', '#eb5a46'],
           },
@@ -127,24 +181,44 @@ export default {
         labels,
         datasets: [
           {
+            label: 'Cards per list',
             data,
             backgroundColor: ['#55b2f6'],
+            barThickness: 35,
           },
         ],
       }
     },
-    // cardsLabelData() {
+    cardsLabelData() {
+      const labels = this.board.labels.map((label) => {
+        return label.title ? label.title : 'No title'
+      })
+      const colors = this.board.labels.map((label) => label.color)
+      let labelsCount = {}
+      this.board.labels.forEach((label) => {
+        if (!labelsCount[label.id]) labelsCount[label.id] = 0
+      })
+      this.allCards.forEach((card) => {
+        card.labelIds.forEach((id) => {
+          labelsCount[id]++
+        })
+      })
+      let data = []
+      for (var key in labelsCount) {
+        data.push(labelsCount[key])
+      }
+      return {
+        labels,
+        datasets: [
+          {
+            label: 'Cards per label',
+            data,
+            backgroundColor: colors,
+          },
+        ],
+      }
+    },
 
-    // return {
-    //   labels,
-    //   datasets: [
-    //     {
-    //       data: [],
-    //       backgroundColor: ['#55b2f6'],
-    //     },
-    //   ],
-    // }
-    // },
     board() {
       return this.$store.getters.currBoard
     },
@@ -154,6 +228,7 @@ export default {
     dueSoonCards() {
       const now = new Date()
       const cardsWithDates = this.allCards.filter((card) => card.dueDate)
+      if (!cardsWithDates) return 0
       const dueSoon = cardsWithDates.filter((card) => {
         return (
           card.dueDate.timestamp - now > 0 &&
@@ -171,6 +246,7 @@ export default {
     overDueCards() {
       const now = new Date()
       const cardsWithDates = this.allCards.filter((card) => card.dueDate)
+      if (!cardsWithDates) return 0
       const overDue = cardsWithDates.filter((card) => {
         return card.dueDate.timestamp - now < 0 && card.dueDate.isDone === false
       })
@@ -183,6 +259,8 @@ export default {
     },
     completedCards() {
       const cardsWithDates = this.allCards.filter((card) => card.dueDate)
+      if (!cardsWithDates) return 0
+
       const done = cardsWithDates.filter((card) => card.dueDate.isDone)
       return done.length
     },
@@ -191,6 +269,9 @@ export default {
     this.board.groups.forEach((group) => {
       this.allCards.push(...group.cards)
     })
+    Chart.defaults.borderColor = '#fff'
+    Chart.defaults.color = '#fff'
+    // Chart.defaults.plugins.title.align = 'left'
   },
 }
 </script>
