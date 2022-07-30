@@ -61,7 +61,6 @@ const store = createStore({
   },
   mutations: {
     setCardMembersIds(state, { card }) {
-      console.log(card);
       state.cardMembersIds = []
       card.members = card.members|| []
       if(!card.members.length) return
