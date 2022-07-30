@@ -87,5 +87,13 @@ export default {
     this.closeMenu()
     this.$store.dispatch({ type: 'setUsers' })
   },
+  async mounted(){
+    const { boardId } = this.$route.params
+    const boards = await this.$store.dispatch({type:'loadBoards'})
+    const board = boards.find(board => board._id === boardId)
+    const loggedUser = this.$store.getters.loggedUser
+    this.$store.commit({ type: 'setBoardMembersIds', board  })
+    console.log(loggedUser);
+  },
 }
 </script>

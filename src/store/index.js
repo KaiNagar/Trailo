@@ -17,6 +17,7 @@ const store = createStore({
     currCard: null,
     isLabelsOpen: null,
     cardMembersIds: [],
+    boardMembersIds:[],
   },
   getters: {
     isCover({ isCover }) {
@@ -54,14 +55,32 @@ const store = createStore({
     cardMemberIds({ cardMembersIds }) {
       return cardMembersIds
     },
+    boardMemberIds({ boardMembersIds }) {
+      return boardMembersIds
+    },
   },
   mutations: {
     setCardMembersIds(state, { card }) {
+      console.log(card);
       state.cardMembersIds = []
-      card.members = card.members || []
+      card.members = card.members|| []
+      if(!card.members.length) return
+      console.log(card.members);
       card.members.forEach((member) => {
         state.cardMembersIds.push(member._id)
       })
+    },
+    setBoardMembersIds(state, { board, user }) {
+      state.boardMembersIds = []
+      board.members = board.members || []
+      board.members.forEach((member) => {
+        state.boardMembersIds.push(member._id)
+      })
+      const loggedUser = JSON.parse(sessionStorage.getItem("user"))
+      if(!state.boardMembersIds.includes(loggedUser._id)){
+        state.boardMembersIds.push(loggedUser._id)
+      }
+      console.log(state.boardMembersIds);
     },
     toggleMember(state, { memberId }) {
       const idx = state.card.findIndex((member) => {

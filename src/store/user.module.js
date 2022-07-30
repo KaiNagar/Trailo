@@ -21,6 +21,9 @@ export const userModule = {
     setFilteredUsers(state ,{filteredUsers}){
       state.filteredUsers = filteredUsers
     },
+    removeBoardMember(state, {memberId}){
+      
+    },
   },
   // ACTIONS
   actions: {

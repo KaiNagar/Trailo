@@ -8,10 +8,16 @@
         </header>
 
         <div class="search-container">
-            <input @click.stop="openMenu('searchUser')" @input="filterUsers" class="input" type="search" placeholder="Email address or name"
-              >
-            <search-user v-if="menu.searchUser" ></search-user>
-            <div class="select-menu">Member <span class="fa"></span></div>
+            <input @click.stop="openMenu('searchUser')" @input="filterUsers" class="input" type="search"
+                placeholder="Email address or name">
+            <search-user v-if="menu.searchUser" @addmember="addMember"></search-user>
+            <div class="select-menu">{{ newMemberStatus }} <span class="fa"></span>
+
+                <select @change="changeNewMemberStatus">
+                    <option value="member">Member</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
         </div>
 
         <div class="wide btn ">Share</div>
@@ -25,14 +31,21 @@
                 </div>
             </li>
 
-            <li v-for="member in members" :key="member._id" >
+            <li v-for="member in members" :key="member._id">
                 <div class="icon avatar">{{ member.username.slice(0, 1).toUpperCase() }}</div>
                 <div class="content">
-                    <div class="top">{{ member.username }}</div>
+                    <div class="top">{{ member.username }} <span v-if="member._id === loggedId">(you)</span> </div>
                     <div class="middle">{{ member.email }}</div>
                     <div class="bottom">Workspace {{ member.status || 'Admin' }}</div>
                 </div>
-                <div class="select-menu">Member <span class="fa"></span></div>
+                <div class="select-menu">{{ memberStatus }}<span class="fa"></span>
+                    <select @change="changeMemberStatus($event, member._id)">
+                        <option value="member">Member</option>
+                        <option value="admin">Admin</option>
+                        <option value="remove" v-if="member._id !== loggedId">Remove</option>
+                    </select>
+                    <!-- <member-status></member-status> -->
+                </div>
 
             </li>
         </ul>
@@ -44,24 +57,59 @@ import searchUser from './search.user.vue';
 export default {
     name: 'ProjectApp',
     props: {
-       
+
     },
     components: {
         searchUser,
+
     },
     data() {
         return {
-            filteredUsers: []
+            filteredUsers: [],
+            newMemberStatus: 'Member',
+            memberStatus: 'Member',
         };
     },
     created() { },
     methods: {
-        addMember(memberId){
-            console.log(memberId);
+        changeNewMemberStatus(ev) {
+            this.newMemberStatus = ev.target.value.charAt(0).toUpperCase() + ev.target.value.slice(1, ev.target.value.length)
         },
-        filterUsers() {
+        changeMemberStatus(ev, memberId) {
+            const newBoard = JSON.parse(JSON.stringify(this.board))
+            const idx = newBoard.members.findIndex(member => member._id === memberId)
+            if (ev.target.value === 'remove') {
+                newBoard.members.splice(idx, 1)
+            } else {
+                this.memberStatus = ev.target.value.charAt(0).toUpperCase() + ev.target.value.slice(1, ev.target.value.length)
+                const userToUpdate = newBoard.members[idx]
+                console.log(userToUpdate);
+                // userToUpdate.isAdmin = this.memberStatus
+            }
+            this.$store.dispatch({ type: 'saveBoard', board: newBoard })
+            this.$store.commit({ type: 'setBoardMembersIds', board: newBoard })
+        },
+        addMember(updatedUser) {
+            if (this.boardMemberIds.includes(updatedUser._id)) return
+            if (this.newMemberStatus === 'Admin') {
+                updatedUser.isAdmin = true
+            } else{
+                updatedUser.isAdmin = false
+            }
+            console.log(updatedUser);
+            // this.newMemberStatus = 'Member'
+            const newBoard = JSON.parse(JSON.stringify(this.board))
+            if (!newBoard.members.length || !newBoard.members) newBoard.members = []
+            newBoard.members.push(updatedUser)
+            this.$store.commit({ type: 'setBoardMembersIds', board: newBoard })
+            this.$store.dispatch({ type: 'saveBoard', board: newBoard })
+        },
+        editMember() {
+
+        },
+        filterUsers(ev) {
             this.filteredUsers = []
-            const regex = new RegExp(this.userSearch, 'i')
+            const regex = new RegExp(ev.target.value, 'i')
             let filteredUsers = this.users.filter((user) => regex.test(user.username))
             this.$store.commit({ type: 'setFilteredUsers', filteredUsers })
         },
@@ -70,6 +118,9 @@ export default {
         },
         closeMenu() {
             this.$store.commit({ type: 'closeMenu' })
+        },
+        loggedUser() {
+
         },
     },
     computed: {
@@ -83,23 +134,30 @@ export default {
             return this.board.createdBy._id
         },
         members() {
-            const admin = JSON.parse(JSON.stringify(this.board.createdBy))            
+            const admin = JSON.parse(JSON.stringify(this.board.createdBy))
             const members = [this.board.createdBy]
             const board = JSON.parse(JSON.stringify(this.board))
             let boardMemberIds = []
-            board.members.forEach(member=>{
+            board.members.forEach(member => {
                 boardMemberIds.push(member._id)
             })
-            if(!boardMemberIds.includes(this.board.createdBy._id)){
+            if (!boardMemberIds.includes(this.board.createdBy._id)) {
                 admin.isAdmin = true
                 board.members.push(admin)
-                
+
             }
+            this.$store.dispatch({ type: 'saveBoard', board })
             return board.members
         },
         menu() {
             return this.$store.getters.menu
         },
+        loggedId() {
+            return this.$store.getters.loggedUser._id
+        },
+        boardMemberIds() {
+            return this.$store.getters.boardMemberIds
+        }
 
     },
     unmounted() { },

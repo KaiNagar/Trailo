@@ -21,9 +21,11 @@ export default {
     emits:['sendtosave','closemenu'],
     components: {
         menuMembers,
+        
     },
     props: {
-        card: Object
+        card: Object,
+        members:Array,
     },
     data() {
         return {};

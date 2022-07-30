@@ -102,7 +102,7 @@
           @click="openMenu('headerCreate')"
           class="create-board-btn"
         >
-          Create
+          
         </button>
         <add-board v-if="menu.headerCreate"></add-board>
       </div>

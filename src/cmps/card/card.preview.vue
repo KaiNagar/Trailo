@@ -98,13 +98,15 @@
 
     <!-- MEMBERS LIST -->
     <!-- <div class="members-list card-preview">
-      <avatar-list :card="card"></avatar-list>
-    </div> -->
+      </div> -->
+      <avatar-list  :members="cardMembers"></avatar-list>
+      <!-- <card-members :card="card"></card-members> -->
   </section>
 </template>
 <script>
 import membersList from '../members.list.vue'
 import avatarList from './avatar.list.vue'
+import cardMembers from '../user/card-members.vue'
 export default {
   name: 'cardPreview',
   props: {
@@ -114,6 +116,7 @@ export default {
   components: {
     membersList,
     avatarList,
+    cardMembers,
   },
   data() {
     return {
@@ -261,6 +264,9 @@ export default {
     isCardLabels() {
       if (this.card.labelIds.length) return true
       return false
+    },
+    cardMembers(){
+      return  this.card.members
     },
   },
   created() {

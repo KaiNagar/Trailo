@@ -1,11 +1,12 @@
 .modal {
-  
+
   .background {
     width: 200px;
     height: 120px;
     background-color: green;
     margin: auto;
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
     div {
       margin: 0 auto;
       height: 100%;
@@ -85,17 +86,29 @@
   }
 
   .title {
+    header{
+      .req{
+        &.red{
+          color: red;
+        }
+      }
+    }
     input {
       margin-bottom: 7px;
+      
       span {
+        border: 1px black solid;
         margin: 0;
         color: red;
+
       }
     }
 
     span {
       // border: 1px black solid;
       margin-bottom: 7px;
+      font-weight: 400;
+      
     }
   }
   button.create {
@@ -114,5 +127,6 @@
     &:hover {
       background-color: rgba(128, 128, 128, 0.281);
     }
+    
   }
 }
