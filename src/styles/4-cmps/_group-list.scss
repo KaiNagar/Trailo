@@ -44,7 +44,7 @@
      }
 
     .new-group {
-      background-color: rgb(103 103 103 / 30%);
+      background: #bebebf5e;
       height: 40px;
     line-height: 3em;
     margin: 0px 8px 0px 4px;
@@ -52,8 +52,9 @@
     padding-inline-start: 0.5em;
     position: relative;
     cursor: pointer;
-      &:hover{
-        background-color: #00000030;
+    &:hover{
+      background-color: #d2d2d27e;
+      transition: background 90ms ease-in,opacity 40ms ease-in;
       }
       .g-list-title{
         line-height: 20px;
@@ -80,7 +81,7 @@
     background-color: #fff;
     width: 100%;
     padding: 8px 9px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     box-shadow: 0 0 0 2px rgb(3 110 173 / 76%);
     border: 1px solid transparent;
     border-radius: 1px;
@@ -104,3 +105,19 @@
       font-size: 1.5rem;
   }
 }
+// .slide-fade-enter-active{
+//   transition: all 0.6s ease-out;
+//   // transition: margin 85ms ease-in,height 85ms ease-in;
+// }
+
+// .slide-fade-leave-active{
+//   transition: none;
+// }
+// .slide-fade-leave-to{
+//   transform: none;
+
+// }
+// .slide-fade-enter-from{
+//   transform: translateY(-10px);
+//   opacity: 0;
+// }

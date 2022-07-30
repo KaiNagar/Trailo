@@ -3,8 +3,14 @@ z
   <section v-if="currBoard">
     <div class="group-page-container" :style="onBoardBgColor">
       <board-header />
-      <group-list :groups="currBoard.groups" @updateGroup="updateGroup" @addGroup="addGroup" @removeGroup="removeGroup"
-        @removeCard="removeCard" />
+
+      <group-list
+        :groups="currBoard.groups"
+        @updateGroup="updateGroup"
+        @addGroup="addGroup"
+        @removeGroup="removeGroup"
+        @removeCard="removeCard"
+      />
     </div>
     <router-view></router-view>
   </section>
@@ -61,8 +67,7 @@ export default {
     onBoardBgColor() {
       if (this.currBoard.style.bgColor) {
         return { backgroundColor: this.currBoard.style.bgColor }
-      } else
-        return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
+      } else return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
     },
     getRelativeColor() { },
   },
@@ -72,7 +77,7 @@ export default {
         const { boardId } = this.$route.params
         const board = await boardService.getById(boardId)
         socketService.emit('board new-enter', boardId)
-        // console.log('board', board)
+        console.log('board', board)
         this.$store.commit({ type: 'setCurrBoard', currBoard: board })
       },
       immediate: true,
@@ -82,19 +87,13 @@ export default {
     socketService.on('board pushed', this.pushedBoard)
     this.closeMenu()
     this.$store.dispatch({ type: 'setUsers' })
-
-    // console.log(this.currBoard)
-    //   const { boardId } = this.$route.params
-    //   const board = await boardService.getById(boardId)
-    //   console.log(board);
-    //   this.$store.commit({ type: 'setCurrBoard', currBoard: board })
   },
   async mounted(){
     const { boardId } = this.$route.params
     const boards = await this.$store.dispatch({type:'loadBoards'})
     const board = boards.find(board => board._id === boardId)
     const loggedUser = this.$store.getters.loggedUser
-    this.$store.commit({ type: 'setBoardMembersIds', board , loggedUser })
+    this.$store.commit({ type: 'setBoardMembersIds', board  })
     console.log(loggedUser);
   },
 }

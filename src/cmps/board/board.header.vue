@@ -1,10 +1,17 @@
 <template>
-  <section class="board-header full flex space-between">
+  <section
+    :style="{ backgroundColor: headerColor }"
+    class="board-header full flex space-between"
+  >
     <nav>
       <button class="board-btn">
-        <span class="bars"><img src="../../assets/icons/icons-bar-chart.png" alt="" /></span>
-        <span class="txt">Board</span>
-        <span class="img"><img src="../../assets/icons/icons-down.png" alt="" /></span>
+        <span class="bars"
+          ><img src="../../assets/icons/icons-bar-chart.png" alt=""
+        /></span>
+        <span  class="txt">Board</span>
+        <span  class="img"
+          ><img src="../../assets/icons/icons-down.png" alt=""
+        /></span>
       </button>
 
       <h1 v-if="!editBoardTitle" class="board-header-title" @click="openEditTitle">
@@ -40,15 +47,31 @@
           <span class="menu-icon"></span>
           <span class="txt">Show menu</span>
         </button>
-        <show-more @openStyleMenu="openStyleMenu" @closeMoreMenu="hideMenu" :style="setMenuMore" />
-        <style-menu @backToMenu="backToMenuFromStyle" @openColorsMenu="openColorsMenu" @openImgsMenu="openImgsMenu"
-          @closeMoreMenu="hideMenu" :style="setMenuStyle" />
-        <color-menu @backToStyle="backToStyleFromColors" @setBgColor="setBgColor" :style="setMenuColors"
-          @closeMoreMenu="hideMenu" />
-        <photo-menu @closeMoreMenu="hideMenu" @backToStyle="backToStyleFromImgs" @setBgImg="setBgImg"
-          :style="setMenuPhotos" />
-
-
+        <show-more
+          @openStyleMenu="openStyleMenu"
+          @openDashboard="openDashboard"
+          @closeMoreMenu="hideMenu"
+          :style="setMenuMore"
+        />
+        <style-menu
+          @backToMenu="backToMenuFromStyle"
+          @openColorsMenu="openColorsMenu"
+          @openImgsMenu="openImgsMenu"
+          @closeMoreMenu="hideMenu"
+          :style="setMenuStyle"
+        />
+        <color-menu
+          @backToStyle="backToStyleFromColors"
+          @setBgColor="setBgColor"
+          :style="setMenuColors"
+          @closeMoreMenu="hideMenu"
+        />
+        <photo-menu
+          @closeMoreMenu="hideMenu"
+          @backToStyle="backToStyleFromImgs"
+          @setBgImg="setBgImg"
+          :style="setMenuPhotos"
+        />
       </div>
     </div>
   </section>
@@ -60,6 +83,7 @@ import showMore from '../menu/show.more.vue'
 import styleMenu from '../menu/style.menu.vue'
 import colorMenu from '../menu/color.menu.vue'
 import photoMenu from '../menu/photo.menu.vue'
+import { FastAverageColor } from 'fast-average-color'
 import membersList from '../members.list.vue'
 import avatarList from '../card/avatar.list.vue'
 import menuMembers from '../menu/menu.members.vue'
@@ -78,6 +102,7 @@ export default {
       isStyleMenu: false,
       isPhotosMenu: true,
       isColorsMenu: false,
+      headerColor: '',
       isShareBoard:false,
     }
   },
@@ -97,6 +122,10 @@ export default {
     backToStyleFromImgs() {
       this.isStyleMenu = true
       this.isPhotosMenu = false
+    },
+    openDashboard() {
+      this.hideMenu()
+      this.$router.push(`/board/${this.stateBoard._id}/dashboard`)
     },
     openImgsMenu() {
       this.isStyleMenu = false
@@ -173,12 +202,29 @@ export default {
     stateBoard() {
       return this.$store.getters.currBoard
     },
+    headerStyle() {
+      if (!this.stateBoard.style || !this.stateBoard.style.bgImg)
+        return (this.headerColor = '#ffffff82')
+      const imgUrl = this.stateBoard.style.bgImg
+      const fac = new FastAverageColor()
+      fac
+        .getColorAsync(imgUrl)
+        .then((color) => {
+          if (color.isDark) this.headerColor = '#ffffff82'
+          else this.headerColor = ''
+          return
+        })
+        .catch((e) => {
+          return '#ffffff82'
+        })
+    },
     menu() {
       return this.$store.getters.menu
     },
 
   },
   created() {
+    this.headerStyle
     this.currBoard = JSON.parse(JSON.stringify(this.stateBoard))
     this.hideMenu()
   },

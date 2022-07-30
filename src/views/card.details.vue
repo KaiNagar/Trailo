@@ -9,10 +9,15 @@
 
       <div
         v-if="isCoverActive"
+        ref="imgEl"
         :style="cardCoverStyle"
         :class="cardCoverClass"
         class="card-cover"
       >
+        <div
+          :style="{ backgroundColor: coverColorComputed }"
+          class="cover-screen"
+        ></div>
         <div class="cover-menu-container">
           <div
             class="cover-menu-btn flex align-center"
@@ -63,11 +68,12 @@
                 <!-- MEMBERS LIST PREVIEW -->
                 <div v-if="isMembers" class="members-list">
                   <header>Members</header>
-                  <members-list
+                  <!-- <members-list
                     :card="card"
                     @sendtosave="sendToSave"
                     @closemenu="closeMenu"
-                  />
+                  /> -->
+                  <avatar-list :members="cardMembers"></avatar-list>
                 </div>
 
                 <div v-if="isLabels" class="labels-preview-container">
@@ -232,6 +238,8 @@ import { Container, Draggable } from 'vue3-smooth-dnd'
 import menuCover from '../cmps/menu.cover.vue'
 import menuMembers from '../cmps/menu/menu.members.vue'
 import membersList from '../cmps/members.list.vue'
+import { FastAverageColor } from 'fast-average-color'
+import avatarList from '../cmps/card/avatar.list.vue'
 export default {
   name: 'cardDetails',
   components: {
@@ -248,6 +256,7 @@ export default {
     menuCover,
     menuMembers,
     membersList,
+    avatarList,
   },
   data() {
     return {
@@ -267,6 +276,7 @@ export default {
         showOnTop: true,
       },
       leavingCIdx: null,
+      coverColor:''
     }
   },
   methods: {
@@ -366,6 +376,7 @@ export default {
     },
 
     sendToSave(newCard) {
+      this.coverColor = this.coverRelativeColor
       const pos = this.getCurrPos
       this.board.groups[pos.groupIdx].cards[pos.cardIdx] = newCard
       this.$store.dispatch({
@@ -435,6 +446,7 @@ export default {
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
+    
   },
   computed: {
     isLabels() {
@@ -549,9 +561,28 @@ export default {
     isCover() {
       return this.$store.getters.isCover
     },
+    coverRelativeColor() {
+      if (!this.card.style.bgImg) {
+        return
+      }
+      if (!this.card.style || !this.card.style.bgImg) return
+      const imgUrl = this.card.style.bgImg
+      const fac = new FastAverageColor()
+      fac
+        .getColorAsync(imgUrl)
+        .then((color) => {
+          return this.coverColor =  color.hexa
+        })
+        .catch((e) => {
+          return
+        })
+    },
+    coverColorComputed(){
+      return this.coverColor
+    }
   },
   created() {
-
+    this.coverColor = this.coverRelativeColor
     this.newChecklist = boardService.getEmptyChecklist()
     this.isCoverOn = this.isCoverActive
     this.$store.commit({ type: 'setIsCover', status: this.isCoverOn })

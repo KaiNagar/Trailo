@@ -13,8 +13,13 @@
     >
       <Draggable v-for="(card, idx) in cards" :key="card.id">
         <div>
-          <card-preview @click="openCard(card.id)" :card="card" :idx="idx" @saveCard="saveCard"
-            @removeCard="removeCard" />
+          <card-preview
+            @click="openCard(card.id)"
+            :card="card"
+            :idx="idx"
+            @saveCard="saveCard"
+            @removeCard="removeCard"
+          />
         </div>
       </Draggable>
     </Container>
@@ -37,6 +42,7 @@ export default {
         className: 'drop-preview',
         animationDuration: '150',
         showOnTop: true,
+        newCard: {},
       },
       showCardMenu: false,
     }
@@ -91,6 +97,7 @@ export default {
     groupIdx() {
       return this.board.groups.findIndex((group) => group.id === this.group.id)
     },
+    
   },
 }
 </script>
