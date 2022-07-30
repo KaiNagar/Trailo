@@ -1,5 +1,5 @@
 <template>
-  <section  class="board-header full flex space-between">
+  <section :style="{ backgroundColor: headerColor }" class="board-header full flex space-between">
     <nav>
       <button class="board-btn">
         <span class="bars"

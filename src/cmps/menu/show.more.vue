@@ -50,6 +50,8 @@ export default {
       return JSON.parse(JSON.stringify(this.$store.getters.currBoard))
     },
   },
-  created() {},
+  created() {
+    console.log(this.board.activities);
+  },
 }
 </script>

@@ -145,6 +145,10 @@ const store = createStore({
       }
       state.starredBoard = board
     },
+    addActivity(state,{activity}){
+      state.currBoard.activities.push(activity)
+
+    }
   },
   actions: {
     async loadBoards({ commit }) {
@@ -176,6 +180,12 @@ const store = createStore({
       const newBoard = await boardService.save(board)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
     },
+    // async addActivity({commit,state},{activity}){
+    //   const board = JSON.parse(JSON.stringify(state.currBoard))
+    //   board.activities.push(activity)
+    //   const newBoard = await boardService.save(board)
+    //   commit({ type: 'setCurrBoard', currBoard: newBoard })
+    // }
   },
   modules: {
     menuModule,
