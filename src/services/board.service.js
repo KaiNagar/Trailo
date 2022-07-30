@@ -12,6 +12,7 @@ export const boardService = {
   getEmptyChecklist,
   getEmptyTodo,
   getEmptyLabel,
+  getEmptyActivity,
 }
 
 async function query(filterBy = null) {
@@ -75,6 +76,16 @@ function getEmptyChecklist() {
   }
 }
 
+function getEmptyActivity(){
+  return {
+    id:_makeId(),
+    txt:'',
+    createdAt: new Date(),
+    byMember:{},
+    card:{}
+  }
+}
+
 function getEmptyBoard() {
   return {
     title: '',
@@ -109,6 +120,7 @@ function getEmptyBoard() {
         cards: [],
       },
     ],
+    activities:[],
   }
 }
 
