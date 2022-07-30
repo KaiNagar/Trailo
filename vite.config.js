@@ -13,6 +13,7 @@ export default defineConfig({
   },
   build:{
     outDir:'../backend/trailo-backend/public',
-    emptyOutDir:true
+    emptyOutDir:true,
+    assetsDir: './dist'
   }
 })
