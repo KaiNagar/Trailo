@@ -69,7 +69,6 @@ export default {
         return { backgroundColor: this.currBoard.style.bgColor }
       } else return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
     },
-    getRelativeColor() {},
   },
   watch: {
     '$route.params.boardId': {

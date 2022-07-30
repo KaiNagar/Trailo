@@ -1,20 +1,24 @@
 <template>
   <section @click="setCurrGroup" class="card-preview">
-    <div v-if="card.style.bgColor || card.style.bgImg" class="card-preview-cover">
+    <div
+      v-if="card.style.bgColor || card.style.bgImg"
+      class="card-preview-cover"
+    >
       <div :class="showCardCoverClass" :style="showCardCover"></div>
       <button class="edit-icon-btn"><span class="edit-icon"></span></button>
     </div>
     <div class="card-preview-details">
       <div v-if="isCardLabels" class="card-preview-labels">
-        <div class="show-labels-container" v-if="this.$store.getters.isLabelsOpen">
+        <div
+          class="show-labels-container"
+          v-if="this.$store.getters.isLabelsOpen"
+        >
           <span
-            @mouseenter="isLabelHover = true"
-            @mouseleave="isLabelHover = false"
             class="label-preview-show"
             @click.stop="toggleLabels"
             v-for="label in cardLabels"
             :style="{
-              backgroundColor: isLabelHover ? LightenDarkenColor(label.color) : label.color,
+              backgroundColor: label.color,
             }"
             :key="label.id"
             >{{ label.title }}</span
@@ -23,13 +27,11 @@
 
         <div v-else class="hide-labels-container flex">
           <span
-            @mouseenter="isLabelHover = true"
-            @mouseleave="isLabelHover = false"
-            class="label-preview-show label-preview-hide"
+            class="label-preview-hide"
             @click.stop="toggleLabels"
             v-for="label in cardLabels"
             :style="{
-              backgroundColor: isLabelHover ? LightenDarkenColor(label.color) : label.color,
+              backgroundColor: label.color,
             }"
             :key="label.id"
           ></span>
@@ -54,7 +56,11 @@
           class="duedate-preview"
           :style="dueDateStyle"
         >
-          <span :style="dueDateStyle" v-if="!hoverDue" class="clock-icon"></span>
+          <span
+            :style="dueDateStyle"
+            v-if="!hoverDue"
+            class="clock-icon"
+          ></span>
           <span
             v-if="hoverDue && !isDueDateDone"
             @click.stop="toggleDueDate"
@@ -115,7 +121,6 @@ export default {
       group: null,
       showCardMenu: false,
       isLabelsOpen: this.$store.getters.isLabelsOpen,
-      isLabelHover: false,
       hoverDue: false,
     }
   },
@@ -131,18 +136,18 @@ export default {
       newBoard.labelsOpen = this.$store.getters.isLabelsOpen
       this.$store.dispatch({ type: 'saveBoard', board: newBoard })
     },
-    LightenDarkenColor(col, amt = -30) {
-      col = col.split('#')[1]
-      col = parseInt(col, 16)
-      return (
-        '#' +
-        (
-          ((col & 0x0000ff) + amt) |
-          ((((col >> 8) & 0x00ff) + amt) << 8) |
-          (((col >> 16) + amt) << 16)
-        ).toString(16)
-      )
-    },
+    // LightenDarkenColor(col, amt = -20) {
+    //   col = col.split('#')[1]
+    //   col = parseInt(col, 16)
+    //   return (
+    //     '#' +
+    //     (
+    //       ((col & 0x0000ff) + amt) |
+    //       ((((col >> 8) & 0x00ff) + amt) << 8) |
+    //       (((col >> 16) + amt) << 16)
+    //     ).toString(16)
+    //   )
+    // },
     removeCard(cardId) {
       console.log(cardId)
       this.$emit('removeCard', cardId)
@@ -169,14 +174,16 @@ export default {
         if (dueDate.isDone) return { backgroundColor: '#61BD4F', color: '#fff' }
         else if (dueDate.timestamp - now < -86000000)
           return { backgroundColor: '#ec9488', color: '#fff' }
-        else if (dueDate.timestamp < now) return { backgroundColor: '#eb5a46', color: '#fff' }
+        else if (dueDate.timestamp < now)
+          return { backgroundColor: '#eb5a46', color: '#fff' }
         else if (dueDate.timestamp - now < 86000000)
           return { backgroundColor: '#f2d600', color: '#fff' }
       } else {
         if (dueDate.isDone) return { backgroundColor: '#519839', color: '#fff' }
         else if (dueDate.timestamp - now < -86000000)
           return { backgroundColor: '#eb5a46', color: '#fff' }
-        else if (dueDate.timestamp - now < 0) return { backgroundColor: '#b04632', color: '#fff' }
+        else if (dueDate.timestamp - now < 0)
+          return { backgroundColor: '#b04632', color: '#fff' }
         else if (dueDate.timestamp - now < 86000000)
           return { backgroundColor: '#d9b51c', color: '#fff' }
       }
@@ -193,7 +200,8 @@ export default {
       return `${dueDate.date} ${dueDate.month}`
     },
     showCardCover() {
-      if (this.card.style.bgImg) return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      if (this.card.style.bgImg)
+        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
       return { backgroundColor: this.card.style.bgColor }
     },
     showCardCoverClass() {
@@ -234,7 +242,9 @@ export default {
     },
     cardLabels() {
       const labels = this.$store.getters.currBoard.labels
-      const labelsToShow = labels.filter((label) => this.card.labelIds.includes(label.id))
+      const labelsToShow = labels.filter((label) =>
+        this.card.labelIds.includes(label.id),
+      )
       return labelsToShow
     },
     labelsStatus() {

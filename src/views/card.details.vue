@@ -214,6 +214,7 @@
                 @sendToSave="sendToSave"
                 @setDate="setDate"
                 @removeDate="removeDate"
+                @removeCard="removeCard"
               />
             </div>
           </div>
@@ -274,10 +275,19 @@ export default {
         showOnTop: true,
       },
       leavingCIdx: null,
-      coverColor:''
+      coverColor: '',
     }
   },
   methods: {
+    removeCard(card) {
+      this.$router.push(`/board/${this.board._id}`)
+      const cardIdx = this.group.cards.findIndex((c) => c.id === card.id)
+      const groupIdx = this.board.groups.findIndex(
+        (g) => g.id === this.group.id,
+      )
+      this.board.groups[groupIdx].cards.splice(cardIdx, 1)
+      this.$store.dispatch({ type: 'saveBoard', board: this.board })
+    },
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
@@ -444,7 +454,6 @@ export default {
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
-    
   },
   computed: {
     isLabels() {
@@ -569,15 +578,15 @@ export default {
       fac
         .getColorAsync(imgUrl)
         .then((color) => {
-          return this.coverColor =  color.hexa
+          return (this.coverColor = color.hexa)
         })
         .catch((e) => {
           return
         })
     },
-    coverColorComputed(){
+    coverColorComputed() {
       return this.coverColor
-    }
+    },
   },
   created() {
     this.coverColor = this.coverRelativeColor

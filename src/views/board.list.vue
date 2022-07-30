@@ -132,7 +132,8 @@ export default {
       return this.boards.filter((board) => board.isStarred)
     },
     recently() {
-      return this.$store.getters.boardsToDisplay
+      return this.boards.filter((board) => !board.isStarred)
+      // return this.$store.getters.boardsToDisplay
     },
     loggedUser() {
       return this.$store.getters.loggedUser

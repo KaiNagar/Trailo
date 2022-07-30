@@ -137,11 +137,7 @@ export default {
   },
   created() {
     console.log('user is ' , this.loggedUser);
-    this.newBoard.labels = [
-      { id: 'l101', color: '#61bd4f', title: '' },
-      { id: 'l104', color: '#eb5a46', title: '' },
-      { id: 'l105', color: '#c377e0', title: '' },
-    ]
+    
   },
   unmounted() {},
 }

@@ -86,53 +86,67 @@
           rgba(111, 134, 214, 1)
         );
         .list-board {
-          font-family: fa;
-          font-size: rem(35px);
+          font-family: trellicons;
+          font-size: rem(50px);
+          font-weight: 400;
           &::before {
-            content: '\f462';
+            content: "\e91f";
           }
         }
-        .chart {
-          width: 100%;
-          margin: 0;
-          padding: 0;
+        .header {
+          margin-inline-end: 4rem;
+          font-size: 30px;
+          h1{
+            margin-inline-start: 1rem;
+          }
         }
+        .counter{
+          font-size: 70px;
+        }
+        
       }
       .cards-duedate {
         background: linear-gradient(
           to left,
           rgba(250, 112, 154, 1),
           rgba(254, 225, 64, 1)
-          );
-          .clock-icon {
-            color: white;
-            font-size: rem(35px);
-            font-weight: 400;
-          }
+        );
+        .clock-icon {
+          color: white;
+          font-size: rem(35px);
+          font-weight: 400;
         }
-        .cards-overdue {
+      }
+      .cards-overdue {
         background: linear-gradient(
           to left,
           rgba(235, 187, 167, 1),
           rgba(207, 199, 248, 1)
-          );
-          .sign-mark {
-            font-family: fa;
-            font-size: rem(35px);
-            &::before {
-              content: '\21';
-            }
+        );
+        .sign-mark {
+          font-family: fa;
+          font-size: rem(35px);
+          &::before {
+            content: '\21';
           }
         }
       }
+    }
   }
   #dashboard-bars {
     display: flex;
     justify-content: center;
-    margin-top: 6rem;
+    margin-top: 4rem;
     .bar {
       margin: 0 2rem;
-      
+      h1 {
+        color: white;
+        text-align: center;
+        margin: 0;
+        margin-top: 2px;
+        font-size: rem(16px);
+        font-weight: 500;
+      }
     }
   }
 }

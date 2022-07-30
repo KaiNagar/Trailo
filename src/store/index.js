@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 import { boardService } from '@/services/board.service.js'
 import { menuModule } from './menu.module'
 import { userModule } from './user.module'
-import {socketService} from '../services/socket.service.js'
+import { socketService } from '../services/socket.service.js'
 
 const store = createStore({
   strict: true,
@@ -32,7 +32,6 @@ const store = createStore({
         .filter((board) => {
           return !board.isStarred
         })
-       
     },
     boards({ boards }) {
       return boards
@@ -59,7 +58,7 @@ const store = createStore({
   mutations: {
     setCardMembersIds(state, { card }) {
       state.cardMembersIds = []
-      card.members = card.members|| []
+      card.members = card.members || []
       card.members.forEach((member) => {
         state.cardMembersIds.push(member._id)
       })
@@ -91,7 +90,9 @@ const store = createStore({
       state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
-      console.log('store mutation:',currBoard )
+      // console.log('store mutation:',currBoard )
+      const idx = state.boards.findIndex((board) => board._id === currBoard._id)
+      state.boards[idx] = currBoard
       state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
@@ -137,31 +138,30 @@ const store = createStore({
         console.error('cannot get boards:', err)
       }
     },
-    async saveBoard({ commit }, { board}) {
+    async saveBoard({ commit }, { board }) {
       commit({ type: 'setCurrBoard', currBoard: board })
-      console.log('created by', board.loggedUser);
+      console.log('created by', board.loggedUser)
       const newBoard = await boardService.save(board)
-     
+
       return newBoard
     },
     pushedBoard({ commit }, { board }) {
-      console.log('pushedBoard',board);
-      commit({ type: 'setCurrBoard',currBoard:board })
-
+      console.log('pushedBoard', board)
+      commit({ type: 'setCurrBoard', currBoard: board })
     },
 
     async updateGroup({ commit }, { board, group }) {
       const idx = board.groups.findIndex(
         (currGroup) => currGroup.id === group.id,
-        )
+      )
       board.groups.splice(idx, 1, group)
       const newBoard = await boardService.save(board)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
-    }
+    },
   },
   modules: {
     menuModule,
-    userModule
+    userModule,
   },
 })
 

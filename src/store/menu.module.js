@@ -23,6 +23,7 @@ export const menuModule = {
       account:false,
       searchUser:false,
       shareBoard:false,
+      removeCard:false,
 
     },
     
