@@ -1,7 +1,7 @@
 <template>
-  <section :style="{ backgroundColor: headerColor }" class="board-header full flex space-between">
+  <section  class="board-header full flex space-between">
     <nav>
-      <!-- <button class="board-btn">
+      <button class="board-btn">
         <span class="bars"
           ><img src="../../assets/icons/icons-bar-chart.png" alt=""
         /></span>
@@ -9,7 +9,7 @@
         <span class="img"
           ><img src="../../assets/icons/icons-down.png" alt=""
         /></span>
-      </button> -->
+      </button>
 
       <h1
         v-if="!editBoardTitle"
@@ -30,11 +30,11 @@
       <button @click="toggleStarBoard" class="board-header-star">
         <span :style="isStarred" class="star-icon"></span>
       </button>
-      <!-- <span class="divider"></span>
+      <span class="divider"></span>
       <button class="board-header-privet">
         <span class="privet-icon"></span> Private
       </button>
-      <span class="divider"></span> -->
+      <span class="divider"></span>
 
       <!-- MEMBERS -->
 

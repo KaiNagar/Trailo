@@ -13,7 +13,7 @@
       <router-link @click="resetCurrBoard" to="/board">
         <div class="logo-container">
           <!-- <img src="../../src/styles/cenzored-header-gif.gif" alt="" /> -->
-          <!-- <span :style="headerStyle">ai</span> -->
+          <span :style="headerStyle"></span>
         </div>
       </router-link>
     </div>
