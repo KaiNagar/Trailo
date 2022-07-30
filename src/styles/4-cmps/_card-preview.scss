@@ -130,17 +130,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.5s;
-
     }
-  //   @keyframes right-animate {
-  //     0% {
-  //       transform: translateY(0px);
-  //     }
-  //     100% {
-  //       transform: translateY(56px);
-  //     }
-  // }
-
 
     .label-preview-hide {
       display: block;
@@ -151,11 +141,6 @@
       margin: 0 4px 4px 0;
       border-radius: rem(4px);
       transition: all 0.5s;
-    }
-    .close-labels {
-      height: 8px;
-      background-color: green;
-      width: 10px;
     }
   }
 }
@@ -195,7 +180,7 @@
   font-size: rem(12px);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
- 
+
   .unchecked-icon {
     position: relative;
   }
@@ -210,7 +195,7 @@
   }
 }
 
-.description-preview{
+.description-preview {
   margin-inline-start: 4px;
   margin-inline-end: 8px;
   margin-top: 1px;

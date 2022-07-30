@@ -1,4 +1,4 @@
-import {socketService} from '@/services/socket.service.js'
+import { socketService } from '@/services/socket.service.js'
 import { httpService } from './http.service'
 
 export const boardService = {
@@ -14,7 +14,6 @@ export const boardService = {
   getEmptyLabel,
 }
 
-
 async function query(filterBy = null) {
   return await httpService.get(`board`, filterBy)
 }
@@ -26,11 +25,9 @@ async function getById(boardId) {
 async function save(board) {
   if (board._id) {
     socketService.emit('board updated', board)
-    console.log('board update board-service',board);
-    return await httpService.put(`board/${board._id}`,board)
+    return await httpService.put(`board/${board._id}`, board)
   } else {
-    return await httpService.post(`board`,board)
-
+    return await httpService.post(`board`, board)
   }
 }
 
@@ -90,7 +87,14 @@ function getEmptyBoard() {
       bgColor: null,
     },
     createdBy: {},
-    labels: [],
+    labels: [
+      { id: 'l101', color: '#61bd4f', title: '' },
+      { id: 'l102', color: '#f2d600', title: '' },
+      { id: 'l103', color: '#ff9f1a', title: '' },
+      { id: 'l104', color: '#eb5a46', title: '' },
+      { id: 'l105', color: '#c377e0', title: '' },
+      { id: 'l106', color: '#0079bf', title: '' },
+    ],
     members: [],
     groups: [
       { id: _makeId(), title: 'To do', cards: [] },
@@ -107,7 +111,6 @@ function getEmptyBoard() {
     ],
   }
 }
-
 
 function _makeId(length = 8) {
   var text = ''

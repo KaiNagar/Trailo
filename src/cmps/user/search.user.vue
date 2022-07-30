@@ -31,17 +31,12 @@ export default {
     },
     methods: {
         addMember(user) {
-            console.log(this.board.members);
-            const newBoard = JSON.parse(JSON.stringify(this.board))
             const updatedUser = JSON.parse(JSON.stringify(user))
-            updatedUser.isAdmin = false
-            if (!newBoard.members.length || !newBoard.members) newBoard.members = []
-            newBoard.members.push(updatedUser)
-            this.$store.dispatch({ type: 'saveBoard', board: newBoard })
+            this.$emit('addmember', updatedUser)   
         },
     },
     computed: {
-        users() {
+        users() {   
             return this.$store.getters.filteredUsers || this.$store.getters.users
         },
         board() {

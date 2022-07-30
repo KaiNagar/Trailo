@@ -46,6 +46,30 @@
     content: '\e908';
   }
 }
+.archive-icon {
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+    content: '\e907';
+  }
+}
+.refresh-icon {
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+    content: '\e95b';
+  }
+}
+.remove-icon {
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+    content: '\e95c';
+  }
+}
 .cover-icon {
   font-family: trellicons;
   font-size: 1rem;

@@ -3,7 +3,9 @@
     <div class="suggested-tab">
       <h3>Suggested</h3>
       <div class="action-btn-container">
-        <button><span class="member-icon"></span><span class="txt">Join</span></button>
+        <button>
+          <span class="member-icon"></span><span class="txt">Join</span>
+        </button>
       </div>
     </div>
     <div class="add-card-tab">
@@ -36,7 +38,9 @@
         ></menu-labels>
       </div>
       <div @click="$emit('openChecklistMenu')" class="action-btn-container">
-        <button><span class="checklist-icon"></span><span class="txt">Checklist</span></button>
+        <button>
+          <span class="checklist-icon"></span><span class="txt">Checklist</span>
+        </button>
       </div>
       <div class="action-btn-container">
         <button @click="openMenu('dates')">
@@ -57,12 +61,11 @@
         <button><span class="cover-icon"></span> Cover</button>
       </div> -->
 
-
       <menu-attachments @attachFile="attachFile" />
-      
+
       <div class="action-btn-container">
         <button @click="openMenu('cover')" v-if="!isCover">
-          <span class="cover-icon"></span><span class="txt">Cover</span> 
+          <span class="cover-icon"></span><span class="txt">Cover</span>
           <menu-cover
             v-if="!previewMenuOpen"
             @setCoverColor="$emit('setCoverColor', $event)"
@@ -76,11 +79,34 @@
         </button>
       </div>
 
-      <!-- <div class="action-btn-container">
-        <button disabled>
-          <span class="custom-icon"></span> Custom Fields
+      <div class="removing action-btn-container">
+        <button v-if="!archiving" @click="archiving = true">
+          <span class="archive-icon"></span>
+          <span class="txt" >Archive</span>
         </button>
-      </div> -->
+        <button @click="archiving = false" v-if="archiving">
+          <span class="refresh-icon"></span>
+          <span class="txt">Back</span>
+        </button>
+        <button
+          class="removing-btn"
+          @click="openMenu('removeCard')"
+          v-if="archiving"
+        >
+          <span class="remove-icon"></span>
+          <span class="txt">Delete</span>
+          <app-modal class="removing-card-modal" v-if="menu.removeCard" @closeModal="closeMenu">
+            <template #title>Delete card?</template>
+            <template #part-1>
+              <p class="remove-txt">
+                All actions will be removed from the activity feed and you won't
+                be able to re-open the card.There is no undo.
+              </p>
+              <button class="final-remove" @click="removeCard">Delete</button>
+            </template>
+          </app-modal>
+        </button>
+      </div>
     </div>
   </section>
 </template>
@@ -111,9 +137,14 @@ export default {
   data() {
     return {
       openDateMenu: false,
+      archiving: false,
     }
   },
   methods: {
+    removeCard() {
+      this.archiving = false
+      this.$emit('removeCard', this.card)
+    },
     attachFile(file) {
       this.$emit('attachFile', file)
     },

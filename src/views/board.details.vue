@@ -69,7 +69,6 @@ export default {
         return { backgroundColor: this.currBoard.style.bgColor }
       } else return { backgroundImage: 'url(' + this.currBoard.style.bgImg + ')' }
     },
-    getRelativeColor() {},
   },
   watch: {
     '$route.params.boardId': {
@@ -87,6 +86,14 @@ export default {
     socketService.on('board pushed', this.pushedBoard)
     this.closeMenu()
     this.$store.dispatch({ type: 'setUsers' })
+  },
+  async mounted(){
+    const { boardId } = this.$route.params
+    const boards = await this.$store.dispatch({type:'loadBoards'})
+    const board = boards.find(board => board._id === boardId)
+    const loggedUser = this.$store.getters.loggedUser
+    this.$store.commit({ type: 'setBoardMembersIds', board  })
+    console.log(loggedUser);
   },
 }
 </script>

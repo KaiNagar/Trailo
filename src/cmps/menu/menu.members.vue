@@ -5,13 +5,13 @@
     <template #title>Members</template>
     <!-- SEARCH -->
     <template #part-1>
-      <input type="text" class="input" placeholder="Search members">
+      <input type="text" class="input" @input="filterMembers" placeholder="Search members">
     </template>
     <!--BOARD MEMBERS LIST -->
     <template #part-2>
       <ul class="members">
         <header>Board members</header>
-        <li class="member-container" v-for="member in users " :key="member._id">
+        <li class="member-container" v-for="member in boardMembers " :key="member._id">
           <!-- MEMBER PREVIEW -->
           <member-preview :member="member" :card="card" @togglemember="toggleMember" />
         </li>
@@ -36,6 +36,7 @@ export default {
   },
   data() {
     return {
+      filterUsers:[]
     };
   },
   methods: {
@@ -56,10 +57,15 @@ export default {
       }
       this.$emit('sendToSave', this.card)
     },
+    // filterUsers(ev) {
+    //   this.filteredUsers = []
+    //   const regex = new RegExp(ev.target.value, 'i')
+    //   this.filteredUsers = this.users.filter((user) => regex.test(user.username))
+      
+    // },
   },
   created() {
-    // console.log(this.card.members);
-    console.log('members menu', this.users);
+
 
   },
   computed: {
@@ -78,8 +84,11 @@ export default {
       })
       return avatarStr
     },
-    users(){
+    users() {
       return this.$store.getters.users
+    },
+    boardMembers() {
+      return  this.$store.getters.currBoard.members
     },
   },
   unmounted() { },

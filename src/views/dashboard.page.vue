@@ -4,16 +4,13 @@
     <div class="dashboard-info">
       <h1 class="back" @click="closeDashboard">Back to board</h1>
       <div class="cards-general-info">
-        <div class="dashboard-tab cards-count flex">
-          <div class="flex column">
+        <div class="dashboard-tab cards-count flex space-between">
+          <div class="flex">
             <div class="header">
-              <h1>Cards</h1>
               <span class="list-board"></span>
+              <h1>Cards</h1>
             </div>
             <div class="counter">{{ cardsCount }}</div>
-          </div>
-          <div class="chart">
-            <DoughnutChart :height="220" :chartData="cardsData" />
           </div>
         </div>
         <div class="dashboard-tab cards-duedate flex space-between">
@@ -57,7 +54,8 @@
       </div>
       <div id="dashboard-bars">
         <div class="bar">
-          <BarChart :height="220" :chartData="cardsData" />
+          <h1>Cards per Due date</h1>
+          <DoughnutChart :height="220" :chartData="cardsData" />
         </div>
         <div class="bar">
           <BarChart :height="220" :chartData="cardsLabelData" />
@@ -71,9 +69,10 @@
           <BarChart :height="220" :chartData="cardsPerMember" />
         </div>
         <div class="bar">
-          <BarChart :height="220" :chartData="cardsData" />
+          <BarChart :height="220" :chartData="cardsCreatedPerMember" />
         </div>
         <div class="bar">
+          <h1>Todos per status</h1>
           <PolarAreaChart :height="220" :chartData="todosLeft" />
         </div>
       </div>
@@ -131,6 +130,30 @@ export default {
         ],
       }
     },
+    cardsCreatedPerMember() {
+      // const labels = this.board.members.map((m) => m.username)
+      // let membersCount = {}
+      // this.board.members.forEach((m) => {
+      //   if (!membersCount[m._id]) membersCount[m._id] = 0
+      // })
+      // this.allCards.forEach((card) => {
+      //   membersCount[card.createdBy._id]++
+      // })
+      // let data = []
+      // for (var key in membersCount) {
+      //   data.push(membersCount[key])
+      // }
+      // return {
+      //   labels,
+      //   datasets: [
+      //     {
+      //       label: 'Cards created per member',
+      //       data,
+      //       backgroundColor: ['#55b2f6'],
+      //     },
+      //   ],
+      // }
+    },
     cardsPerMember() {
       // const labels = this.board.members.map((m) => m.username)
       // let membersCount = {}
@@ -157,6 +180,18 @@ export default {
       //     },
       //   ],
       // }
+    },
+    cardsCountData() {
+      return {
+        labels: ['Cards'],
+        datasets: [
+          {
+            label: 'Cards',
+            data: [this.cardsCount],
+            backgroundColor: ['#fff'],
+          },
+        ],
+      }
     },
     cardsData() {
       return {
@@ -271,7 +306,7 @@ export default {
     })
     Chart.defaults.borderColor = '#fff'
     Chart.defaults.color = '#fff'
-    // Chart.defaults.plugins.title.align = 'left'
+    Chart.defaults.plugins.title.display = false
   },
 }
 </script>

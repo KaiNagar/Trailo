@@ -68,11 +68,12 @@
                 <!-- MEMBERS LIST PREVIEW -->
                 <div v-if="isMembers" class="members-list">
                   <header>Members</header>
-                  <members-list
+                  <!-- <members-list
                     :card="card"
                     @sendtosave="sendToSave"
                     @closemenu="closeMenu"
-                  />
+                  /> -->
+                  <avatar-list :members="cardMembers"></avatar-list>
                 </div>
 
                 <div v-if="isLabels" class="labels-preview-container">
@@ -214,6 +215,7 @@
                 @sendToSave="sendToSave"
                 @setDate="setDate"
                 @removeDate="removeDate"
+                @removeCard="removeCard"
               />
             </div>
           </div>
@@ -238,7 +240,7 @@ import menuCover from '../cmps/menu.cover.vue'
 import menuMembers from '../cmps/menu/menu.members.vue'
 import membersList from '../cmps/members.list.vue'
 import { FastAverageColor } from 'fast-average-color'
-
+import avatarList from '../cmps/card/avatar.list.vue'
 export default {
   name: 'cardDetails',
   components: {
@@ -255,6 +257,7 @@ export default {
     menuCover,
     menuMembers,
     membersList,
+    avatarList,
   },
   data() {
     return {
@@ -274,10 +277,19 @@ export default {
         showOnTop: true,
       },
       leavingCIdx: null,
-      coverColor:''
+      coverColor: '',
     }
   },
   methods: {
+    removeCard(card) {
+      this.$router.push(`/board/${this.board._id}`)
+      const cardIdx = this.group.cards.findIndex((c) => c.id === card.id)
+      const groupIdx = this.board.groups.findIndex(
+        (g) => g.id === this.group.id,
+      )
+      this.board.groups[groupIdx].cards.splice(cardIdx, 1)
+      this.$store.dispatch({ type: 'saveBoard', board: this.board })
+    },
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
@@ -444,7 +456,6 @@ export default {
     closeMenu() {
       this.$store.commit({ type: 'closeMenu' })
     },
-    
   },
   computed: {
     isLabels() {
@@ -569,20 +580,19 @@ export default {
       fac
         .getColorAsync(imgUrl)
         .then((color) => {
-          return this.coverColor =  color.hexa
+          return (this.coverColor = color.hexa)
         })
         .catch((e) => {
           return
         })
     },
-    coverColorComputed(){
+    coverColorComputed() {
       return this.coverColor
-    }
+    },
   },
   created() {
     this.coverColor = this.coverRelativeColor
     this.newChecklist = boardService.getEmptyChecklist()
-    this.$store.commit({ type: 'setCardMembersIds', card: this.card })
     this.isCoverOn = this.isCoverActive
     this.$store.commit({ type: 'setIsCover', status: this.isCoverOn })
     this.$store.commit({
@@ -590,6 +600,12 @@ export default {
       attachments: this.card.attachments,
     })
     this.card.members = []
+  },
+  mounted(){
+    const { cardId } = this.$route.params
+    const card = this.group.cards.find((card) => card.id === cardId)
+    console.log(card);
+    this.$store.commit({ type: 'setCardMembersIds', card })
   },
 }
 </script>

@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 import { boardService } from '@/services/board.service.js'
 import { menuModule } from './menu.module'
 import { userModule } from './user.module'
-import {socketService} from '../services/socket.service.js'
+import { socketService } from '../services/socket.service.js'
 
 const store = createStore({
   strict: true,
@@ -17,6 +17,7 @@ const store = createStore({
     currCard: null,
     isLabelsOpen: null,
     cardMembersIds: [],
+    boardMembersIds:[],
   },
   getters: {
     isCover({ isCover }) {
@@ -32,7 +33,6 @@ const store = createStore({
         .filter((board) => {
           return !board.isStarred
         })
-       
     },
     boards({ boards }) {
       return boards
@@ -55,14 +55,31 @@ const store = createStore({
     cardMemberIds({ cardMembersIds }) {
       return cardMembersIds
     },
+    boardMemberIds({ boardMembersIds }) {
+      return boardMembersIds
+    },
   },
   mutations: {
     setCardMembersIds(state, { card }) {
-      // state.cardMembersIds = []
-      // card.members = card.members|| []
-      // card.members.forEach((member) => {
-      //   state.cardMembersIds.push(member._id)
-      // })
+      state.cardMembersIds = []
+      card.members = card.members|| []
+      if(!card.members.length) return
+      console.log(card.members);
+      card.members.forEach((member) => {
+        state.cardMembersIds.push(member._id)
+      })
+    },
+    setBoardMembersIds(state, { board, user }) {
+      state.boardMembersIds = []
+      board.members = board.members || []
+      board.members.forEach((member) => {
+        state.boardMembersIds.push(member._id)
+      })
+      const loggedUser = JSON.parse(sessionStorage.getItem("user"))
+      if(!state.boardMembersIds.includes(loggedUser._id)){
+        state.boardMembersIds.push(loggedUser._id)
+      }
+      console.log(state.boardMembersIds);
     },
     toggleMember(state, { memberId }) {
       const idx = state.card.findIndex((member) => {
@@ -91,7 +108,9 @@ const store = createStore({
       state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
-      console.log('store mutation:',currBoard )
+      // console.log('store mutation:',currBoard )
+      const idx = state.boards.findIndex((board) => board._id === currBoard._id)
+      state.boards[idx] = currBoard
       state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
@@ -137,31 +156,30 @@ const store = createStore({
         console.error('cannot get boards:', err)
       }
     },
-    async saveBoard({ commit }, { board}) {
+    async saveBoard({ commit }, { board }) {
       commit({ type: 'setCurrBoard', currBoard: board })
-      console.log('created by', board.loggedUser);
+      console.log('created by', board.loggedUser)
       const newBoard = await boardService.save(board)
-     
+
       return newBoard
     },
     pushedBoard({ commit }, { board }) {
-      console.log('pushedBoard',board);
-      commit({ type: 'setCurrBoard',currBoard:board })
-
+      console.log('pushedBoard', board)
+      commit({ type: 'setCurrBoard', currBoard: board })
     },
 
     async updateGroup({ commit }, { board, group }) {
       const idx = board.groups.findIndex(
         (currGroup) => currGroup.id === group.id,
-        )
+      )
       board.groups.splice(idx, 1, group)
       const newBoard = await boardService.save(board)
       commit({ type: 'setCurrBoard', currBoard: newBoard })
-    }
+    },
   },
   modules: {
     menuModule,
-    userModule
+    userModule,
   },
 })
 
