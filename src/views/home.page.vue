@@ -18,14 +18,30 @@
         <h1>Traillo helps teams move work forward.</h1>
         <p>
           Collaborate, manage projects, and reach new productivity peaks. From high rises to the
-          home office, the way your team works is unique—accomplish it all with Trello.
+          home office, the way your team works is unique—accomplish it all with Trailo.
         </p>
-
-        <div class="signup-btn" @click="signupModal">Start demo</div>
+        <!-- <router-link to="/board">
+          <div class="signup-btn" @click="signupModal"><span>Start demo</span></div>
+        </router-link> -->
+        <div class="signup-btn" @click="signupModal"><span>Start demo</span></div>
       </div>
 
       <div class="right-content">
         <div class="hero"></div>
+      </div>
+    </div>
+    <div class="hero-container-center">
+      <div class="center-content">
+        <h1>It’s more than work. It’s a way of working together.</h1>
+        <p>
+          Start with a Trailo board, lists, and cards. Customize and expand with more features as
+          your teamwork grows. Manage projects, organize tasks, and build team spirit—all in one
+          place.
+        </p>
+      </div>
+      <div class="hero-img-container">
+        <div class="hero-img"><img src="../assets/home-page-imgs/Capture2.png" alt="" /></div>
+        <span>ai</span>
       </div>
     </div>
   </section>

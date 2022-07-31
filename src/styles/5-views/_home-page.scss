@@ -77,24 +77,28 @@ button.swal2-confirm.swal2-styled {
     }
   }
 
-  .hero-container {
+  .hero-container,
+  .hero-container-center {
     // border: 1px black solid;
-    max-width: 80vw;
+    max-width: 1140px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    padding: 90px 0px 0px;
     // MQ
     @media only screen and (max-width: 750px) {
       flex-direction: column-reverse;
     }
 
     // LEFT - CONTENT
-    .left-content {
+    .left-content
+     {
       position: relative;
       width: 550px;
+      margin-right: 125px;
       // MQ
       @media only screen and (max-width: 650px) {
-        width: 300px;
+        width: 373px;
         text-align: center;
       }
       // HEADER
@@ -123,10 +127,35 @@ button.swal2-confirm.swal2-styled {
         color: white;
         font-size: 16px;
         display: flex;
+        transition: all 0.5s;
         align-items: center;
         padding-bottom: 2px;
         justify-content: center;
         cursor: pointer;
+        span{
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          transition: 0.5s;
+        }
+        span:after {
+          content: '\00bb';
+          position: absolute;
+          opacity: 0;
+          top: -1px;
+          right: -20px;
+          font-size: 25px;
+          transition: 0.5s;
+        }
+        &:hover span {
+          padding-right: 25px;
+        }
+        
+        &:hover span:after {
+          opacity: 1;
+          right: 0;
+          font-size: 25px;
+        }
         &:hover {
           background-color: rgb(7 71 166);
         }
@@ -137,23 +166,108 @@ button.swal2-confirm.swal2-styled {
           text-align: center;
         }
       }
+      // .signup-btn {
+      //   position: absolute;
+      //   bottom: 10px;
+      //   transition: all 250ms ease-out 0s;
+      //   background-color: rgb(0 101 255);
+      //   border-radius: 3px;
+      //   width: 160px;
+      //   height: 50px;
+      //   color: white;
+      //   font-size: 16px;
+      //   display: flex;
+      //   transition: all 0.5s;
+      //   align-items: center;
+      //   padding-bottom: 2px;
+      //   justify-content: center;
+      //   cursor: pointer;
+      //   &:hover {
+      //     background-color: rgb(7 71 166);
+      //   }
+      //   margin-bottom: 33px;
+
+      //   @media only screen and (max-width: 650px) {
+      //     width: 100%;
+      //     text-align: center;
+      //   }
+      // }
     }
 
     // RIGHT - CONTENT
     .right-content {
       position: relative;
-      top: 15px;
-      min-width: 290px;
+      bottom: 40px;
+      min-width: 400px;
       max-width: 500px;
-      height: 500px;
+      height: 400px;
       .hero {
         background-image: url("https://images.ctfassets.net/rz1oowkt5gyp/5QIzYxue6b7raOnVFtMyQs/113acb8633ee8f0c9cb305d3a228823c/hero.png?w=992&fm=webp");
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
         width: 100%;
-        height: 100%;
+        height: 120%;
       }
     }
   }
 }
+.hero-container-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.center-content{
+  position: relative;
+  padding: 3rem 1rem 1rem;
+  position: relative;
+  scroll-margin-top: 72px;
+  text-align: center;
+  width: 100%;
+ 
+  h1 {
+    font-size: 2.25rem;
+    line-height: 1.33333;
+    letter-spacing: 0.3px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  p {
+    position: relative;
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 90px;
+  }
+}
+
+  .hero-img-container{
+    position: relative;
+    top: 0px;
+    @media only screen and (max-width: 650px) {
+      img{
+        width: 400px;
+      }
+    }
+    .hero-img{
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      
+    }
+    span{
+      position: absolute;
+      top: 6px;
+      left: 49.9%;
+      font-weight: 600;
+      font-size: 24px;
+      color: #d495d1;
+      @media only screen and (max-width: 650px) {
+        top: -2px;
+        font-size: 11px;
+      }
+    }
+    
+  }
+  
+

@@ -11,7 +11,7 @@
     <div class="logo-container">
       <!-- <button class="header-menu icon"></button> -->
       <router-link @click="resetCurrBoard" to="/board">
-        <div  class="logo">
+        <div class="logo">
           <img src="../assets/logo/header-all-logo.png" alt="" />
           <span class="logo-text">ai</span>
           <span :style="headerStyle"></span>
@@ -31,7 +31,9 @@
           @closeModal="closeModal"
         >
           <template #title>Boards</template>
-          <template #content-1> </template>
+          <template #content-1 class="content-1">
+            <!-- <div class="heade-img-btn"></div> -->
+          </template>
         </app-modal>
       </div>
 
@@ -69,12 +71,7 @@
 
     <div class="search">
       <img src="../styles/svgs/search.svg" />
-      <input
-        :style="inputStyle"
-        class="search-board-input"
-        type="text"
-        placeholder="Search"
-      />
+      <input :style="inputStyle" class="search-board-input" type="text" placeholder="Search" />
     </div>
 
     <div class="right-header flex">
@@ -88,7 +85,7 @@
       >
         <img src="../styles/svgs/notification.svg" alt="" />
       </button>
-      <div  class="profile" @click="openMenu('account')">
+      <div class="profile" @click="openMenu('account')">
         <button>{{ loggedUser.username.slice(0, 1).toUpperCase() }}</button>
       </div>
       <!-- ACCOUNT MENU -->
@@ -180,9 +177,7 @@ export default {
         return (this.headerBgColor = '#026aa7')
       }
       if (!this.board.style.bgImg)
-        return (this.headerBgColor = this.LightenDarkenColor(
-          this.board.style.bgColor,
-        ))
+        return (this.headerBgColor = this.LightenDarkenColor(this.board.style.bgColor))
       if (!this.board.style || !this.board.style.bgImg) return
       const imgUrl = this.board.style.bgImg
       const fac = new FastAverageColor()
