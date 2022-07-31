@@ -102,6 +102,14 @@
     content: '\e902';
   }
 }
+.star-full-icon {
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+ content: "\e967";
+  }
+}
 .emoji-icon {
   font-family: trellicons;
   font-size: 1rem;

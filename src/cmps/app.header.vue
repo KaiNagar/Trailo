@@ -8,11 +8,12 @@
     class="main-header"
     v-if="loggedUser"
   >
-    <div class="logo">
-      <button class="header-menu icon"></button>
+    <div class="logo-container">
+      <!-- <button class="header-menu icon"></button> -->
       <router-link @click="resetCurrBoard" to="/board">
-        <div class="logo-container">
-          <!-- <img src="../../src/styles/cenzored-header-gif.gif" alt="" /> -->
+        <div class="logo">
+          <img src="../assets/logo/header-all-logo.png" alt="" />
+          <span class="logo-text">ai</span>
           <span :style="headerStyle"></span>
         </div>
       </router-link>

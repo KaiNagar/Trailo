@@ -1,5 +1,5 @@
 .board-header {
-  background: #ffffff03;
+  background: rgba(137, 134, 131, 0.096);
   position: relative;
   line-height: 20px;
   padding-left: 32px;
@@ -47,7 +47,7 @@
     .board-header-star {
       width: 2rem;
       height: 2rem;
-      margin: 0 4px 4px 0;
+      margin: 0 4px 2px 0;
     }
     .board-header-privet {
       padding: 7px 12.4px 7px 12.4px;
@@ -86,9 +86,9 @@
     border-radius: 0.1875rem;
     // color: rgb(23, 43, 77);
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.0784313725);
+    background-color: rgba(165, 160, 160, 0.308);
     &:hover {
-      background-color: #00000029;
+      background-color: #7b7373b3;
     }
   }
 
@@ -102,6 +102,8 @@
     font-weight: 700;
     line-height: 32px;
     padding: 0 16px;
+    // color: rgb(23, 43, 77);
+    color: rgb(246, 241, 241);
     margin: 0 4px 4px 0;
   }
   .edit-board-title {
@@ -150,8 +152,10 @@
   .show-menu-btn {
     padding: 6px 8px 6px 8px;
     margin: 0 4px 4px 0;
-    color: rgb(23, 43, 77);
+    color: white;
+    // color: rgb(23, 43, 77);
     .menu-icon {
+      color: white;
       font-size: 20px;
       margin-inline-end: 4px;
     }

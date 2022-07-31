@@ -1,21 +1,13 @@
 <template>
-  <section  class="board-header full flex space-between">
+  <section class="board-header full flex space-between">
     <nav>
-      <button class="board-btn">
-        <span class="bars"
-          ><img src="../../assets/icons/icons-bar-chart.png" alt=""
-        /></span>
+      <!-- <button class="board-btn">
+        <span class="bars"><img src="../../assets/icons/icons-bar-chart.png" alt="" /></span>
         <span class="txt">Board</span>
-        <span class="img"
-          ><img src="../../assets/icons/icons-down.png" alt=""
-        /></span>
-      </button>
+        <span class="img"><img src="../../assets/icons/icons-down.png" alt="" /></span>
+      </button> -->
 
-      <h1
-        v-if="!editBoardTitle"
-        class="board-header-title"
-        @click="openEditTitle"
-      >
+      <h1 v-if="!editBoardTitle" class="board-header-title" @click="openEditTitle">
         {{ currBoard.title }}
       </h1>
       <input
@@ -30,48 +22,33 @@
       <button @click="toggleStarBoard" class="board-header-star">
         <span :style="isStarred" class="star-icon"></span>
       </button>
-      <span class="divider"></span>
+      <!-- <span class="divider"></span>
       <button class="board-header-privet">
         <span class="privet-icon"></span> Private
       </button>
-      <span class="divider"></span>
+      <span class="divider"></span> -->
 
       <!-- MEMBERS -->
 
       <div class="board-members-container flex align-center">
-        <avatar-list
-          class="avatar-list-board-header"
-          @users="users"
-        ></avatar-list>
-        <button
-          class="share-btn-board-header flex align-center"
-          @click="isShareBoard = true"
-        >
-        <img src="https://cdn-icons-png.flaticon.com/512/748/748137.png" class="share-icon" />
+        <avatar-list class="avatar-list-board-header" @users="users"></avatar-list>
+        <button class="share-btn-board-header flex align-center" @click="isShareBoard = true">
+          <img src="https://cdn-icons-png.flaticon.com/512/748/748137.png" class="share-icon" />
           <span class="txt">Share</span>
         </button>
-        <share-board
-          v-if="isShareBoard"
-          @close="isShareBoard = false"
-        ></share-board>
+        <share-board v-if="isShareBoard" @close="isShareBoard = false"></share-board>
       </div>
     </nav>
 
     <div class="board-header-right-btns">
-      <button class="filter-btn">
-        <span class="img"
-          ><img src="../../assets/icons/icons-bars.png" alt=""
-        /></span>
+      <!-- <button class="filter-btn">
+        <span class="img"><img src="../../assets/icons/icons-bars.png" alt="" /></span>
         <span class="txt">Filter</span>
       </button>
-      <board-filter v-if="filterMenu" />
+      <board-filter v-if="filterMenu" /> -->
 
       <div>
-        <button
-          v-if="!isMoreMenu"
-          @click="showMenu"
-          class="show-menu-btn flex align-center"
-        >
+        <button v-if="!isMoreMenu" @click="showMenu" class="show-menu-btn flex align-center">
           <span class="menu-icon"></span>
           <span class="txt">Show menu</span>
         </button>
