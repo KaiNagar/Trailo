@@ -11,11 +11,7 @@
         /></span>
       </button> -->
 
-      <h1
-        v-if="!editBoardTitle"
-        class="board-header-title"
-        @click="openEditTitle"
-      >
+      <h1 v-if="!editBoardTitle" class="board-header-title" @click="openEditTitle">
         {{ currBoard.title }}
       </h1>
       <input
@@ -39,21 +35,12 @@
       <!-- MEMBERS -->
 
       <div class="board-members-container flex align-center">
-        <avatar-list
-          class="avatar-list-board-header"
-          @users="users"
-        ></avatar-list>
-        <button
-          class="share-btn-board-header flex align-center"
-          @click="isShareBoard = true"
-        >
-        <img src="https://cdn-icons-png.flaticon.com/512/748/748137.png" class="share-icon" />
+        <avatar-list class="avatar-list-board-header" @users="users"></avatar-list>
+        <button class="share-btn-board-header flex align-center" @click="isShareBoard = true">
+          <img src="https://cdn-icons-png.flaticon.com/512/748/748137.png" class="share-icon" />
           <span class="txt">Share</span>
         </button>
-        <share-board
-          v-if="isShareBoard"
-          @close="isShareBoard = false"
-        ></share-board>
+        <share-board v-if="isShareBoard" @close="isShareBoard = false"></share-board>
       </div>
     </nav>
 

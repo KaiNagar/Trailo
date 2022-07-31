@@ -47,16 +47,26 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      height: 0.7em;
+      height: -0.2em;
       position: relative;
-      margin-inline-end: 1em;
+      margin-inline-end: 0.5em;
+      display: flex;
+      padding: 7px;
+      border-radius: 3px;
+      font-size: 1.80em;
+      img{
+        width: 80px;
+      }
 
       span {
-        font-size: 20px;
+        font-size: 22px;
         position: absolute;
-        left: 36px;
-        bottom: -1px;
+        left: 50px;
+        bottom: 6.8px;
         font-weight: 600;
+      }
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.2);
       }
 
       display: flex;
