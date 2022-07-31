@@ -102,6 +102,8 @@
           class="avatar-list-card-preview"
           :members="cardMembers"
         ></avatar-list>
+
+        <!-- <card-avatar-list></card-avatar-list> -->
           <!-- <card-members :card="card"></card-members> -->
       </div>
     </div>
@@ -110,6 +112,7 @@
 <script>
 import membersList from '../members.list.vue'
 import avatarList from './avatar.list.vue'
+import cardAvatarList from './card.avatar.list.vue'
 import cardMembers from '../user/card-members.vue'
 export default {
   name: 'cardPreview',
@@ -120,7 +123,7 @@ export default {
   components: {
     membersList,
     avatarList,
-    cardMembers,
+    cardAvatarList,
   },
   data() {
     return {

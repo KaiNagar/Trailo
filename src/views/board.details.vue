@@ -53,7 +53,6 @@ export default {
       this.$store.dispatch({ type: 'saveBoard', board })
     },
     pushedBoard(board) {
-      console.log('push board', board)
       this.$store.dispatch({ type: 'pushedBoard', board })
     },
   },
@@ -89,7 +88,9 @@ export default {
     const boards = await this.$store.dispatch({type:'loadBoards'})
     const board = boards.find(board => board._id === boardId)
     const loggedUser = this.$store.getters.loggedUser
+    board.members.push(loggedUser)
     this.$store.commit({ type: 'setBoardMembersIds', board  })
+    // this.$store.dispatch({ type: 'saveBoard', board })
     console.log(loggedUser);
   },
 }

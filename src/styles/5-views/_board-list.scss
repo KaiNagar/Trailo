@@ -72,7 +72,6 @@
     }
   }
 
-  // WORKSPACES
   .workspaces {
     width: 90%;
     button {
@@ -132,6 +131,7 @@
   }
 }
 
+// BOARD LIST
 .board-list-container {
   margin-bottom: 47px;
   .section.icon {
@@ -178,20 +178,21 @@
     margin-left: 4%;
     color: #172b4d;
   }
+  // LIST -->
   .board-preview .gallery {
     position: relative;
     left: 6px;
-    // padding: 0;
     display: grid;
-    // width: 100%;
     grid-template-columns: repeat(auto-fill, minmax(193.8px, 1fr));
     gap: 5px;
     row-gap: 30px;
-    // column-gap: 5px;
-    // width: 100%;
+    // ITEM -->
     .item {
-      max-width: 193.8px;
       cursor: pointer;
+      // max-width: 193.8px;
+      position: relative;
+      overflow: hidden;
+      // STAR
       .starred-board {
         border: 1px black solid;
         width: 50px;
@@ -200,26 +201,17 @@
       img{
         border: 1px black solid;
       }
-      // max-width: 194px;
-      overflow-x: hidden;
-      // min-height: 150px;
-      // margin-inline-end: 1em;
-      
       .star {
-        // display: none;
         transition: 0.2s;
         width: 100%;
         height: 100%;
-
         position: absolute;
         bottom: 0;
         right: -5em;
-        // right: 0;
         z-index: 1;
         &:hover {
           right: 0;
         }
-
         .star-icon {
           filter: brightness(1.75);
           z-index: 0;
@@ -229,16 +221,11 @@
           bottom: 0.4rem;
           right: 0.7rem;
           color: rgb(255, 255, 255);
-
           &:hover {
-            // font-size: 18px;
             bottom: 0.7em;
           }
-
           &.starred {
             transition: 0.2s;
-            // right: 5.7em;
-            // -webkit-text-stroke: 3px;
             color: yellow;
             &:hover {
               -webkit-text-stroke: 0;
@@ -246,14 +233,11 @@
           }
         }
       }
-      &:hover {
-        filter: brightness(96%);
-      }
+  
     }
-    .item,
-    .board-list-new-board {
-      position: relative;
-      overflow-y: hidden;
+    .item
+    {
+     
       .img {
         width: 100%;
         max-width: 194px;

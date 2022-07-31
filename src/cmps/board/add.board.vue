@@ -118,6 +118,7 @@ export default {
       this.newBoard.style.bgImg = this.selectedBgImg
       this.newBoard.style.bgColor = this.selectedBgColor
       this.newBoard.createdBy = this.loggedUser
+      this.newBoard.members.push(this.loggedUser)
       this.saveBoard()
       const boards = JSON.parse(JSON.stringify(this.boards))
       boards.push(this.newBoard)

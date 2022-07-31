@@ -1,12 +1,7 @@
 <template>
-  <div class="avatars" v-if="members">
-    <div v-for="(member, idx) in members" :key="idx" class="avatar" :style="{ backgroundColor: member.color }">
-      {{ member.username.charAt(0).toUpperCase() }}
-      <div :class="{ admin: member.isAdmin || member._id === board.createdBy._id }"></div>
-    </div>
-  </div>
 
-  <div class="avatars" v-else>
+
+  <div class="avatars">
     <div v-for="(member, idx) in boardMembers" :key="idx" class="avatar" :style="{ backgroundColor: member.color }">
       {{ member.username.charAt(0).toUpperCase() }}
       <div :class="{ admin: member.isAdmin || member._id === board.createdBy._id }"></div>
@@ -87,11 +82,24 @@ export default {
 
       return this.board.members || members
     },
-    card(){
+    cardMembers() {
+      const memeberIds = this.$store.getters.cardMemberIds
+       const members = []
+      this.users.filter((user) => {
+        return memeberIds.forEach((memberId) => {
+          if (memberId === user._id) {
+            members.unshift(user)
+          }
+        })
+      })
+      return this.$store.getters.cardMemberIds
+    },
+    card() {
       return this.$store.getters.currCard
     }
   },
   created() {
+    console.log(this.cardMembers);
     const card = this.$store.getters.currCard
     console.log(card)
   },

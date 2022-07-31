@@ -27,8 +27,9 @@ export default {
     methods: {
         toggleMember(member) {
             this.$emit('togglemember', member._id)
+            
             this.$store.commit({ type: 'setCardMembersIds', card: this.card })
-            this.isCardMember(member)
+            // this.isCardMember(member)
         },
         isCardMember(member) {
             return this.ids.includes(member._id)

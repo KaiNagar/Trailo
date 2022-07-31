@@ -65,6 +65,7 @@ function getEmptyCard() {
     style: { bgImg: null, bgColor: null, isFull: false },
     checklists: [],
     labelIds: [],
+    members:[],
   }
 }
 

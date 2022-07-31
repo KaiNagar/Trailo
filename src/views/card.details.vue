@@ -66,14 +66,20 @@
             <div class="details-column flex column">
               <div class="sub-header-details flex">
                 <!-- MEMBERS LIST PREVIEW -->
-                <div v-if="isMembers" class="members-list">
+                <div v-if="card.members" class="members-list">
                   <header>Members</header>
                   <!-- <members-list
                     :card="card"
                     @sendtosave="sendToSave"
                     @closemenu="closeMenu"
                   /> -->
-                  <avatar-list :members="cardMembers"></avatar-list>
+                  <!-- <avatar-list :members="cardMembers"></avatar-list> -->
+
+                  <div class="avatars">
+                    <div class="avatar" v-for="member in cardMembers" :key="member._id">
+                    <span>{{member.username.slice(0,1).toUpperCase()}}</span>
+                    </div>
+                  </div>
                 </div>
 
                 <div v-if="isLabels" class="labels-preview-container">
@@ -560,6 +566,10 @@ export default {
         JSON.stringify(this.group.cards.find((card) => card.id === cardId)),
       )
     },
+    cardMembers(){
+      const { cardId } = this.$route.params
+      return this.group.cards.find((card) => card.id === cardId).members
+    },
     isCoverActive() {
       if (this.card.style.bgColor || this.card.style.bgImg) return true
       return false
@@ -604,7 +614,7 @@ export default {
   mounted(){
     const { cardId } = this.$route.params
     const card = this.group.cards.find((card) => card.id === cardId)
-    console.log(card);
+    this.$store.commit({ type: 'setCurrCard', card })
     this.$store.commit({ type: 'setCardMembersIds', card })
   },
 }

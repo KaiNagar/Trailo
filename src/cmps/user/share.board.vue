@@ -44,7 +44,6 @@
                         <option value="admin">Admin</option>
                         <option value="remove" v-if="member._id !== loggedId">Remove</option>
                     </select>
-                    <!-- <member-status></member-status> -->
                 </div>
 
             </li>
@@ -93,7 +92,7 @@ export default {
             if (this.boardMemberIds.includes(updatedUser._id)) return
             if (this.newMemberStatus === 'Admin') {
                 updatedUser.isAdmin = true
-            } else{
+            } else {
                 updatedUser.isAdmin = false
             }
             console.log(updatedUser);
@@ -146,7 +145,7 @@ export default {
                 board.members.push(admin)
 
             }
-            this.$store.dispatch({ type: 'saveBoard', board })
+            // this.$store.dispatch({ type: 'saveBoard', board })
             return board.members
         },
         menu() {

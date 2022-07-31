@@ -105,6 +105,7 @@ export default {
   methods: {
     updateGroup() {
       this.newCard.title = this.$refs.textarea.value
+      // this.newCard.members.push(this.loggedUser)
       if (this.newCard.title === '') {
         this.isEditable = false
         return
@@ -146,6 +147,9 @@ export default {
     menu() {
       return this.$store.getters.menu
     },
+    loggedUser(){
+      return this.$store.getters.loggedUser
+    }
   },
   created() {
     this.newCard = this.$store.getters.emptyCard

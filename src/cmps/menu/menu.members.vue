@@ -88,7 +88,7 @@ export default {
       return this.$store.getters.users
     },
     boardMembers() {
-      return  this.$store.getters.currBoard.members
+      return this.$store.getters.currBoard.members
     },
   },
   unmounted() { },

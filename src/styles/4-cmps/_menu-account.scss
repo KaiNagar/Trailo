@@ -1,6 +1,7 @@
 .menu-account {
   position: relative;
   .modal {
+    z-index: 100;
     top: 25px;
     // USER CONTAINER
     .user {
