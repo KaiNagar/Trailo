@@ -131,55 +131,55 @@ export default {
       }
     },
     cardsCreatedPerMember() {
-      // const labels = this.board.members.map((m) => m.username)
-      // let membersCount = {}
-      // this.board.members.forEach((m) => {
-      //   if (!membersCount[m._id]) membersCount[m._id] = 0
-      // })
-      // this.allCards.forEach((card) => {
-      //   membersCount[card.createdBy._id]++
-      // })
-      // let data = []
-      // for (var key in membersCount) {
-      //   data.push(membersCount[key])
-      // }
-      // return {
-      //   labels,
-      //   datasets: [
-      //     {
-      //       label: 'Cards created per member',
-      //       data,
-      //       backgroundColor: ['#55b2f6'],
-      //     },
-      //   ],
-      // }
+      const labels = this.board.members.map((m) => m.username)
+      let membersCount = {}
+      this.board.members.forEach((m) => {
+        if (!membersCount[m._id]) membersCount[m._id] = 0
+      })
+      this.allCards.forEach((card) => {
+        membersCount[card.createdBy._id]++
+      })
+      let data = []
+      for (var key in membersCount) {
+        data.push(membersCount[key])
+      }
+      return {
+        labels,
+        datasets: [
+          {
+            label: 'Cards created per member',
+            data,
+            backgroundColor: ['#55b2f6'],
+          },
+        ],
+      }
     },
     cardsPerMember() {
-      // const labels = this.board.members.map((m) => m.username)
-      // let membersCount = {}
-      // this.board.members.forEach((m) => {
-      //   if (!membersCount[m._id]) membersCount[m._id] = 0
-      // })
-      // this.allCards.forEach((card) => {
-      //   card.members.forEach((m) => {
-      //     membersCount[m._id]++
-      //   })
-      // })
-      // let data = []
-      // for (var key in membersCount) {
-      //   data.push(membersCount[key])
-      // }
-      // return {
-      //   labels,
-      //   datasets: [
-      //     {
-      //       label: 'Cards per member',
-      //       data,
-      //       backgroundColor: ['#55b2f6'],
-      //       barThickness: 35,
-      //     },
-      //   ],
-      // }
+      const labels = this.board.members.map((m) => m.username)
+      let membersCount = {}
+      this.board.members.forEach((m) => {
+        if (!membersCount[m._id]) membersCount[m._id] = 0
+      })
+      this.allCards.forEach((card) => {
+        card.members.forEach((m) => {
+          membersCount[m._id]++
+        })
+      })
+      let data = []
+      for (var key in membersCount) {
+        data.push(membersCount[key])
+      }
+      return {
+        labels,
+        datasets: [
+          {
+            label: 'Cards per member',
+            data,
+            backgroundColor: ['#55b2f6'],
+            barThickness: 35,
+          },
+        ],
+      }
     },
     cardsCountData() {
       return {
