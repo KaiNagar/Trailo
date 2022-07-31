@@ -1,5 +1,5 @@
 <template>
-  <div v-if="card" class="card-details-container">
+  <div v-if="card" @click.self="backToBoard" class="card-details-container">
     <section class="card-details flex column">
       <div class="close-details-container flex">
         <router-link class="close-details-btn flex" :to="'/board/' + board._id"
@@ -287,6 +287,9 @@ export default {
     }
   },
   methods: {
+    backToBoard() {
+      this.$router.push(`/board/${this.board._id}`)
+    },
     removeCard(card) {
       this.$router.push(`/board/${this.board._id}`)
       const cardIdx = this.group.cards.findIndex((c) => c.id === card.id)
@@ -611,10 +614,11 @@ export default {
     })
     this.card.members = []
   },
-  mounted(){
+  mounted() {
     const { cardId } = this.$route.params
     const card = this.group.cards.find((card) => card.id === cardId)
     this.$store.commit({ type: 'setCurrCard', card })
+    console.log(card)
     this.$store.commit({ type: 'setCardMembersIds', card })
   },
 }

@@ -42,7 +42,6 @@
           :currGroup="group"
           :cards="group.cards"
           @groupsQ="$emit('onCardMove', $event)"
-          @removeCard="$emit('removeCard', $event)"
           @dragLeave="$emit('dragLeave', $event)"
           :updateGroup="updateGroup"
         />
@@ -50,8 +49,13 @@
 
       <div class="g-footer flex space-between">
         <div class="g-footer-add-area">
-          <div @click="onOpenTextarea" v-if="!isEditable" class="g-footer-title-icon">
-            <span class="add-icon"></span><span class="g-footer-title">Add a card</span>
+          <div
+            @click="onOpenTextarea"
+            v-if="!isEditable"
+            class="g-footer-title-icon"
+          >
+            <span class="add-icon"></span
+            ><span class="g-footer-title">Add a card</span>
           </div>
           <div v-if="!isEditable" class="g-template-icon">
             <span class="template-icon"></span>
@@ -86,6 +90,7 @@
 <script>
 import cardList from '@/cmps/card/card.list.vue'
 import appModal from '../cmps/app.modal.vue'
+import { boardService } from '../services/board.service'
 export default {
   name: 'groupPreview',
   props: {
@@ -104,6 +109,7 @@ export default {
   },
   methods: {
     updateGroup() {
+      //add card
       this.newCard.title = this.$refs.textarea.value
       // this.newCard.members.push(this.loggedUser)
       if (this.newCard.title === '') {
@@ -114,7 +120,19 @@ export default {
         ...this.group,
         cards: [...this.group.cards, { ...this.newCard }],
       }
+
+      // const activity = boardService.getEmptyActivity()
+      // activity.txt = `Added card ${this.newCard.title} to ${this.group.title}`
+      // const loggedUser = JSON.parse(sessionStorage.getItem('user'))
+      // activity.byMember = {
+      //   _id: loggedUser._id,
+      //   fullname: loggedUser.username,
+      //   imgUrl: loggedUser.imgUrl,
+      // }
+      // activity.card = { id: this.newCard.id, title: this.newCard.title }
+      // this.$store.dispatch({ type: 'addActivity', activity })
       this.$emit('updateGroup', updateGroup)
+
       this.$refs.textarea.value = ''
       this.newCard = this.$store.getters.emptyCard
       setTimeout(() => {
@@ -172,5 +190,3 @@ export default {
   opacity: 0;
 }
 </style>
-
-

@@ -81,7 +81,7 @@ function getEmptyActivity(){
   return {
     id:_makeId(),
     txt:'',
-    createdAt: new Date(),
+    createdAt: Date.now(),
     byMember:{},
     card:{}
   }

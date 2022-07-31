@@ -8,11 +8,12 @@
     class="main-header"
     v-if="loggedUser"
   >
-    <div class="logo">
-      <button class="header-menu icon"></button>
+    <div class="logo-container">
+      <!-- <button class="header-menu icon"></button> -->
       <router-link @click="resetCurrBoard" to="/board">
-        <div class="logo-container">
-          <!-- <img src="../../src/styles/cenzored-header-gif.gif" alt="" /> -->
+        <div  class="logo">
+          <img src="../assets/logo/header-all-logo.png" alt="" />
+          <span class="logo-text">ai</span>
           <span :style="headerStyle"></span>
         </div>
       </router-link>
@@ -62,20 +63,32 @@
           @click="openMenu('headerCreate')"
           class="create-board-btn"
         ></button>
-        <add-board v-if="menu.headerCreate"></add-board>
+        <add-board @blur="closeModal" v-if="menu.headerCreate"></add-board>
       </div>
     </div>
 
     <div class="search">
       <img src="../styles/svgs/search.svg" />
-      <input :style="inputStyle" class="search-board-input" type="text" placeholder="Search" />
+      <input
+        :style="inputStyle"
+        class="search-board-input"
+        type="text"
+        placeholder="Search"
+      />
     </div>
 
     <div class="right-header flex">
-      <button class="notifications">
+      <button
+        :style="{
+          backgroundColor: headerBgColor,
+          color: headerColor,
+          transition: 'all 0.3s',
+        }"
+        class="notifications"
+      >
         <img src="../styles/svgs/notification.svg" alt="" />
       </button>
-      <div class="profile" @click="openMenu('account')">
+      <div  class="profile" @click="openMenu('account')">
         <button>{{ loggedUser.username.slice(0, 1).toUpperCase() }}</button>
       </div>
       <!-- ACCOUNT MENU -->
@@ -136,7 +149,7 @@ export default {
       this.$store.commit({ type: 'closeMenu' })
     },
     resetCurrBoard() {
-      this.$store.commit({ type: 'setCurrBoard', board: null })
+      this.$store.commit({ type: 'setCurrBoard', currBoard: null })
     },
     openMenu(menuAction) {
       this.$store.commit({ type: 'openMenu', menuAction })
@@ -167,7 +180,9 @@ export default {
         return (this.headerBgColor = '#026aa7')
       }
       if (!this.board.style.bgImg)
-        return (this.headerBgColor = this.LightenDarkenColor(this.board.style.bgColor))
+        return (this.headerBgColor = this.LightenDarkenColor(
+          this.board.style.bgColor,
+        ))
       if (!this.board.style || !this.board.style.bgImg) return
       const imgUrl = this.board.style.bgImg
       const fac = new FastAverageColor()

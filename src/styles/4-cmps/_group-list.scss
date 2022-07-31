@@ -5,33 +5,19 @@
   background-position: center center;
   background-attachment: fixed;
   height: 95.3vh;
-  overflow-x: auto;
-  overflow-y: hidden;
+  
   padding-bottom: 2em;
   border-bottom: 8px rgba(255, 0, 0, 0) solid;
   /* width */
   .smooth-dnd-container{
     min-height: 1px;
   }
-  &::-webkit-scrollbar {
-    width: 10px;
-    height: 12px;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: #f1f1f118;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: #a5a39996;
-    border-radius: 50px;
-  }
+  
   .group-list {
     display: flex;
     position: relative;
     margin-left: 12px;
+    overflow: auto;
     .group-ghost {
       transition: transform 0.18s ease;
       transform: rotateZ(5deg);
@@ -42,6 +28,21 @@
       transform: rotateZ(0deg);
       z-index: 10;
      }
+     &::-webkit-scrollbar {
+      width: 10px;
+      height: 12px;
+    }
+  
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f1f1f118;
+    }
+  
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #a5a39996;
+      border-radius: 50px;
+    }
 
     .new-group {
       background: #bebebf5e;
