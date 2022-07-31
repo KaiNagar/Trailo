@@ -115,7 +115,7 @@
     }
 
     .label-preview-show {
-      z-index: 20;
+      // z-index: 20;
       color: white;
       font-size: rem(12px);
       font-weight: 700;
@@ -134,7 +134,7 @@
 
     .label-preview-hide {
       display: block;
-      z-index: 20;
+      // z-index: 20;
       height: 8px;
       min-width: 40px;
       transition: height 0.15s ease-in-out;

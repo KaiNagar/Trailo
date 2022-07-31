@@ -21,7 +21,7 @@
           home office, the way your team works is unique—accomplish it all with Trello.
         </p>
 
-        <div class="signup-btn" @click="signupModal">Sign up - It's free</div>
+        <div class="signup-btn" @click="signupModal">Start demo</div>
       </div>
 
       <div class="right-content">

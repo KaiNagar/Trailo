@@ -1,7 +1,7 @@
 <template>
-  <section :style="{ backgroundColor: headerColor }" class="board-header full flex space-between">
+  <section :style="{ color:'#fff' }" class="board-header full flex space-between">
     <nav>
-      <button class="board-btn">
+      <!-- <button class="board-btn">
         <span class="bars"
           ><img src="../../assets/icons/icons-bar-chart.png" alt=""
         /></span>
@@ -9,7 +9,7 @@
         <span class="img"
           ><img src="../../assets/icons/icons-down.png" alt=""
         /></span>
-      </button>
+      </button> -->
 
       <h1
         v-if="!editBoardTitle"
@@ -31,10 +31,10 @@
         <span :style="isStarred" class="star-icon"></span>
       </button>
       <span class="divider"></span>
-      <button class="board-header-privet">
+      <!-- <button class="board-header-privet">
         <span class="privet-icon"></span> Private
-      </button>
-      <span class="divider"></span>
+      </button> -->
+      <!-- <span class="divider"></span> -->
 
       <!-- MEMBERS -->
 
@@ -58,22 +58,23 @@
     </nav>
 
     <div class="board-header-right-btns">
-      <button class="filter-btn">
+      <!-- <button class="filter-btn">
         <span class="img"
           ><img src="../../assets/icons/icons-bars.png" alt=""
         /></span>
         <span class="txt">Filter</span>
       </button>
-      <board-filter v-if="filterMenu" />
+      <board-filter v-if="filterMenu" /> -->
 
       <div>
         <button
+        
           v-if="!isMoreMenu"
           @click="showMenu"
           class="show-menu-btn flex align-center"
         >
-          <span class="menu-icon"></span>
-          <span class="txt">Show menu</span>
+          <span :style="{ color:'#fff' }" class="menu-icon"></span>
+          <span :style="{ color:'#fff' }" class="txt">Show menu</span>
         </button>
         <show-more
           @openStyleMenu="openStyleMenu"
@@ -234,7 +235,7 @@ export default {
     isStarred() {
       if (this.currBoard.isStarred) {
         return { color: '#f2d600' }
-      }
+      }else return {color:'#fff'}
     },
     stateBoard() {
       return this.$store.getters.currBoard

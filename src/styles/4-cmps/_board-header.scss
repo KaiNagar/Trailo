@@ -48,6 +48,11 @@
       width: 2rem;
       height: 2rem;
       margin: 0 4px 4px 0;
+      background-color: #ffffff3d;
+      &:hover{
+        background-color: #ffffff5b;
+
+      }
     }
     .board-header-privet {
       padding: 7px 12.4px 7px 12.4px;
@@ -61,22 +66,25 @@
       }
       .share-btn-board-header {
         @include save-btns;
-         font-family: -apple-system, BlinkMacSystemFont,
-          Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-          sans-serif;
-          margin-inline-start:4px ;
-          margin-inline-end: 8px;
-          padding: 6.5px 0;
-          padding-inline-start:10px ;
-          padding-inline-end: 12px;
-          .txt{
-            margin:-1px 0 1px 6px;
-
-          }
-          .share-icon{
-            width: 12px;
-            filter: brightness(0) invert(1);
-          }
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+          Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+        margin-inline-start: 4px;
+        margin-inline-end: 8px;
+        padding: 6.5px 0;
+        padding-inline-start: 10px;
+        padding-inline-end: 12px;
+        background-color: #fff;
+        color: black;
+        &:hover{
+          background-color: rgba(255, 255, 255, 0.9);
+        }
+        .txt {
+          margin: -1px 0 1px 6px;
+        }
+        .share-icon {
+          width: 12px;
+          // filter: brightness(0) invert(1);
+        }
       }
     }
   }
@@ -103,6 +111,7 @@
     line-height: 32px;
     padding: 0 16px;
     margin: 0 4px 4px 0;
+    padding-inline-start: 0px;
   }
   .edit-board-title {
     margin: 0 4px 4px 0;
@@ -151,6 +160,11 @@
     padding: 6px 8px 6px 8px;
     margin: 0 4px 4px 0;
     color: rgb(23, 43, 77);
+    background-color: #ffffff3d;
+      &:hover{
+        background-color: #ffffff5b;
+
+      }
     .menu-icon {
       font-size: 20px;
       margin-inline-end: 4px;
