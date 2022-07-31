@@ -52,8 +52,8 @@ export default {
         this.$swal
           .fire({
             title: 'Login Form',
-            html: `<input type="text" id="login" value="admin"  class="swal2-input" placeholder="admin">
-                            <input type="password" id="password"  value="123" class="swal2-input" placeholder="123">`,
+            html: `<input type="text" id="login" value="kai"  class="swal2-input" placeholder="admin">
+                            <input type="password" id="password"  value="kai" class="swal2-input" placeholder="123">`,
             confirmButtonText: 'Sign in',
             focusConfirm: false,
             preConfirm: () => {
