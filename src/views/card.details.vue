@@ -62,7 +62,7 @@
             </div>
           </div>
 
-          <div class="flex space-between">
+          <div class="card-details-content flex space-between">
             <div class="details-column flex column">
               <div class="sub-header-details flex">
                 <!-- MEMBERS LIST PREVIEW -->

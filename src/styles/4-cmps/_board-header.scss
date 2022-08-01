@@ -7,6 +7,29 @@
   font-weight: 400;
   padding: 4px 4px 4px 12px;
   // height: 52px;
+  @media only screen and(max-width:600px) {
+    .board-header-title{
+      font-size: rem(14px);
+      padding: 0;
+    }
+    .show-menu-btn{
+      .txt{
+        display: none;
+      }
+      .menu-icon{
+        margin: 0;
+      }
+    }
+    .share-btn-board-header{
+      margin-bottom: 0px;
+      .txt{
+        display: none;
+      }
+    }
+    .divider{
+      display: none;
+    }
+  }
   .divider {
     margin: 8px 8px 12px 4px;
     width: 1px;
@@ -49,9 +72,8 @@
       height: 2rem;
       margin: 0 4px 4px 0;
       background-color: #ffffff3d;
-      &:hover{
+      &:hover {
         background-color: #ffffff5b;
-
       }
     }
     .board-header-privet {
@@ -60,9 +82,10 @@
       margin: 0 4px 4px 0;
     }
     .board-members-container {
+      margin-bottom:4px;
       .avatar-list-board-header {
         margin-inline-start: 0.25rem;
-        padding: 0 2px 2px 0;
+        padding: 2px 2px 2px 0;
       }
       .share-btn-board-header {
         @include save-btns;
@@ -75,7 +98,7 @@
         padding-inline-end: 12px;
         // background-color: #fff;
         // color: black;
-        &:hover{
+        &:hover {
           // background-color: rgba(255, 255, 255, 0.9);
         }
         .txt {
@@ -163,14 +186,13 @@
     margin: 0 4px 4px 0;
     color: rgb(23, 43, 77);
     background-color: #ffffff3d;
-      &:hover{
-        background-color: #ffffff5b;
-
-      }
+    &:hover {
+      background-color: #ffffff5b;
+    }
     .menu-icon {
       color: white;
       font-size: 20px;
-      margin-inline-end: 4px;
+      margin-inline-end: 6px;
     }
     .txt {
       margin-inline-end: 4px;

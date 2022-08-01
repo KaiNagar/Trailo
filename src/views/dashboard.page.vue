@@ -2,7 +2,7 @@
   <section class="dashboard-page">
     <div class="dashboard-screen" @click="closeDashboard"></div>
     <div class="dashboard-info">
-      <h1 class="back" @click="closeDashboard">Back to board</h1>
+      <h1 class="close-icon" @click="closeDashboard"></h1>
       <div class="cards-general-info">
         <div class="dashboard-tab cards-count flex space-between">
           <div class="flex">
@@ -13,6 +13,27 @@
             <div class="counter">{{ cardsCount }}</div>
           </div>
         </div>
+
+        <div class="dashboard-tab cards-completed flex space-between">
+          <div class="flex column">
+            <div class="header">
+              <span class="checklist-icon"></span>
+              <h1>Completed</h1>
+            </div>
+            <div class="counter">{{ completedCards }}</div>
+          </div>
+          <div class="chart">
+            <circle-progress
+              class="circle"
+              fill-color="#55b2f6"
+              empty-color="#fff"
+              :percent="completedCardPrec"
+              :transition="300"
+            />
+            <span class="count-prec">{{ completedCardPrec }}%</span>
+          </div>
+        </div>
+        
         <div class="dashboard-tab cards-duedate flex space-between">
           <div class="flex column">
             <div class="header">
@@ -54,26 +75,16 @@
       </div>
       <div id="dashboard-bars">
         <div class="bar">
-          <h1>Cards per Due date</h1>
-          <DoughnutChart :height="220" :chartData="cardsData" />
+          <h1>Cards per member</h1>
+          <BarChart :height="420" :width="460" :chartData="cardsPerMember" />
         </div>
         <div class="bar">
-          <BarChart :height="220" :chartData="cardsLabelData" />
+          <h1>Cards per label</h1>
+          <BarChart :height="420" :width="460" :chartData="cardsLabelData" />
         </div>
         <div class="bar">
-          <BarChart :height="220" :chartData="cardsPerGroup" />
-        </div>
-      </div>
-      <div id="dashboard-bars">
-        <div class="bar">
-          <BarChart :height="220" :chartData="cardsPerMember" />
-        </div>
-        <div class="bar">
-          <BarChart :height="220" :chartData="cardsCreatedPerMember" />
-        </div>
-        <div class="bar">
-          <h1>Todos per status</h1>
-          <PolarAreaChart :height="220" :chartData="todosLeft" />
+          <h1>Cards per group</h1>
+          <BarChart :height="420" :width="460" :options="options" :chartData="cardsPerGroup" />
         </div>
       </div>
     </div>
@@ -95,11 +106,17 @@ export default {
     return {
       allCards: [],
       options: {
-        plugins: {
-          title: {
-            color: '#fff',
-            display: false,
-          },
+        title: {
+          display: false,
+        },
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
         },
       },
     }
@@ -110,26 +127,26 @@ export default {
     },
   },
   computed: {
-    todosLeft() {
-      let allTodos = []
-      this.allCards.forEach((card) =>
-        card.checklists.forEach((checklist) =>
-          allTodos.push(...checklist.todos),
-        ),
-      )
-      const done = allTodos.filter((t) => t.isDone)
-      const undone = allTodos.filter((t) => t.isDone === false)
-      return {
-        labels: ['Todos checked', 'Todos unchecked'],
-        datasets: [
-          {
-            label: 'Todos Left',
-            data: [done.length, undone.length],
-            backgroundColor: ['#61BD4F', '#eb5a46'],
-          },
-        ],
-      }
-    },
+    // todosLeft() {
+    //   let allTodos = []
+    //   this.allCards.forEach((card) =>
+    //     card.checklists.forEach((checklist) =>
+    //       allTodos.push(...checklist.todos),
+    //     ),
+    //   )
+    //   const done = allTodos.filter((t) => t.isDone)
+    //   const undone = allTodos.filter((t) => t.isDone === false)
+    //   return {
+    //     labels: ['Todos checked', 'Todos unchecked'],
+    //     datasets: [
+    //       {
+    //         label: 'Todos Left',
+    //         data: [done.length, undone.length],
+    //         backgroundColor: ['#61BD4F', '#eb5a46'],
+    //       },
+    //     ],
+    //   }
+    // },
     cardsCreatedPerMember() {
       const labels = this.board.members.map((m) => m.username)
       let membersCount = {}
@@ -176,35 +193,34 @@ export default {
             label: 'Cards per member',
             data,
             backgroundColor: ['#55b2f6'],
-            barThickness: 35,
           },
         ],
       }
     },
-    cardsCountData() {
-      return {
-        labels: ['Cards'],
-        datasets: [
-          {
-            label: 'Cards',
-            data: [this.cardsCount],
-            backgroundColor: ['#fff'],
-          },
-        ],
-      }
-    },
-    cardsData() {
-      return {
-        labels: ['Completed', 'Due soon', 'Over due'],
-        datasets: [
-          {
-            label: 'Cards per due date',
-            data: [this.completedCards, this.dueSoonCards, this.overDueCards],
-            backgroundColor: ['#61BD4F', '#f2d600', '#eb5a46'],
-          },
-        ],
-      }
-    },
+    // cardsCountData() {
+    //   return {
+    //     labels: ['Cards'],
+    //     datasets: [
+    //       {
+    //         label: 'Cards',
+    //         data: [this.cardsCount],
+    //         backgroundColor: ['#fff'],
+    //       },
+    //     ],
+    //   }
+    // },
+    // cardsData() {
+    //   return {
+    //     labels: ['Completed', 'Due soon', 'Over due'],
+    //     datasets: [
+    //       {
+    //         label: 'Cards per due date',
+    //         data: [this.completedCards, this.dueSoonCards, this.overDueCards],
+    //         backgroundColor: ['#61BD4F', '#f2d600', '#eb5a46'],
+    //       },
+    //     ],
+    //   }
+    // },
     cardsPerGroup() {
       let labels = []
       let data = []
@@ -219,7 +235,6 @@ export default {
             label: 'Cards per list',
             data,
             backgroundColor: ['#55b2f6'],
-            barThickness: 35,
           },
         ],
       }
@@ -299,14 +314,19 @@ export default {
       const done = cardsWithDates.filter((card) => card.dueDate.isDone)
       return done.length
     },
+    completedCardPrec(){
+      const all = this.cardsCount
+      const completed = this.completedCards
+      return completed / all === Infinity ? 0 : ((completed / all) * 100).toFixed(1)
+    },
   },
   created() {
     this.board.groups.forEach((group) => {
       this.allCards.push(...group.cards)
     })
-    Chart.defaults.borderColor = '#fff'
+    Chart.defaults.borderColor = 'transparent'
     Chart.defaults.color = '#fff'
-    Chart.defaults.plugins.title.display = false
+    Chart.defaults.plugins.legend.display = false
   },
 }
 </script>
