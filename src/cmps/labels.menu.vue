@@ -163,7 +163,7 @@ import { boardService } from '../services/board.service'
 import appModal from './app.modal.vue'
 export default {
   props: {
-    card: Object,
+    
   },
   components: {
     appModal,
@@ -261,6 +261,9 @@ export default {
     },
     sideMenuOpen() {
       return this.$store.getters.sideMenuStatus
+    },
+     card (){
+        return JSON.parse(JSON.stringify(this.$store.getters.currCard))
     },
   },
   created() {},

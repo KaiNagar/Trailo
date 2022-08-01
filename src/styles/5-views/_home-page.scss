@@ -21,6 +21,7 @@ button.swal2-confirm.swal2-styled {
 }
 
 .home-page-view {
+
   overflow-x: hidden;
   color: rgb(9 30 66);
   // HEADER
@@ -79,7 +80,8 @@ button.swal2-confirm.swal2-styled {
 
   .hero-container,
   .hero-container-center {
-    // border: 1px black solid;
+    width: 80vw;
+    max-width: 1200px;
     max-width: 1140px;
     margin: 0 auto;
     display: flex;
@@ -119,7 +121,7 @@ button.swal2-confirm.swal2-styled {
 
       .signup-btn {
         position: absolute;
-        bottom: 10px;
+        bottom: -80px;
         transition: all 250ms ease-out 0s;
         background-color: rgb(0 101 255);
         border-radius: 3px;

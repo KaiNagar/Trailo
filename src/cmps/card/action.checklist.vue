@@ -169,7 +169,6 @@ export default {
   props: {
     checklist: Object,
     idx: Number,
-    card: Object,
   },
   components: { todoActionbar, Container, Draggable, appModal },
   data() {
@@ -321,6 +320,9 @@ export default {
     },
     menu() {
       return this.$store.getters.menu
+    },
+     card (){
+        return JSON.parse(JSON.stringify(this.$store.getters.currCard))
     },
   },
   created() {

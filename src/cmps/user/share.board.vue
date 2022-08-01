@@ -32,7 +32,7 @@
             </li>
 
             <li v-for="member in members" :key="member._id">
-                <div class="icon avatar">{{ member.username.slice(0, 1).toUpperCase() }}</div>
+                <div :style="{ backgroundImage: `url(${member.avatar.imgUrl})` }" class="icon avatar"></div>
                 <div class="content">
                     <div class="top">{{ member.username }} <span v-if="member._id === loggedId">(you)</span> </div>
                     <div class="middle">{{ member.email }}</div>

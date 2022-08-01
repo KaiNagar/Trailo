@@ -76,8 +76,8 @@
                   <!-- <avatar-list :members="cardMembers"></avatar-list> -->
 
                   <div class="avatars">
-                    <div class="avatar" v-for="member in cardMembers" :key="member._id">
-                    <span>{{member.username.slice(0,1).toUpperCase()}}</span>
+                    <div class="avatar" v-for="member in cardMembers" :key="member._id" :style="{ backgroundImage: `url(${member.avatar.imgUrl})` }">
+                    <span></span>
                     </div>
                   </div>
                 </div>

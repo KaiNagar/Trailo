@@ -87,7 +87,7 @@
         <img src="../styles/svgs/notification.svg" alt="" />
       </button>
       <div class="profile" @click="openMenu('account')">
-        <button>{{ loggedUser.username.slice(0, 1).toUpperCase() }}</button>
+        <button class="avatar" :style="{ backgroundImage: `url(${loggedUser.avatar.imgUrl})` }"></button>
       </div>
       <!-- ACCOUNT MENU -->
     </div>

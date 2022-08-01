@@ -1,14 +1,14 @@
 <template>
   <div class="avatars" v-if="members">
-    <div v-for="(member, idx) in members" :key="idx" class="avatar" :style="{ backgroundColor: member.color }">
-      {{ member.username.charAt(0).toUpperCase() }}
+    <div v-for="(member, idx) in members" :key="idx" class="avatar" :style="{ backgroundImage: `url(${member.avatar.imgUrl})` }">
+     
       <div :class="{ admin: member.isAdmin || member._id === board.createdBy._id }"></div>
     </div>
   </div>
 
   <div class="avatars" v-else>
-    <div v-for="(member, idx) in boardMembers" :key="idx" class="avatar" :style="{ backgroundColor: member.color }">
-      {{ member.username.charAt(0).toUpperCase() }}
+    <div v-for="(member, idx) in boardMembers" :key="idx" class="avatar" :style="{ backgroundImage: `url(${member.avatar.imgUrl})` }">
+     
       <div :class="{ admin: member.isAdmin || member._id === board.createdBy._id }"></div>
     </div>
   </div>
@@ -93,7 +93,7 @@ export default {
   },
   created() {
     const card = this.$store.getters.currCard
-    console.log(card)
+    console.log(this.users)
   },
   unmounted() { },
 }

@@ -61,9 +61,9 @@
         <template #part-4>
           <div class="attachments part">
             <header>Attachments</header>
-            <div v-if="card.attachments" class="attachments-images">
+            <div v-if="currCard.attachments" class="attachments-images">
               <button :style="{ backgroundImage: 'url(' + attachment.url + ')' }" @click="setCoverImg(attachment.url)"
-                v-for="attachment in card.attachments" :key="attachment.id" class="set-attachment-cover"></button>
+                v-for="attachment in currCard.attachments" :key="attachment.id" class="set-attachment-cover"></button>
             </div>
 
             <div class="upload part">
@@ -82,7 +82,7 @@
       </app-modal>
     
     <!-- 
-      <section v-if="card.color">
+      <section v-if="currCard.color">
         <div class="menu-header">
                         <h1>Cover</h1>
                         <button @click="this.$emit('closeCoverMenu')">X</button>
@@ -163,31 +163,31 @@ export default {
   },
   methods: {
     setCoverColor(color) {
-      this.card.style.bgImg = null
-      this.card.style.bgColor = color
+      this.currCard.style.bgImg = null
+      this.currCard.style.bgColor = color
       this.isCoverOn = true
-      this.$emit('setCoverColor', this.card)
+      this.$emit('setCoverColor', this.currCard)
       this.$store.commit({type:'setIsCover', status:true})
     },
     setFullCover(isFull) {
-      this.card.style.isFull = isFull
-      this.$emit('setFullCover', this.card)
+      this.currCard.style.isFull = isFull
+      this.$emit('setFullCover', this.currCard)
     },
     setCoverMode(isDarkMode) {
-      this.card.style.isDarkMode = isDarkMode
-      this.$emit('setCoverMode', this.card)
+      this.currCard.style.isDarkMode = isDarkMode
+      this.$emit('setCoverMode', this.currCard)
     },
     setCoverImg(url) {
-      this.card.style.bgColor = null
-      this.card.style.bgImg = url
+      this.currCard.style.bgColor = null
+      this.currCard.style.bgImg = url
       this.isCoverOn = true
-      this.$emit('setCoverImg', this.card)
+      this.$emit('setCoverImg', this.currCard)
       this.$store.commit({type:'setIsCover', status:true})
     },
     removeCover() {
-      this.card.style = { isFull: false, bgColor: null, bgImg: null }
+      this.currCard.style = { isFull: false, bgColor: null, bgImg: null }
       this.$store.commit({type:'setIsCover', status:false})
-      this.$emit('removeCover', this.card)
+      this.$emit('removeCover', this.currCard)
     },
     coverSize(isFull) {
       return isFull ? 'cover-full' : 'cover-half'
@@ -224,15 +224,18 @@ export default {
   },
   computed: {
     setCoverSizeStyle() {
-      if (this.card.style.bgColor) {
-        return { backgroundColor: this.card.style.bgColor }
-      } else if (this.card.style.bgImg) {
-        return { backgroundImage: 'url(' + this.card.style.bgImg + ')' }
+      if (this.currCard.style.bgColor) {
+        return { backgroundColor: this.currCard.style.bgColor }
+      } else if (this.currCard.style.bgImg) {
+        return { backgroundImage: 'url(' + this.currCard.style.bgImg + ')' }
       }
     },
     coverIsOpen() {
-      if (this.card.style.bgColor || this.card.style.bgImg) return true
+      if (this.currCard.style.bgColor || this.currCard.style.bgImg) return true
       return false
+    },
+    currCard (){
+        return this.$store.getters.currCard
     },
 
     menu() {

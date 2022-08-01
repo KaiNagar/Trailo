@@ -23,7 +23,7 @@
         class="edit-board-title"
       />
 
-      <button @click="toggleStarBoard" class="board-header-star">
+      <button @click="starBoard" class="board-header-star">
         <span :style="isStarred" class="star-icon"></span>
       </button>
       <span class="divider"></span>
@@ -132,6 +132,12 @@ export default {
     }
   },
   methods: {
+     starBoard() {
+      const boardId = this.stateBoard.id
+      // this.$store.commit({ type: 'starBoard', boardId })
+      // const board = this.$store.getters.starredBoard
+      // this.$store.dispatch({ type: 'saveBoard', board })
+    },
     setBgImg(img) {
       const board = JSON.parse(JSON.stringify(this.stateBoard))
       board.style.bgColor = null

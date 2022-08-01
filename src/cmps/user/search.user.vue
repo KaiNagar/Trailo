@@ -3,7 +3,7 @@
         <ul>
 
             <li v-for="user in users" :key="user._id" @click="addMember(user)">
-                <div class="icon avatar">{{ user.username.slice(0, 1).toUpperCase() }}</div>
+                <div class="icon avatar" :style="{ backgroundImage: `url(${user.avatar.imgUrl})` }"></div>
                 <div class="content">
                     <div class="top">{{ user.username }}</div>
                     <div class="bottom">Hasn't logged in recently</div>
