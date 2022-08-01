@@ -14,12 +14,10 @@
       >
         <slot name="content-1">
           <div class="img" :style="boardCover(item)"></div>
-          <!-- <div class="img" :style="{ backgroundImage: 'url(' + item.bgCover + ')' }"></div> -->
           <div class="titles">
             <div class="b-title">{{ item.title || 'Nameless' }}</div>
             <div class="w-title">My workspace</div>
           </div>
-          <!-- <div class="star-icon" :class="{itemStarred : item.isStarred}"></div> -->
           <div class="star-icon bottom" :class="{ starred: item.isStarred }"></div>
         </slot>
       </section>

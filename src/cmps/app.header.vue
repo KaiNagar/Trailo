@@ -29,6 +29,7 @@
           :newItems="boards"
           @openBoard="openBoard"
           @closeModal="closeModal"
+          v-click-outside="closeModal"
         >
           <template #title>Boards</template>
           <template #content-1 class="content-1">
