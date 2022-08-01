@@ -3,7 +3,7 @@
         <template #title>Account</template>
         <template #part-1>
             <div class="user">
-                <div class="avatar">{{ user.username.slice(0, 1).toUpperCase() }}</div>
+                <div class="avatar" :style="{ backgroundImage: `url(${user.avatar.imgUrl})` }" ></div>
                 <div class="info">
                     <header>{{ user.username }}</header>
                     <span>{{ user.email }}</span>

@@ -111,6 +111,8 @@ export default {
     updateGroup() {
       //add card
       this.newCard.title = this.$refs.textarea.value
+      const loggedUser = this.$store.getters.loggedUser
+      this.newCard.createdBy = {_id:loggedUser._id,username:loggedUser.username}
       // this.newCard.members.push(this.loggedUser)
       if (this.newCard.title === '') {
         this.isEditable = false

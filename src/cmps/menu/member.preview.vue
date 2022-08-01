@@ -1,6 +1,6 @@
 <template  >
     <div @click="toggleMember(member)" class="member" >
-        <div class="avatar" :style="{ backgroundColor: member.color }">{{ member.username.charAt(0) }}</div>
+        <div class="avatar" :style="{ backgroundImage: `url(${member.avatar.imgUrl})` }"></div>
         <div class="member-name">
             <span>{{ member.username }}</span>
             <span> ({{ member.username.split(' ').join('').slice(0, 15) }})</span>
