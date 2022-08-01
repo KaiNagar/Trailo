@@ -1,16 +1,6 @@
 <template>
-  <section :style="{ color:'#fff' }" class="board-header full flex space-between">
+  <section :style="{ color: '#fff' }" class="board-header full flex space-between">
     <nav>
-      <!-- <button class="board-btn">
-        <span class="bars"
-          ><img src="../../assets/icons/icons-bar-chart.png" alt=""
-        /></span>
-        <span class="txt">Board</span>
-        <span class="img"
-          ><img src="../../assets/icons/icons-down.png" alt=""
-        /></span>
-      </button> -->
-
       <h1 v-if="!editBoardTitle" class="board-header-title" @click="openEditTitle">
         {{ currBoard.title }}
       </h1>
@@ -27,10 +17,6 @@
         <span :style="isStarred" class="star-icon"></span>
       </button>
       <span class="divider"></span>
-      <!-- <button class="board-header-privet">
-        <span class="privet-icon"></span> Private
-      </button> -->
-      <!-- <span class="divider"></span> -->
 
       <!-- MEMBERS -->
 
@@ -40,7 +26,9 @@
           <img src="https://cdn-icons-png.flaticon.com/512/748/748137.png" class="share-icon" />
           <span class="txt">Share</span>
         </button>
-        <share-board v-if="isShareBoard" @close="isShareBoard = false"></share-board>
+        <div v-if="isShareBoard" class="share-screen">
+          <share-board v-if="isShareBoard" @close="isShareBoard = false"></share-board>
+        </div>
       </div>
     </nav>
 
@@ -54,14 +42,9 @@
       <board-filter v-if="filterMenu" /> -->
 
       <div>
-        <button
-        
-          v-if="!isMoreMenu"
-          @click="showMenu"
-          class="show-menu-btn flex align-center"
-        >
-          <span :style="{ color:'#fff' }" class="menu-icon"></span>
-          <span :style="{ color:'#fff' }" class="txt">Show menu</span>
+        <button v-if="!isMoreMenu" @click="showMenu" class="show-menu-btn flex align-center">
+          <span :style="{ color: '#fff' }" class="menu-icon"></span>
+          <span :style="{ color: '#fff' }" class="txt">Show menu</span>
         </button>
         <show-more
           @openStyleMenu="openStyleMenu"
@@ -132,7 +115,7 @@ export default {
     }
   },
   methods: {
-     starBoard() {
+    starBoard() {
       const boardId = this.stateBoard.id
       // this.$store.commit({ type: 'starBoard', boardId })
       // const board = this.$store.getters.starredBoard
@@ -228,7 +211,7 @@ export default {
     isStarred() {
       if (this.currBoard.isStarred) {
         return { color: '#f2d600' }
-      }else return {color:'#fff'}
+      } else return { color: '#fff' }
     },
     stateBoard() {
       return this.$store.getters.currBoard
