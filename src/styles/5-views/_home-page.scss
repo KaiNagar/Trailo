@@ -21,6 +21,7 @@ button.swal2-confirm.swal2-styled {
 }
 
 .home-page-view {
+
   overflow-x: hidden;
   color: rgb(9 30 66);
   // HEADER
@@ -79,7 +80,8 @@ button.swal2-confirm.swal2-styled {
 
   .hero-container {
     // border: 1px black solid;
-    max-width: 80vw;
+    width: 80vw;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;

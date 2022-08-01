@@ -163,10 +163,10 @@ export default {
   },
   methods: {
     setCoverColor(color) {
-      this.card.style.bgImg = null
-      this.card.style.bgColor = color
+      this.currCard.style.bgImg = null
+      this.currCard.style.bgColor = color
       this.isCoverOn = true
-      this.$emit('setCoverColor', this.card)
+      this.$emit('setCoverColor', this.currCard)
       this.$store.commit({type:'setIsCover', status:true})
     },
     setFullCover(isFull) {
@@ -233,6 +233,9 @@ export default {
     coverIsOpen() {
       if (this.card.style.bgColor || this.card.style.bgImg) return true
       return false
+    },
+    currCard (){
+        return this.$store.getters.currCard
     },
 
     menu() {
