@@ -66,8 +66,9 @@
             <div class="details-column flex column">
               <div class="sub-header-details flex">
                 <!-- MEMBERS LIST PREVIEW -->
-                <div v-if="card.members" class="members-list">
-                  <header>Members</header>
+
+                <div v-if="cardMembersCheck" class="members-list">
+                  <header> Members</header>
                   <!-- <members-list
                     :card="card"
                     @sendtosave="sendToSave"
@@ -81,6 +82,7 @@
                     </div>
                   </div>
                 </div>
+
 
                 <div v-if="isLabels" class="labels-preview-container">
                   <h3 class="labels-header">Labels</h3>
@@ -267,6 +269,7 @@ export default {
   },
   data() {
     return {
+      cardMembersCheck:[],
       isLabelMenuOpen: false,
       isCoverMenuOpen: false,
       isChecklistMenuOpen: false,
@@ -602,6 +605,10 @@ export default {
     coverColorComputed() {
       return this.coverColor
     },
+    cardMembersCheckL(){
+     
+      return this.cardMembersCheck
+    }
   },
   created() {
     this.coverColor = this.coverRelativeColor
@@ -617,9 +624,10 @@ export default {
   mounted() {
     const { cardId } = this.$route.params
     const card = this.group.cards.find((card) => card.id === cardId)
+    console.log('the card is ',card);
     this.$store.commit({ type: 'setCurrCard', card })
-    console.log(card)
     this.$store.commit({ type: 'setCardMembersIds', card })
+    this.cardMembersCheck = card.members
   },
 }
 </script>

@@ -55,6 +55,9 @@ export default {
       } else {
         this.card.members.splice(cardMemberIdx, 1)
       }
+      console.log('boardMemberIdx',idx);
+      console.log('cardMemberIdx',cardMemberIdx);
+      console.log('card members on menu',this.card.members);
       this.$emit('sendToSave', this.card)
     },
     // filterUsers(ev) {
