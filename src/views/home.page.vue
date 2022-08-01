@@ -23,7 +23,7 @@
         <!-- <router-link to="/board">
           <div class="signup-btn" @click="signupModal"><span>Start demo</span></div>
         </router-link> -->
-        <div class="signup-btn" @click="signupModal"><span>Start demo</span></div>
+        <div class="signup-btn" @click="startDemo"><span>Start demo</span></div>
       </div>
 
       <div class="right-content">
@@ -63,6 +63,12 @@ export default {
     this.signout()
   },
   methods: {
+    startDemo(){
+      const demoUser = {username:'kai', password:'kai'}
+      this.$store.dispatch({ type: 'setLoggedUser', credentials:demoUser })
+      this.closeMenu()
+      this.$router.push(`/board/`)
+    },
     async loginModal(ev) {
       try {
         this.$swal
