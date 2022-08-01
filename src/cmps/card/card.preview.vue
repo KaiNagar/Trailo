@@ -100,7 +100,7 @@
           </div> -->
         <avatar-list
           class="avatar-list-card-preview"
-          :members="cardMembers"
+          :members="card.members"
         ></avatar-list>
 
         <!-- <card-avatar-list></card-avatar-list> -->

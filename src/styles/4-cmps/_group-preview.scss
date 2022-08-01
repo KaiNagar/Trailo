@@ -15,6 +15,9 @@
   font-size: 14px;
   width: 272px;
   position: relative;
+  @media only screen and(max-width:600px) {
+    max-height: 95%;
+  }
 
   .g-header {
     cursor: pointer;
@@ -87,7 +90,7 @@
     font-weight: 600;
     overflow: hidden;
     border: 2px solid transparent;
-    resize:none;
+    resize: none;
     overflow-wrap: break-word;
     color: #172b4d;
     &:focus {
@@ -121,7 +124,7 @@
         padding: 1px;
         line-height: 20px;
       }
-      .add-icon{
+      .add-icon {
         padding-right: 2px;
       }
       &:hover {
@@ -151,7 +154,7 @@
     cursor: pointer;
   }
 }
-.g-footer-textarea-container{
+.g-footer-textarea-container {
   padding-top: 4px;
 }
 .g-footer-textarea {
@@ -202,12 +205,10 @@
   }
 }
 
-.v-enter-active{
+.v-enter-active {
   transition: opacity 0.3s ease;
 }
 
-.v-enter-from
- {
+.v-enter-from {
   opacity: 0;
 }
-
