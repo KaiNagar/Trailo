@@ -13,7 +13,7 @@
         <span class="cover-txt">Change background</span>
       </div>
       <div class="dashboard" @click="$emit('openDashboard')">
-        <span class="dash-icon"></span>
+        <span class="collection-icon"></span>
         <span class="cover-txt">Dashboard</span>
       </div>
     </div>

@@ -107,7 +107,7 @@
   font-size: 1rem;
   color: #5e6c84;
   &::before {
- content: "\e967";
+    content: '\e967';
   }
 }
 .emoji-icon {
@@ -218,6 +218,14 @@
   color: #5e6c84;
   &::before {
     content: '\e959';
+  }
+}
+.collection-icon {
+  font-family: trellicons;
+  font-size: 1rem;
+  color: #5e6c84;
+  &::before {
+    content: '\e91d';
   }
 }
 .check-icon {
