@@ -33,14 +33,6 @@
     </nav>
 
     <div class="board-header-right-btns">
-      <!-- <button class="filter-btn">
-        <span class="img"
-          ><img src="../../assets/icons/icons-bars.png" alt=""
-        /></span>
-        <span class="txt">Filter</span>
-      </button>
-      <board-filter v-if="filterMenu" /> -->
-
       <div>
         <button v-if="!isMoreMenu" @click="showMenu" class="show-menu-btn flex align-center">
           <span :style="{ color: '#fff' }" class="menu-icon"></span>
@@ -117,9 +109,6 @@ export default {
   methods: {
     starBoard() {
       const boardId = this.stateBoard.id
-      // this.$store.commit({ type: 'starBoard', boardId })
-      // const board = this.$store.getters.starredBoard
-      // this.$store.dispatch({ type: 'saveBoard', board })
     },
     setBgImg(img) {
       const board = JSON.parse(JSON.stringify(this.stateBoard))

@@ -100,7 +100,6 @@ export default {
         type: 'saveBoard',
         board: this.newBoard,
       })
-      console.log(newBoard)
       this.$router.push('/board/' + newBoard._id)
     },
     openMenu(menuAction) {
@@ -136,10 +135,6 @@ export default {
       return this.$store.getters.menu
     },
   },
-  created() {
-    console.log('user is ', this.loggedUser)
-  },
-  unmounted() {},
 }
 </script>
 <style></style>

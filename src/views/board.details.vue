@@ -72,7 +72,6 @@ export default {
         const { boardId } = this.$route.params
         const board = await boardService.getById(boardId)
         socketService.emit('board new-enter', boardId)
-        console.log('board', board)
         this.$store.commit({ type: 'setCurrBoard', currBoard: board })
       },
       immediate: true,
@@ -83,15 +82,13 @@ export default {
     this.closeMenu()
     this.$store.dispatch({ type: 'setUsers' })
   },
-  async mounted(){
+  async mounted() {
     const { boardId } = this.$route.params
-    const boards = await this.$store.dispatch({type:'loadBoards'})
-    const board = boards.find(board => board._id === boardId)
+    const boards = await this.$store.dispatch({ type: 'loadBoards' })
+    const board = boards.find((board) => board._id === boardId)
     const loggedUser = this.$store.getters.loggedUser
     board.members.push(loggedUser)
-    this.$store.commit({ type: 'setBoardMembersIds', board  })
-    // this.$store.dispatch({ type: 'saveBoard', board })
-    console.log(loggedUser);
+    this.$store.commit({ type: 'setBoardMembersIds', board })
   },
 }
 </script>

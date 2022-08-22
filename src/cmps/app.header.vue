@@ -87,7 +87,10 @@
         <img src="../styles/svgs/notification.svg" alt="" />
       </button>
       <div class="profile" @click="openMenu('account')">
-        <button class="avatar" :style="{ backgroundImage: `url(${loggedUser.avatar.imgUrl})` }"></button>
+        <button
+          class="avatar"
+          :style="{ backgroundImage: `url(${loggedUser.avatar.imgUrl})` }"
+        ></button>
       </div>
       <!-- ACCOUNT MENU -->
     </div>
@@ -136,7 +139,6 @@ export default {
       }
     },
     openBoard(boardId) {
-      console.log(boardId)
       this.$router.push(`/board/${boardId}`)
     },
     openMenu(menuAction) {
@@ -174,7 +176,6 @@ export default {
     },
     headerStyle() {
       if (!this.board) {
-        // this.headerColor = '#fff'
         return (this.headerBgColor = '#026aa7')
       }
       if (!this.board.style.bgImg)
@@ -220,9 +221,6 @@ export default {
     loggedUser() {
       return this.$store.getters.loggedUser
     },
-  },
-  created() {
-    console.log(this.board)
   },
 }
 </script>

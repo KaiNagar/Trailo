@@ -25,25 +25,21 @@ export default {
           fullname: 'kagol mokakor',
           email: 'kagol@gmail.com',
           imgUrl: '',
-                      color:this.getRandomColor
-
+          color: this.getRandomColor,
         },
         {
           _id: 'u102',
           fullname: 'manoka menika',
           email: 'manoka@gmail.com',
-          imgUrl:
-            '',
-                        color:this.getRandomColor
-
+          imgUrl: '',
+          color: this.getRandomColor,
         },
         {
           _id: 'u103',
           fullname: 'menashe moko',
           email: 'menashe@gmail.com',
-          imgUrl:
-            '',
-            color:this.getRandomColor
+          imgUrl: '',
+          color: this.getRandomColor,
         },
       ]
     },
@@ -53,9 +49,9 @@ export default {
       for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)]
 
-      return color
-    }
-  },
+        return color
+      }
+    },
   },
   created() {},
 }

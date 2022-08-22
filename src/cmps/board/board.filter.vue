@@ -1,6 +1,6 @@
 <template>
   <section class="board-header-right-btns">
-    <div class="filter-menu" >
+    <div class="filter-menu">
       <div class="filter-menu-header flex">
         <span class="filter-title">Filter</span>
         <span class="close-menu">X</span>
@@ -39,14 +39,6 @@
               />
               <label for="cards-assigned"><span>img</span> Cards assign to me</label>
             </div>
-            <!-- <div class="select-member">
-              <input id="select-member" type="checkbox" />
-              <input type="select">
-              <label for="select-member"><span>img</span> Select Member</label>
-              <select id="select-member" placeholder="Select member">
-                <option v-for="member in members" :key="member.id" value="member.username" >{{member.username}}</option>
-              </select>
-            </div> -->
             <div class="due-date">
               <h5>Due date</h5>
               <div class="no-dates flex">
@@ -132,7 +124,6 @@
 <script>
 export default {
   name: 'borderFilter',
-  components: {},
   data() {
     return {
       filterOpen: false,
@@ -155,12 +146,5 @@ export default {
       },
     }
   },
-  methods: {
-    setFilterBy() {
-      console.log(this.filterBy)
-    },
-  },
-  computed: {},
-  created() {},
 }
 </script>

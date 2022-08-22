@@ -1,34 +1,32 @@
 <template>
-
   <app-modal class="members-modal" @closeModal="$emit('closeMenu')">
     <!-- HEADER -->
     <template #title>Members</template>
     <!-- SEARCH -->
     <template #part-1>
-      <input type="text" class="input" @input="filterMembers" placeholder="Search members">
+      <input type="text" class="input" @input="filterMembers" placeholder="Search members" />
     </template>
     <!--BOARD MEMBERS LIST -->
     <template #part-2>
       <ul class="members">
         <header>Board members</header>
-        <li class="member-container" v-for="member in boardMembers " :key="member._id">
+        <li class="member-container" v-for="member in boardMembers" :key="member._id">
           <!-- MEMBER PREVIEW -->
           <member-preview :member="member" :card="card" @togglemember="toggleMember" />
         </li>
       </ul>
     </template>
   </app-modal>
-
 </template>
 
  <script>
-import memberPreview from './member.preview.vue';
-import appModal from '../app.modal.vue';
+import memberPreview from './member.preview.vue'
+import appModal from '../app.modal.vue'
 export default {
   name: 'ProjectApp',
   emits: ['closeMenu', 'sendToSave'],
   props: {
-    card: Object
+    card: Object,
   },
   components: {
     appModal,
@@ -36,17 +34,17 @@ export default {
   },
   data() {
     return {
-      filterUsers:[]
-    };
+      filterUsers: [],
+    }
   },
   methods: {
     toggleMember(memberId) {
       // IDX CARD FROM BOARD
-      const idx = this.board.members.findIndex(member => {
+      const idx = this.board.members.findIndex((member) => {
         return member._id === memberId
       })
       // CHECK IF MEMBER ON CARD
-      const cardMemberIdx = this.card.members.findIndex(member => {
+      const cardMemberIdx = this.card.members.findIndex((member) => {
         return member._id === memberId
       })
       // PUSH OR SPLICE
@@ -55,21 +53,8 @@ export default {
       } else {
         this.card.members.splice(cardMemberIdx, 1)
       }
-      console.log('boardMemberIdx',idx);
-      console.log('cardMemberIdx',cardMemberIdx);
-      console.log('card members on menu',this.card.members);
       this.$emit('sendToSave', this.card)
     },
-    // filterUsers(ev) {
-    //   this.filteredUsers = []
-    //   const regex = new RegExp(ev.target.value, 'i')
-    //   this.filteredUsers = this.users.filter((user) => regex.test(user.username))
-      
-    // },
-  },
-  created() {
-
-
   },
   computed: {
     board() {
@@ -80,8 +65,8 @@ export default {
     },
     avatarStr() {
       let avatarStr = ''
-      this.card.members.forEach(member => {
-        member.username.split(' ').forEach(memberName => {
+      this.card.members.forEach((member) => {
+        member.username.split(' ').forEach((memberName) => {
           avatarStr += memberName.charAt(0)
         })
       })
@@ -94,8 +79,5 @@ export default {
       return this.$store.getters.currBoard.members
     },
   },
-  unmounted() { },
-};
+}
 </script>
- <style>
- </style>

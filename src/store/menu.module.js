@@ -59,7 +59,6 @@ export const menuModule = {
       for (let e in state.menu) {
         state.menu[e] = false;
       }
-      console.log(state.edit);
     },
     closeMenu(state) {
       for (let action in state.menu) {
@@ -78,5 +77,4 @@ export const menuModule = {
       state.isPreviewMenusOpen = status
     },
   },
-  actions: {},
 };

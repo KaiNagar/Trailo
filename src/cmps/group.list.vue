@@ -130,11 +130,7 @@ export default {
       this.showForm = false
     },
     removeCard(cardId) {
-      console.log(cardId)
       this.$emit('removeCard', cardId)
-      // const group = { ...this.groups }
-      // const groupIdx = this.groups.cards.findIndex((card) => card.id === cardId)
-      // console.log(groupIdx)
     },
     getChildPayload1(idx) {
       return idx

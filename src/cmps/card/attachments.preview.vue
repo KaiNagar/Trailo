@@ -1,30 +1,34 @@
 <template>
   <section class="attachments-preview">
     <div class="attch-preview-body flex">
-      <div :style="{
-        backgroundImage: 'url(' + file.url + ')',
-      }" class="img"></div>
+      <div
+        :style="{
+          backgroundImage: 'url(' + file.url + ')',
+        }"
+        class="img"
+      ></div>
       <div>
-        <div class="attach-title">
-          {{ file.title }}.jpg <span class="arrow">↗</span>
-        </div>
+        <div class="attach-title">{{ file.title }}.jpg <span class="arrow">↗</span></div>
 
         <div class="actions preview">
-          <span>Added {{ createdAtFormat }}</span> -
-          <span class="action">Comment</span> -
-          <span class="action" @click="setFileToDelete(file)">Delete
+          <span>Added {{ createdAtFormat }}</span> - <span class="action">Comment</span> -
+          <span class="action" @click="setFileToDelete(file)"
+            >Delete
             <!-- DELETE MODAL -->
             <app-modal v-if="menu.deleteAttachment" @closeModal="closeMenu">
               <template #title> Delete attachment?</template>
               <template #part-1>
-                <div class="warning">There is no undo. This will remove this label from all cards and destroy its
-                  history.</div>
+                <div class="warning">
+                  There is no undo. This will remove this label from all cards and destroy its
+                  history.
+                </div>
                 <button @click="removeAttachment" class="delete wide btn">Delete</button>
               </template>
             </app-modal>
           </span>
           -
-          <span @click="openMenu('edit')" class="action">Edit
+          <span @click="openMenu('edit')" class="action"
+            >Edit
             <app-modal @closeModal="closeMenu" v-if="menu.edit && file.isEdit">
               <template #title>Edit attachment</template>
               <template #part-1>
@@ -39,8 +43,7 @@
         </div>
         <div class="toggle-cover flex align-center">
           <span class="cover-icon"></span>
-          <span class="action" @click="makeOrRemove(file)">
-            {{ toggleCover }}</span>
+          <span class="action" @click="makeOrRemove(file)"> {{ toggleCover }}</span>
         </div>
       </div>
     </div>
@@ -62,8 +65,7 @@ export default {
   },
   data() {
     return {
-      fileToDelete: null
-
+      fileToDelete: null,
     }
   },
   created() {
@@ -103,13 +105,10 @@ export default {
   },
   computed: {
     toggleCover() {
-      return this.card.style.bgImg === this.file.url
-        ? 'Remove cover'
-        : 'Make cover'
+      return this.card.style.bgImg === this.file.url ? 'Remove cover' : 'Make cover'
     },
     createdAtFormat() {
       const byMinutes = Math.floor(this.file.createdAt / 1000 / 60) % 60
-      // console.log(moment(this.file.createdAt).fromNow());
       return moment(this.file.createdAt).fromNow()
     },
     menu() {
@@ -123,7 +122,6 @@ export default {
       return this.$store.getters.edit[editId]
     },
   },
-  unmounted() { },
 }
 </script>
 <style>

@@ -67,7 +67,6 @@ const store = createStore({
       state.cardMembersIds = []
       card.members = card.members || []
       if (!card.members.length) return
-      console.log(card.members)
       card.members.forEach((member) => {
         state.cardMembersIds.push(member._id)
       })
@@ -110,14 +109,13 @@ const store = createStore({
       state.boardId = boardId
     },
     setCurrBoard(state, { currBoard }) {
-      // console.log('store mutation:',currBoard )
       const idx = state.boards.findIndex((board) => board._id === currBoard._id)
       state.boards[idx] = currBoard
       state.currBoard = currBoard
     },
     setCurrGroup(state, { groupId }) {
       state.currGroup = state.currBoard.groups.find(
-        (group) => group.id === groupId,
+        (group) => group.id === groupId
       )
     },
     setCurrCard(state, { card }) {
@@ -166,19 +164,17 @@ const store = createStore({
     },
     async saveBoard({ commit }, { board }) {
       commit({ type: 'setCurrBoard', currBoard: board })
-      console.log('created by', board.loggedUser)
       const newBoard = await boardService.save(board)
 
       return newBoard
     },
     pushedBoard({ commit }, { board }) {
       commit({ type: 'setCurrBoard', currBoard: board })
-      console.log('pushedBoard', board)
     },
 
     async updateGroup({ commit }, { board, group }) {
       const idx = board.groups.findIndex(
-        (currGroup) => currGroup.id === group.id,
+        (currGroup) => currGroup.id === group.id
       )
       board.groups.splice(idx, 1, group)
       const newBoard = await boardService.save(board)

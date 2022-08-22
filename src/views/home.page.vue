@@ -7,8 +7,6 @@
       </div>
       <div @click="loginModal" class="login-btn">
         <span>Log in</span>
-        <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                <a href="#" onclick="signOut();">Sign out</a> -->
       </div>
     </header>
 
@@ -20,9 +18,6 @@
           Collaborate, manage projects, and reach new productivity peaks. From high rises to the
           home office, the way your team works is unique—accomplish it all with Trailo.
         </p>
-        <!-- <router-link to="/board">
-          <div class="signup-btn" @click="signupModal"><span>Start demo</span></div>
-        </router-link> -->
         <div class="signup-btn" @click="startDemo"><span>Start demo</span></div>
       </div>
 
@@ -63,9 +58,9 @@ export default {
     this.signout()
   },
   methods: {
-    startDemo(){
-      const demoUser = {username:'kai', password:'kai'}
-      this.$store.dispatch({ type: 'setLoggedUser', credentials:demoUser })
+    startDemo() {
+      const demoUser = { username: 'kai', password: 'kai' }
+      this.$store.dispatch({ type: 'setLoggedUser', credentials: demoUser })
       this.closeMenu()
       this.$router.push(`/board/`)
     },
@@ -148,7 +143,6 @@ export default {
             text: 'Username or password were incorect',
             footer: '<a href="">Why do I have this issue?</a>',
           })
-          return console.log(this.user)
         }
       }
     },
@@ -174,7 +168,6 @@ export default {
             text: 'Username or password were incorect',
             footer: '<a href="">Why do I have this issue?</a>',
           })
-          return console.log(this.user)
         }
       }
     },

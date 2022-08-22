@@ -3,7 +3,7 @@
     <app-modal v-if="menu.dates" @closeModal="closeMenu">
       <template #title>Dates</template>
       <template #part-1>
-        <form class="date-form" >
+        <form class="date-form">
           <div class="date-calender-container"></div>
           <Datepicker
             placeholder="Select Date"
@@ -39,20 +39,7 @@ export default {
     return {
       date: null,
       dayNames: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
-      months: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ],
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     }
   },
   methods: {
@@ -103,9 +90,6 @@ export default {
       return this.$store.getters.menu
     },
   },
-  created() {},
-  unmounted() {},
 }
 </script>
 
-<style></style>

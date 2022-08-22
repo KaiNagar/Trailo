@@ -39,11 +39,9 @@ export default {
     colorStyle(color) {
       return { backgroundColor: color.color }
     },
-    setBgColor(color){
-      this.$emit('setBgColor',color)
-    }
+    setBgColor(color) {
+      this.$emit('setBgColor', color)
+    },
   },
 }
 </script>
-
-<style></style>

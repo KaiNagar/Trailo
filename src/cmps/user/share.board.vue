@@ -88,8 +88,6 @@ export default {
         this.memberStatus =
           ev.target.value.charAt(0).toUpperCase() + ev.target.value.slice(1, ev.target.value.length)
         const userToUpdate = newBoard.members[idx]
-        console.log(userToUpdate)
-        // userToUpdate.isAdmin = this.memberStatus
       }
       this.$store.dispatch({ type: 'saveBoard', board: newBoard })
       this.$store.commit({ type: 'setBoardMembersIds', board: newBoard })
@@ -101,8 +99,6 @@ export default {
       } else {
         updatedUser.isAdmin = false
       }
-      console.log(updatedUser)
-      // this.newMemberStatus = 'Member'
       const newBoard = JSON.parse(JSON.stringify(this.board))
       if (!newBoard.members.length || !newBoard.members) newBoard.members = []
       newBoard.members.push(updatedUser)
@@ -146,7 +142,6 @@ export default {
         admin.isAdmin = true
         board.members.push(admin)
       }
-      // this.$store.dispatch({ type: 'saveBoard', board })
       return board.members
     },
     menu() {
@@ -159,8 +154,5 @@ export default {
       return this.$store.getters.boardMemberIds
     },
   },
-  unmounted() {},
 }
 </script>
- <style>
-</style>

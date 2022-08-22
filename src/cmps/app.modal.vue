@@ -51,9 +51,5 @@ export default {
       return { backgroundImage: 'url(' + item.style.bgImg + ')' }
     },
   },
-  computed: {},
-  unmounted() {},
 }
 </script>
-<style>
-</style>

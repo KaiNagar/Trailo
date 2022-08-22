@@ -17,7 +17,7 @@
         <span class="cover-txt">Dashboard</span>
       </div>
     </div>
-    
+
     <hr />
     <div class="board-activity">
       <div class="activity-header">
@@ -30,17 +30,14 @@
 
 <script>
 export default {
-  components: {},
   data() {
     return {
       changeBackground: false,
     }
   },
-  methods: {},
   computed: {
     bgMini() {
-      if (this.board.style.bgColor)
-        return { backgroundColor: this.board.style.bgColor }
+      if (this.board.style.bgColor) return { backgroundColor: this.board.style.bgColor }
       else {
         const url = this.board.style.bgImg
         return { backgroundImage: 'url(' + url + ')' }
@@ -49,9 +46,6 @@ export default {
     board() {
       return JSON.parse(JSON.stringify(this.$store.getters.currBoard))
     },
-  },
-  created() {
-    console.log(this.board.activities);
   },
 }
 </script>

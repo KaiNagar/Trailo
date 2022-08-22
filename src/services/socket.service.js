@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-const baseUrl = (process.env.NODE_ENV === 'production')? '' : '//127.0.0.1:5173'
+const baseUrl = process.env.NODE_ENV === 'production' ? '' : '//127.0.0.1:5173'
 
 export const socketService = createSocketService()
 // export const socketService = createDummySocketService()
@@ -10,18 +10,17 @@ window.socketService = socketService
 
 socketService.setup()
 
-
 function createSocketService() {
   let socket = null
   const socketService = {
-   async setup() {
+    async setup() {
       socket = io(baseUrl)
     },
     on(eventName, cb) {
       socket.on(eventName, cb)
     },
-    off(eventName, cb=null) {
-      if (!socket) return;
+    off(eventName, cb = null) {
+      if (!socket) return
       if (!cb) socket.removeAllListeners(eventName)
       else socket.off(eventName, cb)
     },
@@ -31,7 +30,7 @@ function createSocketService() {
     },
     terminate() {
       socket = null
-    }
+    },
   }
   return socketService
 }
@@ -54,20 +53,20 @@ function createDummySocketService() {
     off(eventName, cb) {
       if (!listenersMap[eventName]) return
       if (!cb) delete listenersMap[eventName]
-      else listenersMap[eventName] = listenersMap[eventName].filter(l => l !== cb)
+      else
+        listenersMap[eventName] = listenersMap[eventName].filter(
+          (l) => l !== cb
+        )
     },
     emit(eventName, data) {
       if (!listenersMap[eventName]) return
-      listenersMap[eventName].forEach(listener => {
+      listenersMap[eventName].forEach((listener) => {
         listener(data)
       })
     },
     debugMsg() {
-      this.emit('chat addMsg', {from: 'Someone', txt: 'Aha it worked!'})
+      this.emit('chat addMsg', { from: 'Someone', txt: 'Aha it worked!' })
     },
   }
   return socketService
 }
-
-
-
