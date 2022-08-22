@@ -58,6 +58,7 @@
       }
     }
     .dashboard{
+      position: relative;
       background-color: transparent;
       padding: 6px 6px 6px 40px;
       border-radius: 3px;
@@ -66,11 +67,12 @@
       line-height: 1.42857143;
       color: rgb(23, 43, 77);
       margin-bottom: 10px;
-
       cursor: pointer;
-      .dash-icon{
+      .collection-icon{
         position: absolute;
-        left: 20px;
+        font-size: 20px;
+        top: 0;
+        left: 8px;
         width: 20px;
         height: 20px;
       }
